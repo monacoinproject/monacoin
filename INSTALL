@@ -1,0 +1,9 @@
+Building Monacoin
+
+See doc/readme-qt.rst for instructions on building Monacoin-Qt,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of Monacoin.
+
+See doc/build-*.txt for instructions on building litecoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of Monacoin.
