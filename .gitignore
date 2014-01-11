@@ -213,3 +213,26 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+#import from litecoin's .gitignore
+src/*.exe
+src/monacoin
+src/monacoind
+src/test_monacoin
+!src/leveldb-*/Makefile
+.monacoin
+*.*~*
+*.rej
+*.orig
+*.o
+*.patch
+
+# Compilation and Qt preprocessor part
+*.qm
+Makefile
+monacoin-qt
+monacoin-Qt.app
+
+# Unit-tests
+Makefile.test
+monacoin-qt_test
