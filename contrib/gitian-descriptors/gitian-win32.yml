@@ -13,7 +13,7 @@ packages:
 - "faketime"
 reference_datetime: "2011-01-30 00:00:00"
 remotes:
-- "url": "https://github.com/monacoin-project/monacoin.git"
+- "url": "https://github.com/ohac/monacoin.git"
   "dir": "monacoin"
 files:
 - "qt-win32-4.8.3-gitian-r4.zip"
