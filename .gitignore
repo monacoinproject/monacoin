@@ -219,7 +219,7 @@ src/*.exe
 src/monacoin
 src/monacoind
 src/test_monacoin
-!src/leveldb-*/Makefile
+!src/leveldb*/Makefile
 .monacoin
 *.*~*
 *.rej

@@ -26,14 +26,14 @@ BOOST_SUFFIX?=-mgw48-mt-s-1_54
 INCLUDEPATHS= \
  -I"$(CURDIR)" \
  -I"$(DEPSDIR)/include" \
- -I"c:/deps/boost_1_54_0" \
+ -I"c:/deps/boost_1_55_0" \
  -I"c:/deps/db-4.8.30.NC/build_unix" \
  -I"c:/deps/openssl-1.0.1e/include"
 
 LIBPATHS= \
  -L"$(CURDIR)/leveldb" \
  -L"$(DEPSDIR)/lib" \
- -L"c:/deps/boost_1_54_0/stage/lib" \
+ -L"c:/deps/boost_1_55_0/stage/lib" \
  -L"c:/deps/db-4.8.30.NC/build_unix" \
  -L"c:/deps/openssl-1.0.1e"
 

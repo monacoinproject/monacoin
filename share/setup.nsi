@@ -5,7 +5,7 @@ SetCompressor /SOLID lzma
 
 # General Symbol Definitions
 !define REGKEY "SOFTWARE\$(^Name)"
-!define VERSION 0.8.6.1
+!define VERSION 0.8.6.2
 !define COMPANY "Monacoin project"
 !define URL http://www.monacoin.org/
 
@@ -45,13 +45,13 @@ Var StartMenuGroup
 !insertmacro MUI_LANGUAGE English
 
 # Installer attributes
-OutFile monacoin-0.8.6.1-win32-setup.exe
+OutFile monacoin-0.8.6.2-win32-setup.exe
 InstallDir $PROGRAMFILES\Monacoin
 CRCCheck on
 XPStyle on
 BrandingText " "
 ShowInstDetails show
-VIProductVersion 0.8.6.1
+VIProductVersion 0.8.6.2
 VIAddVersionKey ProductName Monacoin
 VIAddVersionKey ProductVersion "${VERSION}"
 VIAddVersionKey CompanyName "${COMPANY}"

@@ -62,8 +62,7 @@ QDateTime ClientModel::getLastBlockDate() const
 
 double ClientModel::getVerificationProgress() const
 {
-      return 0.0;
-//    return Checkpoints::GuessVerificationProgress(pindexBest);
+    return Checkpoints::GuessVerificationProgress(pindexBest);
 }
 
 void ClientModel::updateTimer()
