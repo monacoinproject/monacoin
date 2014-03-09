@@ -77,7 +77,7 @@ int64 nHPSTimerStart = 0;
 int64 nTransactionFee = 0;
 int64 nMinimumInputValue = DUST_HARD_LIMIT;
 
-int64 nSwitchKGWblock = 1000000;
+int64 nSwitchKGWblock = 80000;
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -1175,54 +1175,54 @@ unsigned int static GetNextWorkRequired_V1(const CBlockIndex* pindexLast, const 
 }
 
 unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBlockHeader *pblock, uint64 TargetBlocksSpacingSeconds, uint64 PastBlocksMin, uint64 PastBlocksMax) {
-	/* current difficulty formula, megacoin - kimoto gravity well */
-	const CBlockIndex  *BlockLastSolved				= pindexLast;
-	const CBlockIndex  *BlockReading				= pindexLast;
-	const CBlockHeader *BlockCreating				= pblock;
-						BlockCreating				= BlockCreating;
-	uint64				PastBlocksMass				= 0;
-	int64				PastRateActualSeconds		= 0;
-	int64				PastRateTargetSeconds		= 0;
-	double				PastRateAdjustmentRatio		= double(1);
-	CBigNum				PastDifficultyAverage;
-	CBigNum				PastDifficultyAveragePrev;
-	double				EventHorizonDeviation;
-	double				EventHorizonDeviationFast;
-	double				EventHorizonDeviationSlow;
+    /* current difficulty formula, megacoin - kimoto gravity well */
+    const CBlockIndex  *BlockLastSolved             = pindexLast;
+    const CBlockIndex  *BlockReading                = pindexLast;
+    const CBlockHeader *BlockCreating               = pblock;
+                        BlockCreating               = BlockCreating;
+    uint64              PastBlocksMass              = 0;
+    int64               PastRateActualSeconds       = 0;
+    int64               PastRateTargetSeconds       = 0;
+    double              PastRateAdjustmentRatio     = double(1);
+    CBigNum             PastDifficultyAverage;
+    CBigNum             PastDifficultyAveragePrev;
+    double              EventHorizonDeviation;
+    double              EventHorizonDeviationFast;
+    double              EventHorizonDeviationSlow;
 
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || (uint64)BlockLastSolved->nHeight < PastBlocksMin) { return bnProofOfWorkLimit.GetCompact(); }
 
-	for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) {
-		if (PastBlocksMax > 0 && i > PastBlocksMax) { break; }
-		PastBlocksMass++;
+    for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) {
+        if (PastBlocksMax > 0 && i > PastBlocksMax) { break; }
+        PastBlocksMass++;
 
-		if (i == 1)	{ PastDifficultyAverage.SetCompact(BlockReading->nBits); }
-		else		{ PastDifficultyAverage = ((CBigNum().SetCompact(BlockReading->nBits) - PastDifficultyAveragePrev) / i) + PastDifficultyAveragePrev; }
-		PastDifficultyAveragePrev = PastDifficultyAverage;
+        if (i == 1) { PastDifficultyAverage.SetCompact(BlockReading->nBits); }
+        else        { PastDifficultyAverage = ((CBigNum().SetCompact(BlockReading->nBits) - PastDifficultyAveragePrev) / i) + PastDifficultyAveragePrev; }
+        PastDifficultyAveragePrev = PastDifficultyAverage;
 
-		PastRateActualSeconds			= BlockLastSolved->GetBlockTime() - BlockReading->GetBlockTime();
-		PastRateTargetSeconds			= TargetBlocksSpacingSeconds * PastBlocksMass;
-		PastRateAdjustmentRatio			= double(1);
-		if (PastRateActualSeconds < 0) { PastRateActualSeconds = 0; }
-		if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
-		PastRateAdjustmentRatio			= double(PastRateTargetSeconds) / double(PastRateActualSeconds);
-		}
-		EventHorizonDeviation			= 1 + (0.7084 * pow((double(PastBlocksMass)/double(144)), -1.228));
-		EventHorizonDeviationFast		= EventHorizonDeviation;
-		EventHorizonDeviationSlow		= 1 / EventHorizonDeviation;
+        PastRateActualSeconds           = BlockLastSolved->GetBlockTime() - BlockReading->GetBlockTime();
+        PastRateTargetSeconds           = TargetBlocksSpacingSeconds * PastBlocksMass;
+        PastRateAdjustmentRatio         = double(1);
+        if (PastRateActualSeconds < 0) { PastRateActualSeconds = 0; }
+        if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
+        PastRateAdjustmentRatio         = double(PastRateTargetSeconds) / double(PastRateActualSeconds);
+        }
+        EventHorizonDeviation           = 1 + (0.7084 * pow((double(PastBlocksMass)/double(144)), -1.228));
+        EventHorizonDeviationFast       = EventHorizonDeviation;
+        EventHorizonDeviationSlow       = 1 / EventHorizonDeviation;
 
-		if (PastBlocksMass >= PastBlocksMin) {
-			if ((PastRateAdjustmentRatio <= EventHorizonDeviationSlow) || (PastRateAdjustmentRatio >= EventHorizonDeviationFast)) { assert(BlockReading); break; }
-		}
-		if (BlockReading->pprev == NULL) { assert(BlockReading); break; }
-		BlockReading = BlockReading->pprev;
-	}
+        if (PastBlocksMass >= PastBlocksMin) {
+            if ((PastRateAdjustmentRatio <= EventHorizonDeviationSlow) || (PastRateAdjustmentRatio >= EventHorizonDeviationFast)) { assert(BlockReading); break; }
+        }
+        if (BlockReading->pprev == NULL) { assert(BlockReading); break; }
+        BlockReading = BlockReading->pprev;
+    }
 
-	CBigNum bnNew(PastDifficultyAverage);
-	if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
-		bnNew *= PastRateActualSeconds;
-		bnNew /= PastRateTargetSeconds;
-	}
+    CBigNum bnNew(PastDifficultyAverage);
+    if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
+        bnNew *= PastRateActualSeconds;
+        bnNew /= PastRateTargetSeconds;
+    }
     if (bnNew > bnProofOfWorkLimit) { bnNew = bnProofOfWorkLimit; }
 
     /// debug print
@@ -1231,34 +1231,34 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
     printf("Before: %08x  %s\n", BlockLastSolved->nBits, CBigNum().SetCompact(BlockLastSolved->nBits).getuint256().ToString().c_str());
     printf("After:  %08x  %s\n", bnNew.GetCompact(), bnNew.getuint256().ToString().c_str());
 
-	return bnNew.GetCompact();
+    return bnNew.GetCompact();
 }
 
 unsigned int static GetNextWorkRequired_V2(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
-	static const int64	BlocksTargetSpacing			= nTargetSpacing;
-	unsigned int		TimeDaySeconds				= 60 * 60 * 24;
-	int64				PastSecondsMin				= TimeDaySeconds * 0.25;
-	int64				PastSecondsMax				= TimeDaySeconds * 7;
-	uint64				PastBlocksMin				= PastSecondsMin / BlocksTargetSpacing;
-	uint64				PastBlocksMax				= PastSecondsMax / BlocksTargetSpacing;	
+    static const int64  BlocksTargetSpacing         = nTargetSpacing;
+    unsigned int        TimeDaySeconds              = 60 * 60 * 24;
+    int64               PastSecondsMin              = TimeDaySeconds * 0.25;
+    int64               PastSecondsMax              = TimeDaySeconds * 7;
+    uint64              PastBlocksMin               = PastSecondsMin / BlocksTargetSpacing;
+    uint64              PastBlocksMax               = PastSecondsMax / BlocksTargetSpacing; 
 
-	return KimotoGravityWell(pindexLast, pblock, BlocksTargetSpacing, PastBlocksMin, PastBlocksMax);
+    return KimotoGravityWell(pindexLast, pblock, BlocksTargetSpacing, PastBlocksMin, PastBlocksMax);
 }
 
 unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
-	int DiffMode = 1;
-	if (fTestNet) {
-		if (pindexLast->nHeight+1 >= 0) { DiffMode = 2; }
-	}
-	else {
-		if (pindexLast->nHeight+1 >= nSwitchKGWblock) { DiffMode = 2; }
-	}
+    int DiffMode = 1;
+    if (fTestNet) {
+        if (pindexLast->nHeight+1 >= 0) { DiffMode = 2; }
+    }
+    else {
+        if (pindexLast->nHeight+1 >= nSwitchKGWblock) { DiffMode = 2; }
+    }
 
-	if		(DiffMode == 1) { return GetNextWorkRequired_V1(pindexLast, pblock); }
-	else if	(DiffMode == 2) { return GetNextWorkRequired_V2(pindexLast, pblock); }
-	return GetNextWorkRequired_V2(pindexLast, pblock);
+    if (DiffMode == 1) { return GetNextWorkRequired_V1(pindexLast, pblock); }
+    else if (DiffMode == 2) { return GetNextWorkRequired_V2(pindexLast, pblock); }
+    return GetNextWorkRequired_V2(pindexLast, pblock);
 }
 
 
@@ -4688,7 +4688,7 @@ void static MonacoinMiner(CWallet *pwallet)
             char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
             loop
             {
-                scrypt_1024_1_1_256_sp_sse2(BEGIN(pblock->nVersion), BEGIN(thash), scratchpad);
+                scrypt_1024_1_1_256_sp(BEGIN(pblock->nVersion), BEGIN(thash), scratchpad);
 
                 if (thash <= hashTarget)
                 {
