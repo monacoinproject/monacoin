@@ -15,8 +15,6 @@ Monacoin is a lite version of Bitcoin using scrypt as a proof-of-work algorithm.
  - 1.5 minute block targets
  - subsidy halves in 1051k blocks (~3 years)
  - ~168 million total coins
-
-The rest is the same as Bitcoin.
  - 50 coins per block
  - kimoto gravity well
 
