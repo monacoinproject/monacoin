@@ -1,6 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2012 The Bitcoin developers
-// Copyright (c) 2011-2012 Litecoin Developers
+// Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2011-2014 Litecoin Developers
 // Copyright (c) 2013-2014 Dr Kimoto Chan
 // Copyright (c) 2013-2014 Monacoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
