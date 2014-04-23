@@ -1,3 +1,5 @@
+This is a test line by giko.
+
 Monacoin integration/staging tree
 ================================
 
