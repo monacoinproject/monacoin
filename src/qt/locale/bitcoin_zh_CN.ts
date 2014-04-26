@@ -2640,7 +2640,7 @@ rpcpassword=%s
     <message>
         <location line="+5"/>
         <source>SSL options: (see the Monacoin Wiki for SSL setup instructions)</source>
-        <translation>SSL选项：(参见Litecoin Wiki关于SSL设置栏目)</translation>
+        <translation>SSL选项：(参见Monacoin Wiki关于SSL设置栏目)</translation>
     </message>
     <message>
         <location line="+1"/>
