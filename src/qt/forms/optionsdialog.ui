@@ -33,10 +33,10 @@
        <item>
         <widget class="QCheckBox" name="bitcoinAtStartup">
          <property name="toolTip">
-          <string>Automatically start Litecoin after logging in to the system.</string>
+          <string>Automatically start Monacoin after logging in to the system.</string>
          </property>
          <property name="text">
-          <string>&amp;Start Litecoin on system login</string>
+          <string>&amp;Start Monacoin on system login</string>
          </property>
         </widget>
        </item>
