@@ -1,7 +1,7 @@
 Monacoin integration/staging tree
 ================================
 
-http://www.monacoin.com
+http://monacoin.org
 
 Copyright (c) 2009-2014 Bitcoin Developers  
 Copyright (c) 2011-2014 Litecoin Developers  
@@ -20,7 +20,7 @@ Monacoin is a lite version of Bitcoin using scrypt as a proof-of-work algorithm.
  - Digishield difficulty retarget
 
 For more information, as well as an immediately useable, binary version of
-the Monacoin client sofware, see http://www.monacoin.com
+the Monacoin client sofware, see http://monacoin.org
 
 License
 -------
