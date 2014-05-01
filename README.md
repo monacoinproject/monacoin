@@ -1,9 +1,7 @@
-This is a test line by giko.
-
 Monacoin integration/staging tree
 ================================
 
-http://www.monacoin.com
+http://monacoin.org
 
 Copyright (c) 2009-2014 Bitcoin Developers  
 Copyright (c) 2011-2014 Litecoin Developers  
