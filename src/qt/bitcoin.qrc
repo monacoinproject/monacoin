@@ -80,7 +80,7 @@
         <file alias="hr">locale/bitcoin_hr.qm</file>
         <file alias="hu">locale/bitcoin_hu.qm</file>
         <file alias="it">locale/bitcoin_it.qm</file>
-        <file alias="ja">locale/bitcoin_ja.ts</file>
+        <file alias="ja">locale/bitcoin_ja.qm</file>
         <file alias="la">locale/bitcoin_la.ts</file>
         <file alias="lt">locale/bitcoin_lt.qm</file>
         <file alias="lv_LV">locale/bitcoin_lv_LV.ts</file>
