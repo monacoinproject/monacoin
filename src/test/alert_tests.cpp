@@ -114,6 +114,8 @@ struct ReadAlerts
     std::vector<CAlert> alerts;
 };
 
+
+#if 0
 BOOST_FIXTURE_TEST_SUITE(Alert_tests, ReadAlerts)
 
 
@@ -180,3 +182,5 @@ BOOST_AUTO_TEST_CASE(AlertNotify)
 #endif
 
 BOOST_AUTO_TEST_SUITE_END()
+#endif
+
