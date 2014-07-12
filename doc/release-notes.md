@@ -1,3 +1,6 @@
+- Upgrade to openssl-1.0.1h for CVE-2014-0224
+
+
 0.8.7.0 changes
 =============
 - Mac and Windows Official Gitian Builds: upgrade to openssl-1.0.1g for CVE-2014-0160

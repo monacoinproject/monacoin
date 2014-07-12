@@ -34,13 +34,13 @@ Release Process
 
 	mkdir -p inputs; cd inputs/
 	wget 'http://miniupnp.free.fr/files/download.php?file=miniupnpc-1.9.20140401.tar.gz' -O miniupnpc-1.9.20140401.tar.gz'
-	wget 'http://www.openssl.org/source/openssl-1.0.1g.tar.gz'
+	wget 'http://www.openssl.org/source/openssl-1.0.1h.tar.gz'
 	wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
 	wget 'http://zlib.net/zlib-1.2.8.tar.gz'
 	wget 'ftp://ftp.simplesystems.org/pub/libpng/png/src/history/libpng16/libpng-1.6.8.tar.gz'
 	wget 'http://fukuchi.org/works/qrencode/qrencode-3.4.3.tar.bz2'
 	wget 'http://downloads.sourceforge.net/project/boost/boost/1.55.0/boost_1_55_0.tar.bz2'
-	wget 'http://download.qt-project.org/official_releases/qt/4.8/4.8.5/qt-everywhere-opensource-src-4.8.5.tar.gz'
+	wget 'http://download.qt-project.org/archive/qt/4.8/4.8.5/qt-everywhere-opensource-src-4.8.5.tar.gz'
 	cd ..
 	./bin/gbuild ../monacoin/contrib/gitian-descriptors/boost-win32.yml
 	mv build/out/boost-*.zip inputs/
@@ -82,7 +82,7 @@ repackage gitian builds for release as stand-alone zip/tar/installer exe
 
 	unzip monacoin-${VERSION}-win32-gitian.zip -d monacoin-${VERSION}-win32
 	mv monacoin-${VERSION}-win32/monacoin-*-setup.exe .
-	zip -r monacoin-${VERSION}-win32.zip bitcoin-${VERSION}-win32
+	zip -r monacoin-${VERSION}-win32.zip monacoin-${VERSION}-win32
 	rm -rf monacoin-${VERSION}-win32
 
 **Perform Mac build:**
