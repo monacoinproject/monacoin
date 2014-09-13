@@ -1259,7 +1259,7 @@ Address: %4
     <message>
         <location filename="../rpcconsole.cpp" line="-30"/>
         <source>Welcome to the Monacoin RPC console.</source>
-        <translation>Mitcoin RPC コンソールへようこそ。</translation>
+        <translation>Monacoin RPC コンソールへようこそ。</translation>
     </message>
     <message>
         <location line="+1"/>
