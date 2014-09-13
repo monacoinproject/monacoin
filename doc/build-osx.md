@@ -13,6 +13,8 @@ License
 -------
 
 Copyright (c) 2009-2012 Bitcoin Developers
+Copyright (c) 2014 Monacoin Developers
+
 
 Distributed under the MIT/X11 software license, see the accompanying
 file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -30,7 +32,9 @@ See `doc/readme-qt.rst` for instructions on building Litecoin-Qt, the
 graphical user interface.
 
 Tested on OS X 10.5 through 10.8 on Intel processors only. PPC is not
-supported because it is big-endian.
+supported because it is big-endian.  
+
+There is a known issue with building on 10.9.  See https://github.com/bitcoin/bitcoin/issues/3228 for details.
 
 All of the commands should be executed in a Terminal application. The
 built-in one is located in `/Applications/Utilities`.
@@ -99,7 +103,7 @@ Note: After you have installed the dependencies, you should check that the Brew 
 
         openssl version
 
-into Terminal. You should see OpenSSL 1.0.1e 11 Feb 2013.
+into Terminal. You should see OpenSSL 1.0.1i 6 Aug 2014.
 
 If not, you can ensure that the Brew OpenSSL is correctly linked by running
 
@@ -107,12 +111,12 @@ If not, you can ensure that the Brew OpenSSL is correctly linked by running
 
 Rerunning "openssl version" should now return the correct version.
 
-### Building `litecoind`
+### Building `monacoind`
 
 1. Clone the github tree to get the source code and go into the directory.
 
-        git clone https://github.com/litecoin-project/litecoin.git
-        cd litecoin
+        git clone https://github.com/monacoinproject/monacoin.git
+        cd monacoin
 
 2.  Modify source in order to pick up the `openssl` library.
 
@@ -134,10 +138,10 @@ Rerunning "openssl version" should now return the correct version.
 Creating a release build
 ------------------------
 
-A litecoind binary is not included in the Litecoin-Qt.app bundle. You can ignore
-this section if you are building `litecoind` for your own use.
+A monacoind binary is not included in the Monacoin-Qt.app bundle. You can ignore
+this section if you are building `monacoind` for your own use.
 
-If you are building `litecond` for others, your build machine should be set up
+If you are building `monacoind` for others, your build machine should be set up
 as follows for maximum compatibility:
 
 All dependencies should be compiled with these flags:
@@ -159,27 +163,27 @@ for a fix. Some ports also seem to obey either `build_arch` or
 on an OS X 10.6 64-bit machine fails. Official release builds of Litecoin-Qt are
 compiled on an OS X 10.6 32-bit machine to workaround that problem.
 
-Once dependencies are compiled, creating `Litecoin-Qt.app` is easy:
+Once dependencies are compiled, creating `Monacoin-Qt.app` is easy:
 
     make -f Makefile.osx RELEASE=1
 
 Running
 -------
 
-It's now available at `./litecoind`, provided that you are still in the `src`
+It's now available at `./monacoind`, provided that you are still in the `src`
 directory. We have to first create the RPC configuration file, though.
 
-Run `./litecoind` to get the filename where it should be put, or just try these
+Run `./monacoind` to get the filename where it should be put, or just try these
 commands:
 
-    echo -e "rpcuser=litecoinrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/Litecoin/litecoin.conf"
-    chmod 600 "/Users/${USER}/Library/Application Support/Litecoin/litecoin.conf"
+    echo -e "rpcuser=litecoinrpc\nrpcpassword=$(xxd -l 16 -p /dev/urandom)" > "/Users/${USER}/Library/Application Support/Monacoin/monacoin.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/Monacooin/monacoin.conf"
 
 When next you run it, it will start downloading the blockchain, but it won't
 output anything while it's doing this. This process may take several hours.
 
 Other commands:
 
-    ./litecoind --help  # for a list of command-line options.
-    ./litecoind -daemon # to start the litecoin daemon.
-    ./litecoind help    # When the daemon is running, to get a list of RPC commands
+    ./monacoind --help  # for a list of command-line options.
+    ./monacoind -daemon # to start the litecoin daemon.
+    ./monacoind help    # When the daemon is running, to get a list of RPC commands
