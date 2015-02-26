@@ -1,5 +1,12 @@
 - Upgrade to openssl-1.0.1h for CVE-2014-0224
 
+0.8.7.1 changes
+=============
+- Enforce v2 blocks
+- Add `-maxorphantx=<n>` and `-maxorphanblocks=<n>` options for control over the maximum orphan transactions and blocks
+- Stricter memory limits on CNode
+- Windows Official Gitian Builds: upgrade to openssl-1.0.1k
+
 
 0.8.7.0 changes
 =============
