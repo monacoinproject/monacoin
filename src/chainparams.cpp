@@ -124,6 +124,7 @@ public:
         nTargetTimespan = 1.1 * 24 * 60 * 60; // 1.1 days
         nTargetTimespanNew = 1.5 * 60;
         nTargetSpacing = 1.5 * 60; // 1.5 minutes
+        nMaxTipAge = 24 * 60 * 60;
 
         /**
          * Build the genesis block. Note that the output of the genesis coinbase cannot
@@ -208,6 +209,7 @@ public:
         nTargetTimespan = 1.1 * 24 * 60 * 60; // 1.1 days
         nTargetTimespanNew = 1.5 * 60;
         nTargetSpacing = 1.5 * 60; // 2.5 minutes
+        nMaxTipAge = 0x7fffffff;
 
         //! Modify the testnet genesis block so the timestamp is valid for a later start.
         genesis.nTime = 1388479759;
@@ -269,6 +271,7 @@ public:
         nTargetTimespanNew = 1.5 * 60;
         nTargetSpacing = 1.5 * 60; // 1.5 minutes
         bnProofOfWorkLimit = ~uint256(0) >> 1;
+        nMaxTipAge = 24 * 60 * 60;
         genesis.nTime = 1296688602;
         genesis.nBits = 0x207fffff;
         genesis.nNonce = 0;
