@@ -1,4 +1,5 @@
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -31,6 +32,9 @@
 
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
+#if BOOST_FILESYSTEM_VERSION >= 3
+#include <boost/filesystem/detail/utf8_codecvt_facet.hpp>
+#endif
 
 #ifdef WIN32
 #ifdef _WIN32_WINNT
@@ -48,6 +52,10 @@
 #include "shlwapi.h"
 #include "shlobj.h"
 #include "shellapi.h"
+#endif
+
+ #if BOOST_FILESYSTEM_VERSION >= 3
+static boost::filesystem::detail::utf8_codecvt_facet utf8;
 #endif
 
 namespace GUIUtil {
@@ -276,6 +284,38 @@ void openDebugLogfile()
     /* Open debug.log with the associated application */
     if (boost::filesystem::exists(pathDebug))
         QDesktopServices::openUrl(QUrl::fromLocalFile(QString::fromStdString(pathDebug.string())));
+}
+
+#if BOOST_FILESYSTEM_VERSION >= 3
+boost::filesystem::path qstringToBoostPath(const QString &path)
+{
+    return boost::filesystem::path(path.toStdString(), utf8);
+}
+
+QString boostPathToQString(const boost::filesystem::path &path)
+{
+    return QString::fromStdString(path.string(utf8));
+}
+#else
+#warning Conversion between boost path and QString can use invalid character encoding with boost_filesystem v2 and older
+boost::filesystem::path qstringToBoostPath(const QString &path)
+{
+    return boost::filesystem::path(path.toStdString());
+}
+
+QString boostPathToQString(const boost::filesystem::path &path)
+{
+    return QString::fromStdString(path.string());
+}
+#endif
+
+void showBackups()
+{
+    boost::filesystem::path pathBackups = GetDataDir() / "backups";
+
+    /* Open folder with default browser */
+    if (boost::filesystem::exists(pathBackups))
+        QDesktopServices::openUrl(QUrl::fromLocalFile(boostPathToQString(pathBackups)));
 }
 
 ToolTipToRichTextFilter::ToolTipToRichTextFilter(int size_threshold, QObject *parent) :

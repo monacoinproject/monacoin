@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -25,7 +26,9 @@
 using namespace std;
 using namespace boost;
 
+std::string strWalletFile;
 CWallet* pwalletMain;
+static int nWalletBackups = 10;
 CClientUIInterface uiInterface;
 
 #ifdef WIN32
@@ -43,6 +46,7 @@ enum BindFlags {
     BF_EXPLICIT     = (1U << 0),
     BF_REPORT_ERROR = (1U << 1)
 };
+
 
 //////////////////////////////////////////////////////////////////////////////
 //
@@ -331,6 +335,9 @@ std::string HelpMessage()
         "  -upnp                  " + _("Use UPnP to map the listening port (default: 0)") + "\n" +
 #endif
 #endif
+        "  -createwalletbackups=<n> " + _("Number of automatic wallet backups (default: 10)") + "\n" +
+        "  -disablewallet           " + _("Do not load the wallet and disable wallet RPC calls") + "\n" +
+
         "  -paytxfee=<amt>        " + _("Fee per KB to add to transactions you send") + "\n" +
         "  -mininput=<amt>        " + _("When creating transactions, ignore inputs with value less than this (default: 0.0001)") + "\n" +
 #ifdef QT_GUI
@@ -637,6 +644,8 @@ bool AppInit2(boost::thread_group& threadGroup)
             return InitError(strprintf(_("Invalid amount for -mininput=<amount>: '%s'"), mapArgs["-mininput"].c_str()));
     }
 
+    strWalletFile = "wallet.dat";
+
     // ********************************************************* Step 4: application initialization: dir lock, daemonize, pidfile, debug log
 
     std::string strDataDir = GetDataDir().string();
@@ -676,9 +685,80 @@ bool AppInit2(boost::thread_group& threadGroup)
     scrypt_detect_sse2();
 #endif
 
-    // ********************************************************* Step 5: verify wallet database integrity
+    // ********************************************************* Step 5: Backup wallet and verify wallet database integrity
 
     if (!fDisableWallet) {
+        filesystem::path backupDir = GetDataDir() / "backups";
+        if (!filesystem::exists(backupDir))
+        {
+            // Always create backup folder to not confuse the operating system's file browser
+            filesystem::create_directories(backupDir);
+        }
+        nWalletBackups = GetArg("-createwalletbackups", 10);
+        nWalletBackups = std::max(0, std::min(10, nWalletBackups));
+        if(nWalletBackups > 0)
+        {
+            if (filesystem::exists(backupDir))
+            {
+                // Create backup of the wallet
+                std::string dateTimeStr = DateTimeStrFormat(".%Y-%m-%d-%H.%M", GetTime());
+                std::string backupPathStr = backupDir.string();
+                backupPathStr += "/" + strWalletFile;
+                std::string sourcePathStr = GetDataDir().string();
+                sourcePathStr += "/" + strWalletFile;
+                boost::filesystem::path sourceFile = sourcePathStr;
+                boost::filesystem::path backupFile = backupPathStr + dateTimeStr;
+                sourceFile.make_preferred();
+                backupFile.make_preferred();
+                try {
+                    boost::filesystem::copy_file(sourceFile, backupFile);
+                    printf("Creating backup of %s -> %s\n", sourceFile.c_str(), backupFile.c_str());
+                } catch(boost::filesystem::filesystem_error &error) {
+                    printf("Failed to create backup %s\n", error.what());
+                }
+                // Keep only the last 10 backups, including the new one of course
+                typedef std::multimap<std::time_t, boost::filesystem::path> folder_set_t;
+                folder_set_t folder_set;
+                boost::filesystem::directory_iterator end_iter;
+                boost::filesystem::path backupFolder = backupDir.string();
+                backupFolder.make_preferred();
+
+                // Build map of backup files for current(!) wallet sorted by last write time
+                boost::filesystem::path currentFile;
+                for (boost::filesystem::directory_iterator dir_iter(backupFolder); dir_iter != end_iter; ++dir_iter)
+                {
+                    // Only check regular files
+                    if ( boost::filesystem::is_regular_file(dir_iter->status()))
+                    {
+                        currentFile = dir_iter->path().filename();
+                        // Only add the backups for the current wallet, e.g. wallet.dat.*
+                        if(currentFile.string().find(strWalletFile) != string::npos)
+                        {
+                            folder_set.insert(folder_set_t::value_type(boost::filesystem::last_write_time(dir_iter->path()), *dir_iter));
+                        }
+                    }
+                }
+                // Loop backward through backup files and keep the N newest ones (1 <= N <= 10)
+                int counter = 0;
+                BOOST_REVERSE_FOREACH(PAIRTYPE(const std::time_t, boost::filesystem::path) file, folder_set)
+                {
+                    counter++;
+                    if (counter > nWalletBackups)
+                    {
+                        // More than nWalletBackups backups: delete oldest one(s)
+                        try {
+                            boost::filesystem::remove(file.second);
+                            printf("Old backup deleted: %s\n", file.second.c_str());
+                        } catch(boost::filesystem::filesystem_error &error) {
+                            printf("Failed to delete backup %s\n", error.what());
+                        }
+                    }
+                }
+            }
+        }
+
+
+
         uiInterface.InitMessage(_("Verifying wallet..."));
 
         if (!bitdb.Open(GetDataDir()))
@@ -704,13 +784,13 @@ bool AppInit2(boost::thread_group& threadGroup)
         if (GetBoolArg("-salvagewallet"))
         {
             // Recover readable keypairs:
-            if (!CWalletDB::Recover(bitdb, "wallet.dat", true))
+            if (!CWalletDB::Recover(bitdb, strWalletFile, true))
                 return false;
         }
 
-        if (filesystem::exists(GetDataDir() / "wallet.dat"))
+        if (filesystem::exists(GetDataDir() / strWalletFile))
         {
-            CDBEnv::VerifyResult r = bitdb.Verify("wallet.dat", CWalletDB::Recover);
+            CDBEnv::VerifyResult r = bitdb.Verify(strWalletFile, CWalletDB::Recover);
             if (r == CDBEnv::RECOVER_OK)
             {
                 string msg = strprintf(_("Warning: wallet.dat corrupt, data salvaged!"
@@ -990,7 +1070,7 @@ bool AppInit2(boost::thread_group& threadGroup)
 
         nStart = GetTimeMillis();
         bool fFirstRun = true;
-        pwalletMain = new CWallet("wallet.dat");
+        pwalletMain = new CWallet(strWalletFile);
         DBErrors nLoadWalletRet = pwalletMain->LoadWallet(fFirstRun);
         if (nLoadWalletRet != DB_LOAD_OK)
         {
@@ -1055,7 +1135,7 @@ bool AppInit2(boost::thread_group& threadGroup)
             pindexRescan = pindexGenesisBlock;
         else
         {
-            CWalletDB walletdb("wallet.dat");
+            CWalletDB walletdb(strWalletFile);
             CBlockLocator locator;
             if (walletdb.ReadBestBlock(locator))
                 pindexRescan = locator.GetBlockIndex();
