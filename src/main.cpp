@@ -2231,7 +2231,6 @@ bool CBlock::CheckBlock(CValidationState &state, bool fCheckPOW, bool fCheckMerk
 {
     // These are checks that are independent of context
     // that can be verified before saving an orphan block.
-printf("##enter checkblock \n");
 
     // Size limits
     if (vtx.empty() || vtx.size() > MAX_BLOCK_SIZE || ::GetSerializeSize(*this, SER_NETWORK, PROTOCOL_VERSION) > MAX_BLOCK_SIZE)
@@ -2314,8 +2313,6 @@ printf("##enter checkblock \n");
     // Check merkle root
     if (fCheckMerkleRoot && hashMerkleRoot != BuildMerkleTree())
         return state.DoS(100, error("CheckBlock() : hashMerkleRoot mismatch"));
-
-printf("##true checkblock\n");
 
     return true;
 }
