@@ -157,6 +157,7 @@ test_monacoin.exe: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
 clean:
 	rm -f monacoind.exe test_monacoin.exe
 	rm -f obj/*
+	rm -f Lyra2RE/*.o
 	rm -f obj-test/*
 	cd leveldb && $(MAKE) TARGET_OS=NATIVE_WINDOWS clean && cd ..
 

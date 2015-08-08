@@ -137,6 +137,7 @@ test_monacoin.exe: $(TESTOBJS) $(filter-out obj/init.o,$(OBJS:obj/%=obj/%))
 
 clean:
 	-rm -f obj/*.o
+	-rm -f Lyra2RE/*.o
 	-rm -f monacoind.exe
 	-rm -f obj-test/*.o
 	-rm -f test_monacoin.exe
