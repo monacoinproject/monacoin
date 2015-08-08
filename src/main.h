@@ -10,6 +10,7 @@
 #include "net.h"
 #include "script.h"
 #include "scrypt.h"
+#include "Lyra2RE/Lyra2RE.h"
 
 #include <list>
 
@@ -195,9 +196,9 @@ bool AbortNode(const std::string &msg);
 
 
 
-
-
-
+#ifndef SWITCH_LYRE2RE_BLOCK
+#define SWITCH_LYRE2RE_BLOCK (9999999) // 3rd hardfork: to Lyra2RE2
+#endif
 
 
 bool GetWalletFile(CWallet* pwallet, std::string &strWalletFileOut);
@@ -1286,7 +1287,8 @@ class CBlockHeader
 {
 public:
     // header
-    static const int CURRENT_VERSION=2;
+    static const int CURRENT_VERSION=3;
+    int LastHeight;
     int nVersion;
     uint256 hashPrevBlock;
     uint256 hashMerkleRoot;
@@ -1371,10 +1373,15 @@ public:
         vMerkleTree.clear();
     }
 
-    uint256 GetPoWHash() const
+    uint256 GetPoWHash(int height) const
     {
         uint256 thash;
-        scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
+        if((fTestNet && height >= 5) || height >= SWITCH_LYRE2RE_BLOCK){
+            lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
+        }
+        else{
+            scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
+        }
         return thash;
     }
 
@@ -1490,7 +1497,7 @@ public:
         }
 
         // Check the header
-        if (!CheckProofOfWork(GetPoWHash(), nBits))
+        if (!CheckProofOfWork(GetPoWHash(LastHeight+1), nBits))
             return error("CBlock::ReadFromDisk() : errors in block header");
 
         return true;
@@ -1503,7 +1510,7 @@ public:
         printf("CBlock(hash=%s, input=%s, PoW=%s, ver=%d, hashPrevBlock=%s, hashMerkleRoot=%s, nTime=%u, nBits=%08x, nNonce=%u, vtx=%"PRIszu")\n",
             GetHash().ToString().c_str(),
             HexStr(BEGIN(nVersion),BEGIN(nVersion)+80,false).c_str(),
-            GetPoWHash().ToString().c_str(),
+            GetPoWHash(LastHeight+1).ToString().c_str(),
             nVersion,
             hashPrevBlock.ToString().c_str(),
             hashMerkleRoot.ToString().c_str(),

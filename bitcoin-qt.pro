@@ -222,7 +222,17 @@ HEADERS += src/qt/bitcoingui.h \
     src/threadsafety.h \
     src/limitedmap.h \
     src/qt/macnotificationhandler.h \
-    src/qt/splashscreen.h
+    src/qt/splashscreen.h \
+    src/Lyra2RE/Lyra2.h \
+    src/Lyra2RE/Lyra2RE.h \
+    src/Lyra2RE/Sponge.h \
+    src/Lyra2RE/sph_blake.h \
+    src/Lyra2RE/sph_groestl.h \
+    src/Lyra2RE/sph_keccak.h \
+    src/Lyra2RE/sph_skein.h \
+    src/Lyra2RE/sph_types.h \
+    src/Lyra2RE/sph_cubehash.h \
+    src/Lyra2RE/sph_bmw.h
 
 SOURCES += src/qt/bitcoin.cpp \
     src/qt/bitcoingui.cpp \
@@ -293,7 +303,16 @@ SOURCES += src/qt/bitcoin.cpp \
     src/noui.cpp \
     src/leveldb.cpp \
     src/txdb.cpp \
-    src/qt/splashscreen.cpp
+    src/qt/splashscreen.cpp \
+    src/Lyra2RE/Lyra2.c \
+    src/Lyra2RE/Lyra2RE.c \
+    src/Lyra2RE/Sponge.c \
+    src/Lyra2RE/blake.c \
+    src/Lyra2RE/skein.c \
+    src/Lyra2RE/groestl.c \
+    src/Lyra2RE/keccak.c \
+    src/Lyra2RE/cubehash.c \
+    src/Lyra2RE/bmw.c
 
 RESOURCES += src/qt/bitcoin.qrc
 

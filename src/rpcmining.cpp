@@ -388,8 +388,17 @@ Value getwork(const Array& params, bool fHelp)
     {
         // Parse parameters
         vector<unsigned char> vchData = ParseHex(params[0].get_str());
-        if (vchData.size() != 128)
+
+		//FIXME: LastHeight is in the block header
+		for(int i = 0; i < 4; i++)
+		{
+			vchData.insert(vchData.begin(), 0);
+		}
+
+        if (vchData.size() != 132)
+		{
             throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid parameter");
+        }
         CBlock* pdata = (CBlock*)&vchData[0];
 
         // Byte reverse

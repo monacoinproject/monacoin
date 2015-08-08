@@ -3,6 +3,8 @@
 // Copyright (c) 2011-2015 Litecoin Developers
 // Copyright (c) 2013-2014 Dr. Kimoto Chan
 // Copyright (c) 2009-2014 The DigiByte developers
+// Copyright (c) 2014-2015 The Dash developers
+// Copyright (c) 2014-2015 Vertcoin Developers
 // Copyright (c) 2013-2015 Monacoin Developers
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
@@ -1078,6 +1080,8 @@ CBlockIndex* FindBlockByHeight(int nHeight)
 
 bool CBlock::ReadFromDisk(const CBlockIndex* pindex)
 {
+    LastHeight = pindex->nHeight - 1;
+
     if (!ReadFromDisk(pindex->GetBlockPos()))
         return false;
     if (GetHash() != pindex->GetBlockHash())
@@ -1308,6 +1312,11 @@ unsigned int static GetNextWorkRequired_V2(const CBlockIndex* pindexLast, const 
 
 unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
+
+    if (pindexLast->nHeight+1 == SWITCH_LYRE2RE_BLOCK) {
+        return bnProofOfWorkLimit.GetCompact();
+    }
+
     if(pindexLast->nHeight+1 >= nSwitchKGWblock && pindexLast->nHeight+1 < nSwitchDIGIblock){
         return GetNextWorkRequired_V2(pindexLast, pblock);
     }
@@ -1438,6 +1447,7 @@ bool ConnectBestBlock(CValidationState &state) {
 void CBlockHeader::UpdateTime(const CBlockIndex* pindexPrev)
 {
     nTime = max(pindexPrev->GetMedianTimePast()+1, GetAdjustedTime());
+    LastHeight = pindexPrev->nHeight;
 
     // Updating time can change work required on testnet:
     if (fTestNet)
@@ -1743,6 +1753,8 @@ void ThreadScriptCheck() {
 
 bool CBlock::ConnectBlock(CValidationState &state, CBlockIndex* pindex, CCoinsViewCache &view, bool fJustCheck)
 {
+    LastHeight = pindex->nHeight;
+
     // Check it again in case a previous version let a bad block in
     if (!CheckBlock(state, !fJustCheck, !fJustCheck))
         return false;
@@ -2219,6 +2231,7 @@ bool CBlock::CheckBlock(CValidationState &state, bool fCheckPOW, bool fCheckMerk
 {
     // These are checks that are independent of context
     // that can be verified before saving an orphan block.
+printf("##enter checkblock \n");
 
     // Size limits
     if (vtx.empty() || vtx.size() > MAX_BLOCK_SIZE || ::GetSerializeSize(*this, SER_NETWORK, PROTOCOL_VERSION) > MAX_BLOCK_SIZE)
@@ -2242,9 +2255,23 @@ bool CBlock::CheckBlock(CValidationState &state, bool fCheckPOW, bool fCheckMerk
             return error("CheckBlock() : 15 August maxlocks violation");
     }
 
-    // Check proof of work matches claimed amount
-    if (fCheckPOW && !CheckProofOfWork(GetPoWHash(), nBits))
-        return state.DoS(50, error("CheckBlock() : proof of work failed"));
+    CBlockIndex* pindexPrev = NULL;
+    int nHeight = 0;
+    if (GetHash() != hashGenesisBlock)
+    {
+        map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(hashPrevBlock);
+        pindexPrev = (*mi).second;
+        if (mi != mapBlockIndex.end())
+        {
+            if (pindexPrev != NULL)
+            {
+                nHeight = pindexPrev->nHeight+1;
+                // Check proof of work matches claimed amount
+                if (fCheckPOW && !CheckProofOfWork(GetPoWHash(nHeight), nBits))
+                    return state.DoS(50, error("CheckBlock() : proof of work failed"));
+            }
+        }
+    }
 
     // Check timestamp
     if (GetBlockTime() > GetAdjustedTime() + 2 * 60 * 60)
@@ -2288,6 +2315,8 @@ bool CBlock::CheckBlock(CValidationState &state, bool fCheckPOW, bool fCheckMerk
     if (fCheckMerkleRoot && hashMerkleRoot != BuildMerkleTree())
         return state.DoS(100, error("CheckBlock() : hashMerkleRoot mismatch"));
 
+printf("##true checkblock\n");
+
     return true;
 }
 
@@ -2307,6 +2336,7 @@ bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
             return state.DoS(10, error("AcceptBlock() : prev block not found"));
         pindexPrev = (*mi).second;
         nHeight = pindexPrev->nHeight+1;
+        LastHeight = pindexPrev->nHeight;
 
         // Check proof of work
         if (nBits != GetNextWorkRequired(pindexPrev, this))
@@ -2336,12 +2366,24 @@ bool CBlock::AcceptBlock(CValidationState &state, CDiskBlockPos *dbp)
             return state.Invalid(error("AcceptBlock() : rejected nVersion=1 block"));
         }
         // Enforce block.nVersion=2 rule that the coinbase starts with serialized block height
-        if (nVersion >= 2)
+        if (nVersion == 2)
         {
             CScript expect = CScript() << nHeight;
             if (vtx[0].vin[0].scriptSig.size() < expect.size() ||
                 !std::equal(expect.begin(), expect.end(), vtx[0].vin[0].scriptSig.begin()))
                 return state.DoS(100, error("AcceptBlock() : block height mismatch in coinbase"));
+        }
+        else if (nVersion >= 3)
+        {
+            // if 750 of the last 1,000 blocks are version 2 or greater (51/100 if testnet):
+            if ((!fTestNet && CBlockIndex::IsSuperMajority(3, pindexPrev, 750, 1000)) ||
+                (fTestNet && CBlockIndex::IsSuperMajority(3, pindexPrev, 51, 100)))
+            {
+                CScript expect = CScript() << nHeight;
+                if (vtx[0].vin[0].scriptSig.size() < expect.size() ||
+                    !std::equal(expect.begin(), expect.end(), vtx[0].vin[0].scriptSig.begin()))
+                    return state.DoS(100, error("AcceptBlock() : block height mismatch in coinbase"));
+            }
         }
     }
 
@@ -4555,6 +4597,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn)
 
         // Fill in header
         pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
+        pblock->LastHeight = pindexPrev->nHeight;
         pblock->UpdateTime(pindexPrev);
         pblock->nBits          = GetNextWorkRequired(pindexPrev, pblock);
         pblock->nNonce         = 0;
@@ -4649,7 +4692,16 @@ void FormatHashBuffers(CBlock* pblock, char* pmidstate, char* pdata, char* phash
 
 bool CheckWork(CBlock* pblock, CWallet& wallet, CReserveKey& reservekey)
 {
-    uint256 hash = pblock->GetPoWHash();
+    CBlockIndex* pindexPrev = NULL;
+    int nHeight = 0;
+    if (pblock->GetHash() != hashGenesisBlock)
+    {
+        map<uint256, CBlockIndex*>::iterator mi = mapBlockIndex.find(pblock->hashPrevBlock);
+        pindexPrev = (*mi).second;
+        nHeight = pindexPrev->nHeight+1;
+    }
+
+    uint256 hash = pblock->GetPoWHash(nHeight);
     uint256 hashTarget = CBigNum().SetCompact(pblock->nBits).getuint256();
 
     if (hash > hashTarget)
@@ -4741,7 +4793,12 @@ void static MonacoinMiner(CWallet *pwallet)
             char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
             loop
             {
-                scrypt_1024_1_1_256_sp(BEGIN(pblock->nVersion), BEGIN(thash), scratchpad);
+                if((fTestNet && pindexPrev->nHeight+1 >= 5) || pindexPrev->nHeight+1 >= SWITCH_LYRE2RE_BLOCK){
+                     lyra2re2_hash(BEGIN(pblock->nVersion), BEGIN(thash));
+                }
+                else{
+                     scrypt_1024_1_1_256_sp(BEGIN(pblock->nVersion), BEGIN(thash), scratchpad);
+                }
 
                 if (thash <= hashTarget)
                 {

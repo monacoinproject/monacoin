@@ -88,7 +88,16 @@ OBJS= \
     obj/hash.o \
     obj/bloom.o \
     obj/leveldb.o \
-    obj/txdb.o
+    obj/txdb.o \
+    Lyra2RE/Lyra2RE.o \
+    Lyra2RE/Lyra2.o \
+    Lyra2RE/Sponge.o \
+    Lyra2RE/blake.o \
+    Lyra2RE/groestl.o \
+    Lyra2RE/keccak.o \
+    Lyra2RE/skein.o \
+    Lyra2RE/cubehash.o \
+    Lyra2RE/bmw.o
 
 ifdef USE_SSE2
 DEFS += -DUSE_SSE2
