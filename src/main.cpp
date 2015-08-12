@@ -1310,14 +1310,74 @@ unsigned int static GetNextWorkRequired_V2(const CBlockIndex* pindexLast, const 
     return KimotoGravityWell(pindexLast, pblock, BlocksTargetSpacing, PastBlocksMin, PastBlocksMax);
 }
 
-unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
-{
+unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockHeader *pblock) {
+    /* current difficulty formula, dash - DarkGravity v3, written by Evan Duffield - evan@dashpay.io */
+    const CBlockIndex *BlockLastSolved = pindexLast;
+    const CBlockIndex *BlockReading = pindexLast;
+    int64_t nActualTimespan = 0;
+    int64_t LastBlockTime = 0;
+    int64_t PastBlocksMin = 24;
+    int64_t PastBlocksMax = 24;
+    int64_t CountBlocks = 0;
+    CBigNum PastDifficultyAverage;
+    CBigNum PastDifficultyAveragePrev;
 
-    if (pindexLast->nHeight+1 == SWITCH_LYRE2RE_BLOCK) {
+    if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || BlockLastSolved->nHeight < PastBlocksMin) {
         return bnProofOfWorkLimit.GetCompact();
     }
 
-    if(pindexLast->nHeight+1 >= nSwitchKGWblock && pindexLast->nHeight+1 < nSwitchDIGIblock){
+    for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) {
+        if (PastBlocksMax > 0 && i > PastBlocksMax) { break; }
+        CountBlocks++;
+
+        if(CountBlocks <= PastBlocksMin) {
+            if (CountBlocks == 1) { PastDifficultyAverage.SetCompact(BlockReading->nBits); }
+            else { PastDifficultyAverage = ((PastDifficultyAveragePrev * CountBlocks)+(CBigNum().SetCompact(BlockReading->nBits))) / (CountBlocks+1); }
+            PastDifficultyAveragePrev = PastDifficultyAverage;
+        }
+
+        if(LastBlockTime > 0){
+            int64_t Diff = (LastBlockTime - BlockReading->GetBlockTime());
+            nActualTimespan += Diff;
+        }
+        LastBlockTime = BlockReading->GetBlockTime();
+
+        if (BlockReading->pprev == NULL) { assert(BlockReading); break; }
+        BlockReading = BlockReading->pprev;
+    }
+
+    CBigNum bnNew(PastDifficultyAverage);
+
+    int64_t _nTargetTimespan = CountBlocks*nTargetSpacing;
+
+    if (nActualTimespan < _nTargetTimespan/3)
+        nActualTimespan = _nTargetTimespan/3;
+    if (nActualTimespan > _nTargetTimespan*3)
+        nActualTimespan = _nTargetTimespan*3;
+
+    // Retarget
+    bnNew *= nActualTimespan;
+    bnNew /= _nTargetTimespan;
+
+    if (bnNew > bnProofOfWorkLimit){
+        bnNew = bnProofOfWorkLimit;
+    }
+
+    return bnNew.GetCompact();
+}
+
+unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
+{
+
+    if (pindexLast->nHeight+1 == SWITCH_LYRE2RE_DGW_BLOCK) {
+        return bnProofOfWorkLimit.GetCompact();
+    }
+
+    if(pindexLast->nHeight+1 >= SWITCH_LYRE2RE_DGW_BLOCK)
+    {
+        return DarkGravityWave(pindexLast, pblock);
+    }
+    else if(pindexLast->nHeight+1 >= nSwitchKGWblock && pindexLast->nHeight+1 < nSwitchDIGIblock){
         return GetNextWorkRequired_V2(pindexLast, pblock);
     }
 
@@ -4790,7 +4850,7 @@ void static MonacoinMiner(CWallet *pwallet)
             char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
             loop
             {
-                if((fTestNet && pindexPrev->nHeight+1 >= 5) || pindexPrev->nHeight+1 >= SWITCH_LYRE2RE_BLOCK){
+                if((fTestNet && pindexPrev->nHeight+1 >= 5) || pindexPrev->nHeight+1 >= SWITCH_LYRE2RE_DGW_BLOCK){
                      lyra2re2_hash(BEGIN(pblock->nVersion), BEGIN(thash));
                 }
                 else{
