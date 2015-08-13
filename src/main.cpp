@@ -1319,14 +1319,15 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
     int64_t PastBlocksMin = 24;
     int64_t PastBlocksMax = 24;
     int64_t CountBlocks = 0;
+    int64_t nSwitchBlock = ((fTestNet)?SWITCH_LYRE2RE_DGW_BLOCK_TESTNET:SWITCH_LYRE2RE_DGW_BLOCK);
     CBigNum PastDifficultyAverage;
     CBigNum PastDifficultyAveragePrev;
 
-    if (BlockLastSolved == NULL || BlockLastSolved->nHeight == 0 || BlockLastSolved->nHeight < PastBlocksMin) {
+    if (BlockLastSolved == NULL || BlockLastSolved->nHeight < nSwitchBlock + PastBlocksMin) {
         return bnProofOfWorkLimit.GetCompact();
     }
 
-    for (unsigned int i = 1; BlockReading && BlockReading->nHeight > 0; i++) {
+    for (unsigned int i = 1; BlockReading && BlockReading->nHeight >= nSwitchBlock; i++) {
         if (PastBlocksMax > 0 && i > PastBlocksMax) { break; }
         CountBlocks++;
 
@@ -1369,11 +1370,7 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
 unsigned int static GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
 
-    if (pindexLast->nHeight+1 == SWITCH_LYRE2RE_DGW_BLOCK) {
-        return bnProofOfWorkLimit.GetCompact();
-    }
-
-    if(pindexLast->nHeight+1 >= SWITCH_LYRE2RE_DGW_BLOCK)
+    if((fTestNet && pindexLast->nHeight+1 >= SWITCH_LYRE2RE_DGW_BLOCK_TESTNET) || pindexLast->nHeight+1 >= SWITCH_LYRE2RE_DGW_BLOCK)
     {
         return DarkGravityWave(pindexLast, pblock);
     }
@@ -4850,7 +4847,7 @@ void static MonacoinMiner(CWallet *pwallet)
             char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
             loop
             {
-                if((fTestNet && pindexPrev->nHeight+1 >= 5) || pindexPrev->nHeight+1 >= SWITCH_LYRE2RE_DGW_BLOCK){
+                if((fTestNet && pindexPrev->nHeight+1 >= SWITCH_LYRE2RE_DGW_BLOCK_TESTNET) || pindexPrev->nHeight+1 >= SWITCH_LYRE2RE_DGW_BLOCK){
                      lyra2re2_hash(BEGIN(pblock->nVersion), BEGIN(thash));
                 }
                 else{

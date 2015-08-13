@@ -196,7 +196,8 @@ bool AbortNode(const std::string &msg);
 
 
 
-#define SWITCH_LYRE2RE_DGW_BLOCK (9999999) // 3rd hardfork: to Lyra2RE2
+#define SWITCH_LYRE2RE_DGW_BLOCK         (9999999) // 3rd hardfork: to Lyra2RE2
+#define SWITCH_LYRE2RE_DGW_BLOCK_TESTNET (10)      // for testnet
 
 
 bool GetWalletFile(CWallet* pwallet, std::string &strWalletFileOut);
@@ -1374,7 +1375,7 @@ public:
     uint256 GetPoWHash(int height) const
     {
         uint256 thash;
-        if((fTestNet && height >= 5) || height >= SWITCH_LYRE2RE_DGW_BLOCK){
+        if((fTestNet && height >= SWITCH_LYRE2RE_DGW_BLOCK_TESTNET) || height >= SWITCH_LYRE2RE_DGW_BLOCK){
             lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
         }
         else{
