@@ -234,6 +234,22 @@
 <context>
     <name>BitcoinGUI</name>
     <message>
+        <location filename="../bitcoingui.cpp" line="+247"/>
+        <source>Show Automatic &amp;Backups</source>
+        <translation>自動バックアップのフォルダを開く</translation>
+    </message>
+    <message>
+        <location line="+1"/>
+        <source>Show automatically created wallet backups</source>
+        <translation>自動的にバックアップされたウォレットデータのフォルダを開きます</translation>
+    </message>
+
+    <message>
+        <location line="+38"/>
+        <source>&amp;Tools</source>
+        <translation>ツール</translation>
+    </message>
+    <message>
         <source>Sign &amp;message...</source>
         <translation>メッセージの署名... (&amp;m)</translation>
     </message>
