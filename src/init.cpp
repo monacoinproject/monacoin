@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2014 The Bitcoin developers
+// Copyright (c) 2014-2015 The Dash developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -47,7 +48,9 @@ using namespace boost;
 using namespace std;
 
 #ifdef ENABLE_WALLET
+std::string strWalletFile;
 CWallet* pwalletMain = NULL;
+static int nWalletBackups = 10;
 #endif
 bool fFeeEstimatesInitialized = false;
 
@@ -301,6 +304,7 @@ std::string HelpMessage(HelpMessageMode mode)
 
 #ifdef ENABLE_WALLET
     strUsage += "\n" + _("Wallet options:") + "\n";
+    strUsage += "  -createwalletbackups=<n> " + _("Number of automatic wallet backups (default: 10)") + "\n";
     strUsage += "  -disablewallet         " + _("Do not load the wallet and disable wallet RPC calls") + "\n";
     strUsage += "  -keypool=<n>           " + strprintf(_("Set key pool size to <n> (default: %u)"), 100) + "\n";
     if (GetBoolArg("-help-debug", false))
@@ -397,15 +401,17 @@ std::string HelpMessage(HelpMessageMode mode)
 std::string LicenseInfo()
 {
     return FormatParagraph(strprintf(_("Copyright (C) 2009-%i The Bitcoin Core Developers"), COPYRIGHT_YEAR)) + "\n" +
-           "\n" +
+           "\n" + 
            FormatParagraph(strprintf(_("Copyright (C) 2011-%i The Litecoin Core Developers"), COPYRIGHT_YEAR)) + "\n" +
-           "\n" +
+           "\n" + 
            FormatParagraph(strprintf(_("Copyright (C) 2011-%i Dr. Kimoto Chan"), COPYRIGHT_YEAR)) + "\n" +
-           "\n" +
+           "\n" + 
            FormatParagraph(strprintf(_("Copyright (C) 2011-%i The DigiByte developers"), COPYRIGHT_YEAR)) + "\n" +
-           "\n" +
+           "\n" + 
+           FormatParagraph(strprintf(_("Copyright (C) 2014-%i The Dash developers"), COPYRIGHT_YEAR)) + "\n" +
+           "\n" + 
            FormatParagraph(strprintf(_("Copyright (C) 2013-%i The Monacoin Core Developers"), COPYRIGHT_YEAR)) + "\n" +
-           "\n" + "\n" +
+           "\n" + 
            FormatParagraph(_("This is experimental software.")) + "\n" +
            "\n" +
            FormatParagraph(_("Distributed under the MIT software license, see the accompanying file COPYING or <http://www.opensource.org/licenses/mit-license.php>.")) + "\n" +
@@ -825,9 +831,78 @@ bool AppInit2(boost::thread_group& threadGroup)
     scrypt_detect_sse2();
 #endif
 
-    // ********************************************************* Step 5: verify wallet database integrity
+    // ********************************************************* Step 5: Backup wallet and verify wallet database integrity
 #ifdef ENABLE_WALLET
     if (!fDisableWallet) {
+        filesystem::path backupDir = GetDataDir() / "backups";
+        if (!filesystem::exists(backupDir))
+        {
+            // Always create backup folder to not confuse the operating system's file browser
+            filesystem::create_directories(backupDir);
+        }
+        nWalletBackups = GetArg("-createwalletbackups", 10);
+        nWalletBackups = std::max(0, std::min(10, nWalletBackups));
+        if(nWalletBackups > 0)
+        {
+            if (filesystem::exists(backupDir))
+            {
+                // Create backup of the wallet
+                std::string dateTimeStr = DateTimeStrFormat(".%Y-%m-%d-%H.%M", GetTime());
+                std::string backupPathStr = backupDir.string();
+                backupPathStr += "/" + strWalletFile;
+                std::string sourcePathStr = GetDataDir().string();
+                sourcePathStr += "/" + strWalletFile;
+                boost::filesystem::path sourceFile = sourcePathStr;
+                boost::filesystem::path backupFile = backupPathStr + dateTimeStr;
+                sourceFile.make_preferred();
+                backupFile.make_preferred();
+                try {
+                    boost::filesystem::copy_file(sourceFile, backupFile);
+                    printf("Creating backup of %s -> %s\n", sourceFile.c_str(), backupFile.c_str());
+                } catch(boost::filesystem::filesystem_error &error) {
+                    printf("Failed to create backup %s\n", error.what());
+                }
+                // Keep only the last 10 backups, including the new one of course
+                typedef std::multimap<std::time_t, boost::filesystem::path> folder_set_t;
+                folder_set_t folder_set;
+                boost::filesystem::directory_iterator end_iter;
+                boost::filesystem::path backupFolder = backupDir.string();
+                backupFolder.make_preferred();
+
+                // Build map of backup files for current(!) wallet sorted by last write time
+                boost::filesystem::path currentFile;
+                for (boost::filesystem::directory_iterator dir_iter(backupFolder); dir_iter != end_iter; ++dir_iter)
+                {
+                    // Only check regular files
+                    if ( boost::filesystem::is_regular_file(dir_iter->status()))
+                    {
+                        currentFile = dir_iter->path().filename();
+                        // Only add the backups for the current wallet, e.g. wallet.dat.*
+                        if(currentFile.string().find(strWalletFile) != string::npos)
+                        {
+                            folder_set.insert(folder_set_t::value_type(boost::filesystem::last_write_time(dir_iter->path()), *dir_iter));
+                        }
+                    }
+                }
+                // Loop backward through backup files and keep the N newest ones (1 <= N <= 10)
+                int counter = 0;
+                BOOST_REVERSE_FOREACH(PAIRTYPE(const std::time_t, boost::filesystem::path) file, folder_set)
+                {
+                    counter++;
+                    if (counter > nWalletBackups)
+                    {
+                        // More than nWalletBackups backups: delete oldest one(s)
+                        try {
+                            boost::filesystem::remove(file.second);
+                            printf("Old backup deleted: %s\n", file.second.c_str());
+                        } catch(boost::filesystem::filesystem_error &error) {
+                            printf("Failed to delete backup %s\n", error.what());
+                        }
+                    }
+                }
+            }
+        }
+
         LogPrintf("Using wallet %s\n", strWalletFile);
         uiInterface.InitMessage(_("Verifying wallet..."));
 

@@ -103,6 +103,7 @@ private:
     QAction *changePassphraseAction;
     QAction *aboutQtAction;
     QAction *openRPCConsoleAction;
+    QAction *showBackupsAction;
     QAction *openAction;
     QAction *showHelpMessageAction;
 
