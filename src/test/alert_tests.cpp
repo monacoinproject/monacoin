@@ -1,14 +1,26 @@
+// Copyright (c) 2013 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 //
 // Unit tests for alert system
 //
 
-#include <boost/foreach.hpp>
-#include <boost/test/unit_test.hpp>
+#include "alert.h"
+#include "clientversion.h"
+#include "data/alertTests.raw.h"
+
+#include "chainparams.h"
+#include "serialize.h"
+#include "streams.h"
+#include "util.h"
+#include "utilstrencodings.h"
+
 #include <fstream>
 
-#include "alert.h"
-#include "serialize.h"
-#include "util.h"
+#include <boost/filesystem/operations.hpp>
+#include <boost/foreach.hpp>
+#include <boost/test/unit_test.hpp>
 
 #if 0
 //
@@ -22,7 +34,7 @@
     alert.nID           = 1;
     alert.nCancel       = 0;   // cancels previous messages up to this ID number
     alert.nMinVer       = 0;  // These versions are protocol versions
-    alert.nMaxVer       = 70001;
+    alert.nMaxVer       = 999001;
     alert.nPriority     = 1;
     alert.strComment    = "Alert comment";
     alert.strStatusBar  = "Alert 1";
@@ -71,31 +83,8 @@ struct ReadAlerts
 {
     ReadAlerts()
     {
-        std::string filename("alertTests");
-        namespace fs = boost::filesystem;
-        fs::path testFile = fs::current_path() / "test" / "data" / filename;
-#ifdef TEST_DATA_DIR
-        if (!fs::exists(testFile))
-        {
-            testFile = fs::path(BOOST_PP_STRINGIZE(TEST_DATA_DIR)) / filename;
-        }
-#endif
-        FILE* fp = fopen(testFile.string().c_str(), "rb");
-        if (!fp) return;
-
-
-        CAutoFile filein = CAutoFile(fp, SER_DISK, CLIENT_VERSION);
-        if (!filein) return;
-
-        try {
-            while (!feof(filein))
-            {
-                CAlert alert;
-                filein >> alert;
-                alerts.push_back(alert);
-            }
-        }
-        catch (std::exception) { }
+        std::vector<unsigned char> vch(alert_tests::alertTests, alert_tests::alertTests + sizeof(alert_tests::alertTests));
+        CDataStream(vch, SER_DISK, CLIENT_VERSION) >> allAlerts[CBaseChainParams::MAIN];
     }
     ~ReadAlerts() { }
 
@@ -111,11 +100,9 @@ struct ReadAlerts
         return result;
     }
 
-    std::vector<CAlert> alerts;
+    std::map<CBaseChainParams::Network, std::vector<CAlert> > allAlerts;
 };
 
-
-#if 0
 BOOST_FIXTURE_TEST_SUITE(Alert_tests, ReadAlerts)
 
 
@@ -123,45 +110,54 @@ BOOST_AUTO_TEST_CASE(AlertApplies)
 {
     SetMockTime(11);
 
-    BOOST_FOREACH(const CAlert& alert, alerts)
+    BOOST_FOREACH(const PAIRTYPE(CBaseChainParams::Network, std::vector<CAlert>) &net, allAlerts)
     {
-        BOOST_CHECK(alert.CheckSignature());
+        SelectParams(net.first);
+        const std::vector<CAlert> &alerts = net.second;
+
+        BOOST_FOREACH(const CAlert& alert, alerts)
+        {
+            BOOST_CHECK(alert.CheckSignature());
+        }
+
+        BOOST_CHECK(alerts.size() >= 3);
+
+        // Matches:
+        BOOST_CHECK(alerts[0].AppliesTo(1, ""));
+        BOOST_CHECK(alerts[0].AppliesTo(999001, ""));
+        BOOST_CHECK(alerts[0].AppliesTo(1, "/Satoshi:11.11.11/"));
+
+        BOOST_CHECK(alerts[1].AppliesTo(1, "/Satoshi:0.1.0/"));
+        BOOST_CHECK(alerts[1].AppliesTo(999001, "/Satoshi:0.1.0/"));
+
+        BOOST_CHECK(alerts[2].AppliesTo(1, "/Satoshi:0.1.0/"));
+        BOOST_CHECK(alerts[2].AppliesTo(1, "/Satoshi:0.2.0/"));
+
+        // Don't match:
+        BOOST_CHECK(!alerts[0].AppliesTo(-1, ""));
+        BOOST_CHECK(!alerts[0].AppliesTo(999002, ""));
+
+        BOOST_CHECK(!alerts[1].AppliesTo(1, ""));
+        BOOST_CHECK(!alerts[1].AppliesTo(1, "Satoshi:0.1.0"));
+        BOOST_CHECK(!alerts[1].AppliesTo(1, "/Satoshi:0.1.0"));
+        BOOST_CHECK(!alerts[1].AppliesTo(1, "Satoshi:0.1.0/"));
+        BOOST_CHECK(!alerts[1].AppliesTo(-1, "/Satoshi:0.1.0/"));
+        BOOST_CHECK(!alerts[1].AppliesTo(999002, "/Satoshi:0.1.0/"));
+        BOOST_CHECK(!alerts[1].AppliesTo(1, "/Satoshi:0.2.0/"));
+
+        BOOST_CHECK(!alerts[2].AppliesTo(1, "/Satoshi:0.3.0/"));
     }
-    // Matches:
-    BOOST_CHECK(alerts[0].AppliesTo(1, ""));
-    BOOST_CHECK(alerts[0].AppliesTo(70001, ""));
-    BOOST_CHECK(alerts[0].AppliesTo(1, "/Satoshi:11.11.11/"));
-
-    BOOST_CHECK(alerts[1].AppliesTo(1, "/Satoshi:0.1.0/"));
-    BOOST_CHECK(alerts[1].AppliesTo(70001, "/Satoshi:0.1.0/"));
-
-    BOOST_CHECK(alerts[2].AppliesTo(1, "/Satoshi:0.1.0/"));
-    BOOST_CHECK(alerts[2].AppliesTo(1, "/Satoshi:0.2.0/"));
-
-    // Don't match:
-    BOOST_CHECK(!alerts[0].AppliesTo(-1, ""));
-    BOOST_CHECK(!alerts[0].AppliesTo(70002, ""));
-
-    BOOST_CHECK(!alerts[1].AppliesTo(1, ""));
-    BOOST_CHECK(!alerts[1].AppliesTo(1, "Satoshi:0.1.0"));
-    BOOST_CHECK(!alerts[1].AppliesTo(1, "/Satoshi:0.1.0"));
-    BOOST_CHECK(!alerts[1].AppliesTo(1, "Satoshi:0.1.0/"));
-    BOOST_CHECK(!alerts[1].AppliesTo(-1, "/Satoshi:0.1.0/"));
-    BOOST_CHECK(!alerts[1].AppliesTo(70002, "/Satoshi:0.1.0/"));
-    BOOST_CHECK(!alerts[1].AppliesTo(1, "/Satoshi:0.2.0/"));
-
-    BOOST_CHECK(!alerts[2].AppliesTo(1, "/Satoshi:0.3.0/"));
 
     SetMockTime(0);
+    SelectParams(CBaseChainParams::MAIN);
 }
 
 
-// This uses sh 'echo' to test the -alertnotify function, writing to a
-// /tmp file. So skip it on Windows:
-#ifndef WIN32
 BOOST_AUTO_TEST_CASE(AlertNotify)
 {
     SetMockTime(11);
+
+    const std::vector<CAlert> &alerts = allAlerts.find(CBaseChainParams::MAIN)->second;
 
     boost::filesystem::path temp = GetTempPath() / "alertnotify.txt";
     boost::filesystem::remove(temp);
@@ -172,15 +168,25 @@ BOOST_AUTO_TEST_CASE(AlertNotify)
         alert.ProcessAlert(false);
 
     std::vector<std::string> r = read_lines(temp);
-    BOOST_CHECK_EQUAL(r.size(), 1u);
-    BOOST_CHECK_EQUAL(r[0], "Evil Alert; /bin/ls; echo "); // single-quotes should be removed
+    BOOST_CHECK_EQUAL(r.size(), 4u);
 
+// Windows built-in echo semantics are different than posixy shells. Quotes and
+// whitespace are printed literally.
+
+#ifndef WIN32
+    BOOST_CHECK_EQUAL(r[0], "Alert 1");
+    BOOST_CHECK_EQUAL(r[1], "Alert 2, cancels 1");
+    BOOST_CHECK_EQUAL(r[2], "Alert 2, cancels 1");
+    BOOST_CHECK_EQUAL(r[3], "Evil Alert; /bin/ls; echo "); // single-quotes should be removed
+#else
+    BOOST_CHECK_EQUAL(r[0], "'Alert 1' ");
+    BOOST_CHECK_EQUAL(r[1], "'Alert 2, cancels 1' ");
+    BOOST_CHECK_EQUAL(r[2], "'Alert 2, cancels 1' ");
+    BOOST_CHECK_EQUAL(r[3], "'Evil Alert; /bin/ls; echo ' ");
+#endif
     boost::filesystem::remove(temp);
 
     SetMockTime(0);
 }
-#endif
 
 BOOST_AUTO_TEST_SUITE_END()
-#endif
-

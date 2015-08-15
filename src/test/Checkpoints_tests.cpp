@@ -1,12 +1,16 @@
+// Copyright (c) 2011-2013 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
 //
 // Unit tests for block-chain checkpoints
 //
-#include <boost/assign/list_of.hpp> // for 'map_list_of()'
-#include <boost/test/unit_test.hpp>
-#include <boost/foreach.hpp>
 
-#include "../checkpoints.h"
-#include "../util.h"
+#include "checkpoints.h"
+
+#include "uint256.h"
+
+#include <boost/test/unit_test.hpp>
 
 using namespace std;
 
@@ -14,21 +18,21 @@ BOOST_AUTO_TEST_SUITE(Checkpoints_tests)
 
 BOOST_AUTO_TEST_CASE(sanity)
 {
-    uint256 p1500 = uint256("0x841a2965955dd288cfa707a755d05a54e45f8bd476835ec9af4402a2b59a2967");
-    uint256 p120000 = uint256("0xbd9d26924f05f6daa7f0155f32828ec89e8e29cee9e7121b026a7a3552ac6131");
+    uint256 p1500 = uint256("0x9f42d51d18d0a8914a00664c433a0ca4be3eed02f9374d790bffbd3d3053d41d");
+    uint256 p300000 = uint256("0x11095515590421444ba29396d9122c234baced79be8b32604acc37cf094558ab");
     BOOST_CHECK(Checkpoints::CheckBlock(1500, p1500));
-    BOOST_CHECK(Checkpoints::CheckBlock(120000, p120000));
+    BOOST_CHECK(Checkpoints::CheckBlock(300000, p300000));
 
     
     // Wrong hashes at checkpoints should fail:
-    BOOST_CHECK(!Checkpoints::CheckBlock(1500, p120000));
-    BOOST_CHECK(!Checkpoints::CheckBlock(120000, p1500));
+    BOOST_CHECK(!Checkpoints::CheckBlock(1500, p300000));
+    BOOST_CHECK(!Checkpoints::CheckBlock(300000, p1500));
 
     // ... but any hash not at a checkpoint should succeed:
-    BOOST_CHECK(Checkpoints::CheckBlock(1500+1, p120000));
-    BOOST_CHECK(Checkpoints::CheckBlock(120000+1, p1500));
+    BOOST_CHECK(Checkpoints::CheckBlock(1500+1, p300000));
+    BOOST_CHECK(Checkpoints::CheckBlock(300000+1, p1500));
 
-    BOOST_CHECK(Checkpoints::GetTotalBlocksEstimate() >= 120000);
+    BOOST_CHECK(Checkpoints::GetTotalBlocksEstimate() >= 300000);
 }    
 
 BOOST_AUTO_TEST_SUITE_END()

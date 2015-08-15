@@ -1,9 +1,5 @@
-Building Monacoin
+Building Bitcoin
 
-See doc/readme-qt.rst for instructions on building Monacoin-Qt,
-the intended-for-end-users, nice-graphical-interface, reference
-implementation of Monacoin.
-
-See doc/build-*.txt for instructions on building litecoind,
+See doc/build-*.md for instructions on building bitcoind,
 the intended-for-services, no-graphical-interface, reference
-implementation of Monacoin.
+implementation of Bitcoin.

@@ -2,22 +2,23 @@
 // Distributed under the MIT/X11 software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef SIGNVERIFYMESSAGEDIALOG_H
-#define SIGNVERIFYMESSAGEDIALOG_H
+#ifndef BITCOIN_QT_SIGNVERIFYMESSAGEDIALOG_H
+#define BITCOIN_QT_SIGNVERIFYMESSAGEDIALOG_H
 
 #include <QDialog>
+
+class WalletModel;
 
 namespace Ui {
     class SignVerifyMessageDialog;
 }
-class WalletModel;
 
 class SignVerifyMessageDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit SignVerifyMessageDialog(QWidget *parent = 0);
+    explicit SignVerifyMessageDialog(QWidget *parent);
     ~SignVerifyMessageDialog();
 
     void setModel(WalletModel *model);
@@ -47,4 +48,4 @@ private slots:
     void on_clearButton_VM_clicked();
 };
 
-#endif // SIGNVERIFYMESSAGEDIALOG_H
+#endif // BITCOIN_QT_SIGNVERIFYMESSAGEDIALOG_H

@@ -2,7 +2,7 @@
 .SH NAME
 bitcoin.conf \- bitcoin configuration file
 .SH SYNOPSIS
-All command-line options (except for '\-datadir' and '\-conf') may be specified in a configuration file, and all configuration file options may also be specified on the command line. Command-line options override values set in the configuration file.
+All command-line options (except for '\-conf') may be specified in a configuration file, and all configuration file options may also be specified on the command line. Command-line options override values set in the configuration file.
 .TP
 The configuration file is a list of 'setting=value' pairs, one per line, with optional comments starting with the '#' character.
 .TP
@@ -18,10 +18,10 @@ Enable or disable run on the test network instead of the real *bitcoin* network.
 \fBproxy=\fR\fI'127.0.0.1:9050'\fR
 Connect via a socks4 proxy.
 .TP
-\fBaddnode=\fR\fI'10.0.0.2:9333'\fR
+\fBaddnode=\fR\fI'10.0.0.2:9401'\fR
 Use as many *addnode=* settings as you like to connect to specific peers.
 .TP
-\fBconnect=\fR\fI'10.0.0.1:9333'\fR
+\fBconnect=\fR\fI'10.0.0.1:9401'\fR
 Use as many *connect=* settings as you like to connect ONLY to specific peers.
 .TP
 \fRmaxconnections=\fR\fI'value'\fR
@@ -37,13 +37,10 @@ You must set *rpcuser* to secure the JSON-RPC api.
 \fBrpcpassword=\fR\fI'password'\fR
 You must set *rpcpassword* to secure the JSON-RPC api.
 .TP
-\fBrpctimeout=\fR\fI'30'\fR
-How many seconds *bitcoin* will wait for a complete RPC HTTP request, after the HTTP connection is established.
-.TP
 \fBrpcallowip=\fR\fI'192.168.1.*'\fR
 By default, only RPC connections from localhost are allowed. Specify as many *rpcallowip=* settings as you like to allow connections from other hosts (and you may use * as a wildcard character).
 .TP
-\fBrpcport=\fR\fI'9332'\fR
+\fBrpcport=\fR\fI'9402'\fR
 Listen for RPC connections on this TCP port.
 .TP
 \fBrpcconnect=\fR\fI'127.0.0.1'\fR

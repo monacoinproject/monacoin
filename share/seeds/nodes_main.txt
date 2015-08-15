@@ -1,0 +1,3 @@
+# List of Monacoin IPv4 nodes sorted by 30 day availability, block height and version.
+
+153.120.39.89:9401

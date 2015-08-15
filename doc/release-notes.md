@@ -1,114 +1,86 @@
-- Upgrade to openssl-1.0.1h for CVE-2014-0224
+Bitcoin Core version 0.10.2 is now available from:
 
-0.8.7.1 changes
-=============
-- Enforce v2 blocks
-- Add `-maxorphantx=<n>` and `-maxorphanblocks=<n>` options for control over the maximum orphan transactions and blocks
-- Stricter memory limits on CNode
-- Windows Official Gitian Builds: upgrade to openssl-1.0.1k
+  <https://bitcoin.org/bin/bitcoin-core-0.10.2/>
 
+This is a new minor version release, bringing minor bug fixes and translation 
+updates. It is recommended to upgrade to this version.
 
-0.8.7.0 changes
-=============
-- Mac and Windows Official Gitian Builds: upgrade to openssl-1.0.1g for CVE-2014-0160
-                   Linux was not vulnerable with Lucid openssl-0.9.8k
-                   Older versions were only vulnerable with rarely used RPC SSL
-- If you build from source, be sure that your openssl is patched for CVE-2014-0160.
-- Upgrade openssl, qt, miniupnpc, zlib, libpng, qrencode
-- Many bug fixes from Bitcoin 0.8.7rc stable branch
-    including transaction malleability mitigation backports from 0.9
-- Implemented the DigiShield difficulty algorithm
+Please report bugs using the issue tracker at github:
 
+  <https://github.com/bitcoin/bitcoin/issues>
 
-0.8.6.2 changes
-=============
+Upgrading and downgrading
+=========================
 
-- Windows only: Fixes issue where network connectivity can fail.
+How to Upgrade
+--------------
 
-- Cleanup of SSE2 scrypt detection.
+If you are running an older version, shut it down. Wait until it has completely
+shut down (which might take a few minutes for older versions), then run the
+installer (on Windows) or just copy over /Applications/Bitcoin-Qt (on Mac) or
+bitcoind/bitcoin-qt (on Linux).
 
-- Minor fixes:
-  - s/Bitcoin/Litecoin/ in the Coin Control example
-  - Fix custom build on MacOS X 10.9
-  - Fix QT5 custom build
-  - Update Debian build instructions
-  - Update Homebrew build 
+Downgrade warning
+------------------
 
-0.8.6.1 changes
-=============
+Because release 0.10.0 and later makes use of headers-first synchronization and
+parallel block download (see further), the block files and databases are not
+backwards-compatible with pre-0.10 versions of Bitcoin Core or other software:
 
-- Coin Control - experts only GUI selection of inputs before you send a transaction
+* Blocks will be stored on disk out of order (in the order they are
+received, really), which makes it incompatible with some tools or
+other programs. Reindexing using earlier versions will also not work
+anymore as a result of this.
 
-- Disable Wallet - reduces memory requirements, helpful for miner or relay nodes
+* The block index database will now hold headers for which no block is
+stored on disk, which earlier versions won't support.
 
-- 20x reduction in default mintxfee.
+If you want to be able to downgrade smoothly, make a backup of your entire data
+directory. Without this your node will need start syncing (or importing from
+bootstrap.dat) anew afterwards. It is possible that the data from a completely
+synchronised 0.10 node may be usable in older versions as-is, but this is not
+supported and may break as soon as the older version attempts to reindex.
 
-- Up to 50% faster PoW validation, faster sync and reindexing.
+This does not affect wallet forward or backward compatibility.
 
-- Peers older than protocol version 70002 are disconnected.  0.8.3.7 is the oldest compatible client.
-
-- Internal miner added back to Litecoin.  setgenerate now works, although it is generally a bad idea as it is significantly slower than external CPU miners.
-
-- New RPC commands: getbestblockhash and verifychain
-
-- Improve fairness of the high priority transaction space per block
-
-- OSX block chain database corruption fixes
-  - Update leveldb to 1.13
-  - Use fcntl with `F_FULLSYNC` instead of fsync on OSX
-  - Use native Darwin memory barriers
-  - Replace use of mmap in leveldb for improved reliability (only on OSX)
-
-- Fix nodes forwarding transactions with empty vins and getting banned
-
-- Network code performance and robustness improvements
-
-- Additional debug.log logging for diagnosis of network problems, log timestamps by default
-
-- Fix rare GUI crash on send
-
-0.8.5.1 changes
+Notable changes
 ===============
 
-Workaround negative version numbers serialization bug.
+This fixes a serious problem on Windows with data directories that have non-ASCII
+characters (https://github.com/bitcoin/bitcoin/issues/6078).
 
-Fix out-of-bounds check (Litecoin currently does not use this codepath, but we apply this
-patch just to match Bitcoin 0.8.5.)
+For other platforms there are no notable changes.
 
-0.8.4.1 changes
-===============
+For the notable changes in 0.10, refer to the release notes
+at https://github.com/bitcoin/bitcoin/blob/v0.10.0/doc/release-notes.md
 
-CVE-2013-5700 Bloom: filter crash issue - Litecoin 0.8.3.7 disabled bloom by default so was 
-unaffected by this issue, but we include their patches anyway just in case folks want to 
-enable bloomfilter=1.
+0.10.2 Change log
+=================
 
-CVE-2013-4165: RPC password timing guess vulnerability
+Detailed release notes follow. This overview includes changes that affect external
+behavior, not code moves, refactors or string updates.
 
-CVE-2013-4627: Better fix for the fill-memory-with-orphaned-tx attack
+Wallet:
+- `824c011` fix boost::get usage with boost 1.58
 
-Fix multi-block reorg transaction resurrection.
+Miscellaneous:
+- `da65606` Avoid crash on start in TestBlockValidity with gen=1.
+- `424ae66` don't imbue boost::filesystem::path with locale "C" on windows (fixes #6078)
 
-Fix non-standard disconnected transactions causing mempool orphans.  This bug could cause 
-nodes running with the -debug flag to crash, although it was lot less likely on Litecoin 
-as we disabled IsDust() in 0.8.3.x.
+Credits
+=======
 
-Mac OSX: use 'FD_FULLSYNC' with LevelDB, which will (hopefully!) prevent the database 
-corruption issues have experienced on OSX.
+Thanks to everyone who directly contributed to this release:
 
-Add height parameter to getnetworkhashps.
+- Cory Fields
+- Gregory Maxwell
+- Jonas Schnelli
+- Wladimir J. van der Laan
 
-Fix Norwegian and Swedish translations.
+And all those who contributed additional code review and/or security research:
 
-Minor efficiency improvement in block peer request handling.
+- dexX7
+- Pieter Wuille
+- vayvanne
 
-
-0.8.3.7 changes
-===============
-
-Fix CVE-2013-4627 denial of service, a memory exhaustion attack that could crash low-memory nodes.
-
-Fix a regression that caused excessive writing of the peers.dat file.
-
-Add option for bloom filtering.
-
-Fix Hebrew translation.
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).

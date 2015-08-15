@@ -1,9 +1,13 @@
-#include <boost/test/unit_test.hpp>
-
-#include <string>
-#include <vector>
+// Copyright (c) 2012-2013 The Bitcoin Core developers
+// Distributed under the MIT/X11 software license, see the accompanying
+// file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "serialize.h"
+#include "streams.h"
+
+#include <stdint.h>
+
+#include <boost/test/unit_test.hpp>
 
 using namespace std;
 
@@ -21,7 +25,7 @@ BOOST_AUTO_TEST_CASE(varints)
         BOOST_CHECK(size == ss.size());
     }
 
-    for (uint64 i = 0;  i < 100000000000ULL; i += 999999937) {
+    for (uint64_t i = 0;  i < 100000000000ULL; i += 999999937) {
         ss << VARINT(i);
         size += ::GetSerializeSize(VARINT(i), 0, 0);
         BOOST_CHECK(size == ss.size());
@@ -34,12 +38,79 @@ BOOST_AUTO_TEST_CASE(varints)
         BOOST_CHECK_MESSAGE(i == j, "decoded:" << j << " expected:" << i);
     }
 
-    for (uint64 i = 0;  i < 100000000000ULL; i += 999999937) {
-        uint64 j = -1;
+    for (uint64_t i = 0;  i < 100000000000ULL; i += 999999937) {
+        uint64_t j = -1;
         ss >> VARINT(j);
         BOOST_CHECK_MESSAGE(i == j, "decoded:" << j << " expected:" << i);
     }
+}
 
+BOOST_AUTO_TEST_CASE(compactsize)
+{
+    CDataStream ss(SER_DISK, 0);
+    vector<char>::size_type i, j;
+
+    for (i = 1; i <= MAX_SIZE; i *= 2)
+    {
+        WriteCompactSize(ss, i-1);
+        WriteCompactSize(ss, i);
+    }
+    for (i = 1; i <= MAX_SIZE; i *= 2)
+    {
+        j = ReadCompactSize(ss);
+        BOOST_CHECK_MESSAGE((i-1) == j, "decoded:" << j << " expected:" << (i-1));
+        j = ReadCompactSize(ss);
+        BOOST_CHECK_MESSAGE(i == j, "decoded:" << j << " expected:" << i);
+    }
+}
+
+static bool isCanonicalException(const std::ios_base::failure& ex)
+{
+    std::ios_base::failure expectedException("non-canonical ReadCompactSize()");
+
+    // The string returned by what() can be different for different platforms.
+    // Instead of directly comparing the ex.what() with an expected string,
+    // create an instance of exception to see if ex.what() matches 
+    // the expected explanatory string returned by the exception instance. 
+    return strcmp(expectedException.what(), ex.what()) == 0;
+}
+
+
+BOOST_AUTO_TEST_CASE(noncanonical)
+{
+    // Write some non-canonical CompactSize encodings, and
+    // make sure an exception is thrown when read back.
+    CDataStream ss(SER_DISK, 0);
+    vector<char>::size_type n;
+
+    // zero encoded with three bytes:
+    ss.write("\xfd\x00\x00", 3);
+    BOOST_CHECK_EXCEPTION(ReadCompactSize(ss), std::ios_base::failure, isCanonicalException);
+
+    // 0xfc encoded with three bytes:
+    ss.write("\xfd\xfc\x00", 3);
+    BOOST_CHECK_EXCEPTION(ReadCompactSize(ss), std::ios_base::failure, isCanonicalException);
+
+    // 0xfd encoded with three bytes is OK:
+    ss.write("\xfd\xfd\x00", 3);
+    n = ReadCompactSize(ss);
+    BOOST_CHECK(n == 0xfd);
+
+    // zero encoded with five bytes:
+    ss.write("\xfe\x00\x00\x00\x00", 5);
+    BOOST_CHECK_EXCEPTION(ReadCompactSize(ss), std::ios_base::failure, isCanonicalException);
+
+    // 0xffff encoded with five bytes:
+    ss.write("\xfe\xff\xff\x00\x00", 5);
+    BOOST_CHECK_EXCEPTION(ReadCompactSize(ss), std::ios_base::failure, isCanonicalException);
+
+    // zero encoded with nine bytes:
+    ss.write("\xff\x00\x00\x00\x00\x00\x00\x00\x00", 9);
+    BOOST_CHECK_EXCEPTION(ReadCompactSize(ss), std::ios_base::failure, isCanonicalException);
+
+    // 0x01ffffff encoded with nine bytes:
+    ss.write("\xff\xff\xff\xff\x01\x00\x00\x00\x00", 9);
+    BOOST_CHECK_EXCEPTION(ReadCompactSize(ss), std::ios_base::failure, isCanonicalException);
 }
 
 BOOST_AUTO_TEST_CASE(insert_delete)
