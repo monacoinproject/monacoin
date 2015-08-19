@@ -113,6 +113,8 @@ public:
         nDefaultPort = 9401;
         bnProofOfWorkLimit = ~uint256(0) >> 20;
         nSubsidyHalvingInterval = 1051200;
+        nSwitchKGWblock = 80000;
+        nSwitchDIGIblock = 140000;
         nEnforceBlockUpgradeMajority = 750;
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
@@ -197,6 +199,8 @@ public:
         nEnforceBlockUpgradeMajority = 51;
         nRejectBlockOutdatedMajority = 75;
         nToCheckBlockUpgradeMajority = 100;
+        nSwitchKGWblock = 80000;
+        nSwitchDIGIblock = 140000;
         nMinerThreads = 0;
         nTargetTimespan = 1.1 * 24 * 60 * 60; // 1.1 days
         nTargetTimespanNew = 1.5 * 60;

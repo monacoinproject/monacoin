@@ -16,14 +16,11 @@
 #include "util.h"
 #include <math.h>
 
-int64_t nSwitchKGWblock = 80000; // first hardfork: to KGW
-int64_t nSwitchDIGIblock = 140000; // second hardfork: to Digishield
-
 unsigned int GetNextWorkRequired_V1(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
     unsigned int nProofOfWorkLimit = Params().ProofOfWorkLimit().GetCompact();
     int nHeight = pindexLast->nHeight + 1;
-    const bool fNewDifficultyProtocol = (nHeight >= nSwitchDIGIblock);
+    const bool fNewDifficultyProtocol = (nHeight >= Params().SwitchDIGIblock());
 
     int64_t retargetTimespan = Params().TargetTimespan();
     int64_t retargetInterval = Params().Interval();
@@ -841,7 +838,7 @@ unsigned int static GetNextWorkRequired_V2(const CBlockIndex* pindexLast, const 
 
 unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHeader *pblock)
 {
-    if(pindexLast->nHeight+1 >= nSwitchKGWblock && pindexLast->nHeight+1 < nSwitchDIGIblock){
+    if(pindexLast->nHeight+1 >= Params().SwitchKGWblock() && pindexLast->nHeight+1 < Params().SwitchDIGIblock()){
         return GetNextWorkRequired_V2(pindexLast, pblock);
     }
 
