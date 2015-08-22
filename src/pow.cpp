@@ -40,9 +40,9 @@ unsigned int GetNextWorkRequired_V1(const CBlockIndex* pindexLast, const CBlockH
         if (Params().AllowMinDifficultyBlocks())
         {
             // Special difficulty rule for testnet:
-            // If the new block's timestamp is more than 1 * 10 minutes
+            // If the new block's timestamp is more than 2 * 1.5 minutes
             // then allow mining of a min-difficulty block.
-            if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + Params().TargetSpacing()*1)
+            if (pblock->GetBlockTime() > pindexLast->GetBlockTime() + Params().TargetSpacing()*2)
                 return nProofOfWorkLimit;
             else
             {
