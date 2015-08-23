@@ -115,7 +115,7 @@ public:
         nSubsidyHalvingInterval = 1051200;
         nSwitchKGWblock = 80000;
         nSwitchDIGIblock = 140000;
-        nSwitchLyra2REv2 = 9999999;
+        nSwitchLyra2REv2_DGW = 9999999;
         nEnforceBlockUpgradeMajority = 750;
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
@@ -202,7 +202,7 @@ public:
         nToCheckBlockUpgradeMajority = 100;
         nSwitchKGWblock = 80000;
         nSwitchDIGIblock = 140000;
-        nSwitchLyra2REv2 = 5;
+        nSwitchLyra2REv2_DGW = 5;
         nMinerThreads = 0;
         nTargetTimespan = 1.1 * 24 * 60 * 60; // 1.1 days
         nTargetTimespanNew = 1.5 * 60;

@@ -466,7 +466,7 @@ void static BitcoinMiner(CWallet *pwallet)
                 char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
                 while(true)
                 {
-                    if(pindexPrev->nHeight + 1 >= Params().SwitchLyra2REv2()){
+                    if(pindexPrev->nHeight + 1 >= Params().SwitchLyra2REv2_DGW()){
                         lyra2re2_hash(BEGIN(pblock->nVersion), BEGIN(thash));
                     }
                     else{

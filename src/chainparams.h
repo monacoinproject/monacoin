@@ -49,7 +49,7 @@ public:
     int SubsidyHalvingInterval() const { return nSubsidyHalvingInterval; }
     int64_t SwitchKGWblock() const { return nSwitchKGWblock; }
     int64_t SwitchDIGIblock() const { return nSwitchDIGIblock; }
-    int64_t SwitchLyra2REv2() const { return nSwitchLyra2REv2; }
+    int64_t SwitchLyra2REv2_DGW() const { return nSwitchLyra2REv2_DGW; }
     /** Used to check majorities for block version upgrade */
     int EnforceBlockUpgradeMajority() const { return nEnforceBlockUpgradeMajority; }
     int RejectBlockOutdatedMajority() const { return nRejectBlockOutdatedMajority; }
@@ -98,7 +98,7 @@ protected:
     int nSubsidyHalvingInterval;
     int64_t nSwitchKGWblock;
     int64_t nSwitchDIGIblock;
-    int64_t nSwitchLyra2REv2;
+    int64_t nSwitchLyra2REv2_DGW;
     int nEnforceBlockUpgradeMajority;
     int nRejectBlockOutdatedMajority;
     int nToCheckBlockUpgradeMajority;

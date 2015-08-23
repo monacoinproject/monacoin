@@ -1232,7 +1232,7 @@ bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, int height)
     // Check the header
     if (!CheckProofOfWork(block.GetPoWHash(height), block.nBits)){
         if(height < 0){
-            if (CheckProofOfWork(block.GetPoWHash(Params().SwitchLyra2REv2()), block.nBits)){
+            if (CheckProofOfWork(block.GetPoWHash(Params().SwitchLyra2REv2_DGW()), block.nBits)){
                 return true;
             }
         }
