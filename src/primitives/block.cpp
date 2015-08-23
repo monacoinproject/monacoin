@@ -21,7 +21,7 @@ uint256 CBlockHeader::GetHash() const
 uint256 CBlockHeader::GetPoWHash(int32_t height) const
 {
     uint256 thash;
-    if(height >= Params().SwitchLyra2REv2()){
+    if(height >= Params().SwitchLyra2REv2_DGW()){
         lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
     }
     else{
