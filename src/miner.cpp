@@ -19,6 +19,7 @@
 #ifdef ENABLE_WALLET
 #include "wallet.h"
 #endif
+#include "Lyra2RE/Lyra2RE.h"
 
 #include <boost/thread.hpp>
 #include <boost/tuple/tuple.hpp>
@@ -83,6 +84,7 @@ public:
 void UpdateTime(CBlockHeader* pblock, const CBlockIndex* pindexPrev)
 {
     pblock->nTime = std::max(pindexPrev->GetMedianTimePast()+1, GetAdjustedTime());
+    pblock->nLastHeight = pindexPrev->nHeight;
 
     // Updating time can change work required on testnet:
     if (Params().AllowMinDifficultyBlocks())
@@ -328,6 +330,7 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn)
 
         // Fill in header
         pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
+        pblock->nLastHeight    = pindexPrev->nHeight;
         UpdateTime(pblock, pindexPrev);
         pblock->nBits          = GetNextWorkRequired(pindexPrev, pblock);
         pblock->nNonce         = 0;
@@ -463,7 +466,12 @@ void static BitcoinMiner(CWallet *pwallet)
                 char scratchpad[SCRYPT_SCRATCHPAD_SIZE];
                 while(true)
                 {
-                    scrypt_1024_1_1_256_sp(BEGIN(pblock->nVersion), BEGIN(thash), scratchpad);
+                    if(pindexPrev->nHeight + 1 >= Params().SwitchLyra2REv2()){
+                        lyra2re2_hash(BEGIN(pblock->nVersion), BEGIN(thash));
+                    }
+                    else{
+                        scrypt_1024_1_1_256_sp(BEGIN(pblock->nVersion), BEGIN(thash), scratchpad);
+                    }
                     if (thash <= hashTarget)
                     {
                         // Found a solution

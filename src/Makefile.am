@@ -202,7 +202,7 @@ libbitcoin_wallet_a_SOURCES = \
   $(BITCOIN_CORE_H)
 
 # crypto primitives library
-crypto_libbitcoin_crypto_a_CPPFLAGS = $(BITCOIN_CONFIG_INCLUDES)
+crypto_libbitcoin_crypto_a_CPPFLAGS = $(BITCOIN_CONFIG_INCLUDES) -fPIC
 crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sha1.cpp \
   crypto/sha256.cpp \
@@ -220,7 +220,25 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/hmac_sha512.h \
   crypto/scrypt.h \
   crypto/sha1.h \
-  crypto/ripemd160.h
+  Lyra2RE/Lyra2.c \
+  Lyra2RE/Lyra2RE.c \
+  Lyra2RE/Sponge.c \
+  Lyra2RE/blake.c \
+  Lyra2RE/skein.c \
+  Lyra2RE/groestl.c \
+  Lyra2RE/keccak.c \
+  Lyra2RE/cubehash.c \
+  Lyra2RE/bmw.c \
+  Lyra2RE/Lyra2.h \
+  Lyra2RE/Lyra2RE.h \
+  Lyra2RE/Sponge.h \
+  Lyra2RE/sph_blake.h \
+  Lyra2RE/sph_groestl.h \
+  Lyra2RE/sph_keccak.h \
+  Lyra2RE/sph_skein.h \
+  Lyra2RE/sph_types.h \
+  Lyra2RE/sph_cubehash.h \
+  Lyra2RE/sph_bmw.h
 
 # univalue JSON library
 univalue_libbitcoin_univalue_a_SOURCES = \

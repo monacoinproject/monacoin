@@ -410,6 +410,8 @@ std::string LicenseInfo()
            "\n" + 
            FormatParagraph(strprintf(_("Copyright (C) 2014-%i The Dash developers"), COPYRIGHT_YEAR)) + "\n" +
            "\n" + 
+           FormatParagraph(strprintf(_("Copyright (C) 2014-%i The Vertcoin Developers"), COPYRIGHT_YEAR)) + "\n" +
+           "\n" + 
            FormatParagraph(strprintf(_("Copyright (C) 2013-%i The Monacoin Core Developers"), COPYRIGHT_YEAR)) + "\n" +
            "\n" + 
            FormatParagraph(_("This is experimental software.")) + "\n" +
