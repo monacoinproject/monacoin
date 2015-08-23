@@ -21,6 +21,7 @@ class CBlockHeader
 {
 public:
     // header
+    int32_t nLastHeight;
     int32_t nVersion;
     uint256 hashPrevBlock;
     uint256 hashMerkleRoot;
@@ -47,6 +48,7 @@ public:
 
     void SetNull()
     {
+        nLastHeight = 0;
         nVersion = 0;
         hashPrevBlock.SetNull();
         hashMerkleRoot.SetNull();
@@ -62,7 +64,7 @@ public:
 
     uint256 GetHash() const;
 
-    uint256 GetPoWHash() const;
+    uint256 GetPoWHash(int32_t height) const;
 
     int64_t GetBlockTime() const
     {
@@ -109,6 +111,7 @@ public:
     CBlockHeader GetBlockHeader() const
     {
         CBlockHeader block;
+        block.nLastHeight    = nLastHeight;
         block.nVersion       = nVersion;
         block.hashPrevBlock  = hashPrevBlock;
         block.hashMerkleRoot = hashMerkleRoot;

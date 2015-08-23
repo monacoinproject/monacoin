@@ -104,6 +104,7 @@ public:
         // Hardfork params
         nSwitchKGWblock = 80000;
         nSwitchDIGIblock = 140000;
+        nSwitchLyra2REv2 = 450000;
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -206,6 +207,7 @@ public:
         // Hardfork params
         nSwitchKGWblock = 80000;
         nSwitchDIGIblock = 140000;
+        nSwitchLyra2REv2 = 450000;
 
         pchMessageStart[0] = 0xfc;
         pchMessageStart[1] = 0xc1;
@@ -292,6 +294,7 @@ public:
         // Hardfork params
         nSwitchKGWblock = 20;
         nSwitchDIGIblock = 40;
+        nSwitchLyra2REv2 = 60;
 
         pchMessageStart[0] = 0xfa;
         pchMessageStart[1] = 0xbf;

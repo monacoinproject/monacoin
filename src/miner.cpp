@@ -25,6 +25,7 @@
 #include "util.h"
 #include "utilmoneystr.h"
 #include "validationinterface.h"
+#include "Lyra2RE/Lyra2RE.h"
 
 #include <algorithm>
 #include <boost/thread.hpp>
@@ -63,6 +64,7 @@ int64_t UpdateTime(CBlockHeader* pblock, const Consensus::Params& consensusParam
 {
     int64_t nOldTime = pblock->nTime;
     int64_t nNewTime = std::max(pindexPrev->GetMedianTimePast()+1, GetAdjustedTime());
+    pblock->nLastHeight = pindexPrev->nHeight;
 
     if (nOldTime < nNewTime)
         pblock->nTime = nNewTime;
@@ -187,6 +189,7 @@ CBlockTemplate* BlockAssembler::CreateNewBlock(const CScript& scriptPubKeyIn)
 
     // Fill in header
     pblock->hashPrevBlock  = pindexPrev->GetBlockHash();
+    pblock->nLastHeight    = pindexPrev->nHeight;
     UpdateTime(pblock, chainparams.GetConsensus(), pindexPrev);
     pblock->nBits          = GetNextWorkRequired(pindexPrev, pblock, chainparams.GetConsensus());
     pblock->nNonce         = 0;

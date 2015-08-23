@@ -194,6 +194,7 @@ public:
 
     //! block header
     int nVersion;
+    uint32_t nLastHeight;
     uint256 hashMerkleRoot;
     unsigned int nTime;
     unsigned int nBits;
@@ -217,6 +218,7 @@ public:
         nStatus = 0;
         nSequenceId = 0;
 
+        nLastHeight    = 0;
         nVersion       = 0;
         hashMerkleRoot = uint256();
         nTime          = 0;
@@ -233,6 +235,7 @@ public:
     {
         SetNull();
 
+        nLastHeight    = block.nLastHeight;
         nVersion       = block.nVersion;
         hashMerkleRoot = block.hashMerkleRoot;
         nTime          = block.nTime;
@@ -261,6 +264,7 @@ public:
     CBlockHeader GetBlockHeader() const
     {
         CBlockHeader block;
+        block.nLastHeight    = nLastHeight;
         block.nVersion       = nVersion;
         if (pprev)
             block.hashPrevBlock = pprev->GetBlockHash();
@@ -276,10 +280,12 @@ public:
         return *phashBlock;
     }
 
+/*
     uint256 GetBlockPoWHash() const
     {
         return GetBlockHeader().GetPoWHash();
     }
+*/
 
     int64_t GetBlockTime() const
     {

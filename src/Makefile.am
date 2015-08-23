@@ -248,8 +248,8 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/sha512.h
 
 # consensus: shared between all executables that validate any consensus rules.
-libbitcoin_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)
-libbitcoin_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
+libbitcoin_consensus_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) -fPIC
+libbitcoin_consensus_a_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS) -fPIC
 libbitcoin_consensus_a_SOURCES = \
   amount.h \
   arith_uint256.cpp \
@@ -280,7 +280,27 @@ libbitcoin_consensus_a_SOURCES = \
   uint256.h \
   utilstrencodings.cpp \
   utilstrencodings.h \
-  version.h
+  version.h \
+  Lyra2RE/Lyra2.c \
+  Lyra2RE/Lyra2RE.c \
+  Lyra2RE/Sponge.c \
+  Lyra2RE/blake.c \
+  Lyra2RE/skein.c \
+  Lyra2RE/groestl.c \
+  Lyra2RE/keccak.c \
+  Lyra2RE/cubehash.c \
+  Lyra2RE/bmw.c \
+  Lyra2RE/Lyra2.h \
+  Lyra2RE/Lyra2RE.h \
+  Lyra2RE/Sponge.h \
+  Lyra2RE/sph_blake.h \
+  Lyra2RE/sph_groestl.h \
+  Lyra2RE/sph_keccak.h \
+  Lyra2RE/sph_skein.h \
+  Lyra2RE/sph_types.h \
+  Lyra2RE/sph_cubehash.h \
+  Lyra2RE/sph_bmw.h
+
 
 # common: shared between bitcoind, and bitcoin-qt and non-server tools
 libbitcoin_common_a_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES)

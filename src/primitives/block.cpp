@@ -10,16 +10,23 @@
 #include "tinyformat.h"
 #include "utilstrencodings.h"
 #include "crypto/common.h"
+#include "chainparams.h"
+#include "Lyra2RE/Lyra2RE.h"
 
 uint256 CBlockHeader::GetHash() const
 {
     return SerializeHash(*this);
 }
 
-uint256 CBlockHeader::GetPoWHash() const
+uint256 CBlockHeader::GetPoWHash(int32_t height) const
 {
     uint256 thash;
-    scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
+    if(height >= Params().SwitchLyra2REv2()){
+        lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
+    }
+    else{
+        scrypt_1024_1_1_256(BEGIN(nVersion), BEGIN(thash));
+    }
     return thash;
 }
 
