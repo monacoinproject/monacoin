@@ -71,7 +71,7 @@
     </message>
     <message>
         <source>These are your Monacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>これらは支払いを受け取るためのビットコインアドレスです。トランザクションごとに新しい受け取り用アドレスを作成することが推奨されます。</translation>
+        <translation>これらは支払いを受け取るための Monacoin アドレスです。トランザクションごとに新しい受け取り用アドレスを作成することが推奨されます。</translation>
     </message>
     <message>
         <source>Copy &amp;Label</source>
@@ -312,7 +312,7 @@
     </message>
     <message>
         <source>Monacoin Core client</source>
-        <translation>Monacoinコア クライアント</translation>
+        <translation>Monacoin Core クライアント</translation>
     </message>
     <message>
         <source>Importing blocks from disk...</source>
@@ -368,7 +368,7 @@
     </message>
     <message>
         <source>Show information about Monacoin Core</source>
-        <translation>Monacoinコアに関する情報を表示</translation>
+        <translation>Monacoin Coreに関する情報を表示</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -408,7 +408,7 @@
     </message>
     <message>
         <source>Monacoin Core</source>
-        <translation>Monacoin のコア</translation>
+        <translation>Monacoin Core</translation>
     </message>
     <message>
         <source>Request payments (generates QR codes and monacoin: URIs)</source>
@@ -416,7 +416,7 @@
     </message>
     <message>
         <source>&amp;About Monacoin Core</source>
-        <translation>ビットコインコアについて (&amp;A)</translation>
+        <translation>Monacoin Core について (&amp;A)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -842,7 +842,7 @@ Address: %4
     <name>HelpMessageDialog</name>
     <message>
         <source>Monacoin Core</source>
-        <translation>Monacoin のコア</translation>
+        <translation>Monacoin Core</translation>
     </message>
     <message>
         <source>version</source>
@@ -854,7 +854,7 @@ Address: %4
     </message>
     <message>
         <source>About Monacoin Core</source>
-        <translation>Monacoinコアについて</translation>
+        <translation>Monacoin Coreについて</translation>
     </message>
     <message>
         <source>Command-line options</source>
@@ -909,7 +909,7 @@ Address: %4
     </message>
     <message>
         <source>Monacoin Core will download and store a copy of the Monacoin block chain. At least %1GB of data will be stored in this directory, and it will grow over time. The wallet will also be stored in this directory.</source>
-        <translation>Monacoin Coreは、ビットコインのブロックチェーンのコピーを、ダウンロードして保存します。少なくとも%1ギガバイトのデータが、このディレクトリに保存されます。そしてそれは時間と共に増加します。またウォレットもこのディレクトリに保存されます。</translation>
+        <translation>Monacoin Coreは、Monacoinのブロックチェーンのコピーを、ダウンロードして保存します。少なくとも%1ギガバイトのデータが、このディレクトリに保存されます。そしてそれは時間と共に増加します。またウォレットもこのディレクトリに保存されます。</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -921,7 +921,7 @@ Address: %4
     </message>
     <message>
         <source>Monacoin Core</source>
-        <translation>Monacoin のコア</translation>
+        <translation>Monacoin Core</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
@@ -2309,7 +2309,7 @@ Address: %4
     <name>SplashScreen</name>
     <message>
         <source>Monacoin Core</source>
-        <translation>Monacoin のコア</translation>
+        <translation>Monacoin Core</translation>
     </message>
     <message>
         <source>The Bitcoin Core developers</source>
