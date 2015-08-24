@@ -260,6 +260,9 @@ public:
         nEnforceBlockUpgradeMajority = 750;
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
+        nSwitchKGWblock = 20;
+        nSwitchDIGIblock = 40;
+        nSwitchLyra2REv2_DGW = 60;
         nMinerThreads = 1;
         nTargetTimespan = 1.1 * 24 * 60 * 60; // 1.5 days
         nTargetTimespanNew = 1.5 * 60;
