@@ -220,6 +220,7 @@ crypto_libbitcoin_crypto_a_SOURCES = \
   crypto/hmac_sha512.h \
   crypto/scrypt.h \
   crypto/sha1.h \
+  crypto/ripemd160.h \
   Lyra2RE/Lyra2.c \
   Lyra2RE/Lyra2RE.c \
   Lyra2RE/Sponge.c \
