@@ -67,7 +67,7 @@ After exiting, you'll get a warning that the install is keg-only, which means it
 
 1. Clone the github tree to get the source code and go into the directory.
 
-        git clone https://github.com/monacoin-project/monacoin.git
+        git clone https://github.com/monacoinproject/monacoin.git
         cd monacoin
 
 2.  Build monacoind:

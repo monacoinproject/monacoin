@@ -40,7 +40,7 @@ match the project's coding conventions (see [doc/coding.md](doc/coding.md)) or a
 controversial.
 
 The `master-0.10` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/monacoin-project/monacoin/tags) are created
+completely stable. [Tags](https://github.com/monacoinproject/monacoin/tags) are created
 regularly to indicate new official, stable release versions of Monacoin.
 
 Testing
