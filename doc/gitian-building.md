@@ -281,7 +281,7 @@ Clone the git repositories for monacoin and gitian and then checkout the monacoi
 
 ```bash
 git clone https://github.com/devrandom/gitian-builder.git
-git clone https://github.com/monacoin-project/monacoin.git
+git clone https://github.com/monacoinproject/monacoin.git
 cd monacoin
 git checkout v${VERSION}
 cd ..
@@ -337,7 +337,7 @@ Output from `gbuild` will look something like
     remote: Total 35606 (delta 0), reused 0 (delta 0)
     Receiving objects: 100% (35606/35606), 26.52 MiB | 4.28 MiB/s, done.
     Resolving deltas: 100% (25724/25724), done.
-    From https://github.com/monacoin-project/monacoin
+    From https://github.com/monacoinproject/monacoin
     ... (new tags, new branch etc)
     --- Building for precise x86_64 ---
     Stopping target if it is up
@@ -394,5 +394,5 @@ Uploading signatures
 ---------------------
 
 After building and signing you can push your signatures (both the `.assert` and `.assert.sig` files) to the
-[monacoin/gitian.sigs](https://github.com/monacoin-project/gitian.sigs.ltc/) repository, or if that's not possible create a pull
+[monacoin/gitian.sigs](https://github.com/monacoinproject/gitian.sigs.mona/) repository, or if that's not possible create a pull
 request. 

@@ -20,7 +20,7 @@ packages:
 - "libbz2-dev"
 reference_datetime: "2013-06-01 00:00:00"
 remotes:
-- "url": "https://github.com/monacoin-project/monacoin.git"
+- "url": "https://github.com/monacoinproject/monacoin.git"
   "dir": "monacoin"
 files:
 - "MacOSX10.7.sdk.tar.gz"
