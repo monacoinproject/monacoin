@@ -130,7 +130,7 @@ rm SHA256SUMS
 
 - Announce the release:
 
-  - Release sticky on monacointalk: https://monacointalk.org/index.php?board=1.0
+  - Release sticky on monacointalk: Is not yet
 
   - monacoin-development mailing list
 

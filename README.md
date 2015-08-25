@@ -55,7 +55,7 @@ lots of money.
 
 Large changes should have a test plan, and should be tested by somebody other
 than the developer who wrote the code.
-Creating a thread in the [Monacoin discussion forum](https://monacointalk.org/index.php?board=2.0) will allow the Monacoin
+Creating a thread in the [Monacoin discussion forum](Is not yet) will allow the Monacoin
 development team members to review your proposal and to provide assistance with creating a test plan. 
 
 
