@@ -76,6 +76,8 @@ CScript COINBASE_FLAGS;
 
 const string strMessageMagic = "Monacoin Signed Message:\n";
 
+const int32_t int32_max = 0x7fffffff;
+
 // Internal stuff
 namespace {
 
@@ -1210,7 +1212,7 @@ bool WriteBlockToDisk(CBlock& block, CDiskBlockPos& pos)
     return true;
 }
 
-bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, int height)
+bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, int32_t height)
 {
     block.SetNull();
 
@@ -1231,8 +1233,8 @@ bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, int height)
 
     // Check the header
     if (!CheckProofOfWork(block.GetPoWHash(height), block.nBits)){
-        if(height < 0){
-            if (CheckProofOfWork(block.GetPoWHash(Params().SwitchLyra2REv2_DGW()), block.nBits)){
+        if(height == int32_max){
+            if (CheckProofOfWork(block.GetPoWHash(0), block.nBits)){
                 return true;
             }
         }
@@ -3257,7 +3259,7 @@ bool LoadExternalBlockFile(FILE* fileIn, CDiskBlockPos *dbp)
                     std::pair<std::multimap<uint256, CDiskBlockPos>::iterator, std::multimap<uint256, CDiskBlockPos>::iterator> range = mapBlocksUnknownParent.equal_range(head);
                     while (range.first != range.second) {
                         std::multimap<uint256, CDiskBlockPos>::iterator it = range.first;
-                        if (ReadBlockFromDisk(block, it->second, -1))
+                        if (ReadBlockFromDisk(block, it->second, int32_max))
                         {
                             LogPrintf("%s: Processing out of order child %s of %s\n", __func__, block.GetHash().ToString(),
                                     head.ToString());
