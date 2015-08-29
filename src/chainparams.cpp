@@ -171,8 +171,8 @@ public:
         fSkipProofOfWorkCheck = false;
         fTestnetToBeDeprecatedFieldRPC = false;
 
-        // Monacoin: Mainnet v2 enforced as of block 710k
-        nEnforceV2AfterHeight = 710000;
+        // Monacoin: Mainnet v2 enforced as of block 0
+        nEnforceV2AfterHeight = 0;
     }
 
     const Checkpoints::CCheckpointData& Checkpoints() const 
@@ -232,8 +232,8 @@ public:
         fMineBlocksOnDemand = false;
         fTestnetToBeDeprecatedFieldRPC = true;
 
-        // Monacoin: Testnet v2 enforced as of block 400k
-        nEnforceV2AfterHeight = 400000;
+        // Monacoin: Testnet v2 enforced as of block 0
+        nEnforceV2AfterHeight = 0;
     }
     const Checkpoints::CCheckpointData& Checkpoints() const 
     {
