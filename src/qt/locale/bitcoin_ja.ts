@@ -2501,7 +2501,7 @@ Address: %4
     </message>
     <message>
         <source>Address</source>
-        <translation>Helbidea</translation>
+        <translation>アドレス</translation>
     </message>
     <message>
         <source>Immature (%1 confirmations, will be available after %2)</source>
@@ -2724,7 +2724,7 @@ Address: %4
     </message>
     <message>
         <source>Address</source>
-        <translation>Helbidea</translation>
+        <translation>アドレス</translation>
     </message>
     <message>
         <source>ID</source>
