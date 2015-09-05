@@ -116,7 +116,7 @@ public:
         nSubsidyHalvingInterval = 1051200;
         nSwitchKGWblock = 80000;
         nSwitchDIGIblock = 140000;
-        nSwitchLyra2REv2_DGW = 9999999;
+        nSwitchLyra2REv2_DGW = 455000;
         nEnforceBlockUpgradeMajority = 750;
         nRejectBlockOutdatedMajority = 950;
         nToCheckBlockUpgradeMajority = 1000;
