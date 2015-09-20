@@ -126,9 +126,9 @@ class CBitcoinSecret : public CBase58Data
 public:
     void SetKey(const CKey& vchSecret);
     CKey GetKey();
-    bool IsValid() const;
-    bool SetString(const char* pszSecret);
-    bool SetString(const std::string& strSecret);
+    bool IsValid(bool bParmitOldPrefix = false) const;
+    bool SetString(const char* pszSecret, bool bParmitOldPrefix = false);
+    bool SetString(const std::string& strSecret, bool bParmitOldPrefix = false);
 
     CBitcoinSecret(const CKey& vchSecret) { SetKey(vchSecret); }
     CBitcoinSecret() {}

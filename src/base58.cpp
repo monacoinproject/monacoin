@@ -293,19 +293,25 @@ CKey CBitcoinSecret::GetKey()
     return ret;
 }
 
-bool CBitcoinSecret::IsValid() const
+bool CBitcoinSecret::IsValid(bool bParmitOldPrefix) const
 {
     bool fExpectedFormat = vchData.size() == 32 || (vchData.size() == 33 && vchData[32] == 1);
     bool fCorrectVersion = vchVersion == Params().Base58Prefix(CChainParams::SECRET_KEY);
+    if(bParmitOldPrefix && !fCorrectVersion)
+    {
+        std::vector<unsigned char> oldPrefix;
+        oldPrefix.push_back(0xb2);
+        fCorrectVersion = vchVersion == oldPrefix;
+    }
     return fExpectedFormat && fCorrectVersion;
 }
 
-bool CBitcoinSecret::SetString(const char* pszSecret)
+bool CBitcoinSecret::SetString(const char* pszSecret, bool bParmitOldPrefix)
 {
-    return CBase58Data::SetString(pszSecret) && IsValid();
+    return CBase58Data::SetString(pszSecret) && IsValid(bParmitOldPrefix);
 }
 
-bool CBitcoinSecret::SetString(const std::string& strSecret)
+bool CBitcoinSecret::SetString(const std::string& strSecret, bool bParmitOldPrefix)
 {
-    return SetString(strSecret.c_str());
+    return SetString(strSecret.c_str(), bParmitOldPrefix);
 }
