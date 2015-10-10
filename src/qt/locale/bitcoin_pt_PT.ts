@@ -3035,16 +3035,16 @@ Endereço: %4</translation>
         <translation>Definir tamanho máximo de transações com alta-prioridade/baixa-taxa em bytes (por defeito: %d)</translation>
     </message>
     <message>
-        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong Bitcoin Core will not work properly.</source>
-        <translation>Atenção: Por favor verifique que a data e hora do seu computador estão correctas! Se o seu relógio não estiver certo o Bitcoin Core não irá funcionar correctamente.</translation>
+        <source>Warning: Please check that your computer's date and time are correct! If your clock is wrong Litecoin Core will not work properly.</source>
+        <translation>Atenção: Por favor verifique que a data e hora do seu computador estão correctas! Se o seu relógio não estiver certo o Litecoin Core não irá funcionar correctamente.</translation>
     </message>
     <message>
         <source>Copyright (C) 2009-%i The Bitcoin Core Developers</source>
         <translation>Copyright (C) 2009-%i Os Programadores do Bitcoin Core</translation>
     </message>
     <message>
-        <source>Error loading wallet.dat: Wallet requires newer version of Bitcoin Core</source>
-        <translation>Erro ao carregar wallet.dat: A Carteira requer uma versão mais recente do Bitcoin Core</translation>
+        <source>Error loading wallet.dat: Wallet requires newer version of Litecoin Core</source>
+        <translation>Erro ao carregar wallet.dat: A Carteira requer uma versão mais recente do Litecoin Core</translation>
     </message>
     <message>
         <source>Information</source>
@@ -3091,8 +3091,8 @@ Endereço: %4</translation>
         <translation>Nome de utilizador para ligações JSON-RPC</translation>
     </message>
     <message>
-        <source>Wallet needed to be rewritten: restart Bitcoin Core to complete</source>
-        <translation>A Carteira precisou de ser reescrita: reinicie o Bitcoin Core para completar o processo</translation>
+        <source>Wallet needed to be rewritten: restart Litecoin Core to complete</source>
+        <translation>A Carteira precisou de ser reescrita: reinicie o Litecoin Core para completar o processo</translation>
     </message>
     <message>
         <source>Warning</source>

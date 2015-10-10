@@ -2549,7 +2549,7 @@ Endereço: %4</translation>
     </message>
     <message>
         <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>Mostrar ou não endereços Bitcoin na lista de transações.</translation>
+        <translation>Mostrar ou não endereços Litecoin na lista de transações.</translation>
     </message>
     <message>
         <source>Destination address of transaction.</source>

@@ -63,11 +63,11 @@
     </message>
     <message>
         <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>אלה כתובת הלייטקוין שלך לצורך שליחת תשלומים. תמיד יש לבדוק את הכמות ואת כתובות מקבלי התשלומים לפני שליחת מטבעות.</translation>
+        <translation>אלה כתובת ללייטקוין שלך לצורך שליחת תשלומים. תמיד יש לבדוק את הכמות ואת כתובות מקבלי התשלומים לפני שליחת מטבעות.</translation>
     </message>
     <message>
         <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>אלה כתובות הלייטקוין שלך לצורך קבלת תשלומים. מומלץ להשתמש בכתובת קבלה חדשה לכל העברה.</translation>
+        <translation>אלה כתובות ללייטקוין שלך לצורך קבלת תשלומים. מומלץ להשתמש בכתובת קבלה חדשה לכל העברה.</translation>
     </message>
     <message>
         <source>Copy &amp;Label</source>
@@ -364,7 +364,7 @@
     </message>
     <message>
         <source>Sign messages with your Litecoin addresses to prove you own them</source>
-        <translation>חתום על הודעות עם כתובות הלייטקוין שלך כדי להוכיח שהן בבעלותך</translation>
+        <translation>חתום על הודעות עם כתובות ללייטקוין שלך כדי להוכיח שהן בבעלותך</translation>
     </message>
     <message>
         <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
@@ -1098,7 +1098,7 @@ Address: %4
     </message>
     <message>
         <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>המידע המוצג עשוי להיות מיושן. הארנק שלך מסתנכרן באופן אוטומטי עם רשת הלייטקוין לאחר יצירת החיבור, אך התהליך טרם הסתיים.</translation>
+        <translation>המידע המוצג עשוי להיות מיושן. הארנק שלך מסתנכרן באופן אוטומטי עם רשת ללייטקוין לאחר יצירת החיבור, אך התהליך טרם הסתיים.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1936,7 +1936,7 @@ Address: %4
     </message>
     <message>
         <source>The Litecoin address to send the payment to</source>
-        <translation>כתובת הלייטקוין של המוטב</translation>
+        <translation>כתובת ללייטקוין של המוטב</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -1968,7 +1968,7 @@ Address: %4
     </message>
     <message>
         <source>A message that was attached to the litecoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Litecoin network.</source>
-        <translation>הודעה שצורפה ללייטקוין: כתובת שתאוחסן בהעברה לצורך מעקב מצדך. לתשומת לבך: הודעה זו לא תישלח ברשת הלייטקוין.</translation>
+        <translation>הודעה שצורפה ללייטקוין: כתובת שתאוחסן בהעברה לצורך מעקב מצדך. לתשומת לבך: הודעה זו לא תישלח ברשת ללייטקוין.</translation>
     </message>
     <message>
         <source>This is an unverified payment request.</source>
@@ -2010,7 +2010,7 @@ Address: %4
     </message>
     <message>
         <source>The Litecoin address to sign the message with</source>
-        <translation>כתובת הלייטקוין אתה לחתום אתה את ההודעה</translation>
+        <translation>כתובת ללייטקוין אתה לחתום אתה את ההודעה</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2042,7 +2042,7 @@ Address: %4
     </message>
     <message>
         <source>Sign the message to prove you own this Litecoin address</source>
-        <translation>ניתן לחתום על ההודעה כדי להוכיח שכתובת הלייטקוין הזו בבעלותך.</translation>
+        <translation>ניתן לחתום על ההודעה כדי להוכיח שכתובת ללייטקוין הזו בבעלותך.</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2066,11 +2066,11 @@ Address: %4
     </message>
     <message>
         <source>The Litecoin address the message was signed with</source>
-        <translation>כתובת הלייטקוין שאתה נחתמה ההודעה</translation>
+        <translation>כתובת ללייטקוין שאתה נחתמה ההודעה</translation>
     </message>
     <message>
         <source>Verify the message to ensure it was signed with the specified Litecoin address</source>
-        <translation>ניתן לאמת את ההודעה כדי להבטיח שהיא נחתמה עם כתובת הלייטקוין הנתונה</translation>
+        <translation>ניתן לאמת את ההודעה כדי להבטיח שהיא נחתמה עם כתובת ללייטקוין הנתונה</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>

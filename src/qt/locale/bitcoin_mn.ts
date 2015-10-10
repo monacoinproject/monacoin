@@ -62,12 +62,12 @@
         <translation>Хүлээн авах хаяг</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Эдгээр Биткойн хаягууд нь илгээх хаягууд. Хүлээн авах хаяг болон тоо хэмжээг илгээхээсээ өмнө сайн нягталж үзэж байна уу</translation>
+        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Эдгээр Litecoin хаягууд нь илгээх хаягууд. Хүлээн авах хаяг болон тоо хэмжээг илгээхээсээ өмнө сайн нягталж үзэж байна уу</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
-        <translation>Эдгээр Биткойн хаягууд нь хүлээн авах хаягууд. Гүйлгээ болгонд шинээр хаяг үүсгэхийг бид санал болгож байна.</translation>
+        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Эдгээр Litecoin хаягууд нь хүлээн авах хаягууд. Гүйлгээ болгонд шинээр хаяг үүсгэхийг бид санал болгож байна.</translation>
     </message>
     <message>
         <source>Copy &amp;Label</source>
@@ -153,7 +153,7 @@
     </message>
     <message>
         <source>Litecoin will close now to finish the encryption process. Remember that encrypting your wallet cannot fully protect your litecoins from being stolen by malware infecting your computer.</source>
-        <translation>Цоожлолтын процесыг дуусгахын тулд Биткойн одоо хаагдана. Ѳѳрийн түрүйвчийг цоожлох нь таны биткойнуудыг компьютерийн вирус хулгайлахаас бүрэн сэргийлж чадахгүй гэдгийг санаарай.</translation>
+        <translation>Цоожлолтын процесыг дуусгахын тулд Litecoin одоо хаагдана. Ѳѳрийн түрүйвчийг цоожлох нь таны litecoinsуудыг компьютерийн вирус хулгайлахаас бүрэн сэргийлж чадахгүй гэдгийг санаарай.</translation>
     </message>
     <message>
         <source>Wallet encryption failed</source>
@@ -248,7 +248,7 @@
     </message>
     <message>
         <source>Litecoin</source>
-        <translation>Биткойн</translation>
+        <translation>Litecoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -272,7 +272,7 @@
     </message>
     <message numerus="yes">
         <source>%n active connection(s) to Litecoin network</source>
-        <translation><numerusform>Биткойны сүлжээрүү %n идэвхитэй холболт байна </numerusform><numerusform>Биткойны сүлжээрүү %n идэвхитэй холболтууд байна </numerusform></translation>
+        <translation><numerusform>Litecoinы сүлжээрүү %n идэвхитэй холболт байна </numerusform><numerusform>Litecoinы сүлжээрүү %n идэвхитэй холболтууд байна </numerusform></translation>
     </message>
     <message numerus="yes">
         <source>%n hour(s)</source>
@@ -709,7 +709,7 @@ Address: %4
     </message>
     <message>
         <source>Warning: Invalid Litecoin address</source>
-        <translation>Анхаар:Буруу Биткойны хаяг байна</translation>
+        <translation>Анхаар:Буруу Litecoinы хаяг байна</translation>
     </message>
     <message>
         <source>(no label)</source>
@@ -755,7 +755,7 @@ Address: %4
     <name>ShutdownWindow</name>
     <message>
         <source>Litecoin Core is shutting down...</source>
-        <translation>Биткойны цѳм хаагдаж байна...</translation>
+        <translation>Litecoinы цѳм хаагдаж байна...</translation>
     </message>
     <message>
         <source>Do not shut down the computer until this window disappears.</source>

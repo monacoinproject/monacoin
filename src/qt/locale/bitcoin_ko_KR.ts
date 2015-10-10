@@ -419,7 +419,7 @@
         <translation>사용할 수 있는 라이트코인 명령어 옵션 목록을 가져오기 위해 Litecoin-Qt 도움말 메시지를 표시합니다.</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
+        <source>%n active connection(s) to Litecoin network</source>
         <translation><numerusform>비트코인 네트워크와 %n 개의 활성연결</numerusform></translation>
     </message>
     <message>
@@ -991,7 +991,7 @@ Address: %4
         <translation>사용중인 UPnP 포트 매핑(&amp;U)</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
+        <source>Connect to the Litecoin network through a SOCKS5 proxy.</source>
         <translation>SOCKS5 프록시를 통해 비트코인 네트워크 연결</translation>
     </message>
     <message>
@@ -1211,7 +1211,7 @@ Address: %4
         <translation>거래량</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
+        <source>Enter a Litecoin address (e.g. %1)</source>
         <translation>비트코인 주소를 입력하기 (예. %1)</translation>
     </message>
     <message>
