@@ -1176,8 +1176,8 @@ Cím: %4
         <translation>Összeg</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>Ad meg egy Bitcoin címet (pl: %1)</translation>
+        <source>Enter a Litecoin address (e.g. %1)</source>
+        <translation>Ad meg egy Litecoin címet (pl: %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1742,8 +1742,8 @@ Cím: %4
         <translation>Többször szerepel ugyanaz a cím. Egy küldési műveletben egy címre csak egyszer lehet küldeni.</translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation>Figyelmeztetés: Érvénytelen Bitcoin cím</translation>
+        <source>Warning: Invalid Litecoin address</source>
+        <translation>Figyelmeztetés: Érvénytelen Litecoin cím</translation>
     </message>
     <message>
         <source>(no label)</source>
