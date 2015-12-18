@@ -1,9 +1,11 @@
-Monacoin Core version 0.10.2.2 is now available from:
 
-  <https://download.monacoin.org/monacoin-0.10.2.2/>
+Monacoin Core version 0.10.4.0 is now available from:
 
-This is a new major version release, bringing bug fixes and translation 
-updates. It is recommended to upgrade to this version.
+  <https://download.monacoin.org/monacoin-0.10.4.0/>
+
+This is a new minor version release, bringing bug fixes, the BIP65
+(CLTV) consensus change, and relay policy preparation for BIP113. It is
+recommended to upgrade to this version as soon as possible.
 
 Please report bugs using the issue tracker at github:
 
@@ -43,6 +45,8 @@ supported and may break as soon as the older version attempts to reindex.
 
 This does not affect wallet forward or backward compatibility.
 
+Notable changes since 0.10.3
+============================
 
 BIP65 soft fork to enforce OP_CHECKLOCKTIMEVERIFY opcode
 --------------------------------------------------------
@@ -82,71 +86,30 @@ version v0.4.3 or any version from v0.5.2 onward.
 [BIP65]: https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki
 
 
-Fix buffer overflow in bundled upnp
-------------------------------------
+Windows bug fix for corrupted UTXO database on unclean shutdowns
+----------------------------------------------------------------
 
-Bundled miniupnpc was updated to 1.9.20151008. This fixes a buffer overflow in
-the XML parser during initial network discovery.
+Several Windows users reported that they often need to reindex the
+entire blockchain after an unclean shutdown of Litecoin Core on Windows
+(or an unclean shutdown of Windows itself). Although unclean shutdowns
+remain unsafe, this release no longer relies on memory-mapped files for
+the UTXO database, which significantly reduced the frequency of unclean
+shutdowns leading to required reindexes during testing.
 
-Details can be found here: http://talosintel.com/reports/TALOS-2015-0035/
+For more information, see: <https://github.com/bitcoin/bitcoin/pull/6917>
 
-This applies to the distributed executables only, not when building from source or
-using distribution provided packages.
+Other fixes for database corruption on Windows are expected in the
+next major release.
 
-Additionally, upnp has been disabled by default. This may result in a lower
-number of reachable nodes on IPv4, however this prevents future libupnpc
-vulnerabilities from being a structural risk to the network
-(see https://github.com/bitcoin/bitcoin/pull/6795).
-
-Test for LowS signatures before relaying
------------------------------------------
-
-Make the node require the canonical 'low-s' encoding for ECDSA signatures when
-relaying or mining.  This removes a nuisance malleability vector.
-
-Consensus behavior is unchanged.
-
-If widely deployed this change would eliminate the last remaining known vector
-for nuisance malleability on SIGHASH_ALL P2PKH transactions. On the down-side
-it will block most transactions made by sufficiently out of date software.
-
-Unlike the other avenues to change txids on transactions this
-one was randomly violated by all deployed litecoin software prior to
-its discovery. So, while other malleability vectors where made
-non-standard as soon as they were discovered, this one has remained
-permitted. Even BIP62 did not propose applying this rule to
-old version transactions, but conforming implementations have become
-much more common since BIP62 was initially written.
-
-Litecoin Core has produced compatible signatures since the 0.9 development
-branch, but this didn't make it into a release until 0.10. Both litecoinj
-and Electrum have been more recently updated.
-
-This does not replace the need for BIP62 or similar, as miners can
-still cooperate to break transactions.  Nor does it replace the
-need for wallet software to handle malleability sanely[1]. This
-only eliminates the cheap and irritating DOS attack.
-
-[1] On the Malleability of Bitcoin Transactions
-Marcin Andrychowicz, Stefan Dziembowski, Daniel Malinowski, ?ukasz Mazurek
-http://fc15.ifca.ai/preproceedings/bitcoin/paper_9.pdf
-
-0.10.3 Change log
+0.10.4 Change log
 =================
 
-This release is based upon Bitcoin Core v0.10.3.  Their upstream changelog applies to us and
-is included in as separate release-notes.  This section describes the Litecoin-specific differences.
+This release is based upon Bitcoin Core v0.10.4.  Their upstream changelog applies to us and
+is included in as separate release-notes, see: [Release Notes](release-notes.md).  
+This section describes the Litecoin-specific differences.
 
-- Adjusted default confirmation target value (nTxConfirmTarget) which is used for transaction fee 
-	calculation, resulting in lower and more accurate fees. This mainly impacts users who use
-	litecoind via litecoin-cli or the RPC service to send transactions as GUI (Qt) users
-	already have the option to change their fee preferences. 
-- Fixed OSX notification bug displaying incorrect icon.
-- Fixed OSX Chinese language Unicode character display bug.
-- Fixed make check testing suite.
-- Updated Qt translations.
-- Updated build instructions for OSX and Unix.
-- Add BIP65 CHECKLOCKTIMEVERIFY softfork.
+- Added BIP65 CHECKLOCKTIMEVERIFY softfork.
+- Increased OP_RETURN relay size to 80 bytes.
 
 Credits
 =======
@@ -155,7 +118,6 @@ Thanks to everyone who directly contributed to this release:
 
 - Charles Lee
 - pooler
-- Gitju
 - Adrian Gallagher
 - Anton Yemelyanov
 - Martin Smith
