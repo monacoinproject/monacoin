@@ -1,0 +1,88 @@
+Source: litecoin
+Section: utils
+Priority: optional
+Maintainer: Jonas Smedegaard <dr@jones.dk>
+Uploaders: Micah Anderson <micah@debian.org>
+Build-Depends: debhelper,
+ devscripts,
+ automake,
+ libtool,
+ bash-completion,
+ libboost-system-dev (>> 1.35) | libboost-system1.35-dev,
+ libdb4.8++-dev,
+ libssl-dev,
+ pkg-config,
+ libminiupnpc8-dev | libminiupnpc-dev (>> 1.6),
+ libboost-filesystem-dev (>> 1.35) | libboost-filesystem1.35-dev,
+ libboost-program-options-dev (>> 1.35) | libboost-program-options1.35-dev,
+ libboost-thread-dev (>> 1.35) | libboost-thread1.35-dev,
+ libboost-test-dev (>> 1.35) | libboost-test1.35-dev,
+ qt4-qmake,
+ libqt4-dev,
+ libqrencode-dev,
+ libprotobuf-dev, protobuf-compiler,
+ python
+Standards-Version: 3.9.2
+Homepage: https://www.litecoin.org/
+Vcs-Git: git://github.com/litecoin-project/litecoin.git
+Vcs-Browser: https://github.com/litecoin-project/litecoin
+
+Package: litecoind
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: peer-to-peer network based digital currency - daemon
+ Litecoin is a peer-to-peer Internet currency that enables instant,
+ near-zero cost payments to anyone in the world. Litecoin is an open 
+ source, global payment network that is fully decentralized without 
+ any central authorities. Mathematics secures the network and empowers
+ individuals to control their own finances. Litecoin features faster 
+ transaction confirmation times and improved storage efficiency than 
+ the leading math-based currency. With substantial industry support, 
+ trade volume and liquidity, Litecoin is a proven medium of commerce 
+ complementary to Bitcoin.
+ .
+ Full transaction history is stored locally at each client.  This
+ requires 5+ GB of space, slowly growing.
+ .
+ This package provides the daemon, litecoind, and the CLI tool
+ litecoin-cli to interact with the daemon.
+
+Package: litecoin-qt
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: peer-to-peer network based digital currency - Qt GUI
+ Litecoin is a peer-to-peer Internet currency that enables instant,
+ near-zero cost payments to anyone in the world. Litecoin is an open 
+ source, global payment network that is fully decentralized without 
+ any central authorities. Mathematics secures the network and empowers
+ individuals to control their own finances. Litecoin features faster 
+ transaction confirmation times and improved storage efficiency than 
+ the leading math-based currency. With substantial industry support, 
+ trade volume and liquidity, Litecoin is a proven medium of commerce 
+ complementary to Bitcoin.
+ .
+ Full transaction history is stored locally at each client.  This
+ requires 5+ GB of space, slowly growing.
+ .
+ This package provides Litecoin-Qt, a GUI for Litecoin based on Qt.
+
+Package: litecoin-tx
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: peer-to-peer digital currency - standalone transaction tool
+ Litecoin is a peer-to-peer Internet currency that enables instant,
+ near-zero cost payments to anyone in the world. Litecoin is an open 
+ source, global payment network that is fully decentralized without 
+ any central authorities. Mathematics secures the network and empowers
+ individuals to control their own finances. Litecoin features faster 
+ transaction confirmation times and improved storage efficiency than 
+ the leading math-based currency. With substantial industry support, 
+ trade volume and liquidity, Litecoin is a proven medium of commerce 
+ complementary to Bitcoin.
+ .
+ Full transaction history is stored locally at each client.  This
+ requires 5+ GB of space, slowly growing.
+ .
+ This package provides litecoin-tx, a command-line transaction creation
+ tool which can be used without a litecoin daemon.  Some means of
+ exchanging minimal transaction data with peers is still required.
