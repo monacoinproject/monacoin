@@ -217,7 +217,7 @@ bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
     //    which will lower-case it (and thus invalidate the address).
     if(uri.startsWith("litecoin://", Qt::CaseInsensitive))
     {
-        uri.replace(0, 10, "litecoin:");
+        uri.replace(0, 11, "litecoin:");
     }
     QUrl uriInstance(uri);
     return parseBitcoinURI(uriInstance, out);
