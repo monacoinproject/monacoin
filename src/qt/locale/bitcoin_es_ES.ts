@@ -146,8 +146,8 @@
         <translation>Reindexando bloques en el disco...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Envia monedas a una dirección Bitcoin</translation>
+        <source>Send coins to a Litecoin address</source>
+        <translation>Envia monedas a una dirección Litecoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>

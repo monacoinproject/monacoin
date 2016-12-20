@@ -94,8 +94,8 @@
         <translation>Ndrysho frazkalimin e përdorur per enkriptimin e portofolit</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <source>Litecoin</source>
+        <translation>Litecoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -438,8 +438,8 @@
         <translation>Opsionet:</translation>
     </message>
     <message>
-        <source>Bitcoin Core</source>
-        <translation>Berthama Bitcoin</translation>
+        <source>Litecoin Core</source>
+        <translation>Berthama Litecoin</translation>
     </message>
     <message>
         <source>Information</source>

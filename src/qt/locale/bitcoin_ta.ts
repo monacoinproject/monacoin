@@ -78,8 +78,8 @@
         <translation>&amp;செய்தியை சரிசெய்...</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <source>Litecoin</source>
+        <translation>Litecoin</translation>
     </message>
     <message>
         <source>Wallet</source>
@@ -694,8 +694,8 @@
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Bitcoin Core</source>
-        <translation>Bitcoin மையம்</translation>
+        <source>Litecoin Core</source>
+        <translation>Litecoin மையம்</translation>
     </message>
     <message>
         <source>(default: %u)</source>
