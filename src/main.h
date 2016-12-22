@@ -136,7 +136,7 @@ static const unsigned int DEFAULT_BANSCORE_THRESHOLD = 100;
 
 static const bool DEFAULT_TESTSAFEMODE = false;
 /** Default for -mempoolreplacement */
-static const bool DEFAULT_ENABLE_REPLACEMENT = true;
+static const bool DEFAULT_ENABLE_REPLACEMENT = false;
 /** Default for using fee filter */
 static const bool DEFAULT_FEEFILTER = true;
 
@@ -197,7 +197,7 @@ extern uint64_t nPruneTarget;
 /** Block files containing a block-height within MIN_BLOCKS_TO_KEEP of chainActive.Tip() will not be pruned. */
 static const unsigned int MIN_BLOCKS_TO_KEEP = 288;
 
-static const signed int DEFAULT_CHECKBLOCKS = 6;
+static const signed int DEFAULT_CHECKBLOCKS = 6 * 4;
 static const unsigned int DEFAULT_CHECKLEVEL = 3;
 
 // Require that user allocate at least 550MB for block & undo files (blk???.dat and rev???.dat)
