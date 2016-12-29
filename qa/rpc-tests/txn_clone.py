@@ -33,7 +33,7 @@ class TxnMallTest(BitcoinTestFramework):
             self.nodes[i].getnewaddress("")  # bug workaround, coins generated assigned to first getnewaddress!
 
         # Assign coins to foo and bar accounts:
-        self.nodes[0].settxfee(.001)
+        self.nodes[0].settxfee(.1)
 
         node0_address_foo = self.nodes[0].getnewaddress("foo")
         fund_foo_txid = self.nodes[0].sendfrom("", node0_address_foo, 1219)

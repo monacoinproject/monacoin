@@ -242,14 +242,14 @@ class WalletTest (BitcoinTestFramework):
         txObj = self.nodes[0].gettransaction(txId)
         assert_equal(txObj['amount'], Decimal('-2'))
 
-        txId  = self.nodes[0].sendtoaddress(self.nodes[2].getnewaddress(), "0.0001")
+        txId  = self.nodes[0].sendtoaddress(self.nodes[2].getnewaddress(), "0.001")
         txObj = self.nodes[0].gettransaction(txId)
-        assert_equal(txObj['amount'], Decimal('-0.0001'))
+        assert_equal(txObj['amount'], Decimal('-0.001'))
 
         #check if JSON parser can handle scientific notation in strings
-        txId  = self.nodes[0].sendtoaddress(self.nodes[2].getnewaddress(), "1e-4")
+        txId  = self.nodes[0].sendtoaddress(self.nodes[2].getnewaddress(), "1e-3")
         txObj = self.nodes[0].gettransaction(txId)
-        assert_equal(txObj['amount'], Decimal('-0.0001'))
+        assert_equal(txObj['amount'], Decimal('-0.001'))
 
         try:
             txId  = self.nodes[0].sendtoaddress(self.nodes[2].getnewaddress(), "1f-4")
@@ -365,7 +365,7 @@ class WalletTest (BitcoinTestFramework):
         # Make a long chain of unconfirmed payments without hitting mempool limit
         txid_list = []
         for i in range(chainlimit*2):
-            txid_list.append(self.nodes[0].sendtoaddress(chain_addrs[0], Decimal('0.0001')))
+            txid_list.append(self.nodes[0].sendtoaddress(chain_addrs[0], Decimal('0.001')))
         assert_equal(self.nodes[0].getmempoolinfo()['size'], chainlimit*2)
         assert_equal(len(txid_list), chainlimit*2)
 
