@@ -4,7 +4,7 @@
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #
-# Test the CHECKLOCKTIMEVERIFY (BIP65) soft-fork logic
+# Test new Litecoin multisig prefix functionality.
 #
 
 from test_framework.test_framework import BitcoinTestFramework
