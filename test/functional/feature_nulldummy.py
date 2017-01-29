@@ -21,6 +21,7 @@ from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import assert_equal, assert_raises_rpc_error
 
 NULLDUMMY_ERROR = "non-mandatory-script-verify-flag (Dummy CHECKMULTISIG argument must be zero) (code 64)"
+VB_TOP_BITS = 0x20000000
 
 def trueDummy(tx):
     scriptSig = CScript(tx.vin[0].scriptSig)
@@ -98,9 +99,9 @@ class NULLDUMMYTest(BitcoinTestFramework):
             self.nodes[0].sendrawtransaction(i.serialize_with_witness().hex(), 0)
         self.block_submit(self.nodes[0], test6txs, True, True)
 
-    def block_submit(self, node, txs, witness=False, accept=False):
+    def block_submit(self, node, txs, witness=False, accept=False, version=4):
         block = create_block(self.tip, create_coinbase(self.lastblockheight + 1), self.lastblocktime + 1)
-        block.nVersion = 4
+        block.nVersion = version
         for tx in txs:
             tx.rehash()
             block.vtx.append(tx)
