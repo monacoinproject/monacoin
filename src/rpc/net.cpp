@@ -247,8 +247,8 @@ static UniValue addnode(const JSONRPCRequest& request)
                 },
                 RPCResult{RPCResult::Type::NONE, "", ""},
                 RPCExamples{
-                    HelpExampleCli("addnode", "\"192.168.0.6:8333\" \"onetry\"")
-            + HelpExampleRpc("addnode", "\"192.168.0.6:8333\", \"onetry\"")
+                    HelpExampleCli("addnode", "\"192.168.0.6:9333\" \"onetry\"")
+            + HelpExampleRpc("addnode", "\"192.168.0.6:9333\", \"onetry\"")
                 },
             }.ToString());
 
@@ -341,7 +341,7 @@ static UniValue getaddednodeinfo(const JSONRPCRequest& request)
                             {
                                 {RPCResult::Type::OBJ, "", "",
                                 {
-                                    {RPCResult::Type::STR, "address", "The bitcoin server IP and port we're connected to"},
+                                    {RPCResult::Type::STR, "address", "The litecoin server IP and port we're connected to"},
                                     {RPCResult::Type::STR, "connected", "connection, inbound or outbound"},
                                 }},
                             }},
