@@ -237,7 +237,7 @@ class SegWitTest(BitcoinTestFramework):
 
     # Helper functions
 
-    def build_next_block(self, version=4):
+    def build_next_block(self, nVersion=VB_TOP_BITS):
         """Build a block on top of node0's tip."""
         tip = self.nodes[0].getbestblockhash()
         height = self.nodes[0].getblockcount() + 1
