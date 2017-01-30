@@ -144,6 +144,7 @@ testScripts = [
     'signmessages.py',
     'p2p-compactblocks.py',
     'nulldummy.py',
+    'test_script_address2.py'
 ]
 if ENABLE_ZMQ:
     testScripts.append('zmq_test.py')
