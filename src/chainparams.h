@@ -80,6 +80,7 @@ public:
     const CCheckpointData& Checkpoints() const { return checkpointData; }
 
     unsigned int SwitchKGWblock() const { return nSwitchKGWblock; }
+    unsigned int SwitchDIGIblock() const { return nSwitchDIGIblock; }
 
 protected:
     CChainParams() {}
@@ -101,6 +102,7 @@ protected:
     CCheckpointData checkpointData;
 
     unsigned int nSwitchKGWblock;
+    unsigned int nSwitchDIGIblock;
 };
 
 /**
