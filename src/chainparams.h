@@ -78,6 +78,9 @@ public:
     const std::vector<unsigned char>& Base58Prefix(Base58Type type) const { return base58Prefixes[type]; }
     const std::vector<SeedSpec6>& FixedSeeds() const { return vFixedSeeds; }
     const CCheckpointData& Checkpoints() const { return checkpointData; }
+
+    unsigned int SwitchKGWblock() const { return nSwitchKGWblock; }
+
 protected:
     CChainParams() {}
 
@@ -96,6 +99,8 @@ protected:
     bool fMineBlocksOnDemand;
     bool fTestnetToBeDeprecatedFieldRPC;
     CCheckpointData checkpointData;
+
+    unsigned int nSwitchKGWblock;
 };
 
 /**

@@ -100,6 +100,9 @@ public:
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000005c13f99f6d0b1a908");
 
+        // Hardfork params
+        nSwitchKGWblock = 80000;
+
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
@@ -197,6 +200,9 @@ public:
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000000006fce5d67766e");
 
+        // Hardfork params
+        nSwitchKGWblock = 80000;
+
         pchMessageStart[0] = 0xfc;
         pchMessageStart[1] = 0xc1;
         pchMessageStart[2] = 0xb7;
@@ -277,6 +283,9 @@ public:
 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x00");
+
+        // Hardfork params
+        nSwitchKGWblock = 20;
 
         pchMessageStart[0] = 0xfa;
         pchMessageStart[1] = 0xbf;
