@@ -18,10 +18,10 @@ uint256 CBlockHeader::GetHash() const
     return SerializeHash(*this);
 }
 
-uint256 CBlockHeader::GetPoWHash(int32_t height) const
+uint256 CBlockHeader::GetPoWHash(bool bLyra2REv2) const
 {
     uint256 thash;
-    if(height >= Params().SwitchLyra2REv2_DGW()){
+    if(bLyra2REv2){
         lyra2re2_hash(BEGIN(nVersion), BEGIN(thash));
     }
     else{

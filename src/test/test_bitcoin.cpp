@@ -115,8 +115,7 @@ TestChain100Setup::CreateAndProcessBlock(const std::vector<CMutableTransaction>&
     unsigned int extraNonce = 0;
     IncrementExtraNonce(&block, chainActive.Tip(), extraNonce);
 
-    // ‚Æ‚è‚ ‚¦‚¸ƒrƒ‹ƒh’Ê‚·‚½‚ßscryptŒÅ’è
-    while (!CheckProofOfWork(block.GetPoWHash(0), block.nBits, chainparams.GetConsensus())) ++block.nNonce;
+    while (!CheckProofOfWork(block.GetPoWHash(), block.nBits, chainparams.GetConsensus())) ++block.nNonce;
 
     CValidationState state;
     ProcessNewBlock(state, chainparams, NULL, &block, true, NULL, false);

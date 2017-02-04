@@ -1708,9 +1708,9 @@ bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, const Consensus:
     block.nLastHeight = height;
 
     // Check the header
-    if (!CheckProofOfWork(block.GetPoWHash(height), block.nBits, consensusParams)){
+    if (!CheckProofOfWork(block.GetPoWHash(height >= Params().SwitchLyra2REv2_DGW()), block.nBits, consensusParams)){
         if(height == int32_max){
-            if (CheckProofOfWork(block.GetPoWHash(Params().SwitchLyra2REv2_DGW()), block.nBits, consensusParams)){
+            if (CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams)){
                 return true;
             }
         }
@@ -3407,7 +3407,7 @@ bool CheckBlockHeader(CBlockHeader& block, CValidationState& state, const Consen
         if (pindexPrev != NULL){
             block.nLastHeight = pindexPrev->nHeight+1;
             // Check proof of work matches claimed amount
-            if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(block.nLastHeight), block.nBits, consensusParams)){
+            if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(block.nLastHeight  >= Params().SwitchLyra2REv2_DGW()), block.nBits, consensusParams)){
                 return state.DoS(50, error("CheckBlock() : proof of work failed"));
             }
         }
