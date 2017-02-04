@@ -25,7 +25,7 @@ Build Monacoin Core
 
 1. Clone the monacoin source code and cd into `monacoin`
 
-        git clone https://github.com/monacoin-project/monacoin
+        git clone https://github.com/monacoinproject/monacoin
         cd monacoin
 
 2.  Build monacoin-core:
