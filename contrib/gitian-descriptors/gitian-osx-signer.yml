@@ -7,7 +7,7 @@ architectures:
 packages:
 - "faketime"
 remotes:
-- "url": "https://github.com/monacoin-project/monacoin-detached-sigs.git"
+- "url": "https://github.com/monacoinproject/monacoin-detached-sigs.git"
   "dir": "signature"
 files:
 - "monacoin-osx-unsigned.tar.gz"

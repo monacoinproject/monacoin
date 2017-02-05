@@ -22,7 +22,7 @@ packages:
 - "ca-certificates"
 - "python"
 remotes:
-- "url": "https://github.com/monacoin-project/monacoin.git"
+- "url": "https://github.com/monacoinproject/monacoin.git"
   "dir": "monacoin"
 files: []
 script: |

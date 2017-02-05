@@ -1,7 +1,7 @@
 Monacoin Core integration/staging tree
 =====================================
 
-[![Build Status](https://travis-ci.org/monacoin-project/monacoin.svg?branch=master)](https://travis-ci.org/monacoin-project/monacoin)
+[![Build Status](https://travis-ci.org/monacoinproject/monacoin.svg?branch=master)](https://travis-ci.org/monacoinproject/monacoin)
 
 https://monacoin.org
 
@@ -27,7 +27,7 @@ Development Process
 -------------------
 
 The `master` branch is regularly built and tested, but is not guaranteed to be
-completely stable. [Tags](https://github.com/monacoin-project/monacoin/tags) are created
+completely stable. [Tags](https://github.com/monacoinproject/monacoin/tags) are created
 regularly to indicate new official, stable release versions of Monacoin Core.
 
 The contribution workflow is described in [CONTRIBUTING.md](CONTRIBUTING.md).
