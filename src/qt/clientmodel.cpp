@@ -9,6 +9,7 @@
 #include "guiutil.h"
 #include "peertablemodel.h"
 
+#include "alert.h"
 #include "chainparams.h"
 #include "checkpoints.h"
 #include "clientversion.h"
@@ -123,8 +124,20 @@ void ClientModel::updateNumConnections(int numConnections)
     Q_EMIT numConnectionsChanged(numConnections);
 }
 
-void ClientModel::updateAlert()
+void ClientModel::updateAlert(const QString &hash, int status)
 {
+    // Show error message notification for new alert
+    if(status == CT_NEW)
+    {
+        uint256 hash_256;
+        hash_256.SetHex(hash.toStdString());
+        CAlert alert = CAlert::getAlertByHash(hash_256);
+        if(!alert.IsNull())
+        {
+            Q_EMIT message(tr("Network Alert"), QString::fromStdString(alert.strStatusBar), CClientUIInterface::ICON_ERROR);
+        }
+    }
+
     Q_EMIT alertsChanged(getStatusBarWarnings());
 }
 
@@ -211,8 +224,12 @@ static void NotifyNumConnectionsChanged(ClientModel *clientmodel, int newNumConn
                               Q_ARG(int, newNumConnections));
 }
 
-static void NotifyAlertChanged(ClientModel *clientmodel)
+static void NotifyAlertChanged(ClientModel *clientmodel, const uint256 &hash, ChangeType status)
 {
+    qDebug() << "NotifyAlertChanged: " + QString::fromStdString(hash.GetHex()) + " status=" + QString::number(status);
+    QMetaObject::invokeMethod(clientmodel, "updateAlert", Qt::QueuedConnection,
+                              Q_ARG(QString, QString::fromStdString(hash.GetHex())),
+                              Q_ARG(int, status));
     qDebug() << "NotifyAlertChanged";
     QMetaObject::invokeMethod(clientmodel, "updateAlert", Qt::QueuedConnection);
 }
@@ -251,7 +268,7 @@ void ClientModel::subscribeToCoreSignals()
     // Connect signals to client
     uiInterface.ShowProgress.connect(boost::bind(ShowProgress, this, _1, _2));
     uiInterface.NotifyNumConnectionsChanged.connect(boost::bind(NotifyNumConnectionsChanged, this, _1));
-    uiInterface.NotifyAlertChanged.connect(boost::bind(NotifyAlertChanged, this));
+    uiInterface.NotifyAlertChanged.connect(boost::bind(NotifyAlertChanged, this, _1, _2));
     uiInterface.BannedListChanged.connect(boost::bind(BannedListChanged, this));
     uiInterface.NotifyBlockTip.connect(boost::bind(BlockTipChanged, this, _1, _2, false));
     uiInterface.NotifyHeaderTip.connect(boost::bind(BlockTipChanged, this, _1, _2, true));
@@ -262,7 +279,7 @@ void ClientModel::unsubscribeFromCoreSignals()
     // Disconnect signals from client
     uiInterface.ShowProgress.disconnect(boost::bind(ShowProgress, this, _1, _2));
     uiInterface.NotifyNumConnectionsChanged.disconnect(boost::bind(NotifyNumConnectionsChanged, this, _1));
-    uiInterface.NotifyAlertChanged.disconnect(boost::bind(NotifyAlertChanged, this));
+    uiInterface.NotifyAlertChanged.disconnect(boost::bind(NotifyAlertChanged, this, _1, _2));
     uiInterface.BannedListChanged.disconnect(boost::bind(BannedListChanged, this));
     uiInterface.NotifyBlockTip.disconnect(boost::bind(BlockTipChanged, this, _1, _2, false));
     uiInterface.NotifyHeaderTip.disconnect(boost::bind(BlockTipChanged, this, _1, _2, true));
