@@ -877,11 +877,11 @@ covered by the txid. This provides several immediate benefits:
 
 Activation for the segwit soft fork is being managed using
 BIP9. At the beginning of the first retarget period after
-segwit's start date of 1 January 2017 miners can update the Monacoin
+segwit's start date of 8 March 2017 miners can update the Monacoin
 client to Monacoin Core 0.13.2 to signal for segwit support. When a
 super-majority of 75% is reached segwit is activated by optional, and
-if 75% of blocks within a 8,064-block retarget period (about 3.5 days)
-signal support for segwit, after another 8,064 blocks, segwit will
+if 75% of blocks within a 10,080-block retarget period (about 10.5 - 14 days)
+signal support for segwit, after another 10,080 blocks, segwit will
 be required.
 
 For more information about segwit, please see the [segwit FAQ][], the
