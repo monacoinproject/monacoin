@@ -99,7 +99,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1520467200; // March 8, 2018
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x000000000000000000000000000000000000000000000005c13f99f6d0b1a908");
+        consensus.nMinimumChainWork = uint256S("0x0");
 
         // Hardfork params
         nSwitchKGWblock = 80000;
@@ -204,7 +204,7 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_SEGWIT].nTimeout = 1520467200; // March 8, 2018
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000000000006fce5d67766e");
+        consensus.nMinimumChainWork = uint256S("0x0");
 
         // Hardfork params
         nSwitchKGWblock = 80000;
