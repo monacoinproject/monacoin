@@ -3598,7 +3598,7 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
         }
     }
 
-    // Litecoin: (mainnet >= 710000, testnet >= 400000, regtest uses supermajority)
+    // Litecoin: (mainnet >= 710000, regtest and testnet uses supermajority)
     // Enforce block.nVersion=2 rule that the coinbase starts with serialized block height
     // if 750 of the last 1,000 blocks are version 2 or greater (51/100 if testnet):
     bool checkHeightMismatch = false;
@@ -3606,13 +3606,13 @@ bool ContextualCheckBlock(const CBlock& block, CValidationState& state, CBlockIn
     {
         if (consensusParams.BIP34Height != -1)
         {
-            // Mainnet 710k, Testnet 400k
+            // Mainnet 710k
             if (nHeight >= consensusParams.BIP34Height)
                 checkHeightMismatch = true;
         }
         else
         {
-            // Regtest and Unittest: use Bitcoin's supermajority rule
+            // Regtest and Testnet: use Bitcoin's supermajority rule
             if (IsSuperMajority(2, pindexPrev, consensusParams.nMajorityRejectBlockOutdated, consensusParams))
                 checkHeightMismatch = true;
         }

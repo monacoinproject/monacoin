@@ -43,7 +43,7 @@ config file):
 
 	HiddenServiceDir /var/lib/tor/litecoin-service/
 	HiddenServicePort 9333 127.0.0.1:9333
-	HiddenServicePort 19333 127.0.0.1:19333
+	HiddenServicePort 19335 127.0.0.1:19335
 
 The directory can be different of course, but (both) port numbers should be equal to
 your litecoind's P2P listen port (9333 by default).
