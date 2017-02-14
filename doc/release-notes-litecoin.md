@@ -48,8 +48,7 @@ Old and new addresses can be used interchangeably.
 Reset Testnet
 -------------
 
-Testnet3 has been deprecated and replace with Testnet4.
-
+Testnet3 has been deprecated and replaced with Testnet4.
 
 Credits
 =======
