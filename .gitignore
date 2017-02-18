@@ -2,15 +2,14 @@
 
 *.exe
 *.pdb
-src/bitcoin
-src/bitcoind
-src/bitcoin-cli
-src/bitcoin-tx
-src/bitcoin-wallet
-src/test/fuzz
-!src/test/fuzz/*.*
-src/test/test_bitcoin
-src/qt/test/test_bitcoin-qt
+src/monacoin
+src/monacoind
+src/monacoin-cli
+src/monacoin-tx
+src/monacoin-wallet
+src/test/test_monacoin
+src/test/test_monacoin_fuzzy
+src/qt/test/test_monacoin-qt
 
 # autoreconf
 Makefile.in
@@ -90,8 +89,8 @@ src/qt/bitcoin-qt.includes
 *.qm
 Makefile
 !depends/Makefile
-src/qt/bitcoin-qt
-Bitcoin-Qt.app
+src/qt/monacoin-qt
+Monacoin-Qt.app
 background.tiff*
 
 # Qt Creator
@@ -99,7 +98,7 @@ Makefile.am.user
 
 # Unit-tests
 Makefile.test
-bitcoin-qt_test
+monacoin-qt_test
 
 # Resources cpp
 qrc_*.cpp
@@ -115,7 +114,7 @@ releases
 *.gcno
 *.gcda
 /*.info
-test_bitcoin.coverage/
+test_monacoin.coverage/
 total.coverage/
 coverage_percent.txt
 

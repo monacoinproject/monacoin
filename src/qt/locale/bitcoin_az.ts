@@ -373,7 +373,7 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Insufficient funds</source>
         <translation>Yetərsiz balans</translation>

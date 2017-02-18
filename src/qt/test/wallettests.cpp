@@ -92,6 +92,7 @@ QModelIndex FindTx(const QAbstractItemModel& model, const uint256& txid)
 }
 
 //! Invoke bumpfee on txid and check results.
+/* Monacoin: Disable RBF
 void BumpFee(TransactionView& view, const uint256& txid, bool expectDisabled, std::string expectError, bool cancel)
 {
     QTableView* table = view.findChild<QTableView*>("transactionView");
@@ -116,6 +117,7 @@ void BumpFee(TransactionView& view, const uint256& txid, bool expectDisabled, st
     action->trigger();
     QVERIFY(text.indexOf(QString::fromStdString(expectError)) != -1);
 }
+*/
 
 //! Simple qt wallet tests.
 //
@@ -194,10 +196,11 @@ void TestGUI(interfaces::Node& node)
     QVERIFY(FindTx(*transactionTableModel, txid2).isValid());
 
     // Call bumpfee. Test disabled, canceled, enabled, then failing cases.
-    BumpFee(transactionView, txid1, true /* expect disabled */, "not BIP 125 replaceable" /* expected error */, false /* cancel */);
-    BumpFee(transactionView, txid2, false /* expect disabled */, {} /* expected error */, true /* cancel */);
-    BumpFee(transactionView, txid2, false /* expect disabled */, {} /* expected error */, false /* cancel */);
-    BumpFee(transactionView, txid2, true /* expect disabled */, "already bumped" /* expected error */, false /* cancel */);
+    // Monacoin: Disable BumpFee tests
+    // BumpFee(transactionView, txid1, true /* expect disabled */, "not BIP 125 replaceable" /* expected error */, false /* cancel */);
+    // BumpFee(transactionView, txid2, false /* expect disabled */, {} /* expected error */, true /* cancel */);
+    // BumpFee(transactionView, txid2, false /* expect disabled */, {} /* expected error */, false /* cancel */);
+    // BumpFee(transactionView, txid2, true /* expect disabled */, "already bumped" /* expected error */, false /* cancel */);
 
     // Check current balance on OverviewPage
     OverviewPage overviewPage(platformStyle.get());
@@ -235,7 +238,7 @@ void TestGUI(interfaces::Node& node)
             QString paymentText = rlist->toPlainText();
             QStringList paymentTextList = paymentText.split('\n');
             QCOMPARE(paymentTextList.at(0), QString("Payment information"));
-            QVERIFY(paymentTextList.at(1).indexOf(QString("URI: bitcoin:")) != -1);
+            QVERIFY(paymentTextList.at(1).indexOf(QString("URI: monacoin:")) != -1);
             QVERIFY(paymentTextList.at(2).indexOf(QString("Address:")) != -1);
             QCOMPARE(paymentTextList.at(3), QString("Amount: 0.00000001 ") + QString::fromStdString(CURRENCY_UNIT));
             QCOMPARE(paymentTextList.at(4), QString("Label: TEST_LABEL_1"));
