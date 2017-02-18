@@ -1,5 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2014-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -191,7 +192,7 @@ static UniValue getnewaddress(const JSONRPCRequest& request)
     }
 
             RPCHelpMan{"getnewaddress",
-                "\nReturns a new Bitcoin address for receiving payments.\n"
+                "\nReturns a new Monacoin address for receiving payments.\n"
                 "If 'label' is specified, it is added to the address book \n"
                 "so payments received with the address will be associated with 'label'.\n",
                 {
@@ -199,7 +200,7 @@ static UniValue getnewaddress(const JSONRPCRequest& request)
                     {"address_type", RPCArg::Type::STR, /* default */ "set by -addresstype", "The address type to use. Options are \"legacy\", \"p2sh-segwit\", and \"bech32\"."},
                 },
                 RPCResult{
-                    RPCResult::Type::STR, "address", "The new bitcoin address"
+                    RPCResult::Type::STR, "address", "The new monacoin address"
                 },
                 RPCExamples{
                     HelpExampleCli("getnewaddress", "")
@@ -244,7 +245,7 @@ static UniValue getrawchangeaddress(const JSONRPCRequest& request)
     }
 
             RPCHelpMan{"getrawchangeaddress",
-                "\nReturns a new Bitcoin address, for receiving change.\n"
+                "\nReturns a new Monacoin address, for receiving change.\n"
                 "This is for use with raw transactions, NOT normal use.\n",
                 {
                     {"address_type", RPCArg::Type::STR, /* default */ "set by -changetype", "The address type to use. Options are \"legacy\", \"p2sh-segwit\", and \"bech32\"."},
@@ -292,7 +293,7 @@ static UniValue setlabel(const JSONRPCRequest& request)
             RPCHelpMan{"setlabel",
                 "\nSets the label associated with the given address.\n",
                 {
-                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The bitcoin address to be associated with a label."},
+                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The monacoin address to be associated with a label."},
                     {"label", RPCArg::Type::STR, RPCArg::Optional::NO, "The label to assign to the address."},
                 },
                 RPCResult{RPCResult::Type::NONE, "", ""},
@@ -306,7 +307,7 @@ static UniValue setlabel(const JSONRPCRequest& request)
 
     CTxDestination dest = DecodeDestination(request.params[0].get_str());
     if (!IsValidDestination(dest)) {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Bitcoin address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Monacoin address");
     }
 
     std::string label = LabelFromValue(request.params[1]);
@@ -365,7 +366,7 @@ static UniValue sendtoaddress(const JSONRPCRequest& request)
                 "\nSend an amount to a given address." +
         HELP_REQUIRING_PASSPHRASE,
                 {
-                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The bitcoin address to send to."},
+                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The monacoin address to send to."},
                     {"amount", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "The amount in " + CURRENCY_UNIT + " to send. eg 0.1"},
                     {"comment", RPCArg::Type::STR, RPCArg::Optional::OMITTED_NAMED_ARG, "A comment used to store what the transaction is for.\n"
             "                             This is not part of the transaction, just kept in your wallet."},
@@ -373,7 +374,7 @@ static UniValue sendtoaddress(const JSONRPCRequest& request)
             "                             to which you're sending the transaction. This is not part of the \n"
             "                             transaction, just kept in your wallet."},
                     {"subtractfeefromamount", RPCArg::Type::BOOL, /* default */ "false", "The fee will be deducted from the amount being sent.\n"
-            "                             The recipient will receive less bitcoins than you enter in the amount field."},
+            "                             The recipient will receive less monacoins than you enter in the amount field."},
                     {"replaceable", RPCArg::Type::BOOL, /* default */ "wallet default", "Allow this transaction to be replaced by a transaction with higher fees via BIP 125"},
                     {"conf_target", RPCArg::Type::NUM, /* default */ "wallet default", "Confirmation target (in blocks)"},
                     {"estimate_mode", RPCArg::Type::STR, /* default */ "UNSET", "The fee estimate mode, must be one of:\n"
@@ -469,7 +470,7 @@ static UniValue listaddressgroupings(const JSONRPCRequest& request)
                         {
                             {RPCResult::Type::ARR, "", "",
                             {
-                                {RPCResult::Type::STR, "address", "The bitcoin address"},
+                                {RPCResult::Type::STR, "address", "The monacoin address"},
                                 {RPCResult::Type::STR_AMOUNT, "amount", "The amount in " + CURRENCY_UNIT},
                                 {RPCResult::Type::STR, "label", /* optional */ true, "The label"},
                             }},
@@ -524,7 +525,7 @@ static UniValue signmessage(const JSONRPCRequest& request)
                 "\nSign a message with the private key of an address" +
         HELP_REQUIRING_PASSPHRASE,
                 {
-                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The bitcoin address to use for the private key."},
+                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The monacoin address to use for the private key."},
                     {"message", RPCArg::Type::STR, RPCArg::Optional::NO, "The message to create a signature of."},
                 },
                 RPCResult{
@@ -583,7 +584,7 @@ static UniValue getreceivedbyaddress(const JSONRPCRequest& request)
             RPCHelpMan{"getreceivedbyaddress",
                 "\nReturns the total amount received by the given address in transactions with at least minconf confirmations.\n",
                 {
-                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The bitcoin address for transactions."},
+                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The monacoin address for transactions."},
                     {"minconf", RPCArg::Type::NUM, /* default */ "1", "Only include transactions confirmed at least this many times."},
                 },
                 RPCResult{
@@ -611,7 +612,7 @@ static UniValue getreceivedbyaddress(const JSONRPCRequest& request)
     // Bitcoin address
     CTxDestination dest = DecodeDestination(request.params[0].get_str());
     if (!IsValidDestination(dest)) {
-        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Bitcoin address");
+        throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid Monacoin address");
     }
     CScript scriptPubKey = GetScriptForDestination(dest);
     if (!pwallet->IsMine(scriptPubKey)) {
@@ -810,14 +811,14 @@ static UniValue sendmany(const JSONRPCRequest& request)
                     {"dummy", RPCArg::Type::STR, RPCArg::Optional::NO, "Must be set to \"\" for backwards compatibility.", "\"\""},
                     {"amounts", RPCArg::Type::OBJ, RPCArg::Optional::NO, "The addresses and amounts",
                         {
-                            {"address", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "The bitcoin address is the key, the numeric amount (can be string) in " + CURRENCY_UNIT + " is the value"},
+                            {"address", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "The monacoin address is the key, the numeric amount (can be string) in " + CURRENCY_UNIT + " is the value"},
                         },
                     },
                     {"minconf", RPCArg::Type::NUM, RPCArg::Optional::OMITTED_NAMED_ARG, "Ignored dummy value"},
                     {"comment", RPCArg::Type::STR, RPCArg::Optional::OMITTED_NAMED_ARG, "A comment"},
                     {"subtractfeefrom", RPCArg::Type::ARR, RPCArg::Optional::OMITTED_NAMED_ARG, "The addresses.\n"
             "                           The fee will be equally deducted from the amount of each selected address.\n"
-            "                           Those recipients will receive less bitcoins than you enter in their corresponding amount field.\n"
+            "                           Those recipients will receive less monacoins than you enter in their corresponding amount field.\n"
             "                           If no addresses are specified here, the sender pays the fee.",
                         {
                             {"address", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "Subtract fee from this address"},
@@ -888,7 +889,7 @@ static UniValue sendmany(const JSONRPCRequest& request)
     for (const std::string& name_ : keys) {
         CTxDestination dest = DecodeDestination(name_);
         if (!IsValidDestination(dest)) {
-            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Bitcoin address: ") + name_);
+            throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Monacoin address: ") + name_);
         }
 
         if (destinations.count(dest)) {
@@ -940,15 +941,15 @@ static UniValue addmultisigaddress(const JSONRPCRequest& request)
 
             RPCHelpMan{"addmultisigaddress",
                 "\nAdd an nrequired-to-sign multisignature address to the wallet. Requires a new wallet backup.\n"
-                "Each key is a Bitcoin address or hex-encoded public key.\n"
+                "Each key is a Monacoin address or hex-encoded public key.\n"
                 "This functionality is only intended for use with non-watchonly addresses.\n"
                 "See `importaddress` for watchonly p2sh address support.\n"
                 "If 'label' is specified, assign address to that label.\n",
                 {
                     {"nrequired", RPCArg::Type::NUM, RPCArg::Optional::NO, "The number of required signatures out of the n keys or addresses."},
-                    {"keys", RPCArg::Type::ARR, RPCArg::Optional::NO, "The bitcoin addresses or hex-encoded public keys",
+                    {"keys", RPCArg::Type::ARR, RPCArg::Optional::NO, "The monacoin addresses or hex-encoded public keys",
                         {
-                            {"key", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "bitcoin address or hex-encoded public key"},
+                            {"key", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "monacoin address or hex-encoded public key"},
                         },
                         },
                     {"label", RPCArg::Type::STR, RPCArg::Optional::OMITTED_NAMED_ARG, "A label to assign the addresses to."},
@@ -1411,7 +1412,7 @@ UniValue listtransactions(const JSONRPCRequest& request)
                         {RPCResult::Type::OBJ, "", "", Cat(Cat<std::vector<RPCResult>>(
                         {
                             {RPCResult::Type::BOOL, "involvesWatchonly", "Only returns true if imported addresses were involved in transaction."},
-                            {RPCResult::Type::STR, "address", "The bitcoin address of the transaction."},
+                            {RPCResult::Type::STR, "address", "The monacoin address of the transaction."},
                             {RPCResult::Type::STR, "category", "The transaction category.\n"
                                 "\"send\"                  Transactions sent.\n"
                                 "\"receive\"               Non-coinbase transactions received.\n"
@@ -1528,7 +1529,7 @@ static UniValue listsinceblock(const JSONRPCRequest& request)
                             {RPCResult::Type::OBJ, "", "", Cat(Cat<std::vector<RPCResult>>(
                             {
                                 {RPCResult::Type::BOOL, "involvesWatchonly", "Only returns true if imported addresses were involved in transaction."},
-                                {RPCResult::Type::STR, "address", "The bitcoin address of the transaction."},
+                                {RPCResult::Type::STR, "address", "The monacoin address of the transaction."},
                                 {RPCResult::Type::STR, "category", "The transaction category.\n"
                                     "\"send\"                  Transactions sent.\n"
                                     "\"receive\"               Non-coinbase transactions received.\n"
@@ -1674,7 +1675,7 @@ static UniValue gettransaction(const JSONRPCRequest& request)
                             {RPCResult::Type::OBJ, "", "",
                             {
                                 {RPCResult::Type::BOOL, "involvesWatchonly", "Only returns true if imported addresses were involved in transaction."},
-                                {RPCResult::Type::STR, "address", "The bitcoin address involved in the transaction."},
+                                {RPCResult::Type::STR, "address", "The monacoin address involved in the transaction."},
                                 {RPCResult::Type::STR, "category", "The transaction category.\n"
                                     "\"send\"                  Transactions sent.\n"
                                     "\"receive\"               Non-coinbase transactions received.\n"
@@ -1897,7 +1898,7 @@ static UniValue walletpassphrase(const JSONRPCRequest& request)
 
             RPCHelpMan{"walletpassphrase",
                 "\nStores the wallet decryption key in memory for 'timeout' seconds.\n"
-                "This is needed prior to performing transactions related to private keys such as sending bitcoins\n"
+                "This is needed prior to performing transactions related to private keys such as sending monacoins\n"
             "\nNote:\n"
             "Issuing the walletpassphrase command while the wallet is already unlocked will set a new unlock\n"
             "time that overrides the old one.\n",
@@ -2098,7 +2099,7 @@ static UniValue encryptwallet(const JSONRPCRequest& request)
                 RPCExamples{
             "\nEncrypt your wallet\n"
             + HelpExampleCli("encryptwallet", "\"my pass phrase\"") +
-            "\nNow set the passphrase to use the wallet, such as for signing or sending bitcoin\n"
+            "\nNow set the passphrase to use the wallet, such as for signing or sending monacoin\n"
             + HelpExampleCli("walletpassphrase", "\"my pass phrase\"") +
             "\nNow we can do something like sign\n"
             + HelpExampleCli("signmessage", "\"address\" \"test message\"") +
@@ -2150,7 +2151,7 @@ static UniValue lockunspent(const JSONRPCRequest& request)
                 "\nUpdates list of temporarily unspendable outputs.\n"
                 "Temporarily lock (unlock=false) or unlock (unlock=true) specified transaction outputs.\n"
                 "If no transaction outputs are specified when unlocking then all current locked transaction outputs are unlocked.\n"
-                "A locked transaction output will not be chosen by automatic coin selection, when spending bitcoins.\n"
+                "A locked transaction output will not be chosen by automatic coin selection, when spending monacoins.\n"
                 "Locks are stored in memory only. Nodes start with zero locked outputs, and the locked output list\n"
                 "is always cleared (by virtue of process exit) when a node stops or fails.\n"
                 "Also see the listunspent call\n",
@@ -2591,7 +2592,7 @@ static UniValue loadwallet(const JSONRPCRequest& request)
 {
             RPCHelpMan{"loadwallet",
                 "\nLoads a wallet from a wallet file or directory."
-                "\nNote that all wallet command-line options used when starting bitcoind will be"
+                "\nNote that all wallet command-line options used when starting monacoind will be"
                 "\napplied to the new wallet (eg -zapwallettxes, upgradewallet, rescan, etc).\n",
                 {
                     {"filename", RPCArg::Type::STR, RPCArg::Optional::NO, "The wallet directory or .dat file."},
@@ -2827,9 +2828,9 @@ static UniValue listunspent(const JSONRPCRequest& request)
                 {
                     {"minconf", RPCArg::Type::NUM, /* default */ "1", "The minimum confirmations to filter"},
                     {"maxconf", RPCArg::Type::NUM, /* default */ "9999999", "The maximum confirmations to filter"},
-                    {"addresses", RPCArg::Type::ARR, /* default */ "empty array", "The bitcoin addresses to filter",
+                    {"addresses", RPCArg::Type::ARR, /* default */ "empty array", "The monacoin addresses to filter",
                         {
-                            {"address", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "bitcoin address"},
+                            {"address", RPCArg::Type::STR, RPCArg::Optional::OMITTED, "monacoin address"},
                         },
                     },
                     {"include_unsafe", RPCArg::Type::BOOL, /* default */ "true", "Include outputs that are not safe to spend\n"
@@ -2850,7 +2851,7 @@ static UniValue listunspent(const JSONRPCRequest& request)
                         {
                             {RPCResult::Type::STR_HEX, "txid", "the transaction id"},
                             {RPCResult::Type::NUM, "vout", "the vout value"},
-                            {RPCResult::Type::STR, "address", "the bitcoin address"},
+                            {RPCResult::Type::STR, "address", "the monacoin address"},
                             {RPCResult::Type::STR, "label", "The associated label, or \"\" for the default label"},
                             {RPCResult::Type::STR, "scriptPubKey", "the script key"},
                             {RPCResult::Type::STR_AMOUNT, "amount", "the transaction output amount in " + CURRENCY_UNIT},
@@ -2896,7 +2897,7 @@ static UniValue listunspent(const JSONRPCRequest& request)
             const UniValue& input = inputs[idx];
             CTxDestination dest = DecodeDestination(input.get_str());
             if (!IsValidDestination(dest)) {
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Bitcoin address: ") + input.get_str());
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, std::string("Invalid Monacoin address: ") + input.get_str());
             }
             if (!destinations.insert(dest).second) {
                 throw JSONRPCError(RPC_INVALID_PARAMETER, std::string("Invalid parameter, duplicated address: ") + input.get_str());
@@ -3064,7 +3065,7 @@ void FundTransaction(CWallet* const pwallet, CMutableTransaction& tx, CAmount& f
             CTxDestination dest = DecodeDestination(options["changeAddress"].get_str());
 
             if (!IsValidDestination(dest)) {
-                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "changeAddress must be a valid bitcoin address");
+                throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "changeAddress must be a valid monacoin address");
             }
 
             coinControl.destChange = dest;
@@ -3169,7 +3170,7 @@ static UniValue fundrawtransaction(const JSONRPCRequest& request)
                     {"hexstring", RPCArg::Type::STR_HEX, RPCArg::Optional::NO, "The hex string of the raw transaction"},
                     {"options", RPCArg::Type::OBJ, RPCArg::Optional::OMITTED_NAMED_ARG, "for backward compatibility: passing in a true instead of an object will result in {\"includeWatching\":true}",
                         {
-                            {"changeAddress", RPCArg::Type::STR, /* default */ "pool address", "The bitcoin address to receive the change"},
+                            {"changeAddress", RPCArg::Type::STR, /* default */ "pool address", "The monacoin address to receive the change"},
                             {"changePosition", RPCArg::Type::NUM, /* default */ "random", "The index of the change output"},
                             {"change_type", RPCArg::Type::STR, /* default */ "set by -changetype", "The output type to use. Only valid if changeAddress is not specified. Options are \"legacy\", \"p2sh-segwit\", and \"bech32\"."},
                             {"includeWatching", RPCArg::Type::BOOL, /* default */ "true for watch-only wallets, otherwise false", "Also select inputs which are watch only.\n"
@@ -3179,7 +3180,7 @@ static UniValue fundrawtransaction(const JSONRPCRequest& request)
                             {"feeRate", RPCArg::Type::AMOUNT, /* default */ "not set: makes wallet determine the fee", "Set a specific fee rate in " + CURRENCY_UNIT + "/kB"},
                             {"subtractFeeFromOutputs", RPCArg::Type::ARR, /* default */ "empty array", "The integers.\n"
                             "                              The fee will be equally deducted from the amount of each specified output.\n"
-                            "                              Those recipients will receive less bitcoins than you enter in their corresponding amount field.\n"
+                            "                              Those recipients will receive less monacoins than you enter in their corresponding amount field.\n"
                             "                              If no outputs are specified here, the sender pays the fee.",
                                 {
                                     {"vout_index", RPCArg::Type::NUM, RPCArg::Optional::OMITTED, "The zero-based output index, before a change output is added."},
@@ -3732,15 +3733,15 @@ UniValue getaddressinfo(const JSONRPCRequest& request)
     }
 
             RPCHelpMan{"getaddressinfo",
-                "\nReturn information about the given bitcoin address.\n"
+                "\nReturn information about the given monacoin address.\n"
                 "Some of the information will only be present if the address is in the active wallet.\n",
                 {
-                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The bitcoin address for which to get information."},
+                    {"address", RPCArg::Type::STR, RPCArg::Optional::NO, "The monacoin address for which to get information."},
                 },
                 RPCResult{
                     RPCResult::Type::OBJ, "", "",
                     {
-                        {RPCResult::Type::STR, "address", "The bitcoin address validated."},
+                        {RPCResult::Type::STR, "address", "The monacoin address validated."},
                         {RPCResult::Type::STR_HEX, "scriptPubKey", "The hex-encoded scriptPubKey generated by the address."},
                         {RPCResult::Type::BOOL, "ismine", "If the address is yours."},
                         {RPCResult::Type::BOOL, "iswatchonly", "If the address is watchonly."},
@@ -3777,7 +3778,7 @@ UniValue getaddressinfo(const JSONRPCRequest& request)
                             "as an array to keep the API stable if multiple labels are enabled in the future.",
                         {
                             {RPCResult::Type::STR, "label name", "The label name. Defaults to \"\"."},
-                            {RPCResult::Type::OBJ, "", "label data, DEPRECATED, will be removed in 0.21. To re-enable, launch bitcoind with `-deprecatedrpc=labelspurpose`",
+                            {RPCResult::Type::OBJ, "", "label data, DEPRECATED, will be removed in 0.21. To re-enable, launch monacoind with `-deprecatedrpc=labelspurpose`",
                             {
                                 {RPCResult::Type::STR, "name", "The label name. Defaults to \"\"."},
                                 {RPCResult::Type::STR, "purpose", "The purpose of the associated address (send or receive)."},
@@ -4157,7 +4158,7 @@ UniValue walletcreatefundedpsbt(const JSONRPCRequest& request)
                         {
                             {"", RPCArg::Type::OBJ, RPCArg::Optional::OMITTED, "",
                                 {
-                                    {"address", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "A key-value pair. The key (string) is the bitcoin address, the value (float or string) is the amount in " + CURRENCY_UNIT + ""},
+                                    {"address", RPCArg::Type::AMOUNT, RPCArg::Optional::NO, "A key-value pair. The key (string) is the monacoin address, the value (float or string) is the amount in " + CURRENCY_UNIT + ""},
                                 },
                                 },
                             {"", RPCArg::Type::OBJ, RPCArg::Optional::OMITTED, "",
@@ -4170,7 +4171,7 @@ UniValue walletcreatefundedpsbt(const JSONRPCRequest& request)
                     {"locktime", RPCArg::Type::NUM, /* default */ "0", "Raw locktime. Non-0 value also locktime-activates inputs"},
                     {"options", RPCArg::Type::OBJ, RPCArg::Optional::OMITTED_NAMED_ARG, "",
                         {
-                            {"changeAddress", RPCArg::Type::STR_HEX, /* default */ "pool address", "The bitcoin address to receive the change"},
+                            {"changeAddress", RPCArg::Type::STR_HEX, /* default */ "pool address", "The monacoin address to receive the change"},
                             {"changePosition", RPCArg::Type::NUM, /* default */ "random", "The index of the change output"},
                             {"change_type", RPCArg::Type::STR, /* default */ "set by -changetype", "The output type to use. Only valid if changeAddress is not specified. Options are \"legacy\", \"p2sh-segwit\", and \"bech32\"."},
                             {"includeWatching", RPCArg::Type::BOOL, /* default */ "true for watch-only wallets, otherwise false", "Also select inputs which are watch only"},
@@ -4178,7 +4179,7 @@ UniValue walletcreatefundedpsbt(const JSONRPCRequest& request)
                             {"feeRate", RPCArg::Type::AMOUNT, /* default */ "not set: makes wallet determine the fee", "Set a specific fee rate in " + CURRENCY_UNIT + "/kB"},
                             {"subtractFeeFromOutputs", RPCArg::Type::ARR, /* default */ "empty array", "The outputs to subtract the fee from.\n"
                             "                              The fee will be equally deducted from the amount of each specified output.\n"
-                            "                              Those recipients will receive less bitcoins than you enter in their corresponding amount field.\n"
+                            "                              Those recipients will receive less monacoins than you enter in their corresponding amount field.\n"
                             "                              If no outputs are specified here, the sender pays the fee.",
                                 {
                                     {"vout_index", RPCArg::Type::NUM, RPCArg::Optional::OMITTED, "The zero-based output index, before a change output is added."},

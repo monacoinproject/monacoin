@@ -201,7 +201,7 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Transaction must have at least one recipient</source>
         <translation>Transaction must have at least one recipient</translation>

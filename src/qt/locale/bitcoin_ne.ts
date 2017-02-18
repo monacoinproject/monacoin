@@ -31,7 +31,7 @@
     </message>
     <message>
         <source>Export the data in the current tab to a file</source>
-        <translation>वर्तमान ट्याबको डाटालाई फाइलमा निर्यात गर्नुहोस्</translation>
+        <translation>वर्तमान ट्याबको डाटालाई फाइलमा निर्यात गर्नुहोस् </translation>
     </message>
     <message>
         <source>&amp;Export</source>
@@ -92,7 +92,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>सन्देशमा &amp;amp;हस्ताक्षर  गर्नुहोस्...</translation>
@@ -170,8 +170,8 @@
         <translation>डिस्कमा ब्लकलाई पुनः सूचीकरण गरिँदै...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>बिटकोइन ठेगानामा सिक्का पठाउनुहोस्</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation>Monacoin ठेगानामा सिक्का पठाउनुहोस्</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -194,12 +194,6 @@
     </message>
     </context>
 <context>
-    <name>CreateWalletActivity</name>
-    </context>
-<context>
-    <name>CreateWalletDialog</name>
-    </context>
-<context>
     <name>EditAddressDialog</name>
     </context>
 <context>
@@ -218,9 +212,6 @@
     <name>OpenURIDialog</name>
     </context>
 <context>
-    <name>OpenWalletActivity</name>
-    </context>
-<context>
     <name>OptionsDialog</name>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
@@ -230,8 +221,8 @@
 <context>
     <name>OverviewPage</name>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>देखाइएको सूचना पूरानो हुन सक्छ । कनेक्सन स्थापित भएपछि, तपाईंको वालेट बिटकोइन नेटवर्कमा स्वचालित रूपमा समिकरण हुन्छ , तर यो प्रक्रिया अहिले सम्म पूरा भएको छैन ।</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>देखाइएको सूचना पूरानो हुन सक्छ । कनेक्सन स्थापित भएपछि, तपाईंको वालेट Monacoin नेटवर्कमा स्वचालित रूपमा समिकरण हुन्छ , तर यो प्रक्रिया अहिले सम्म पूरा भएको छैन ।</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -295,9 +286,12 @@
         <translation>रकम</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>कृपया बिटकोइन ठेगाना प्रवेश गर्नुहोस् (उदाहरण %1)</translation>
+        <source>Enter a Monacoin address (e.g. %1)</source>
+        <translation>कृपया Monacoin ठेगाना प्रवेश गर्नुहोस् (उदाहरण %1)</translation>
     </message>
+    </context>
+<context>
+    <name>QObject::QObject</name>
     </context>
 <context>
     <name>QRImageWidget</name>
@@ -318,10 +312,6 @@
     </context>
 <context>
     <name>ReceiveRequestDialog</name>
-    <message>
-        <source>Amount</source>
-        <translation>रकम</translation>
-    </message>
     </context>
 <context>
     <name>RecentRequestsTableModel</name>
@@ -340,16 +330,16 @@
         <translation>पहिला प्रयोग गरिएको ठेगाना प्रयोग गर्नुहोस्</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>पठाइँदै गरेको रकमबाट शुल्क कटौती गरिनेछ । प्राप्तकर्ताले तपाईंले रकम क्षेत्रमा प्रवेष गरेको भन्दा थोरै बिटकोइन प्राप्त गर्ने छन् । धेरै प्राप्तकर्ता चयन गरिएको छ भने समान रूपमा शुल्क विभाजित गरिनेछ ।</translation>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less monacoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <translation>पठाइँदै गरेको रकमबाट शुल्क कटौती गरिनेछ । प्राप्तकर्ताले तपाईंले रकम क्षेत्रमा प्रवेष गरेको भन्दा थोरै Monacoin प्राप्त गर्ने छन् । धेरै प्राप्तकर्ता चयन गरिएको छ भने समान रूपमा शुल्क विभाजित गरिनेछ ।</translation>
     </message>
     <message>
         <source>Enter a label for this address to add it to the list of used addresses</source>
         <translation>यो ठेगानालाई प्रयोग गरिएको ठेगानाको सूचीमा थप्न एउटा लेबल प्रविष्ट गर्नुहोस्</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation>बिटकोइनमा संलग्न गरिएको सन्देश: तपाईंको मध्यस्थको लागि कारोबारको साथमा भण्डारण गरिने URI । नोट: यो सन्देश बिटकोइन नेटवर्क मार्फत पठाइने छैन ।</translation>
+        <source>A message that was attached to the monacoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Monacoin network.</source>
+        <translation>Monacoinमा संलग्न गरिएको सन्देश: तपाईंको मध्यस्थको लागि कारोबारको साथमा भण्डारण गरिने URI । नोट: यो सन्देश Monacoin नेटवर्क मार्फत पठाइने छैन ।</translation>
     </message>
     </context>
 <context>
@@ -358,8 +348,8 @@
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation>आफ्नो ठेगानामा पठाइएको बिटकोइन प्राप्त गर्न सकिन्छ भनेर प्रमाणित गर्न तपाईंले ती ठेगानाले सन्देश/सम्झौताहरूमा हस्ताक्षर गर्न सक्नुहुन्छ । फिसिङ आक्रमणले तपाईंलाई छक्याएर अरूका लागि तपाईंको परिचयमा हस्ताक्षर गराउने प्रयास गर्न सक्ने भएकाले अस्पष्ट वा जथाभावीमा हस्ताक्षर गर्दा ध्यान दिनुहोस् । आफू सहमत भएको पूर्ण विस्तृत-कथनमा मात्र हस्ताक्षर गर्नुहोस् ।</translation>
+        <source>You can sign messages/agreements with your addresses to prove you can receive monacoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <translation>आफ्नो ठेगानामा पठाइएको Monacoin प्राप्त गर्न सकिन्छ भनेर प्रमाणित गर्न तपाईंले ती ठेगानाले सन्देश/सम्झौताहरूमा हस्ताक्षर गर्न सक्नुहुन्छ । फिसिङ आक्रमणले तपाईंलाई छक्याएर अरूका लागि तपाईंको परिचयमा हस्ताक्षर गराउने प्रयास गर्न सक्ने भएकाले अस्पष्ट वा जथाभावीमा हस्ताक्षर गर्दा ध्यान दिनुहोस् । आफू सहमत भएको पूर्ण विस्तृत-कथनमा मात्र हस्ताक्षर गर्नुहोस् ।</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -375,14 +365,13 @@
     </message>
     </context>
 <context>
+    <name>SplashScreen</name>
+    </context>
+<context>
     <name>TrafficGraphWidget</name>
     </context>
 <context>
     <name>TransactionDesc</name>
-    <message>
-        <source>Amount</source>
-        <translation>रकम</translation>
-    </message>
     </context>
 <context>
     <name>TransactionDescDialog</name>
@@ -421,7 +410,7 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>The block database contains a block which appears to be from the future. This may be due to your computer's date and time being set incorrectly. Only rebuild the block database if you are sure that your computer's date and time are correct</source>
         <translation>ब्लक डाटाबेसमा भविष्यबाट आए जस्तो देखिने एउटा ब्लक हुन्छ । तपाईंको कम्प्युटरको मिति र समय गलत तरिकाले सेट गरिएकाले यस्तो हुन सक्छ । तपाईं आफ्नो कम्प्युटरको मिति र समय सही छ भनेर पक्का हुनुहुन्छ भने मात्र ब्लक डाटाबेस पुनर्निर्माण गर्नुहोस् ।</translation>
@@ -473,10 +462,6 @@
     <message>
         <source>Unable to bind to %s on this computer. %s is probably already running.</source>
         <translation>यो कम्प्युटरको %s मा बाँध्न सकिएन । %s सम्भवित रूपमा पहिलैबाट चलिरहेको छ ।</translation>
-    </message>
-    <message>
-        <source>User Agent comment (%s) contains unsafe characters.</source>
-        <translation>प्रयोगकर्ता एजेन्टको टिप्पणी (%s) मा असुरक्षित अक्षरहरू छन् ।</translation>
     </message>
     <message>
         <source>Verifying blocks...</source>

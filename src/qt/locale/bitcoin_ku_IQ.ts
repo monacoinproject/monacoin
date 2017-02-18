@@ -140,7 +140,7 @@
         <translation>دەستەواژەی تێپەڕەوی نوێ تێبنووسە بۆ جزدان.1 تکایە دەستەواژەی تێپەڕێک بەکاربێنە لە 2ten یان زیاتر لە هێما هەڕەمەکیەکان2، یان 38 یان زیاتر ووشەکان3.</translation>
     </message>
     <message>
-        <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
+        <source>Remember that encrypting your wallet cannot fully protect your monacoins from being stolen by malware infecting your computer.</source>
         <translation>بیرت بێت کە ڕەمزاندنی جزدانەکەت ناتوانێت بەتەواوی بیتکۆبیتەکانت بپارێزێت لە دزرابوون لەلایەن وورنەری تووشکردنی کۆمپیوتەرەکەت.</translation>
     </message>
     <message>
@@ -152,7 +152,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>Click to disable network activity.</source>
         <translation>کرتە بکە بۆ ناچالاککردنی چالاکی تۆڕ.</translation>
@@ -387,8 +387,8 @@
 <context>
     <name>PaymentServer</name>
     <message>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation>ناتوانێت دەست بکات بە :bitcoin کرتە بکە بۆ-پارەدانی کار</translation>
+        <source>Cannot start monacoin: click-to-pay handler</source>
+        <translation>ناتوانێت دەست بکات بە :monacoin کرتە بکە بۆ-پارەدانی کار</translation>
     </message>
     </context>
 <context>
@@ -597,7 +597,7 @@
         <translation>شاردنەوەی ڕێکخستنەکانی باجی مامەڵە</translation>
     </message>
     <message>
-        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
+        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for monacoin transactions than the network can process.</source>
         <translation>کاتێک قەبارەی مامەڵە کەمتر بێت لە بۆشایی بلۆکەکان، لەوانەیە کانەکان و گرێکانی گواستنەوە کەمترین کرێ جێبەجێ بکەن. پێدانی تەنیا ئەم کەمترین کرێیە تەنیا باشە، بەڵام ئاگاداربە کە ئەمە دەتوانێت ببێتە هۆی ئەوەی کە هەرگیز مامەڵەیەکی پشتڕاستکردنەوە ئەنجام بدرێت جارێک داواکاری زیاتر هەیە بۆ مامەڵەکانی بیت کۆبیتکۆ لەوەی کە تۆڕەکە دەتوانێت ئەنجامی بدات.</translation>
     </message>
     <message>
@@ -845,7 +845,7 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
         <translation>پڕە لە خوارەوەی کەمترین %d MiB شێوەبەند کراوە.  تکایە ژمارەیەکی بەرزتر بەکاربێنە.</translation>

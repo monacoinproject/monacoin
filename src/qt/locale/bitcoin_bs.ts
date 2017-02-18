@@ -66,8 +66,8 @@
         <translation>Adrese primalaca</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Ovo su vaše Bitcoin adrese za slanje novca. Uvijek provjerite iznos i adresu primaoca prije slanja novca.</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Ovo su vaše Monacoin adrese za slanje novca. Uvijek provjerite iznos i adresu primaoca prije slanja novca.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -176,8 +176,8 @@
         <translation>Unesite staru i novu lozinku za novčanik.</translation>
     </message>
     <message>
-        <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>Imajte na umu da šifriranje vašeg novčanika ne može u potpunosti zaštititi vaše bitcoine od krađe zlonamjernim softverom koji zarazi vaš računar.</translation>
+        <source>Remember that encrypting your wallet cannot fully protect your monacoins from being stolen by malware infecting your computer.</source>
+        <translation>Imajte na umu da šifriranje vašeg novčanika ne može u potpunosti zaštititi vaše monacoine od krađe zlonamjernim softverom koji zarazi vaš računar.</translation>
     </message>
     <message>
         <source>Wallet to be encrypted</source>
@@ -402,8 +402,8 @@
         <translation>Alatna traka kartica</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Zatražite uplate (generira QR kodove i bitcoin: URI-je)</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation>Zatražite uplate (generira QR kodove i monacoin: URI-je)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -470,8 +470,8 @@
         <translation>&amp;Primanje adresa</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI</source>
-        <translation>Otvorite bitcoin: URI</translation>
+        <source>Open a monacoin: URI</source>
+        <translation>Otvorite monacoin: URI</translation>
     </message>
     <message>
         <source>Open Wallet</source>
@@ -969,12 +969,12 @@
         <translation>Obrazac</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation>Nedavne transakcije možda još nisu vidljive, pa stoga stanje na vašem novčaniku može biti pogrešno. Ove će informacije biti točne nakon što se novčanik završi sa sinhronizacijom s bitcoin mrežom, kao što je detaljno opisano u nastavku.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the monacoin network, as detailed below.</source>
+        <translation>Nedavne transakcije možda još nisu vidljive, pa stoga stanje na vašem novčaniku može biti pogrešno. Ove će informacije biti točne nakon što se novčanik završi sa sinhronizacijom s monacoin mrežom, kao što je detaljno opisano u nastavku.</translation>
     </message>
     <message>
-        <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Pokušaj trošenja bitcoina na koje utječu još uvijek ne prikazane transakcije mreža neće prihvatiti.</translation>
+        <source>Attempting to spend monacoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>Pokušaj trošenja monacoina na koje utječu još uvijek ne prikazane transakcije mreža neće prihvatiti.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1024,8 +1024,8 @@
 <context>
     <name>OpenURIDialog</name>
     <message>
-        <source>Open bitcoin URI</source>
-        <translation>Otvorite bitcoin URI</translation>
+        <source>Open monacoin URI</source>
+        <translation>Otvorite monacoin URI</translation>
     </message>
     <message>
         <source>URI:</source>
@@ -1512,6 +1512,6 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     </context>
 </TS>

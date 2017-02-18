@@ -168,7 +168,7 @@
         <translation>Подтвердить шифрование кошелька</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MONACOINS&lt;/b&gt;!</source>
         <translation>Предупреждение: Если вы зашифруете кошелёк и потеряете пароль, вы &lt;b&gt;ПОТЕРЯЕТЕ ВСЕ ВАШИ БИТКОЙНЫ&lt;/b&gt;!</translation>
     </message>
     <message>
@@ -188,7 +188,7 @@
         <translation>Введите старый и новый пароль для кошелька.</translation>
     </message>
     <message>
-        <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
+        <source>Remember that encrypting your wallet cannot fully protect your monacoins from being stolen by malware infecting your computer.</source>
         <translation>Помните, что шифрование вашего кошелька не может полностью защитить ваши биткойны от кражи вредоносными программами, заражающими ваш компьютер.</translation>
     </message>
     <message>
@@ -252,7 +252,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Подписать &amp;сообщение...</translation>
@@ -362,7 +362,7 @@
         <translation>Прокси &lt;b&gt;включен&lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
+        <source>Send coins to a Monacoin address</source>
         <translation>Послать средства на Биткойн-адрес</translation>
     </message>
     <message>
@@ -398,11 +398,11 @@
         <translation>Зашифровать приватные ключи, принадлежащие вашему кошельку</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
         <translation>Подписывайте сообщения Биткойн-адресами, чтобы подтвердить, что это написали именно вы</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
         <translation>Проверяйте сообщения, чтобы убедиться, что они подписаны конкретными Биткойн-адресами</translation>
     </message>
     <message>
@@ -422,7 +422,7 @@
         <translation>Панель вкладок</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
         <translation>Запросить платеж</translation>
     </message>
     <message>
@@ -438,8 +438,8 @@
         <translation>Опции командной строки</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n активное подключение к сети Bitcoin</numerusform><numerusform>%n активных подключения к сети Bitcoin</numerusform><numerusform>%n активных подключений к сети Bitcoin</numerusform><numerusform>%n активных подключений к сети Биткойн</numerusform></translation>
+        <source>%n active connection(s) to Monacoin network</source>
+        <translation><numerusform>%n активное подключение к сети Monacoin</numerusform><numerusform>%n активных подключения к сети Monacoin</numerusform><numerusform>%n активных подключений к сети Monacoin</numerusform><numerusform>%n активных подключений к сети Биткойн</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -498,7 +498,7 @@
         <translation>&amp;Адреса для получений</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI</source>
+        <source>Open a monacoin: URI</source>
         <translation>Открыть биткойн: URI</translation>
     </message>
     <message>
@@ -518,7 +518,7 @@
         <translation>Закрыть кошелёк</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
+        <source>Show the %1 help message to get a list with possible Monacoin command-line options</source>
         <translation>Показать помощь по %1, чтобы получить список доступных параметров командной строки</translation>
     </message>
     <message>
@@ -630,7 +630,7 @@
         <translation>Кошелёк &lt;b&gt;зашифрован&lt;/b&gt; и сейчас &lt;b&gt;заблокирован&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</source>
+        <source>A fatal error occurred. Monacoin can no longer continue safely and will quit.</source>
         <translation>Произошла критическая ошибка. Биткойн больше не может продолжать безопасную работу и будет закрыт.</translation>
     </message>
 </context>
@@ -874,7 +874,7 @@
         <translation>Изменить адрес отправки</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
+        <source>The entered address "%1" is not a valid Monacoin address.</source>
         <translation>Введенный адрес "%1" не является действительным Биткойн-адресом.</translation>
     </message>
     <message>
@@ -971,8 +971,8 @@
         <translation>Использовать пользовательскую директорию данных</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin Core</translation>
+        <source>Monacoin</source>
+        <translation>Monacoin Core</translation>
     </message>
     <message>
         <source>Discard blocks after verification, except most recent %1 GB (prune)</source>
@@ -987,7 +987,7 @@
         <translation>Приблизительно %1 ГБ данных будет сохранено в эту директорию.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin block chain.</source>
+        <source>%1 will download and store a copy of the Monacoin block chain.</source>
         <translation>%1 скачает и сохранит копию цепи блоков.</translation>
     </message>
     <message>
@@ -1022,11 +1022,11 @@
         <translation>Форма</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the monacoin network, as detailed below.</source>
         <translation>Последние транзакции пока могут быть не видны, поэтому вы можете видеть некорректный баланс ваших кошельков. Отображаемая информация будет верна после завершения синхронизации. Прогресс синхронизации вы можете видеть ниже.</translation>
     </message>
     <message>
-        <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <source>Attempting to spend monacoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
         <translation>Попытка потратить средства, использованные в транзакциях, которые ещё не синхронизированы, будет отклонена сетью.</translation>
     </message>
     <message>
@@ -1077,7 +1077,7 @@
 <context>
     <name>OpenURIDialog</name>
     <message>
-        <source>Open bitcoin URI</source>
+        <source>Open monacoin URI</source>
         <translation>Открыть URI биткойна</translation>
     </message>
     <message>
@@ -1223,7 +1223,7 @@
         <translation>&amp;Тратить неподтвержденную сдачу</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <source>Automatically open the Monacoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
         <translation>Автоматически открыть порт для Биткойн-клиента на маршрутизаторе. Работает, если ваш маршрутизатор поддерживает UPnP, и данная функция включена.</translation>
     </message>
     <message>
@@ -1239,7 +1239,7 @@
         <translation>Разрешить входящие подключения</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
+        <source>Connect to the Monacoin network through a SOCKS5 proxy.</source>
         <translation>Подключиться к сети Биткойн через прокси SOCKS5.</translation>
     </message>
     <message>
@@ -1275,7 +1275,7 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <source>Connect to the Monacoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
         <translation>Подключаться к Биткойн-сети через отдельный прокси SOCKS5 для скрытых сервисов Tor.</translation>
     </message>
     <message>
@@ -1386,7 +1386,7 @@
         <translation>Форма</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
         <translation>Отображаемая информация может быть устаревшей. Ваш кошелёк автоматически синхронизируется с сетью Биткойн после подключения, но этот процесс пока не завершён.</translation>
     </message>
     <message>
@@ -1461,7 +1461,7 @@
         <translation>Ошибка запроса платежа</translation>
     </message>
     <message>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
+        <source>Cannot start monacoin: click-to-pay handler</source>
         <translation>Не удаётся запустить биткойн: обработчик click-to-pay</translation>
     </message>
     <message>
@@ -1469,8 +1469,8 @@
         <translation>Обработка идентификатора</translation>
     </message>
     <message>
-        <source>'bitcoin://' is not a valid URI. Use 'bitcoin:' instead.</source>
-        <translation>'bitcoin://' неверный URI. Используйте 'bitcoin:' вместо этого.</translation>
+        <source>'monacoin://' is not a valid URI. Use 'monacoin:' instead.</source>
+        <translation>'monacoin://' неверный URI. Используйте 'monacoin:' вместо этого.</translation>
     </message>
     <message>
         <source>Cannot process payment request because BIP70 is not supported.</source>
@@ -1489,7 +1489,7 @@
         <translation>Неверный адрес %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
+        <source>URI cannot be parsed! This can be caused by an invalid Monacoin address or malformed URI parameters.</source>
         <translation>Не удалось обработать идентификатор! Это может быть связано с неверным Биткойн-адресом или неправильными параметрами идентификатора.</translation>
     </message>
     <message>
@@ -1531,7 +1531,7 @@
         <translation>Количество</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
+        <source>Enter a Monacoin address (e.g. %1)</source>
         <translation>Введите биткойн-адрес (напр. %1)</translation>
     </message>
     <message>
@@ -2000,7 +2000,7 @@
         <translation>&amp;Сообщение:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Monacoin network.</source>
         <translation>Необязательное сообщение для запроса платежа, которое будет показано при открытии запроса. Заметьте: сообщение не будет отправлено вместе с платежом через сеть Биткойн.</translation>
     </message>
     <message>
@@ -2281,7 +2281,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>Скрыть настройки комиссий</translation>
     </message>
     <message>
-        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
+        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for monacoin transactions than the network can process.</source>
         <translation>Когда объем транзакций меньше, чем пространство в блоках, майнеры, а также ретранслирующие узлы могут устанавливать минимальную плату. Платить только эту минимальную комиссию - это хорошо, но имейте в виду, что это может привести к тому, что транзакция никогда не будет подтверждена, если будет больше биткойн-транзакций, чем может обработать сеть.</translation>
     </message>
     <message>
@@ -2353,8 +2353,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>Создать Без Подписи</translation>
     </message>
     <message>
-        <source>Creates a Partially Signed Bitcoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
-        <translation>Creates a Partially Signed Bitcoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</translation>
+        <source>Creates a Partially Signed Monacoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <translation>Creates a Partially Signed Monacoin Transaction (PSBT) for use with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</translation>
     </message>
     <message>
         <source> from wallet '%1'</source>
@@ -2377,8 +2377,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>Вы действительно хотите выполнить отправку?</translation>
     </message>
     <message>
-        <source>Please, review your transaction proposal. This will produce a Partially Signed Bitcoin Transaction (PSBT) which you can copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
-        <translation>Please, review your transaction proposal. This will produce a Partially Signed Bitcoin Transaction (PSBT) which you can copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</translation>
+        <source>Please, review your transaction proposal. This will produce a Partially Signed Monacoin Transaction (PSBT) which you can copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <translation>Please, review your transaction proposal. This will produce a Partially Signed Monacoin Transaction (PSBT) which you can copy and then sign with e.g. an offline %1 wallet, or a PSBT-compatible hardware wallet.</translation>
     </message>
     <message>
         <source>or</source>
@@ -2469,7 +2469,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation><numerusform>Предполагаемое подтверждение в течение %n блока.</numerusform><numerusform>Предполагаемое подтверждение в течение %n блоков.</numerusform><numerusform>Предполагаемое подтверждение в течение %n блоков.</numerusform><numerusform>Предполагаемое подтверждение в течение %n блоков.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
+        <source>Warning: Invalid Monacoin address</source>
         <translation>Предупреждение: Неверный Биткойн-адрес</translation>
     </message>
     <message>
@@ -2508,7 +2508,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>Выбрать предыдущий использованный адрес</translation>
     </message>
     <message>
-        <source>The Bitcoin address to send the payment to</source>
+        <source>The Monacoin address to send the payment to</source>
         <translation>Биткойн-адрес, на который отправить платёж</translation>
     </message>
     <message>
@@ -2532,7 +2532,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>The amount to send in the selected unit</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less monacoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
         <translation>С отправляемой суммы будет удержана комиссия. Получателю придёт меньше биткойнов, чем вы вводите в поле количества. Если выбрано несколько получателей, комиссия распределяется поровну.</translation>
     </message>
     <message>
@@ -2560,7 +2560,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>Введите метку для этого адреса, чтобы добавить его в список используемых адресов</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
+        <source>A message that was attached to the monacoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Monacoin network.</source>
         <translation>Сообщение, прикрепленное к биткойн-идентификатору, будет сохранено вместе с транзакцией для вашего сведения. Заметьте: Сообщение не будет отправлено через сеть Биткойн.</translation>
     </message>
     <message>
@@ -2594,11 +2594,11 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>&amp;Подписать Сообщение</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <source>You can sign messages/agreements with your addresses to prove you can receive monacoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
         <translation>Вы можете подписывать сообщения/соглашения своими адресами, чтобы доказать свою возможность получать биткойны на них. Будьте осторожны, не подписывайте что-то неопределённое или случайное, так как фишинговые атаки могут обманным путём заставить вас подписать нежелательные сообщения. Подписывайте только те сообщения, с которыми вы согласны вплоть до мелочей.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to sign the message with</source>
+        <source>The Monacoin address to sign the message with</source>
         <translation>Биткойн-адрес, которым подписать сообщение</translation>
     </message>
     <message>
@@ -2630,7 +2630,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>Скопировать текущую подпись в буфер обмена системы</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
+        <source>Sign the message to prove you own this Monacoin address</source>
         <translation>Подписать сообщение, чтобы доказать владение Биткойн-адресом</translation>
     </message>
     <message>
@@ -2654,7 +2654,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>Введите ниже адрес получателя, сообщение (убедитесь, что переводы строк, пробелы, табы и т.п. в точности скопированы) и подпись, чтобы проверить сообщение. Убедитесь, что не скопировали лишнего в подпись, сравнив с самим подписываемым сообщением, чтобы не стать жертвой атаки "man-in-the-middle". Заметьте, что эта операция удостоверяет лишь авторство подписавшего, но не может удостоверить отправителя транзакции.</translation>
     </message>
     <message>
-        <source>The Bitcoin address the message was signed with</source>
+        <source>The Monacoin address the message was signed with</source>
         <translation>Биткойн-адрес, которым было подписано сообщение</translation>
     </message>
     <message>
@@ -2666,7 +2666,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>The signature given when the message was signed</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
+        <source>Verify the message to ensure it was signed with the specified Monacoin address</source>
         <translation>Проверить сообщение, чтобы убедиться, что оно было подписано указанным Биткойн-адресом</translation>
     </message>
     <message>
@@ -3317,7 +3317,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
     </message>
 </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Распространяется под лицензией MIT, см. приложенный файл %s или %s</translation>
