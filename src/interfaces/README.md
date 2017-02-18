@@ -6,7 +6,7 @@ The following interfaces are defined here:
 
 * [`ChainClient`](chain.h) — used by node to start & stop `Chain` clients. Added in [#14437](https://github.com/bitcoin/bitcoin/pull/14437).
 
-* [`Node`](node.h) — used by GUI to start & stop bitcoin node. Added in [#10244](https://github.com/bitcoin/bitcoin/pull/10244).
+* [`Node`](node.h) — used by GUI to start & stop monacoin node. Added in [#10244](https://github.com/bitcoin/bitcoin/pull/10244).
 
 * [`Wallet`](wallet.h) — used by GUI to access wallets. Added in [#10244](https://github.com/bitcoin/bitcoin/pull/10244).
 

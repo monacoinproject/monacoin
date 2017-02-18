@@ -38,6 +38,10 @@
         <translation>Билдирүүнү &amp;текшерүү...</translation>
     </message>
     <message>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
+    </message>
+    <message>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
     </message>
@@ -107,8 +111,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -120,9 +124,6 @@
     </context>
 <context>
     <name>OpenURIDialog</name>
-    </context>
-<context>
-    <name>OpenWalletActivity</name>
     </context>
 <context>
     <name>OptionsDialog</name>
@@ -177,6 +178,9 @@
     </context>
 <context>
     <name>QObject</name>
+    </context>
+<context>
+    <name>QObject::QObject</name>
     </context>
 <context>
     <name>QRImageWidget</name>
@@ -282,6 +286,9 @@
     </message>
     </context>
 <context>
+    <name>SplashScreen</name>
+    </context>
+<context>
     <name>TrafficGraphWidget</name>
     </context>
 <context>
@@ -340,6 +347,18 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
-    </context>
+    <name>monacoin-core</name>
+    <message>
+        <source>Information</source>
+        <translation>Маалымат</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Эскертүү</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Ката</translation>
+    </message>
+</context>
 </TS>

@@ -204,6 +204,6 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     </context>
 </TS>

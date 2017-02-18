@@ -66,13 +66,13 @@
         <translation>Duke marr adresen</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Këto janë Bitcoin adresat e juaja për të dërguar pagesa. Gjithmon kontrolloni shumën dhe adresën pranuese para se të dërgoni monedha.</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Këto janë Monacoin adresat e juaja për të dërguar pagesa. Gjithmon kontrolloni shumën dhe adresën pranuese para se të dërgoni monedha.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+        <source>These are your Monacoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation>Këto janë adresat tuaja të Bitcoin për të marrë pagesa. Përdorni butonin 'Krijo adresë të re marrëse' në skedën e marrjes për të krijuar adresa të reja. Nënshkrimi është i mundur vetëm me adresa të tipit 'trashëgimi'.</translation>
+        <translation>Këto janë adresat tuaja të Monacoin për të marrë pagesa. Përdorni butonin 'Krijo adresë të re marrëse' në skedën e marrjes për të krijuar adresa të reja. Nënshkrimi është i mundur vetëm me adresa të tipit 'trashëgimi'.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -428,8 +428,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>Miresevini</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -817,7 +817,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Insufficient funds</source>
         <translation>Fonde te pamjaftueshme</translation>

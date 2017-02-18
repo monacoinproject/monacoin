@@ -30,10 +30,6 @@
         <translation>从列表删除选定的地址</translation>
     </message>
     <message>
-        <source>Enter address or label to search</source>
-        <translation>输入地址或者标签进行搜索</translation>
-    </message>
-    <message>
         <source>Export the data in the current tab to a file</source>
         <translation>导出当前数据到文件</translation>
     </message>
@@ -47,11 +43,11 @@
     </message>
     <message>
         <source>Choose the address to send coins to</source>
-        <translation>选择发送比特币地址</translation>
+        <translation>选择发送莱特币地址</translation>
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation>选择接收比特币地址</translation>
+        <translation>选择接收莱特币地址</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
@@ -66,11 +62,15 @@
         <translation>接收地址</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>这是你的比特币发币地址。发送前请确认发送数量和接收地址</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>这是你的莱特币发币地址。发送前请确认发送数量和接收地址</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+        <source>These are your Monacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>这是你的莱特币接收地址。建议每次交易都使用新地址</translation>
+    </message>
+    <message>
+        <source>These are your Monacoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>这是你的比特币接收地址。点击接收选项卡中“创建新的接收地址”按钮来创建新的地址。
 签名只能使用“传统”类型的地址。</translation>
@@ -145,18 +145,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>Encrypt wallet</source>
         <translation>加密钱包</translation>
     </message>
-    <message>
-        <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>此操作需要您的钱包密码用来解锁钱包。</translation>
-    </message>
-    <message>
-        <source>Unlock wallet</source>
-        <translation>解锁钱包</translation>
-    </message>
-    <message>
-        <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>此操作需要您的钱包密码用来解密钱包。</translation>
-    </message>
     </context>
 <context>
     <name>BanTableModel</name>
@@ -170,12 +158,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <source>(no label)</source>
         <translation>(无标签)</translation>
     </message>
-    </context>
-<context>
-    <name>CreateWalletActivity</name>
-    </context>
-<context>
-    <name>CreateWalletDialog</name>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -196,9 +178,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     <name>OpenURIDialog</name>
     </context>
 <context>
-    <name>OpenWalletActivity</name>
-    </context>
-<context>
     <name>OptionsDialog</name>
     </context>
 <context>
@@ -215,6 +194,9 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </context>
 <context>
     <name>QObject</name>
+    </context>
+<context>
+    <name>QObject::QObject</name>
     </context>
 <context>
     <name>QRImageWidget</name>
@@ -254,6 +236,9 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </context>
 <context>
     <name>SignVerifyMessageDialog</name>
+    </context>
+<context>
+    <name>SplashScreen</name>
     </context>
 <context>
     <name>TrafficGraphWidget</name>
@@ -318,6 +303,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     </context>
 </TS>

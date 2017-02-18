@@ -32,7 +32,7 @@ class IncludeConfTest(BitcoinTestFramework):
         # - tmpdir/node0/relative2.conf
         with open(os.path.join(self.options.tmpdir, "node0", "relative2.conf"), "w", encoding="utf8") as f:
             f.write("uacomment=relative2\n")
-        with open(os.path.join(self.options.tmpdir, "node0", "bitcoin.conf"), "a", encoding='utf8') as f:
+        with open(os.path.join(self.options.tmpdir, "node0", "monacoin.conf"), "a", encoding='utf8') as f:
             f.write("uacomment=main\nincludeconf=relative.conf\n")
 
     def run_test(self):
@@ -66,18 +66,18 @@ class IncludeConfTest(BitcoinTestFramework):
         # Commented out as long as we ignore invalid arguments in configuration files
         #with open(os.path.join(self.options.tmpdir, "node0", "relative.conf"), "w", encoding="utf8") as f:
         #    f.write("foo=bar\n")
-        #self.nodes[0].assert_start_raises_init_error(expected_msg="Error: Error reading configuration file: Invalid configuration value foo")
+        #self.nodes[0].assert_start_raises_init_error(expected_msg="Error reading configuration file: Invalid configuration value foo")
 
         self.log.info("-includeconf cannot be invalid path")
         os.remove(os.path.join(self.options.tmpdir, "node0", "relative.conf"))
-        self.nodes[0].assert_start_raises_init_error(expected_msg="Error: Error reading configuration file: Failed to include configuration file relative.conf")
+        self.nodes[0].assert_start_raises_init_error(expected_msg="Error reading configuration file: Failed to include configuration file relative.conf")
 
         self.log.info("multiple -includeconf args can be used from the base config file. subversion should end with 'main; relative; relative2)/'")
         with open(os.path.join(self.options.tmpdir, "node0", "relative.conf"), "w", encoding="utf8") as f:
             # Restore initial file contents
             f.write("uacomment=relative\n")
 
-        with open(os.path.join(self.options.tmpdir, "node0", "bitcoin.conf"), "a", encoding='utf8') as f:
+        with open(os.path.join(self.options.tmpdir, "node0", "monacoin.conf"), "a", encoding='utf8') as f:
             f.write("includeconf=relative2.conf\n")
 
         self.start_node(0)

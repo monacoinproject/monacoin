@@ -1,4 +1,4 @@
-<TS language="mk" version="2.1">
+<TS language="mk_MK" version="2.1">
 <context>
     <name>AddressBookPage</name>
     <message>
@@ -126,12 +126,16 @@
         <translation>Повторно индексирање на блокови од дискот...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Испрати биткоини на Биткоин адреса</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation>Испрати лайткоини на Биткоин адреса</translation>
     </message>
     <message>
         <source>&amp;Verify message...</source>
         <translation>&amp;Потврди порака...</translation>
+    </message>
+    <message>
+        <source>Monacoin</source>
+        <translation>Биткоин</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -289,7 +293,7 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Bitcoin</source>
+        <source>Monacoin</source>
         <translation>Биткоин</translation>
     </message>
     <message>
@@ -307,9 +311,6 @@
         <translation>URI:</translation>
     </message>
 </context>
-<context>
-    <name>OpenWalletActivity</name>
-    </context>
 <context>
     <name>OptionsDialog</name>
     <message>
@@ -413,11 +414,10 @@
     </message>
     </context>
 <context>
+    <name>QObject::QObject</name>
+    </context>
+<context>
     <name>QRImageWidget</name>
-    <message>
-        <source>&amp;Save Image...</source>
-        <translation>&amp;Сними Слика...</translation>
-    </message>
     </context>
 <context>
     <name>RPCConsole</name>
@@ -494,10 +494,6 @@
     </context>
 <context>
     <name>RecentRequestsTableModel</name>
-    <message>
-        <source>Date</source>
-        <translation>Дата</translation>
-    </message>
     </context>
 <context>
     <name>SendCoinsDialog</name>
@@ -548,35 +544,22 @@
     <name>SignVerifyMessageDialog</name>
     </context>
 <context>
+    <name>SplashScreen</name>
+    </context>
+<context>
     <name>TrafficGraphWidget</name>
     </context>
 <context>
     <name>TransactionDesc</name>
-    <message>
-        <source>Date</source>
-        <translation>Дата</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation>Сума</translation>
-    </message>
     </context>
 <context>
     <name>TransactionDescDialog</name>
     </context>
 <context>
     <name>TransactionTableModel</name>
-    <message>
-        <source>Date</source>
-        <translation>Дата</translation>
-    </message>
     </context>
 <context>
     <name>TransactionView</name>
-    <message>
-        <source>Date</source>
-        <translation>Дата</translation>
-    </message>
     </context>
 <context>
     <name>UnitDisplayStatusBarControl</name>
@@ -592,13 +575,16 @@
     </context>
 <context>
     <name>WalletView</name>
+    </context>
+<context>
+    <name>monacoin-core</name>
     <message>
-        <source>&amp;Export</source>
-        <translation>&amp;Експорт</translation>
+        <source>Monacoin Core</source>
+        <translation>Биткоин Core</translation>
     </message>
     <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation>Експортирај ги податоците од активното јазиче во датотека</translation>
+        <source>Warning</source>
+        <translation>Предупредување</translation>
     </message>
     <message>
         <source>Error</source>
@@ -606,6 +592,6 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     </context>
 </TS>

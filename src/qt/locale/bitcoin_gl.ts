@@ -62,8 +62,8 @@
         <translation>Recibindo enderezos</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Estas son as túas direccións Bitcoin para enviar pagos. Revisa sempre a cantidade e a dirección receptora antes de enviar moedas.</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Estas son as túas direccións Monacoin para enviar pagos. Revisa sempre a cantidade e a dirección receptora antes de enviar moedas.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -270,8 +270,8 @@
         <translation>Reindexando bloques no disco...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Enviar moedas a unha dirección Bitcoin</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation>Enviar moedas a unha dirección Monacoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -306,12 +306,12 @@
         <translation>Encriptar as claves privadas que pertencen ao teu moedeiro</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Asina mensaxes cos teus enderezos Bitcoin para probar que che pertencen</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation>Asina mensaxes cos teus enderezos Monacoin para probar que che pertencen</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Verifica mensaxes para asegurar que foron asinados con enderezos Bitcoin específicos.</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation>Verifica mensaxes para asegurar que foron asinados con enderezos Monacoin específicos.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -330,8 +330,8 @@
         <translation>Barra de ferramentas</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Solicitar pagamentos (xera códigos QR e bitcoin: URIs)</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation>Solicitar pagamentos (xera códigos QR e monacoin: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -598,8 +598,8 @@
         <translation>Modificar dirección para enviar</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>A dirección introducida '%1' non é unha dirección Bitcoin válida.</translation>
+        <source>The entered address "%1" is not a valid Monacoin address.</source>
+        <translation>A dirección introducida '%1' non é unha dirección Monacoin válida.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -735,8 +735,8 @@
         <translation>Experto</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abrir automáticamente o porto do cliente Bitcoin no router. Esto so funciona se o teu router soporta UPnP e está habilitado.</translation>
+        <source>Automatically open the Monacoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abrir automáticamente o porto do cliente Monacoin no router. Esto so funciona se o teu router soporta UPnP e está habilitado.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -842,8 +842,8 @@
         <translation>Formulario</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>A información amosada por estar desactualizada. O teu moedeiro sincronízase automáticamente coa rede Bitcoin despois de que se estableza unha conexión, mais este proceso non está todavía rematado.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>A información amosada por estar desactualizada. O teu moedeiro sincronízase automáticamente coa rede Monacoin despois de que se estableza unha conexión, mais este proceso non está todavía rematado.</translation>
     </message>
     <message>
         <source>Your current spendable balance</source>
@@ -1236,8 +1236,8 @@
         <translation>Solicitude de pagamento expirada.</translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation>Atención:  Enderezo Bitcoin non válido</translation>
+        <source>Warning: Invalid Monacoin address</source>
+        <translation>Atención:  Enderezo Monacoin non válido</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -1341,8 +1341,8 @@
         <translation>Copiar a sinatura actual ao portapapeis do sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
-        <translation>Asina a mensaxe para probar que posúes este enderezo Bitcoin</translation>
+        <source>Sign the message to prove you own this Monacoin address</source>
+        <translation>Asina a mensaxe para probar que posúes este enderezo Monacoin</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -1361,8 +1361,8 @@
         <translation>&amp;Verificar Mensaxe</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>Verificar a mensaxe para asegurar que foi asinada coa dirección Bitcoin especificada</translation>
+        <source>Verify the message to ensure it was signed with the specified Monacoin address</source>
+        <translation>Verificar a mensaxe para asegurar que foi asinada coa dirección Monacoin especificada</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1824,7 +1824,7 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
         <translation>Esta é unha build de test pre-lanzamento - emprégaa baixo o teu propio risco - non empregar para minado ou aplicacións de comerciantes</translation>

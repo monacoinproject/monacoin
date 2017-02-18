@@ -66,13 +66,13 @@
         <translation>Adrese primalaca</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Ovo su vaše Bitcoin adrese za slanje novca. Uvijek provjerite iznos i adresu primaoca prije slanja novca.</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Ovo su vaše Monacoin adrese za slanje novca. Uvijek provjerite iznos i adresu primaoca prije slanja novca.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+        <source>These are your Monacoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation>Ovo su vaše Bitcoin adrese za primanje uplata. Upotrijebite dugme 'Stvori novu adresu prijema' na kartici primanja da biste kreirali nove adrese. Potpisivanje je moguće samo s adresama tipa 'legacy'.</translation>
+        <translation>Ovo su vaše Monacoin adrese za primanje uplata. Upotrijebite dugme 'Stvori novu adresu prijema' na kartici primanja da biste kreirali nove adrese. Potpisivanje je moguće samo s adresama tipa 'legacy'.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -189,8 +189,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>Unesite staru i novu lozinku za novčanik.</translation>
     </message>
     <message>
-        <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>Imajte na umu da šifriranje vašeg novčanika ne može u potpunosti zaštititi vaše bitcoine od krađe zlonamjernim softverom koji zarazi vaš računar.</translation>
+        <source>Remember that encrypting your wallet cannot fully protect your monacoins from being stolen by malware infecting your computer.</source>
+        <translation>Imajte na umu da šifriranje vašeg novčanika ne može u potpunosti zaštititi vaše monacoine od krađe zlonamjernim softverom koji zarazi vaš računar.</translation>
     </message>
     <message>
         <source>Wallet to be encrypted</source>
@@ -359,8 +359,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>Proxy je &lt;b&gt;omogućen&lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Pošaljite kovanice na Bitcoin adresu</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation>Pošaljite kovanice na Monacoin adresu</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -395,12 +395,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>Šifrirajte privatne ključeve koji pripadaju vašem novčaniku</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Potpišite poruke sa svojim Bitcoin adresama da biste dokazali da ste njihov vlasnik</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation>Potpišite poruke sa svojim Monacoin adresama da biste dokazali da ste njihov vlasnik</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Potvrdite poruke kako biste bili sigurni da su potpisane navedenim Bitcoin adresama</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation>Potvrdite poruke kako biste bili sigurni da su potpisane navedenim Monacoin adresama</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -419,8 +419,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>Alatna traka kartica</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Zatražite uplate (generira QR kodove i bitcoin: URI-je)</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation>Zatražite uplate (generira QR kodove i monacoin: URI-je)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -475,16 +475,16 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>&amp;Učitaj PSBT iz datoteke...</translation>
     </message>
     <message>
-        <source>Load Partially Signed Bitcoin Transaction</source>
-        <translation>Učitajte Djelomično Potpisanu Bitcoin Transakciju</translation>
+        <source>Load Partially Signed Monacoin Transaction</source>
+        <translation>Učitajte Djelomično Potpisanu Monacoin Transakciju</translation>
     </message>
     <message>
         <source>Load PSBT from clipboard...</source>
         <translation>Učitaj PSBT iz međuspremnika...</translation>
     </message>
     <message>
-        <source>Load Partially Signed Bitcoin Transaction from clipboard</source>
-        <translation>Učitajte djelomično potpisanu bitcoin transakciju iz međuspremnika</translation>
+        <source>Load Partially Signed Monacoin Transaction from clipboard</source>
+        <translation>Učitajte djelomično potpisanu monacoin transakciju iz međuspremnika</translation>
     </message>
     <message>
         <source>Node window</source>
@@ -503,8 +503,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>&amp;Primanje adresa</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI</source>
-        <translation>Otvorite bitcoin: URI</translation>
+        <source>Open a monacoin: URI</source>
+        <translation>Otvorite monacoin: URI</translation>
     </message>
     <message>
         <source>Open Wallet</source>
@@ -531,8 +531,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>Zatvori sve novčanike</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation>Pokažite %1 poruku za pomoć da biste dobili listu s mogućim opcijama Bitcoin naredbenog retka</translation>
+        <source>Show the %1 help message to get a list with possible Monacoin command-line options</source>
+        <translation>Pokažite %1 poruku za pomoć da biste dobili listu s mogućim opcijama Monacoin naredbenog retka</translation>
     </message>
     <message>
         <source>&amp;Mask values</source>
@@ -910,8 +910,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>Uredite adresu za slanje</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>Unesena adresa "%1" nije važeća Bitcoin adresa.</translation>
+        <source>The entered address "%1" is not a valid Monacoin address.</source>
+        <translation>Unesena adresa "%1" nije važeća Monacoin adresa.</translation>
     </message>
     <message>
         <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
@@ -1019,8 +1019,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>Otprilike %1 GB podataka bit će pohranjeno u ovom direktoriju.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin block chain.</source>
-        <translation>%1 će preuzeti i pohraniti kopiju lanca Bitcoin blokova.</translation>
+        <source>%1 will download and store a copy of the Monacoin block chain.</source>
+        <translation>%1 će preuzeti i pohraniti kopiju lanca Monacoin blokova.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -1042,12 +1042,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>Obrazac</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation>Nedavne transakcije možda još nisu vidljive, pa stoga stanje na vašem novčaniku može biti pogrešno. Ove će informacije biti točne nakon što se novčanik završi sa sinhronizacijom s bitcoin mrežom, kao što je detaljno opisano u nastavku.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the monacoin network, as detailed below.</source>
+        <translation>Nedavne transakcije možda još nisu vidljive, pa stoga stanje na vašem novčaniku može biti pogrešno. Ove će informacije biti točne nakon što se novčanik završi sa sinhronizacijom s monacoin mrežom, kao što je detaljno opisano u nastavku.</translation>
     </message>
     <message>
-        <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Pokušaj trošenja bitcoina na koje utječu još uvijek ne prikazane transakcije mreža neće prihvatiti.</translation>
+        <source>Attempting to spend monacoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>Pokušaj trošenja monacoina na koje utječu još uvijek ne prikazane transakcije mreža neće prihvatiti.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1097,8 +1097,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
 <context>
     <name>OpenURIDialog</name>
     <message>
-        <source>Open bitcoin URI</source>
-        <translation>Otvorite bitcoin URI</translation>
+        <source>Open monacoin URI</source>
+        <translation>Otvorite monacoin URI</translation>
     </message>
     <message>
         <source>URI:</source>
@@ -1199,8 +1199,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>Ako onemogućite trošenje nepotvrđene promjene, promjena iz transakcije neće se moći koristiti dok ta transakcija nema barem jednu potvrdu. Ovo također utječe na način izračunavanja vašeg stanja.</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatski otvorite port Bitcoin klijenta na usmjerivaču. Ovo radi samo kada vaš usmjerivač podržava UPnP i ako je omogućen.</translation>
+        <source>Automatically open the Monacoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatski otvorite port Monacoin klijenta na usmjerivaču. Ovo radi samo kada vaš usmjerivač podržava UPnP i ako je omogućen.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1211,8 +1211,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>Prihvatite veze izvana.</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation>Povežite se s Bitcoin mrežom putem SOCKS5 proxyja.</translation>
+        <source>Connect to the Monacoin network through a SOCKS5 proxy.</source>
+        <translation>Povežite se s Monacoin mrežom putem SOCKS5 proxyja.</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
@@ -1266,8 +1266,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation>Obrazac</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Moguće je da su prikazane informacije zastarjele.Vaš novčanik se automatski sinhronizira sa Bitcoin mrežom nakon što je konekcija uspostavljena, ali proces nije još uvijek dovršen.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>Moguće je da su prikazane informacije zastarjele.Vaš novčanik se automatski sinhronizira sa Monacoin mrežom nakon što je konekcija uspostavljena, ali proces nije još uvijek dovršen.</translation>
     </message>
     <message>
         <source>Recent transactions</source>
@@ -1612,6 +1612,6 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     </context>
 </TS>

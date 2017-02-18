@@ -90,6 +90,10 @@
         <translation>Vhura &amp;URI</translation>
     </message>
     <message>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
+    </message>
+    <message>
         <source>&amp;Send</source>
         <translation>&amp;Tumira</translation>
     </message>
@@ -126,7 +130,7 @@
     <name>CoinControlDialog</name>
     <message>
         <source>Amount</source>
-        <translation>Marii</translation>
+        <translation>Marii </translation>
     </message>
     <message>
         <source>Date</source>
@@ -159,8 +163,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     </context>
 <context>
@@ -168,9 +172,6 @@
     </context>
 <context>
     <name>OpenURIDialog</name>
-    </context>
-<context>
-    <name>OpenWalletActivity</name>
     </context>
 <context>
     <name>OptionsDialog</name>
@@ -191,11 +192,11 @@
     <name>QObject</name>
     <message>
         <source>Amount</source>
-        <translation>Marii</translation>
+        <translation>Marii </translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>Nyora kero ye Bitcoin (sekuti %1)</translation>
+        <source>Enter a Monacoin address (e.g. %1)</source>
+        <translation>Nyora kero ye Monacoin (sekuti %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -219,8 +220,11 @@
     </message>
     <message>
         <source>N/A</source>
-        <translation>Hapana</translation>
+        <translation>Hapana </translation>
     </message>
+    </context>
+<context>
+    <name>QObject::QObject</name>
     </context>
 <context>
     <name>QRImageWidget</name>
@@ -229,7 +233,7 @@
     <name>RPCConsole</name>
     <message>
         <source>N/A</source>
-        <translation>Hapana</translation>
+        <translation>Hapana </translation>
     </message>
     </context>
 <context>
@@ -270,6 +274,9 @@
     <name>SignVerifyMessageDialog</name>
     </context>
 <context>
+    <name>SplashScreen</name>
+    </context>
+<context>
     <name>TrafficGraphWidget</name>
     </context>
 <context>
@@ -280,7 +287,7 @@
     </message>
     <message>
         <source>Amount</source>
-        <translation>Marii</translation>
+        <translation>Marii </translation>
     </message>
     </context>
 <context>
@@ -332,6 +339,14 @@
     <name>WalletView</name>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
+    <message>
+        <source>Information</source>
+        <translation>Ruzivo</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Hokoyo</translation>
+    </message>
     </context>
 </TS>

@@ -34,6 +34,10 @@
 #include <memory>
 #include <typeinfo>
 
+#if defined(NDEBUG)
+# error "Monacoin cannot be compiled without assertions."
+#endif
+
 /** Expiration time for orphan transactions in seconds */
 static constexpr int64_t ORPHAN_TX_EXPIRE_TIME = 20 * 60;
 /** Minimum time between orphan transactions expire time checks in seconds */
