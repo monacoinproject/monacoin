@@ -30,10 +30,6 @@
         <translation>सध्याचा निवडलेला पत्ता यादीमधून काढून टाका</translation>
     </message>
     <message>
-        <source>Enter address or label to search</source>
-        <translation>शोधण्यासाठी पत्ता किंवा लेबल दाखल करा</translation>
-    </message>
-    <message>
         <source>Export the data in the current tab to a file</source>
         <translation>सध्याच्या टॅबमधील डेटा एका फाईलमध्ये एक्स्पोर्ट करा</translation>
     </message>
@@ -51,7 +47,7 @@
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation>ज्या पत्त्यावर नाणी प्राप्त करायची आहेत तो</translation>
+        <translation>ज्या पत्त्यावर नाणी प्राप्त करायची आहेत तो </translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
@@ -66,12 +62,12 @@
         <translation>स्वीकृती पत्ते</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>पैसे पाठविण्यासाठीचे हे तुमचे बिटकॉईन पत्त्ते आहेत. नाणी पाठविण्यापूर्वी नेहमी रक्कम आणि प्राप्त होणारा पत्ता तपासून पहा.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
-        <translation>पैसे प्राप्त करण्यासाठीचे हे आपले बिटकॉइन पत्ते आहेत. नवीन पत्ते तयार करण्यासाठी प्राप्त टॅबमधील 'नवीन प्राप्त करण्याचा पत्ता तयार करा' बटण वापरा.</translation>
+        <source>These are your Monacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>पैसे प्राप्त करण्यासाठीचे हे तुमचे बिटकॉईन पत्त्ते आहेत. प्रत्येक व्यवहारासाठी एक नवा स्वीकृती पत्ता वापरण्याची शिफारस सहसा केली जाते.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -85,30 +81,10 @@
         <source>&amp;Edit</source>
         <translation>&amp;संपादित</translation>
     </message>
-    <message>
-        <source>Export Address List</source>
-        <translation>पत्त्याची निर्यात करा</translation>
-    </message>
-    <message>
-        <source>Exporting Failed</source>
-        <translation>निर्यात अयशस्वी</translation>
-    </message>
     </context>
 <context>
     <name>AddressTableModel</name>
-    <message>
-        <source>Label</source>
-        <translation>लेबल</translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation>पत्ता</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(लेबल नाही)</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>AskPassphraseDialog</name>
     </context>
@@ -116,20 +92,10 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     </context>
 <context>
     <name>CoinControlDialog</name>
-    <message>
-        <source>(no label)</source>
-        <translation>(लेबल नाही)</translation>
-    </message>
-    </context>
-<context>
-    <name>CreateWalletActivity</name>
-    </context>
-<context>
-    <name>CreateWalletDialog</name>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -150,9 +116,6 @@
     <name>OpenURIDialog</name>
     </context>
 <context>
-    <name>OpenWalletActivity</name>
-    </context>
-<context>
     <name>OptionsDialog</name>
     </context>
 <context>
@@ -168,6 +131,9 @@
     <name>QObject</name>
     </context>
 <context>
+    <name>QObject::QObject</name>
+    </context>
+<context>
     <name>QRImageWidget</name>
     </context>
 <context>
@@ -178,33 +144,13 @@
     </context>
 <context>
     <name>ReceiveRequestDialog</name>
-    <message>
-        <source>Address</source>
-        <translation>पत्ता</translation>
-    </message>
-    <message>
-        <source>Label</source>
-        <translation>लेबल</translation>
-    </message>
     </context>
 <context>
     <name>RecentRequestsTableModel</name>
-    <message>
-        <source>Label</source>
-        <translation>लेबल</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(लेबल नाही)</translation>
-    </message>
     </context>
 <context>
     <name>SendCoinsDialog</name>
-    <message>
-        <source>(no label)</source>
-        <translation>(लेबल नाही)</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>SendCoinsEntry</name>
     </context>
@@ -213,6 +159,9 @@
     </context>
 <context>
     <name>SignVerifyMessageDialog</name>
+    </context>
+<context>
+    <name>SplashScreen</name>
     </context>
 <context>
     <name>TrafficGraphWidget</name>
@@ -225,29 +174,9 @@
     </context>
 <context>
     <name>TransactionTableModel</name>
-    <message>
-        <source>Label</source>
-        <translation>लेबल</translation>
-    </message>
-    <message>
-        <source>(no label)</source>
-        <translation>(लेबल नाही)</translation>
-    </message>
     </context>
 <context>
     <name>TransactionView</name>
-    <message>
-        <source>Label</source>
-        <translation>लेबल</translation>
-    </message>
-    <message>
-        <source>Address</source>
-        <translation>पत्ता</translation>
-    </message>
-    <message>
-        <source>Exporting Failed</source>
-        <translation>निर्यात अयशस्वी</translation>
-    </message>
     </context>
 <context>
     <name>UnitDisplayStatusBarControl</name>
@@ -265,7 +194,7 @@
     <name>WalletView</name>
     <message>
         <source>&amp;Export</source>
-        <translation>&amp;एक्स्पोर्ट</translation>
+        <translation>&amp;</translation>
     </message>
     <message>
         <source>Export the data in the current tab to a file</source>
@@ -273,6 +202,6 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     </context>
 </TS>
