@@ -187,8 +187,8 @@ public:
         consensus.nPowTargetTimespanDigisheld = 1.5 * 60;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
-        consensus.nRuleChangeActivationThreshold = 1500; // 75% for testchains
-        consensus.nMinerConfirmationWindow = 2000; // nPowTargetTimespan / nPowTargetSpacing
+        consensus.nRuleChangeActivationThreshold = 75; // 75% for testchains
+        consensus.nMinerConfirmationWindow = 100; // nPowTargetTimespan / nPowTargetSpacing
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
@@ -207,9 +207,9 @@ public:
         consensus.nMinimumChainWork = uint256S("0x0");
 
         // Hardfork params
-        nSwitchKGWblock = 80000;
-        nSwitchDIGIblock = 140000;
-        nSwitchLyra2REv2_DGW = 450000;
+        nSwitchKGWblock = 10;
+        nSwitchDIGIblock = 20;
+        nSwitchLyra2REv2_DGW = 30;
 
         pchMessageStart[0] = 0xfc;
         pchMessageStart[1] = 0xc1;
