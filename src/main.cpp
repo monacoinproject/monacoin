@@ -1711,11 +1711,6 @@ bool ReadBlockFromDisk(CBlock& block, const CDiskBlockPos& pos, const Consensus:
 
     // Check the header
     if (!CheckProofOfWork(block.GetPoWHash(height >= Params().SwitchLyra2REv2_DGW()), block.nBits, consensusParams)){
-        if(height == int32_max){
-            if (CheckProofOfWork(block.GetPoWHash(), block.nBits, consensusParams)){
-                return true;
-            }
-        }
         return error("ReadBlockFromDisk: Errors in block header at %s", pos.ToString());
     }
 
@@ -4507,7 +4502,9 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, CDiskB
                     std::pair<std::multimap<uint256, CDiskBlockPos>::iterator, std::multimap<uint256, CDiskBlockPos>::iterator> range = mapBlocksUnknownParent.equal_range(head);
                     while (range.first != range.second) {
                         std::multimap<uint256, CDiskBlockPos>::iterator it = range.first;
-                        if (ReadBlockFromDisk(block, it->second, chainparams.GetConsensus(), int32_max))
+                        uint256 hash = block.GetHash();
+                        int nHeight = mapBlockIndex[hash]->nHeight;
+                        if (ReadBlockFromDisk(block, it->second, chainparams.GetConsensus(), nHeight))
                         {
                             LogPrint("reindex", "%s: Processing out of order child %s of %s\n", __func__, block.GetHash().ToString(),
                                     head.ToString());
