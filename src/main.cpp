@@ -3610,13 +3610,13 @@ bool ContextualCheckBlock(CBlock& block, CValidationState& state, CBlockIndex * 
     {
         if (consensusParams.BIP34Height != -1)
         {
-            // Mainnet 710k, Testnet 400k
+            // Mainnet 710k
             if (nHeight >= consensusParams.BIP34Height)
                 checkHeightMismatch = true;
         }
         else
         {
-            // Regtest and Unittest: use Bitcoin's supermajority rule
+            // Regtest and Testnet: use Bitcoin's supermajority rule
             if (IsSuperMajority(2, pindexPrev, consensusParams.nMajorityRejectBlockOutdated, consensusParams))
                 checkHeightMismatch = true;
         }
