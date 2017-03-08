@@ -244,20 +244,14 @@ class SegWitTest(BitcoinTestFramework):
         assert(tmpl['transactions'][0]['txid'] == txid)
         assert(tmpl['transactions'][0]['sigops'] == 8)
 
-        print("Verify non-segwit miners get a valid GBT response after the fork")
-        send_to_witness(1, self.nodes[0], find_unspent(self.nodes[0], 50), self.pubkey[0], False, Decimal("49.998"))
-        try:
-            tmpl = self.nodes[0].getblocktemplate({})
-            assert(len(tmpl['transactions']) == 1)  # Doesn't include witness tx
-            assert(tmpl['sigoplimit'] == 20000)
-            assert(tmpl['transactions'][0]['hash'] == txid)
-            assert(tmpl['transactions'][0]['sigops'] == 2)
-            assert(('!segwit' in tmpl['rules']) or ('segwit' not in tmpl['rules']))
-        except JSONRPCException:
-            # This is an acceptable outcome
-            pass
+        self.log.info("Non-segwit miners are able to use GBT response after activation.")
+        txid = send_to_witness(1, self.nodes[0], find_unspent(self.nodes[0], 50), self.pubkey[0], False, Decimal("49.998"))
+        #assert_raises_jsonrpc(-8, "Support for 'segwit' rule requires explicit client support", self.nodes[0].getblocktemplate, {})
+        tmpl = self.nodes[0].getblocktemplate()
+        # TODO: add a transaction with witness to mempool, and verify it's not
+        # selected for mining.
 
-        print("Verify behaviour of importaddress, addwitnessaddress and listunspent")
+        self.log.info("Verify behaviour of importaddress, addwitnessaddress and listunspent")
 
         # Some public keys to be used later
         pubkeys = [
