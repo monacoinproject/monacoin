@@ -45,6 +45,10 @@ Monacoin Core now supports P2SH addresses beginning with P on mainnet and p on t
 P2SH addresses beginning with 3 on mainnet and m or n on testnet will continue to be valid.
 Old and new addresses can be used interchangeably.
 
+Reset Testnet
+-------------
+Testnet3 has been deprecated and replace with Testnet4.
+
 Credits
 =======
 
