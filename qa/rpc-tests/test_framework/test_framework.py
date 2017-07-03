@@ -104,11 +104,11 @@ class BitcoinTestFramework(object):
 
         parser = optparse.OptionParser(usage="%prog [options]")
         parser.add_option("--nocleanup", dest="nocleanup", default=False, action="store_true",
-                          help="Leave litecoinds and test.* datadir on exit or error")
+                          help="Leave monacoinds and test.* datadir on exit or error")
         parser.add_option("--noshutdown", dest="noshutdown", default=False, action="store_true",
-                          help="Don't stop litecoinds after the test execution")
+                          help="Don't stop monacoinds after the test execution")
         parser.add_option("--srcdir", dest="srcdir", default=os.path.normpath(os.path.dirname(os.path.realpath(__file__))+"/../../../src"),
-                          help="Source directory containing litecoind/litecoin-cli (default: %default)")
+                          help="Source directory containing monacoind/monacoin-cli (default: %default)")
         parser.add_option("--cachedir", dest="cachedir", default=os.path.normpath(os.path.dirname(os.path.realpath(__file__))+"/../../cache"),
                           help="Directory for caching pregenerated datadirs")
         parser.add_option("--tmpdir", dest="tmpdir", default=tempfile.mkdtemp(prefix="test"),
@@ -163,7 +163,7 @@ class BitcoinTestFramework(object):
             print("Stopping nodes")
             stop_nodes(self.nodes)
         else:
-            print("Note: litecoinds were not stopped and may still be running")
+            print("Note: monacoinds were not stopped and may still be running")
 
         if not self.options.nocleanup and not self.options.noshutdown and success:
             print("Cleaning up")
@@ -205,11 +205,11 @@ class ComparisonTestFramework(BitcoinTestFramework):
 
     def add_options(self, parser):
         parser.add_option("--testbinary", dest="testbinary",
-                          default=os.getenv("LITECOIND", "litecoind"),
-                          help="litecoind binary to test")
+                          default=os.getenv("MONACOIND", "monacoind"),
+                          help="monacoind binary to test")
         parser.add_option("--refbinary", dest="refbinary",
-                          default=os.getenv("LITECOIND", "litecoind"),
-                          help="litecoind binary to use for reference nodes (if any)")
+                          default=os.getenv("MONACOIND", "monacoind"),
+                          help="monacoind binary to use for reference nodes (if any)")
 
     def setup_network(self):
         self.nodes = start_nodes(
