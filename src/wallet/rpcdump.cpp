@@ -148,7 +148,7 @@ UniValue importprivkey(const JSONRPCRequest& request)
         }
 
         CBitcoinSecret vchSecret;
-        bool fGood = vchSecret.SetString(strSecret);
+        bool fGood = vchSecret.SetString(strSecret, true);
 
         if (!fGood) throw JSONRPCError(RPC_INVALID_ADDRESS_OR_KEY, "Invalid private key encoding");
 
