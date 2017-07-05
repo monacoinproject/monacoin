@@ -82,6 +82,7 @@ public:
     const ChainTxData& TxData() const { return chainTxData; }
 
     int SwitchKGWblock() const { return nSwitchKGWblock; }
+    int SwitchDIGIblock() const { return nSwitchDIGIblock; }
 
 protected:
     CChainParams() {}
@@ -103,6 +104,7 @@ protected:
     ChainTxData chainTxData;
 
     int nSwitchKGWblock;
+    int nSwitchDIGIblock;
 };
 
 /**
