@@ -34,7 +34,7 @@ if not (sys.version_info.major >= 3 and sys.version_info.minor >= 5):
     print("This example only works with Python 3.5 and greater")
     exit(1)
 
-port = 28332
+port = 29402
 
 class ZMQHandler():
     def __init__(self):
