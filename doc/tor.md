@@ -43,7 +43,7 @@ config file):
 
 	HiddenServiceDir /var/lib/tor/monacoin-service/
 	HiddenServicePort 9401 127.0.0.1:9401
-	HiddenServicePort 19401 127.0.0.1:19401
+	HiddenServicePort 19403 127.0.0.1:19403
 
 The directory can be different of course, but (both) port numbers should be equal to
 your monacoind's P2P listen port (9401 by default).
