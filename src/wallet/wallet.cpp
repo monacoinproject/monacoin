@@ -4126,6 +4126,11 @@ bool CWallet::BackupWallet(const std::string& strDest)
     return dbw->Backup(strDest);
 }
 
+std::string CWallet::GetWalletFileName()
+{
+    return gArgs.GetArg("-wallet", DEFAULT_WALLET_DAT);
+}
+
 CKeyPool::CKeyPool()
 {
     nTime = GetTime();

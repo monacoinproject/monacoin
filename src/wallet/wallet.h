@@ -1168,6 +1168,8 @@ public:
      * This function will automatically add the necessary scripts to the wallet.
      */
     CTxDestination AddAndGetDestinationForScript(const CScript& script, OutputType);
+
+    static std::string GetWalletFileName();
 };
 
 /** A key allocated from the key pool. */
