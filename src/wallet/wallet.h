@@ -993,6 +993,8 @@ public:
     
     /* Set the current HD master key (will reset the chain child index counters) */
     bool SetHDMasterKey(const CPubKey& key);
+
+    static std::string GetWalletFileName();
 };
 
 /** A key allocated from the key pool. */

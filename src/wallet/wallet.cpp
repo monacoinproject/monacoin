@@ -3918,6 +3918,11 @@ bool CWallet::BackupWallet(const std::string& strDest)
     return false;
 }
 
+std::string CWallet::GetWalletFileName()
+{
+    return GetArg("-wallet", DEFAULT_WALLET_DAT);
+}
+
 CKeyPool::CKeyPool()
 {
     nTime = GetTime();
