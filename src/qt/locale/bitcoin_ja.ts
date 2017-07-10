@@ -234,6 +234,19 @@
 <context>
     <name>BitcoinGUI</name>
     <message>
+        <source>Show Automatic &amp;Backups</source>
+        <translation>自動バックアップのフォルダを開く</translation>
+    </message>
+    <message>
+        <source>Show automatically created wallet backups</source>
+        <translation>自動的にバックアップされたウォレットデータのフォルダを開きます</translation>
+    </message>
+
+    <message>
+        <source>&amp;Tools</source>
+        <translation>ツール</translation>
+    </message>
+    <message>
         <source>Sign &amp;message...</source>
         <translation>メッセージの署名... (&amp;m)</translation>
     </message>

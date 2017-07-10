@@ -116,6 +116,9 @@ namespace GUIUtil
     // Open the config file
     bool openBitcoinConf();
 
+    // Browse backup folder
+    void showBackups();
+
     // Replace invalid default fonts with known good ones
     void SubstituteFonts(const QString& language);
 

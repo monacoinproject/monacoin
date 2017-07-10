@@ -1132,6 +1132,8 @@ public:
        caller must ensure the current wallet version is correct before calling
        this function). */
     bool SetHDMasterKey(const CPubKey& key);
+
+    static std::string GetWalletFileName();
 };
 
 /** A key allocated from the key pool. */
