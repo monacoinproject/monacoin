@@ -29,7 +29,7 @@ Notable changes
 New Multisig Address Prefix
 ---------------------------
 
-Monacoin Core now supports P2SH addresses beginning with M on mainnet and Q on testnet.
+Monacoin Core now supports P2SH addresses beginning with P on mainnet and p on testnet.
 P2SH addresses beginning with 3 on mainnet and m or n on testnet will continue to be valid.
 Old and new addresses can be used interchangeably.
 
@@ -197,15 +197,6 @@ to a `mempool.dat` file. This file preserves the mempool so that when the node
 restarts the mempool can be filled with transactions without waiting for new transactions
 to be created. This will also preserve any changes made to a transaction through
 commands such as `prioritisetransaction` so that those changes will not be lost.
-
-Final Alert
------------
-
-The Alert System was disabled and deprecated in Monacoin Core 0.10.4 and removed in 0.13.2. 
-The Alert System was retired with a maximum sequence final alert which causes any nodes
-supporting the Alert System to display a static hard-coded "Alert Key Compromised" message which also
-prevents any other alerts from overriding it. This final alert is hard-coded into this release
-so that all old nodes receive the final alert.
 
 GUI Changes
 -----------
