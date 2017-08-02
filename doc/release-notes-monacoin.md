@@ -116,7 +116,7 @@ ZMQ On Windows
 
 Previously the ZeroMQ notification system was unavailable on Windows
 due to various issues with ZMQ. These have been fixed upstream and
-now ZMQ can be used on Windows. Please see [this document](https://github.com/monacoinproject/monacoin/blob/master/doc/zmq.md) for
+now ZMQ can be used on Windows. Please see [this document](https://github.com/monacoinproject/monacoin/blob/master-0.14/doc/zmq.md) for
 help with using ZMQ in general.
 
 Nested RPC Commands in Debug Console
