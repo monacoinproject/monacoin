@@ -37,7 +37,7 @@ class BumpFeeTest(BitcoinTestFramework):
                            for i in range(self.num_nodes)]
 
     def run_test(self):
-        raise SkipTest("Litecoin doesn't support RBF.")
+        raise SkipTest("Monacoin doesn't support RBF.")
 
         # Encrypt wallet for test_locked_wallet_fails test
         self.nodes[1].node_encrypt_wallet(WALLET_PASSPHRASE)

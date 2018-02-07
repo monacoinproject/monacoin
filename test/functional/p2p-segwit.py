@@ -956,7 +956,7 @@ class SegWitTest(BitcoinTestFramework):
         assert(self.test_node.last_message["getdata"].inv[0].type == blocktype)
         self.test_node.test_witness_block(block1, True)
 
-        # Litecoin: Blocks with nVersion < VB_TOP_BITS are rejected
+        # Monacoin: Blocks with nVersion < VB_TOP_BITS are rejected
 
         # self.test_node.announce_block_and_wait_for_getdata(block2, use_header=True)
         # assert(self.test_node.last_message["getdata"].inv[0].type == blocktype)
@@ -1013,7 +1013,7 @@ class SegWitTest(BitcoinTestFramework):
             assert_equal(rpc_details["weight"], weight)
 
             # Upgraded node should not ask for blocks from unupgraded
-            # Litecoin: Blocks with nVersion < VB_TOP_BITS are rejected
+            # Monacoin: Blocks with nVersion < VB_TOP_BITS are rejected
             block4 = self.build_next_block(nVersion=(VB_TOP_BITS | (1<<15)))
             block4.solve()
             self.old_node.getdataset = set()
@@ -1947,7 +1947,7 @@ class SegWitTest(BitcoinTestFramework):
         self.test_premature_coinbase_witness_spend()
         self.test_uncompressed_pubkey()
         self.test_signature_version_1()
-        # Litecoin: Disable test due to occasional travis issue
+        # Monacoin: Disable test due to occasional travis issue
         #self.test_non_standard_witness()
         sync_blocks(self.nodes)
         self.test_upgrade_after_activation(node_id=2)
