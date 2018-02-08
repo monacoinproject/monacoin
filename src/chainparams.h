@@ -80,6 +80,7 @@ public:
     const CCheckpointData& Checkpoints() const { return checkpointData; }
     const ChainTxData& TxData() const { return chainTxData; }
     void UpdateVersionBitsParameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout);
+    int SwitchKGWblock() const { return nSwitchKGWblock; }
 protected:
     CChainParams() {}
 
@@ -97,6 +98,8 @@ protected:
     bool fMineBlocksOnDemand;
     CCheckpointData checkpointData;
     ChainTxData chainTxData;
+
+    int nSwitchKGWblock;
 };
 
 /**
