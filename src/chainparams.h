@@ -79,6 +79,7 @@ public:
 
     int SwitchKGWblock() const { return nSwitchKGWblock; }
     int SwitchDIGIblock() const { return nSwitchDIGIblock; }
+    int SwitchLyra2REv2block() const { return nSwitchLyra2REv2; }
 
 protected:
     CChainParams() {}
@@ -101,6 +102,7 @@ protected:
 
     int nSwitchKGWblock;
     int nSwitchDIGIblock;
+    int nSwitchLyra2REv2;
 };
 
 /**
