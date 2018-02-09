@@ -1,6 +1,6 @@
 Monacoin Core version *0.15.1* is now available from:
 
-  <https://download.monacoin.org/monacoin-0.15.1/>
+  <https://download.monacoin.org/>
 
 This is a new minor version release, including various bugfixes and
 performance improvements, as well as updated translations.
@@ -11,7 +11,7 @@ Please report bugs using the issue tracker at GitHub:
 
 To receive security and update notifications, please subscribe to:
 
-  <https://groups.google.com/forum/#!forum/monacoin-dev>
+  <:P>
 
 How to Upgrade
 ==============
