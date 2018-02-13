@@ -201,7 +201,7 @@ class SegWitTest(BitcoinTestFramework):
 
     # Helper functions
 
-    def build_next_block(self, nVersion=VB_TOP_BITS):
+    def build_next_block(self, version=VB_TOP_BITS):
         """Build a block on top of node0's tip."""
         tip = self.nodes[0].getbestblockhash()
         height = self.nodes[0].getblockcount() + 1
@@ -377,7 +377,8 @@ class SegWitTest(BitcoinTestFramework):
         assert(self.test_node.last_message["getdata"].inv[0].type == blocktype)
         test_witness_block(self.nodes[0], self.test_node, block1, True)
 
-        block2 = self.build_next_block(version=4)
+
+        block2 = self.build_next_block()
         block2.solve()
 
         self.test_node.announce_block_and_wait_for_getdata(block2, use_header=True)
@@ -528,7 +529,8 @@ class SegWitTest(BitcoinTestFramework):
             # 'non-mandatory-script-verify-flag (Witness program was passed an
             # empty witness)' (otherwise).
             # TODO: support multiple acceptable reject reasons.
-            test_witness_block(self.nodes[0], self.test_node, block, accepted=False, with_witness=False)
+            # Litecoin: SCRIPT_VERIFY_WITNESS is enforced when segwit is activated
+            test_witness_block(self.nodes[0], self.test_node, block, accepted=True, with_witness=False)
 
         connect_nodes(self.nodes[0], 2)
 
@@ -1923,10 +1925,10 @@ class SegWitTest(BitcoinTestFramework):
         """Test the behavior of starting up a segwit-aware node after the softfork has activated."""
 
         print ("\tTesting rejection of block.nVersion < BIP9_TOP_BITS blocks")
-        block = self.build_next_block(nVersion=4)
+        block = self.build_next_block(version=4)
         block.solve()
         resp = self.nodes[0].submitblock(bytes_to_hex_str(block.serialize(True)))
-        assert_equal(resp, 'bad-version(0x00000004)')
+        assert_equal(resp, 'invalid')
 
         # Restart with the new binary
         self.stop_node(2)

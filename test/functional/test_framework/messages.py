@@ -27,11 +27,12 @@ import socket
 import struct
 import time
 
+import litecoin_scrypt
 from test_framework.siphash import siphash256
 from test_framework.util import hex_str_to_bytes, bytes_to_hex_str, assert_equal
 
 MIN_VERSION_SUPPORTED = 60001
-MY_VERSION = 70014  # past bip-31 for ping/pong
+MY_VERSION = 80014  # past bip-31 for ping/pong
 MY_SUBVERSION = b"/python-mininode-tester:0.0.3/"
 MY_RELAY = 1 # from version 70001 onwards, fRelay should be appended to version messages (BIP37)
 
@@ -537,6 +538,7 @@ class CBlockHeader:
             self.nNonce = header.nNonce
             self.sha256 = header.sha256
             self.hash = header.hash
+            self.scrypt256 = header.scrypt256
             self.calc_sha256()
 
     def set_null(self):
@@ -548,6 +550,7 @@ class CBlockHeader:
         self.nNonce = 0
         self.sha256 = None
         self.hash = None
+        self.scrypt256 = None
 
     def deserialize(self, f):
         self.nVersion = struct.unpack("<i", f.read(4))[0]
@@ -558,6 +561,7 @@ class CBlockHeader:
         self.nNonce = struct.unpack("<I", f.read(4))[0]
         self.sha256 = None
         self.hash = None
+        self.scrypt256 = None
 
     def serialize(self):
         r = b""
@@ -580,9 +584,11 @@ class CBlockHeader:
             r += struct.pack("<I", self.nNonce)
             self.sha256 = uint256_from_str(hash256(r))
             self.hash = encode(hash256(r)[::-1], 'hex_codec').decode('ascii')
+            self.scrypt256 = uint256_from_str(litecoin_scrypt.getPoWHash(r))
 
     def rehash(self):
         self.sha256 = None
+        self.scrypt256 = None
         self.calc_sha256()
         return self.sha256
 
@@ -646,7 +652,7 @@ class CBlock(CBlockHeader):
     def is_valid(self):
         self.calc_sha256()
         target = uint256_from_compact(self.nBits)
-        if self.sha256 > target:
+        if self.scrypt256 > target:
             return False
         for tx in self.vtx:
             if not tx.is_valid():
@@ -658,7 +664,7 @@ class CBlock(CBlockHeader):
     def solve(self):
         self.rehash()
         target = uint256_from_compact(self.nBits)
-        while self.sha256 > target:
+        while self.scrypt256 > target:
             self.nNonce += 1
             self.rehash()
 
