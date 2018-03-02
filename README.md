@@ -1,4 +1,4 @@
-yayyay
+test
 Monacoin Core integration/staging tree
 =====================================
 
