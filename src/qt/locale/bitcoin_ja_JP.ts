@@ -624,7 +624,7 @@
     </message>
     <message>
         <source>Copy amount</source>
-        <translation>総額のコピー</translation>
+        <translation>総額をコピーする</translation>
     </message>
     <message>
         <source>Copy transaction ID</source>
@@ -660,7 +660,7 @@
     </message>
     <message>
         <source>Copy change</source>
-        <translation>釣り銭をコピー</translation>
+        <translation>釣り銭をコピーする</translation>
     </message>
     <message>
         <source>(%1 locked)</source>
@@ -1805,7 +1805,7 @@
     </message>
     <message>
         <source>Copy amount</source>
-        <translation>総額のコピー</translation>
+        <translation>総額をコピーする</translation>
     </message>
 </context>
 <context>
@@ -2034,7 +2034,7 @@
     </message>
     <message>
         <source>Copy amount</source>
-        <translation>総額のコピーする</translation>
+        <translation>総額をコピーする</translation>
     </message>
     <message>
         <source>Copy fee</source>
