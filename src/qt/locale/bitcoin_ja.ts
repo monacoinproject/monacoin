@@ -1046,7 +1046,7 @@
     </message>
     <message>
         <source>Expert</source>
-        <translation>エクスポート</translation>
+        <translation>上級者向け</translation>
     </message>
     <message>
         <source>Enable coin &amp;control features</source>
@@ -1269,7 +1269,7 @@
     </message>
     <message>
         <source>Mined balance in watch-only addresses that has not yet matured</source>
-        <translation>ウォッチオンリーアドレスの採掘された残高のうち、成熟していないもの</translation>
+        <translation>監視限定アドレスの採掘された残高のうち、成熟していないもの</translation>
     </message>
     <message>
         <source>Current total balance in watch-only addresses</source>
@@ -1292,7 +1292,7 @@
     </message>
     <message>
         <source>Payment request fetch URL is invalid: %1</source>
-        <translation>支払い要求の取得先URLが無効です: %1</translation>
+        <translation>支払いリクエストの取得先URLが無効です: %1</translation>
     </message>
     <message>
         <source>Invalid payment address %1</source>
@@ -1312,7 +1312,7 @@
     </message>
     <message>
         <source>Payment request rejected</source>
-        <translation>支払い要求は拒否されました</translation>
+        <translation>支払いリクエストは拒否されました</translation>
     </message>
     <message>
         <source>Payment request network doesn't match client network.</source>
@@ -1336,7 +1336,7 @@
     </message>
     <message>
         <source>Requested payment amount of %1 is too small (considered dust).</source>
-        <translation>要求された支払額 %1 は少なすぎます (ダストとみなされてしまいます)。</translation>
+        <translation>支払リクエスト %1 は少なすぎます (ダストとみなされてしまいます)。</translation>
     </message>
     <message>
         <source>Refund from %1</source>
@@ -1348,7 +1348,7 @@
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
-        <translation>%1: %2とコミュニケーション・エラーです</translation>
+        <translation>%1: %2と通信エラーです</translation>
     </message>
     <message>
         <source>Payment request cannot be parsed!</source>
@@ -1356,11 +1356,11 @@
     </message>
     <message>
         <source>Bad response from server %1</source>
-        <translation>サーバーの返事は無効 %1</translation>
+        <translation>サーバーの応答が無効 %1</translation>
     </message>
     <message>
         <source>Network request error</source>
-        <translation>ネットワーク・リクエストのエラーです</translation>
+        <translation>ネットワーク要求エラーです</translation>
     </message>
     <message>
         <source>Payment acknowledged</source>
@@ -1402,11 +1402,11 @@
     </message>
     <message>
         <source>%1 h</source>
-        <translation>%1 h</translation>
+        <translation>%1時間</translation>
     </message>
     <message>
         <source>%1 m</source>
-        <translation>%1 m</translation>
+        <translation>%1分</translation>
     </message>
     <message>
         <source>%1 s</source>
@@ -1655,7 +1655,7 @@
     </message>
     <message>
         <source>Time Offset</source>
-        <translation>時間オフセット</translation>
+        <translation>タイムオフセット</translation>
     </message>
     <message>
         <source>Last block time</source>
@@ -2119,7 +2119,7 @@
     </message>
     <message>
         <source>Copy amount</source>
-        <translation>総額のコピー</translation>
+        <translation>総額のコピーする</translation>
     </message>
     <message>
         <source>Copy fee</source>
@@ -2139,7 +2139,7 @@
     </message>
     <message>
         <source>Copy change</source>
-        <translation>釣り銭をコピー</translation>
+        <translation>釣り銭をコピーする</translation>
     </message>
     <message>
         <source>%1 to %2</source>
