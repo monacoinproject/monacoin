@@ -46,8 +46,8 @@ def keyhash_to_p2pkh(hash, main = False):
     return byte_to_base58(hash, version)
 
 def scripthash_to_p2sh(hash, main = False):
-    assert len(hash) == 20
-    version = 5 if main else 196
+    assert (len(hash) == 20)
+    version = 5 if main else 58
     return byte_to_base58(hash, version)
 
 def key_to_p2pkh(key, main = False):
