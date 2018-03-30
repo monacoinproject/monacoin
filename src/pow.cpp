@@ -158,6 +158,9 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
     if (pindexLast == NULL)
         return nProofOfWorkLimit;
 
+    if (params.fPowNoRetargeting)
+        return pindexLast->nBits;
+
     if(pindexLast->nHeight+1 >= Params().SwitchLyra2REv2_DGWblock())
     {
         // DGWv3
