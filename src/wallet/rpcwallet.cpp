@@ -31,6 +31,7 @@
 
 #include <univalue.h>
 
+static int DEFAULT_MIN_DEPTH = 10;
 static const std::string WALLET_ENDPOINT_BASE = "/wallet/";
 
 CWallet *GetWalletForJSONRPCRequest(const JSONRPCRequest& request)
@@ -620,7 +621,7 @@ UniValue getreceivedbyaddress(const JSONRPCRequest& request)
             "\nReturns the total amount received by the given address in transactions with at least minconf confirmations.\n"
             "\nArguments:\n"
             "1. \"address\"         (string, required) The monacoin address for transactions.\n"
-            "2. minconf             (numeric, optional, default=1) Only include transactions confirmed at least this many times.\n"
+            "2. minconf             (numeric, optional, default=" + DEFAULT_MIN_DEPTH + ") Only include transactions confirmed at least this many times.\n"
             "\nResult:\n"
             "amount   (numeric) The total amount in " + CURRENCY_UNIT + " received at this address.\n"
             "\nExamples:\n"
@@ -646,7 +647,7 @@ UniValue getreceivedbyaddress(const JSONRPCRequest& request)
     }
 
     // Minimum confirmations
-    int nMinDepth = 1;
+    int nMinDepth = DEFAULT_MIN_DEPTH;
     if (!request.params[1].isNull())
         nMinDepth = request.params[1].get_int();
 
@@ -680,7 +681,7 @@ UniValue getreceivedbyaccount(const JSONRPCRequest& request)
             "\nDEPRECATED. Returns the total amount received by addresses with <account> in transactions with at least [minconf] confirmations.\n"
             "\nArguments:\n"
             "1. \"account\"      (string, required) The selected account, may be the default account using \"\".\n"
-            "2. minconf          (numeric, optional, default=1) Only include transactions confirmed at least this many times.\n"
+            "2. minconf          (numeric, optional, default=" + DEFAULT_MIN_DEPTH + ") Only include transactions confirmed at least this many times.\n"
             "\nResult:\n"
             "amount              (numeric) The total amount in " + CURRENCY_UNIT + " received for this account.\n"
             "\nExamples:\n"
@@ -697,7 +698,7 @@ UniValue getreceivedbyaccount(const JSONRPCRequest& request)
     LOCK2(cs_main, pwallet->cs_wallet);
 
     // Minimum confirmations
-    int nMinDepth = 1;
+    int nMinDepth = DEFAULT_MIN_DEPTH;
     if (!request.params[1].isNull())
         nMinDepth = request.params[1].get_int();
 
@@ -753,7 +754,7 @@ UniValue getbalance(const JSONRPCRequest& request)
             "                     balances. In general, account balance calculation is not considered\n"
             "                     reliable and has resulted in confusing outcomes, so it is recommended to\n"
             "                     avoid passing this argument.\n"
-            "2. minconf           (numeric, optional, default=1) Only include transactions confirmed at least this many times.\n"
+            "2. minconf           (numeric, optional, default=" + DEFAULT_MIN_DEPTH + ") Only include transactions confirmed at least this many times.\n"
             "3. include_watchonly (bool, optional, default=false) Also include balance in watch-only addresses (see 'importaddress')\n"
             "\nResult:\n"
             "amount              (numeric) The total amount in " + CURRENCY_UNIT + " received for this account.\n"
@@ -774,7 +775,7 @@ UniValue getbalance(const JSONRPCRequest& request)
     const std::string& account_param = request.params[0].get_str();
     const std::string* account = account_param != "*" ? &account_param : nullptr;
 
-    int nMinDepth = 1;
+    int nMinDepth = DEFAULT_MIN_DEPTH;
     if (!request.params[1].isNull())
         nMinDepth = request.params[1].get_int();
     isminefilter filter = ISMINE_SPENDABLE;
@@ -872,7 +873,7 @@ UniValue sendfrom(const JSONRPCRequest& request)
             "                       the spend.\n"
             "2. \"toaddress\"         (string, required) The monacoin address to send funds to.\n"
             "3. amount                (numeric or string, required) The amount in " + CURRENCY_UNIT + " (transaction fee is added on top).\n"
-            "4. minconf               (numeric, optional, default=1) Only use funds with at least this many confirmations.\n"
+            "4. minconf               (numeric, optional, default=" + DEFAULT_MIN_DEPTH + ") Only use funds with at least this many confirmations.\n"
             "5. \"comment\"           (string, optional) A comment used to store what the transaction is for. \n"
             "                                     This is not part of the transaction, just kept in your wallet.\n"
             "6. \"comment_to\"        (string, optional) An optional comment to store the name of the person or organization \n"
@@ -898,7 +899,7 @@ UniValue sendfrom(const JSONRPCRequest& request)
     CAmount nAmount = AmountFromValue(request.params[2]);
     if (nAmount <= 0)
         throw JSONRPCError(RPC_TYPE_ERROR, "Invalid amount for send");
-    int nMinDepth = 1;
+    int nMinDepth = DEFAULT_MIN_DEPTH;
     if (request.params.size() > 3)
         nMinDepth = request.params[3].get_int();
 
@@ -942,7 +943,7 @@ UniValue sendmany(const JSONRPCRequest& request)
             "      \"address\":amount   (numeric or string) The monacoin address is the key, the numeric amount (can be string) in " + CURRENCY_UNIT + " is the value\n"
             "      ,...\n"
             "    }\n"
-            "3. minconf                 (numeric, optional, default=1) Only use the balance confirmed at least this many times.\n"
+            "3. minconf                 (numeric, optional, default=" + DEFAULT_MIN_DEPTH + ") Only use the balance confirmed at least this many times.\n"
             "4. \"comment\"             (string, optional) A comment\n"
             "5. subtractfeefrom         (array, optional) A json array with addresses.\n"
             "                           The fee will be equally deducted from the amount of each selected address.\n"
@@ -980,7 +981,7 @@ UniValue sendmany(const JSONRPCRequest& request)
 
     std::string strAccount = AccountFromValue(request.params[0]);
     UniValue sendTo = request.params[1].get_obj();
-    int nMinDepth = 1;
+    int nMinDepth = DEFAULT_MIN_DEPTH;
     if (!request.params[2].isNull())
         nMinDepth = request.params[2].get_int();
 
@@ -1235,7 +1236,7 @@ struct tallyitem
 UniValue ListReceived(CWallet * const pwallet, const UniValue& params, bool fByAccounts)
 {
     // Minimum confirmations
-    int nMinDepth = 1;
+    int nMinDepth = DEFAULT_MIN_DEPTH;
     if (!params[0].isNull())
         nMinDepth = params[0].get_int();
 
@@ -1362,7 +1363,7 @@ UniValue listreceivedbyaddress(const JSONRPCRequest& request)
             "listreceivedbyaddress ( minconf include_empty include_watchonly)\n"
             "\nList balances by receiving address.\n"
             "\nArguments:\n"
-            "1. minconf           (numeric, optional, default=1) The minimum number of confirmations before payments are included.\n"
+            "1. minconf           (numeric, optional, default=" + DEFAULT_MIN_DEPTH + ") The minimum number of confirmations before payments are included.\n"
             "2. include_empty     (bool, optional, default=false) Whether to include addresses that haven't received any payments.\n"
             "3. include_watchonly (bool, optional, default=false) Whether to include watch-only addresses (see 'importaddress').\n"
 
@@ -1406,7 +1407,7 @@ UniValue listreceivedbyaccount(const JSONRPCRequest& request)
             "listreceivedbyaccount ( minconf include_empty include_watchonly)\n"
             "\nDEPRECATED. List balances by account.\n"
             "\nArguments:\n"
-            "1. minconf           (numeric, optional, default=1) The minimum number of confirmations before payments are included.\n"
+            "1. minconf           (numeric, optional, default=" + DEFAULT_MIN_DEPTH + ") The minimum number of confirmations before payments are included.\n"
             "2. include_empty     (bool, optional, default=false) Whether to include accounts that haven't received any payments.\n"
             "3. include_watchonly (bool, optional, default=false) Whether to include watch-only addresses (see 'importaddress').\n"
 
@@ -1690,7 +1691,7 @@ UniValue listaccounts(const JSONRPCRequest& request)
             "listaccounts ( minconf include_watchonly)\n"
             "\nDEPRECATED. Returns Object that has account names as keys, account balances as values.\n"
             "\nArguments:\n"
-            "1. minconf             (numeric, optional, default=1) Only include transactions with at least this many confirmations\n"
+            "1. minconf             (numeric, optional, default=" + DEFAULT_MIN_DEPTH + ") Only include transactions with at least this many confirmations\n"
             "2. include_watchonly   (bool, optional, default=false) Include balances in watch-only addresses (see 'importaddress')\n"
             "\nResult:\n"
             "{                      (json object where keys are account names, and values are numeric balances\n"
@@ -1710,7 +1711,7 @@ UniValue listaccounts(const JSONRPCRequest& request)
 
     LOCK2(cs_main, pwallet->cs_wallet);
 
-    int nMinDepth = 1;
+    int nMinDepth = DEFAULT_MIN_DEPTH;
     if (request.params.size() > 0)
         nMinDepth = request.params[0].get_int();
     isminefilter includeWatchonly = ISMINE_SPENDABLE;
@@ -1775,7 +1776,7 @@ UniValue listsinceblock(const JSONRPCRequest& request)
             "Additionally, if include_removed is set, transactions affecting the wallet which were removed are returned in the \"removed\" array.\n"
             "\nArguments:\n"
             "1. \"blockhash\"            (string, optional) The block hash to list transactions since\n"
-            "2. target_confirmations:    (numeric, optional, default=1) Return the nth block hash from the main chain. e.g. 1 would mean the best block hash. Note: this is not used as a filter, but only affects [lastblock] in the return value\n"
+            "2. target_confirmations:    (numeric, optional, default=" + DEFAULT_MIN_DEPTH + ") Return the nth block hash from the main chain. e.g. 1 would mean the best block hash. Note: this is not used as a filter, but only affects [lastblock] in the return value\n"
             "3. include_watchonly:       (bool, optional, default=false) Include transactions to watch-only addresses (see 'importaddress')\n"
             "4. include_removed:         (bool, optional, default=true) Show transactions that were removed due to a reorg in the \"removed\" array\n"
             "                                                           (not guaranteed to work on pruned nodes)\n"
@@ -2626,7 +2627,7 @@ UniValue listunspent(const JSONRPCRequest& request)
             "with between minconf and maxconf (inclusive) confirmations.\n"
             "Optionally filter to only include txouts paid to specified addresses.\n"
             "\nArguments:\n"
-            "1. minconf          (numeric, optional, default=1) The minimum confirmations to filter\n"
+            "1. minconf          (numeric, optional, default=" + DEFAULT_MIN_DEPTH + ") The minimum confirmations to filter\n"
             "2. maxconf          (numeric, optional, default=9999999) The maximum confirmations to filter\n"
             "3. \"addresses\"      (string) A json array of monacoin addresses to filter\n"
             "    [\n"
@@ -2670,7 +2671,7 @@ UniValue listunspent(const JSONRPCRequest& request)
             + HelpExampleRpc("listunspent", "6, 9999999, [] , true, { \"minimumAmount\": 0.005 } ")
         );
 
-    int nMinDepth = 1;
+    int nMinDepth = DEFAULT_MIN_DEPTH;
     if (request.params.size() > 0 && !request.params[0].isNull()) {
         RPCTypeCheckArgument(request.params[0], UniValue::VNUM);
         nMinDepth = request.params[0].get_int();
