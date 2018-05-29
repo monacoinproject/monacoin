@@ -36,6 +36,7 @@
 #include "txmempool.h"
 #include "ui_interface.h"
 #include "undo.h"
+#include "usercheckpoint.h"
 #include "util.h"
 #include "utilmoneystr.h"
 #include "utilstrencodings.h"
@@ -2950,6 +2951,10 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
         CBlockIndex* pcheckpoint = Checkpoints::GetLastCheckpoint(params.Checkpoints());
         if (pcheckpoint && nHeight < pcheckpoint->nHeight)
             return state.DoS(100, error("%s: forked chain older than last checkpoint (height %d)", __func__, nHeight), REJECT_CHECKPOINT, "bad-fork-prior-to-checkpoint");
+
+        pcheckpoint = CUserCheckpoint::GetInstance().GetLastCheckpoint();
+        if (pcheckpoint && nHeight < pcheckpoint->nHeight)
+            return state.DoS(100, error("%s: forked chain older than last user-checkpoint (height %d)", __func__, nHeight), REJECT_CHECKPOINT, "bad-fork-prior-to-checkpoint");
     }
 
     // Check timestamp against prev

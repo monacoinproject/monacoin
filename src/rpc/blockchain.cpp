@@ -24,6 +24,7 @@
 #include "util.h"
 #include "utilstrencodings.h"
 #include "hash.h"
+#include "usercheckpoint.h"
 
 #include <stdint.h>
 
@@ -1392,6 +1393,96 @@ UniValue preciousblock(const JSONRPCRequest& request)
     return NullUniValue;
 }
 
+UniValue usercheckpoint(const JSONRPCRequest& request)
+{
+    std::string strCommand;
+    int nHeight;
+    uint256 hash;
+
+    bool bError = false;
+    int arglen = request.params.size();
+    if(arglen > 1)
+    {
+        strCommand = request.params[0].get_str();
+        if(strCommand == "add")
+        {
+            if(arglen < 3)
+            {
+                bError = true;
+            }
+        }
+        else if(strCommand != "delete")
+        {
+            bError = true;
+        }
+    }
+    else
+    {
+        bError = true;
+    }
+
+    if (request.fHelp || bError)
+        throw std::runtime_error(
+            "checkpoint command blockheight blockhash\n"
+            "\nA command of the addition and deletion of the checkpoint by the user.\n"
+            "\nArguments:\n"
+            "1. \"command\"   (string, required) add | delete\n"
+            "2. \"height\"    (numeric, required) block height\n"
+            "3. \"hash\"      (string) block hash\n"
+            "\nExamples:\n"
+            + HelpExampleCli("checkpoint", "\"add\" 904000 \"353f5b7f9440e1d830bd1c265c69fb0e7c7988e343b2202a704406d04a8cd02e\"")
+            + HelpExampleCli("checkpoint", "\"delete\" 904000")
+            + HelpExampleRpc("checkpoint", "\"add\", 904000, \"353f5b7f9440e1d830bd1c265c69fb0e7c7988e343b2202a704406d04a8cd02e\"")
+            + HelpExampleRpc("checkpoint", "\"delete\", 904000")
+        );
+
+    nHeight = request.params[1].get_int();
+    if (!request.params[2].isNull())
+    {
+        std::string strHash = request.params[2].get_str();
+        hash = uint256S(strHash);
+    }
+
+    if (nHeight < 0)
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Block height out of range");
+
+    if(strCommand == "add")
+    {
+        CUserCheckpoint::GetInstance().WriteCheckpoint(nHeight, hash, true);
+    }
+    else
+    {
+        CUserCheckpoint::GetInstance().DeleteCheckpoint(nHeight, true);
+    }
+
+    return NullUniValue;
+}
+
+UniValue dumpusercheckpoint(const JSONRPCRequest& request)
+{
+    if (request.fHelp)
+        throw std::runtime_error(
+            "dumpcheckpoint\n"
+            "\ndump user checkpoint.\n"
+            "\nResult:\n"
+            "[\n"
+            "  {\n"
+            "    \"height\" : {   (int) block height\n"
+            "    \"hash\" : {     (string) block hash\n"
+            "  },\n"
+            "  {\n"
+            "    \"height\" : {   (int) block height\n"
+            "    \"hash\" : {     (string) block hash\n"
+            "  }\n"
+            "]\n"
+            "\nExamples:\n"
+            + HelpExampleCli("dumpcheckpoint", "")
+            + HelpExampleRpc("dumpcheckpoint", "")
+        );
+
+    return CUserCheckpoint::GetInstance().Dump();
+}
+
 UniValue invalidateblock(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() != 1)
@@ -1555,6 +1646,9 @@ static const CRPCCommand commands[] =
     { "blockchain",         "verifychain",            &verifychain,            true,  {"checklevel","nblocks"} },
 
     { "blockchain",         "preciousblock",          &preciousblock,          true,  {"blockhash"} },
+
+    { "blockchain",         "checkpoint",             &usercheckpoint,         true,  {"command","height","hash"} },
+    { "blockchain",         "dumpcheckpoint",         &dumpusercheckpoint,     true,  {} },
 
     /* Not shown in help */
     { "hidden",             "invalidateblock",        &invalidateblock,        true,  {"blockhash"} },
