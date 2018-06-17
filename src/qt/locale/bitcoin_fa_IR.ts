@@ -410,8 +410,8 @@
         <translation>بازکردن Litecoin: آدرس یا درخواست پرداخت</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n ارتباط فعال به شبکه بیت‌کوین</numerusform><numerusform>%n ارتباط فعال به شبکه بیت‌کوین</numerusform></translation>
+        <source>%n active connection(s) to Litecoin network</source>
+        <translation><numerusform>%n ارتباط فعال به شبکه Litecoin</numerusform><numerusform>%n ارتباط فعال به شبکه Litecoin</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>

@@ -1100,8 +1100,8 @@
         <translation>&amp;Bejövő kapcsolatok engedélyezése</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation>Csatlakozás a Bitcoin hálózathoz SOCKS5 proxy használatával.</translation>
+        <source>Connect to the Litecoin network through a SOCKS5 proxy.</source>
+        <translation>Csatlakozás a Litecoin hálózathoz SOCKS5 proxy használatával.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -2626,8 +2626,8 @@
         <translation>Parancssoros és JSON-RPC parancsok elfogadása</translation>
     </message>
     <message>
-        <source>Bitcoin Core</source>
-        <translation>Bitcoin Mag</translation>
+        <source>Litecoin Core</source>
+        <translation>Litecoin Mag</translation>
     </message>
     <message>
         <source>Debugging/Testing options:</source>
