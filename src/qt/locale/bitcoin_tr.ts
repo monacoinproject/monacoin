@@ -1884,10 +1884,6 @@
         <translation>Ödeme &amp;talep et</translation>
     </message>
     <message>
-        <source>Generate Bech32 address</source>
-        <translation>Bech32 adresi oluştur</translation>
-    </message>
-    <message>
         <source>Show the selected request (does the same as double clicking an entry)</source>
         <translation>Seçilen talebi göster (bir unsura çift tıklamakla aynı anlama gelir)</translation>
     </message>
@@ -3654,6 +3650,18 @@
         <translation>İşlemin imzalanması başarısız oldu</translation>
     </message>
     <message>
+        <source>Specified -walletdir "%s" does not exist</source>
+        <translation>Belirtilen -walletdir "%s" mevcut değil</translation>
+    </message>
+    <message>
+        <source>Specified -walletdir "%s" is a relative path</source>
+        <translation>Belirtilen -walletdir "%s" göreceli bir yoldur</translation>
+    </message>
+    <message>
+        <source>Specified -walletdir "%s" is not a directory</source>
+        <translation>Belirtilen -walletdir "%s" bir dizin değildir</translation>
+    </message>
+    <message>
         <source>The transaction amount is too small to pay the fee</source>
         <translation>İşlemdeki litecoin tutarı ücreti ödemek için çok düşük</translation>
     </message>
@@ -3684,6 +3692,10 @@
     <message>
         <source>Unable to bind to %s on this computer (bind returned error %s)</source>
         <translation>Bu bilgisayarda %s ögesine bağlanılamadı (bağlanma %s hatasını verdi)</translation>
+    </message>
+    <message>
+        <source>Unable to generate initial keys</source>
+        <translation>Başlangıç anahtarları üretilemiyor</translation>
     </message>
     <message>
         <source>Upgrade wallet to latest format on startup</source>
