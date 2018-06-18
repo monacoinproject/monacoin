@@ -6,7 +6,7 @@ Below are some notes on how to build Litecoin Core for Windows.
 The options known to work for building Litecoin Core on Windows are:
 
 * On Linux using the [Mingw-w64](https://mingw-w64.org/doku.php) cross compiler tool chain. Ubuntu Bionic 18.04 is required
-and is the platform used to build the Bitcoin Core Windows release binaries.
+and is the platform used to build the Litecoin Core Windows release binaries.
 * On Windows using [Windows
 Subsystem for Linux (WSL)](https://msdn.microsoft.com/commandline/wsl/about) and the Mingw-w64 cross compiler tool chain.
 
