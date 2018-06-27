@@ -1892,20 +1892,20 @@
         <translation>Effacer</translation>
     </message>
     <message>
+        <source>Native segwit addresses (aka Bech32 or BIP-173) reduce your transaction fees later on and offer better protection against typos, but old wallets don't support them. When unchecked, an address compatible with older wallets will be created instead.</source>
+        <translation>Les adresses SegWit natives (aussi appelées Bech32 ou BIP-173) réduisent vos frais de transaction ultérieurs et offrent une meilleure protection contre les erreurs de frappe, mais les anciens porte-monnaie ne les prennent pas en charge. Si cette option n’est pas cochée, une adresse compatible avec les anciens porte-monnaie sera plutôt créée.</translation>
+    </message>
+    <message>
+        <source>Generate native segwit (Bech32) address</source>
+        <translation>Générer une adresse SegWit native (Bech32)</translation>
+    </message>
+    <message>
         <source>Requested payments history</source>
         <translation>Historique des paiements demandés</translation>
     </message>
     <message>
         <source>&amp;Request payment</source>
         <translation>&amp;Demander un paiement</translation>
-    </message>
-    <message>
-        <source>Bech32 addresses (BIP-173) are cheaper to spend from and offer better protection against typos. When unchecked a P2SH wrapped SegWit address will be created, compatible with older wallets.</source>
-        <translation>Il est moins coûteux de dépenser à partir d’adresses Bech32 (BIP-173). Elles offrent aussi une meilleure protection contre les fautes de frappe. Si cette option n’est pas cochée, une adresse SegWit enveloppée dans un P2SH sera créée, compatible avec les anciens porte-monnaie.</translation>
-    </message>
-    <message>
-        <source>Generate Bech32 address</source>
-        <translation>Générer une adresse Bech32</translation>
     </message>
     <message>
         <source>Show the selected request (does the same as double clicking an entry)</source>
