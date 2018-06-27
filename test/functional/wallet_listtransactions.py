@@ -11,7 +11,6 @@ from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import (
     assert_array_result,
     assert_equal,
-    bytes_to_hex_str,
     hex_str_to_bytes,
     sync_mempools,
 )
@@ -162,7 +161,7 @@ class ListTransactionsTest(BitcoinTestFramework):
         tx3 = self.nodes[0].createrawtransaction(inputs, outputs)
         tx3_modified = tx_from_hex(tx3)
         tx3_modified.vin[0].nSequence = 0
-        tx3 = bytes_to_hex_str(tx3_modified.serialize())
+        tx3 = tx3_modified.serialize().hex()
         tx3_signed = self.nodes[0].signrawtransactionwithwallet(tx3)['hex']
         txid_3 = self.nodes[0].sendrawtransaction(tx3_signed)
 
@@ -188,10 +187,10 @@ class ListTransactionsTest(BitcoinTestFramework):
         # Replace tx3, and check that tx4 becomes unknown
         tx3_b = tx3_modified
         tx3_b.vout[0].nValue -= int(Decimal("0.004") * COIN)  # bump the fee
-        tx3_b = bytes_to_hex_str(tx3_b.serialize())
+        tx3_b = tx3_b.serialize().hex()
         tx3_b_signed = self.nodes[0].signrawtransactionwithwallet(tx3_b)['hex']
-        txid_3b = self.nodes[0].sendrawtransaction(tx3_b_signed, True)
-        assert(is_opt_in(self.nodes[0], txid_3b))
+        txid_3b = self.nodes[0].sendrawtransaction(tx3_b_signed, 0)
+        assert is_opt_in(self.nodes[0], txid_3b)
 
         assert_array_result(self.nodes[0].listtransactions(), {"txid": txid_4}, {"bip125-replaceable": "unknown"})
         sync_mempools(self.nodes)
