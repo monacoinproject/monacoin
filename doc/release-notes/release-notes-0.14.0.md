@@ -675,7 +675,7 @@ and git merge commit are mentioned.
 - #9839 `eddaa6b` [qa] Make import-rescan.py watchonly check reliable (ryanofsky)
 
 ### Documentation
-- #8332 `806b9e7` Clarify witness branches in transaction.h serialization (dcousens)
+- #9402 `806b9e7` Clarify witness branches in transaction.h serialization (dcousens)
 - #8935 `0306978` Documentation: Building on Windows with WSL (pooleja)
 - #9144 `c98f6b3` Correct waitforblockheight example help text (fanquake)
 - #9407 `041331e` Added missing colons in when running help command (anditto)
