@@ -666,7 +666,7 @@ class FullBlockTest(ComparisonTestFramework):
         s = ser_uint256(b46.hashMerkleRoot)
         yield rejected(RejectResult(16, b'bad-blk-length'))
 
-        # Litecoin: Temporarily disable test
+        # Monacoin: Temporarily disable test
         # A block with invalid work
         #tip(44)
         #b47 = block(47, solve=False)

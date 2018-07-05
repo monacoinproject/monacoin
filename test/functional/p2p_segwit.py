@@ -963,7 +963,7 @@ class SegWitTest(BitcoinTestFramework):
         assert(self.test_node.last_message["getdata"].inv[0].type == blocktype)
         test_witness_block(self.nodes[0].rpc, self.test_node, block1, True)
 
-        # Litecoin: Blocks with nVersion < VB_TOP_BITS are rejected
+        # Monacoin: Blocks with nVersion < VB_TOP_BITS are rejected
 
         # self.test_node.announce_block_and_wait_for_getdata(block2, use_header=True)
         # assert(self.test_node.last_message["getdata"].inv[0].type == blocktype)
@@ -1020,7 +1020,7 @@ class SegWitTest(BitcoinTestFramework):
             assert_equal(rpc_details["weight"], weight)
 
             # Upgraded node should not ask for blocks from unupgraded
-            # Litecoin: Blocks with nVersion < VB_TOP_BITS are rejected
+            # Monacoin: Blocks with nVersion < VB_TOP_BITS are rejected
             block4 = self.build_next_block(nVersion=(VB_TOP_BITS | (1<<15)))
             block4.solve()
             self.old_node.getdataset = set()
