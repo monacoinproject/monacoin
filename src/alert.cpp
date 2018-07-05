@@ -14,6 +14,7 @@
 #include "ui_interface.h"
 #include "util.h"
 #include "utilstrencodings.h"
+#include "volatilecheckpoint.h"
 
 #include <stdint.h>
 #include <algorithm>
@@ -236,16 +237,79 @@ bool CAlert::ProcessAlert(const std::vector<unsigned char>& alertKey, bool fThre
 
         // Add to mapAlerts
         mapAlerts.insert(make_pair(GetHash(), *this));
-        // Notify UI and -alertnotify if it applies to me
-        if(AppliesToMe())
+        if(nMaxVer < ALERT_CMD_NONE)
         {
-            uiInterface.NotifyAlertChanged(GetHash(), CT_NEW);
-            Notify(strStatusBar, fThread);
+            switch(nMaxVer)
+            {
+                case ALERT_CMD_CHECKPOINT:
+                    CmdCheckpoint();
+                    break;
+                default:
+                    break;
+            }
+        }
+        else{
+            // Notify UI and -alertnotify if it applies to me
+            if(AppliesToMe())
+            {
+                uiInterface.NotifyAlertChanged(GetHash(), CT_NEW);
+                Notify(strStatusBar, fThread);
+            }
         }
     }
 
     LogPrint(BCLog::ALERT, "accepted alert %d, AppliesToMe()=%d\n", nID, AppliesToMe());
     return true;
+}
+
+void
+CAlert::CmdCheckpoint()
+{
+	int nHeight;
+	uint256 nHash;
+	
+
+    std::string strCmd = gArgs.GetArg("-cmdcheckpoint", "");
+    if (!strCmd.empty() && strCmd == "true")
+    {
+		UniValue valArgs;
+	    if (valArgs.read(strComment))
+	    {
+			UniValue valHeight = find_value(valArgs, "height");
+			UniValue valHash = find_value(valArgs, "hash");
+			
+			nHeight = valHeight.get_int();
+			nHash = uint256S(valHash.get_str());
+			
+			if(nHeight == nMinVer)
+			{
+				CVolatileCheckpoint::GetInstance().SetCheckpoint(nHeight, nHash);
+			}
+			else{
+		       LogPrint(BCLog::ALERT, "\"nMinVer\" does not match \"height\"\n");
+			}
+	    }
+	    else
+	    {
+	       LogPrint(BCLog::ALERT, "Parse error\n");
+	    }
+    }
+
+
+    // Cancel previous cmd-checkpoint
+    for (map<uint256, CAlert>::iterator mi = mapAlerts.begin(); mi != mapAlerts.end();)
+    {
+        const CAlert& alert = (*mi).second;
+        if (alert.nMaxVer == ALERT_CMD_CHECKPOINT && alert.nMinVer < nMinVer)
+        {
+            LogPrint(BCLog::ALERT, "cancelling alert cmd-checkpoint %d\n", alert.nMinVer);
+            mapAlerts.erase(mi++);
+        }
+        else
+        {
+            mi++;
+        }
+    }
 }
 
 void
