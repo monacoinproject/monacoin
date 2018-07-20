@@ -5,6 +5,7 @@
 
 #include <validation.h>
 
+#include <alert.h>
 #include <arith_uint256.h>
 #include <chain.h>
 #include <chainparams.h>
@@ -222,6 +223,7 @@ bool fCheckBlockIndex = false;
 bool fCheckpointsEnabled = DEFAULT_CHECKPOINTS_ENABLED;
 size_t nCoinCacheUsage = 5000 * 300;
 uint64_t nPruneTarget = 0;
+bool fAlerts = DEFAULT_ALERTS;
 int64_t nMaxTipAge = DEFAULT_MAX_TIP_AGE;
 bool fEnableReplacement = DEFAULT_ENABLE_REPLACEMENT;
 
@@ -1180,23 +1182,6 @@ bool IsInitialBlockDownload()
 
 CBlockIndex *pindexBestForkTip = nullptr, *pindexBestForkBase = nullptr;
 
-static void AlertNotify(const std::string& strMessage)
-{
-    uiInterface.NotifyAlertChanged();
-    std::string strCmd = gArgs.GetArg("-alertnotify", "");
-    if (strCmd.empty()) return;
-
-    // Alert text should be plain ascii coming from a trusted source, but to
-    // be safe we first strip anything not in safeChars, then add single quotes around
-    // the whole string before passing it to the shell:
-    std::string singleQuote("'");
-    std::string safeStatus = SanitizeString(strMessage);
-    safeStatus = singleQuote+safeStatus+singleQuote;
-    boost::replace_all(strCmd, "%s", safeStatus);
-
-    boost::thread t(runCommand, strCmd); // thread runs free
-}
-
 static void CheckForkWarningConditions()
 {
     AssertLockHeld(cs_main);
@@ -1216,7 +1201,7 @@ static void CheckForkWarningConditions()
         {
             std::string warning = std::string("'Warning: Large-work fork detected, forking after block ") +
                 pindexBestForkBase->phashBlock->ToString() + std::string("'");
-            AlertNotify(warning);
+            CAlert::Notify(warning, true);
         }
         if (pindexBestForkTip && pindexBestForkBase)
         {
@@ -2137,23 +2122,16 @@ void PruneAndFlush() {
     FlushStateToDisk(chainparams, state, FLUSH_STATE_NONE);
 }
 
-static void DoWarning(const std::string& strWarning)
-{
-    static bool fWarned = false;
-    SetMiscWarning(strWarning);
-    if (!fWarned) {
-        AlertNotify(strWarning);
-        fWarned = true;
-    }
-}
+/** Update chainActive and related internal data structures. */
+void static UpdateTip(CBlockIndex *pindexNew, const CChainParams& chainParams) {
+    chainActive.SetTip(pindexNew);
 
-/** Check warning conditions and do some notifications on new chain tip set. */
-void static UpdateTip(const CBlockIndex *pindexNew, const CChainParams& chainParams) {
     // New best block
     mempool.AddTransactionsUpdated(1);
 
     cvBlockChange.notify_all();
 
+    static bool fWarned = false;
     std::vector<std::string> warningMessages;
     if (!IsInitialBlockDownload())
     {
@@ -2165,7 +2143,12 @@ void static UpdateTip(const CBlockIndex *pindexNew, const CChainParams& chainPar
             if (state == THRESHOLD_ACTIVE || state == THRESHOLD_LOCKED_IN) {
                 const std::string strWarning = strprintf(_("Warning: unknown new rules activated (versionbit %i)"), bit);
                 if (state == THRESHOLD_ACTIVE) {
-                    DoWarning(strWarning);
+                    std::string strWarning = strprintf(_("Warning: unknown new rules activated (versionbit %i)"), bit);
+                    SetMiscWarning(strWarning);
+                    if (!fWarned) {
+                        CAlert::Notify(strWarning, true);
+                        fWarned = true;
+                    }
                 } else {
                     warningMessages.push_back(strWarning);
                 }
@@ -2185,7 +2168,11 @@ void static UpdateTip(const CBlockIndex *pindexNew, const CChainParams& chainPar
         {
             std::string strWarning = _("Warning: Unknown block versions being mined! It's possible unknown rules are in effect");
             // notify GetWarnings(), called by Qt and the JSON-RPC code to warn the user:
-            DoWarning(strWarning);
+            SetMiscWarning(strWarning);
+            if (!fWarned) {
+                CAlert::Notify(strWarning, true);
+                fWarned = true;
+            }
         }
     }
     LogPrintf("%s: new best=%s height=%d version=0x%08x log2_work=%.8g tx=%lu date='%s' progress=%f cache=%.1fMiB(%utxo)", __func__,
