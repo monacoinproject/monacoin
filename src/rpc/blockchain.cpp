@@ -26,6 +26,7 @@
 #include <utilstrencodings.h>
 #include <hash.h>
 #include <validationinterface.h>
+#include <volatilecheckpoint.h>
 #include <warnings.h>
 
 #include <stdint.h>
@@ -1524,6 +1525,83 @@ UniValue dumpusercheckpoint(const JSONRPCRequest& request)
     return CUserCheckpoint::GetInstance().Dump();
 }
 
+UniValue volatilecheckpoint(const JSONRPCRequest& request)
+{
+    std::string strCommand;
+    int nHeight;
+    uint256 hash;
+
+    bool bError = true;
+    int arglen = request.params.size();
+    if(arglen > 0)
+    {
+        strCommand = request.params[0].get_str();
+        if(arglen == 3 && strCommand == "set")
+        {
+            bError = false;
+        }
+        else if(arglen >= 2 && strCommand == "clear")
+        {
+            bError = false;
+        }
+    }
+
+    if (request.fHelp || bError)
+        throw std::runtime_error(
+            "volatilecheckpoint command blockheight blockhash\n"
+            "\nA command of the addition and deletion of the checkpoint by the user.\n"
+            "\nArguments:\n"
+            "1. \"command\"   (string, required) set | clear\n"
+            "2. \"height\"    (numeric, required) block height\n"
+            "3. \"hash\"      (string) block hash\n"
+            "\nExamples:\n"
+            + HelpExampleCli("volatilecheckpoint", "\"set\" 904000 \"353f5b7f9440e1d830bd1c265c69fb0e7c7988e343b2202a704406d04a8cd02e\"")
+            + HelpExampleCli("volatilecheckpoint", "\"clear\"")
+        );
+
+    nHeight = request.params[1].get_int();
+    if (!request.params[2].isNull())
+    {
+        std::string strHash = request.params[2].get_str();
+        hash = uint256S(strHash);
+    }
+
+    if (nHeight < 0)
+        throw JSONRPCError(RPC_INVALID_PARAMETER, "Block height out of range");
+
+    if(strCommand == "set")
+    {
+        CVolatileCheckpoint::GetInstance().SetCheckpoint(nHeight, hash);
+    }
+    else
+    {
+        CVolatileCheckpoint::GetInstance().ClearCheckpoint();
+    }
+
+    return NullUniValue;
+}
+
+UniValue dumpvolatilecheckpoint(const JSONRPCRequest& request)
+{
+    if (request.fHelp)
+        throw std::runtime_error(
+            "dumpvolatilecheckpoint\n"
+            "\ndump volatile-checkpoint.\n"
+            "\nResult:\n"
+            "[\n"
+            "  {\n"
+            "    \"height\" : {   (int) block height\n"
+            "    \"hash\" : {     (string) block hash\n"
+            "  },\n"
+            "]\n"
+            "\nExamples:\n"
+            + HelpExampleCli("dumpvolatilecheckpoint", "")
+            + HelpExampleRpc("dumpvolatilecheckpoint", "")
+        );
+
+    return CVolatileCheckpoint::GetInstance().Dump();
+}
+
 UniValue invalidateblock(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() != 1)
@@ -1724,6 +1802,8 @@ static const CRPCCommand commands[] =
 
     { "blockchain",         "checkpoint",             &usercheckpoint,         {"command","height","hash"} },
     { "blockchain",         "dumpcheckpoint",         &dumpusercheckpoint,     {} },
+    { "blockchain",         "volatilecheckpoint",     &volatilecheckpoint,     {"command","height","hash"} },
+    { "blockchain",         "dumpvolatilecheckpoint", &dumpvolatilecheckpoint, {} },
 
     /* Not shown in help */
     { "hidden",             "invalidateblock",        &invalidateblock,        {"blockhash"} },
