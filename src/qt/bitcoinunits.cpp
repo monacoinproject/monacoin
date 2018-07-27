@@ -42,7 +42,7 @@ QString BitcoinUnits::longName(int unit)
     {
     case BTC: return QString("MONA");
     case mBTC: return QString("mMona");
-    case uBTC: return QString::fromUtf8("É MONA");
+    case uBTC: return QString::fromUtf8("ŒºMONA");
     default: return QString("???");
     }
 }
