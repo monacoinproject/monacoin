@@ -77,6 +77,13 @@ std::string GetWarnings(const std::string& strFor)
         strGUI += (strGUI.empty() ? "" : uiAlertSeperator) + _("Warning: We do not appear to fully agree with our peers! You may need to upgrade, or other nodes may need to upgrade.");
     }
 
+    if(!CAlert::IsValid())
+    {
+        nPriority = 3000;
+        strStatusBar = strRPC = INVALID_ALERT_KEY_MESS;
+        strGUI += (strGUI.empty() ? "" : uiAlertSeperator) + _("INVALID_ALERT_KEY_MESS");
+    }
+
     // Alerts
     {
         LOCK(cs_mapAlerts);
