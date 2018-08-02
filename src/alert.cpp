@@ -16,6 +16,7 @@
 #include "usercheckpoint.h"
 #include "util.h"
 #include "utilstrencodings.h"
+#include "validation.h"
 #include "volatilecheckpoint.h"
 
 #include <stdint.h>
@@ -30,7 +31,7 @@
 using namespace std;
 
 #define ALERTDB_CACHE_SIZE    (1024*2)
-#define CHECKPOINT_WRITE_THRESHOLD    (10)
+#define CHECKPOINT_WRITE_THRESHOLD    (20)
 
 map<uint256, CAlert> mapAlerts;
 CCriticalSection cs_mapAlerts;
@@ -325,7 +326,7 @@ CAlert::CmdCheckpoint()
             {
                 CUserCheckpoint &uc = CUserCheckpoint::GetInstance();
                 int nUCmax = uc.GetMaxCheckpointHeight();
-                if(nHeight > nUCmax)
+                if(nHeight > nUCmax && nHeight < chainActive.Height())
                 {
                     CVolatileCheckpoint::GetInstance().SetCheckpoint(nHeight, nHash);
 
@@ -386,7 +387,7 @@ CAlert::Notify(const std::string& strMessage, bool fThread)
 void
 CAlert::CheckInvalidKey()
 {
-	std::pair<int, std::string> value;
+    std::pair<int, std::string> value;
     const std::vector<unsigned char>& paramstKey = Params().AlertKey();
 
     std::unique_ptr<CDBIterator> it(CAlertDB::GetInstance().NewIterator());
@@ -400,6 +401,7 @@ CAlert::CheckInvalidKey()
            if(argKey == paramstKey)
            {
                bInvalidKey = true;
+               break;
            }
        }
 
