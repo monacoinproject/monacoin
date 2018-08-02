@@ -112,7 +112,7 @@ uint256 CAlert::GetHash() const
 
 bool CAlert::IsInEffect() const
 {
-    return (GetAdjustedTime() < nExpiration);
+    return (GetAdjustedTime() < nExpiration || GetAdjustedTime() < nRelayUntil);
 }
 
 bool CAlert::Cancels(const CAlert& alert) const
