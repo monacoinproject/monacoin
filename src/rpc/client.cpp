@@ -112,6 +112,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "verifychain", 0, "checklevel" },
     { "verifychain", 1, "nblocks" },
     { "checkpoint", 1, "height" },
+    { "dumpcheckpoint", 0, "maxnum" },
     { "volatilecheckpoint", 1, "height" },
     { "pruneblockchain", 0, "height" },
     { "keypoolrefill", 0, "newsize" },
