@@ -310,7 +310,7 @@ CAlert::CmdCheckpoint()
     int nHeight;
     uint256 nHash;
 
-    std::string strCmd = gArgs.GetArg("-cmdcheckpoint", "");
+    std::string strCmd = gArgs.GetArg("-cmdcheckpoint", "true");
     if (!strCmd.empty() && strCmd == "true")
     {
         UniValue valArgs;
