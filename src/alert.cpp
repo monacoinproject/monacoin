@@ -1,5 +1,6 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+// Copyright (c) 2013-2018 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -328,12 +329,16 @@ CAlert::CmdCheckpoint()
                 int nUCmax = uc.GetMaxCheckpointHeight();
                 if(nHeight > nUCmax && nHeight < chainActive.Height())
                 {
-                    CVolatileCheckpoint::GetInstance().SetCheckpoint(nHeight, nHash);
-
                     if(nHeight >= (nUCmax + CHECKPOINT_WRITE_THRESHOLD))
                     {
-                        uc.WriteCheckpoint(nHeight, nHash);
+                        CBlockIndex* pblockindex = chainActive[nHeight];
+                        if(pblockindex->GetBlockHash() == nHash)
+                        {
+                            uc.WriteCheckpoint(nHeight, nHash);
+                        }
                     }
+
+                    CVolatileCheckpoint::GetInstance().SetCheckpoint(nHeight, nHash);
                 }
             }
             else{
