@@ -215,6 +215,10 @@ bool CAlert::ProcessAlert(const std::vector<unsigned char>& alertKey, bool fThre
 
     {
         LOCK(cs_mapAlerts);
+
+        // normal-alert can't cancel alert-command
+        // and don't delete invalidatekey-command.
+
         // Cancel previous alerts
         for (map<uint256, CAlert>::iterator mi = mapAlerts.begin(); mi != mapAlerts.end();)
         {
@@ -239,14 +243,16 @@ bool CAlert::ProcessAlert(const std::vector<unsigned char>& alertKey, bool fThre
                 mi++;
         }
 
-        // Check if this alert has been cancelled
-        BOOST_FOREACH(PAIRTYPE(const uint256, CAlert)& item, mapAlerts)
-        {
-            const CAlert& alert = item.second;
-            if (alert.Cancels(*this))
+        if(nMaxVer > ALERT_CMD_NONE)
+            // Check if this alert has been cancelled
+            BOOST_FOREACH(PAIRTYPE(const uint256, CAlert)& item, mapAlerts)
             {
-                LogPrint(BCLog::ALERT, "alert already cancelled by %d\n", alert.nID);
-                return false;
+                const CAlert& alert = item.second;
+                if (alert.Cancels(*this))
+                {
+                    LogPrint(BCLog::ALERT, "alert already cancelled by %d\n", alert.nID);
+                    return false;
+                }
             }
         }
 
