@@ -125,7 +125,8 @@ public:
         pchMessageStart[3] = 0xdb;
         nDefaultPort = 9401;
         nPruneAfterHeight = 100000;
-        vAlertPubKey = ParseHex("04fc55d919cdea21e8171fea24c3cf23864ff64a53404829ad50af86e1be1b8217115701b348d50c6aaba6983bc148d3c9e6fa8c11365889774fc1db6da6840c06");
+        vAlertPubKey[MAIN_KEY] = ParseHex("04fc55d919cdea21e8171fea24c3cf23864ff64a53404829ad50af86e1be1b8217115701b348d50c6aaba6983bc148d3c9e6fa8c11365889774fc1db6da6840c06");
+        vAlertPubKey[SUB_KEY]  = ParseHex("042367fa06a8245f17c2137f6946e6084a2251b5a6a7123380cd0ff0d582d82ec32d939ed11c7774e949637dc47950817a80060a99fe7e516c0af43fa5a1a1b682");
 
         genesis = CreateGenesisBlock(1388479472, 1234534, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -231,7 +232,8 @@ public:
 
         nDefaultPort = 19403;
         nPruneAfterHeight = 1000;
-        vAlertPubKey = ParseHex("04887665070e79d20f722857e58ec8f402733f710135521a0b63441419bf5665ba4623bed13fca0cb2338682ab2a54ad13ce07fbc81c3c2f0912a4eb8521dd3cfb");
+        vAlertPubKey[MAIN_KEY] = ParseHex("04887665070e79d20f722857e58ec8f402733f710135521a0b63441419bf5665ba4623bed13fca0cb2338682ab2a54ad13ce07fbc81c3c2f0912a4eb8521dd3cfb");
+        vAlertPubKey[SUB_KEY]  = ParseHex("043368ffcc74f29c9e677f1b4a5d58345e672a19782514c8e1af115f17d1107697dd7017593c7cb39101011f2dafe5b0b14167072de776c27963a95a6aa94d1096");
 
         genesis = CreateGenesisBlock(1488924140, 2122860, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();

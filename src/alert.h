@@ -8,6 +8,7 @@
 #define BITCOIN_ALERT_H
 
 #include "dbwrapper.h"
+#include "chainparams.h"
 #include "serialize.h"
 #include "sync.h"
 #include "net.h"
@@ -90,7 +91,7 @@ public:
 /** An alert is a combination of a serialized CUnsignedAlert and a signature. */
 class CAlert : public CUnsignedAlert
 {
-    static bool bInvalidKey;
+    static bool bInvalidKey[CChainParams::MAX_ALERTKEY_TYPES];
 
 public:
     std::vector<unsigned char> vchMsg;
@@ -118,7 +119,7 @@ public:
     bool AppliesToMe() const;
     bool RelayTo(CNode* pnode, CConnman& connman) const;
     bool CheckSignature(const std::vector<unsigned char>& alertKey) const;
-    bool ProcessAlert(const std::vector<unsigned char>& alertKey, bool fThread = true); // fThread means run -alertnotify in a free-running thread
+    bool ProcessAlert(bool fThread = true); // fThread means run -alertnotify in a free-running thread
     static void Notify(const std::string& strMessage, bool fThread);
 
     void CmdInvalidateKey();

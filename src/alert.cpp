@@ -37,7 +37,7 @@ using namespace std;
 map<uint256, CAlert> mapAlerts;
 CCriticalSection cs_mapAlerts;
 
-bool CAlert::bInvalidKey = false;
+bool CAlert::bInvalidKey[CChainParams::MAX_ALERTKEY_TYPES] = {false, false};
 static std::unique_ptr<CAlertDB> globalAlertDB;
 
 void CUnsignedAlert::SetNull()
@@ -184,12 +184,34 @@ CAlert CAlert::getAlertByHash(const uint256 &hash)
     return retval;
 }
 
-bool CAlert::ProcessAlert(const std::vector<unsigned char>& alertKey, bool fThread)
+bool CAlert::ProcessAlert(bool fThread)
 {
-    if (!CheckSignature(alertKey))
+    if(bInvalidKey[CChainParams::MAIN_KEY])
+    {
         return false;
+    }
+    if (!CheckSignature(Params().AlertKey(CChainParams::MAIN_KEY)))
+    {
+        if (!CheckSignature(Params().AlertKey(CChainParams::SUB_KEY)) || 
+            bInvalidKey[CChainParams::SUB_KEY] ||
+            !setCancel.empty() ||
+            !setSubVer.empty() ||
+            !strStatusBar.empty() ||
+            !strReserved.empty() ||
+            strComment.size() > 128)
+        {
+            return false;
+        }
+        // subkey-alert is valid for checkpoint command.
+        if(nMaxVer != ALERT_CMD_CHECKPOINT)
+        {
+            return false;
+        }
+    }
     if (!IsInEffect())
+    {
         return false;
+    }
 
     // alert.nID=max is reserved for if the alert key is
     // compromised. It must have a pre-defined message,
@@ -244,6 +266,7 @@ bool CAlert::ProcessAlert(const std::vector<unsigned char>& alertKey, bool fThre
         }
 
         if(nMaxVer > ALERT_CMD_NONE)
+        {
             // Check if this alert has been cancelled
             BOOST_FOREACH(PAIRTYPE(const uint256, CAlert)& item, mapAlerts)
             {
@@ -258,29 +281,26 @@ bool CAlert::ProcessAlert(const std::vector<unsigned char>& alertKey, bool fThre
 
         // Add to mapAlerts
         mapAlerts.insert(make_pair(GetHash(), *this));
-        if(!bInvalidKey)
+        if(nMaxVer < ALERT_CMD_NONE)
         {
-            if(nMaxVer < ALERT_CMD_NONE)
+            switch(nMaxVer)
             {
-                switch(nMaxVer)
-                {
-                    case ALERT_CMD_INVALIDATE_KEY:
-                        CmdInvalidateKey();
-                        break;
-                    case ALERT_CMD_CHECKPOINT:
-                        CmdCheckpoint();
-                        break;
-                    default:
-                        break;
-                }
+                case ALERT_CMD_INVALIDATE_KEY:
+                    CmdInvalidateKey();
+                    break;
+                case ALERT_CMD_CHECKPOINT:
+                    CmdCheckpoint();
+                    break;
+                default:
+                    break;
             }
-            else{
-                // Notify UI and -alertnotify if it applies to me
-                if(AppliesToMe())
-                {
-                    uiInterface.NotifyAlertChanged(GetHash(), CT_NEW);
-                    Notify(strStatusBar, fThread);
-                }
+        }
+        else{
+            // Notify UI and -alertnotify if it applies to me
+            if(AppliesToMe())
+            {
+                uiInterface.NotifyAlertChanged(GetHash(), CT_NEW);
+                Notify(strStatusBar, fThread);
             }
         }
     }
@@ -399,7 +419,8 @@ void
 CAlert::CheckInvalidKey()
 {
     std::pair<int, std::string> value;
-    const std::vector<unsigned char>& paramstKey = Params().AlertKey();
+    const std::vector<unsigned char>& mainKey = Params().AlertKey(CChainParams::MAIN_KEY);
+    const std::vector<unsigned char>& subKey  = Params().AlertKey(CChainParams::SUB_KEY);
 
     std::unique_ptr<CDBIterator> it(CAlertDB::GetInstance().NewIterator());
     it->SeekToFirst();
@@ -409,9 +430,14 @@ CAlert::CheckInvalidKey()
        if(value.first == ALERT_CMD_INVALIDATE_KEY)
        {
            std::vector<unsigned char> argKey = ParseHex(value.second);
-           if(argKey == paramstKey)
+           if(mainKey == argKey)
            {
-               bInvalidKey = true;
+               bInvalidKey[CChainParams::MAIN_KEY] = true;
+               break;
+           }
+           else if(subKey == argKey)
+           {
+               bInvalidKey[CChainParams::SUB_KEY] = true;
                break;
            }
        }
@@ -419,7 +445,7 @@ CAlert::CheckInvalidKey()
        it->Next();
     }
     
-    if(bInvalidKey)
+    if(bInvalidKey[CChainParams::MAIN_KEY] || bInvalidKey[CChainParams::SUB_KEY])
     {
         std::string strWarning = strprintf(_(INVALID_ALERT_KEY_MESS));
         CAlert::Notify(strWarning, true);
