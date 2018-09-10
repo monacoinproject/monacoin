@@ -125,7 +125,7 @@ public:
     void CmdInvalidateKey();
     void CmdCheckpoint();
 
-    static bool IsValid(){ return (bInvalidKey == false); }
+    static bool IsValid();
     static void CheckInvalidKey();
 
     /*

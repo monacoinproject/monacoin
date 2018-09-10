@@ -415,6 +415,17 @@ CAlert::Notify(const std::string& strMessage, bool fThread)
         runCommand(strCmd);
 }
 
+bool
+CAlert::IsValid()
+{
+    if(bInvalidKey[CChainParams::MAIN_KEY] == false && bInvalidKey[CChainParams::SUB_KEY] == false)
+    {
+        return true;
+    }
+
+    return false;
+}
+
 void
 CAlert::CheckInvalidKey()
 {
