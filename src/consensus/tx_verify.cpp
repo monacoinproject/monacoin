@@ -1,6 +1,12 @@
-// Copyright (c) 2017-2017 The Bitcoin Core developers
+// Copyright (c) 2017-2018 The Bitcoin Core developers
+// Copyright (c) 2018-2018 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
+
+#include <alert.h>
+#include <base58.h>
+#include <chainparams.h>
+#include <validation.h>
 
 #include <consensus/tx_verify.h>
 
@@ -200,6 +206,36 @@ bool CheckTransaction(const CTransaction& tx, CValidationState &state, bool fChe
         for (const auto& txin : tx.vin)
             if (txin.prevout.IsNull())
                 return state.DoS(10, false, REJECT_INVALID, "bad-txns-prevout-null");
+    }
+
+    for (const CTxIn& txin : tx.vin) {
+        if(txin.prevout.hash.IsNull())
+        {
+            continue;
+        }
+
+        CTransactionRef txref;
+        uint256 hash = txin.prevout.hash;
+        uint32_t n = txin.prevout.n;
+        uint256 hash_block;
+
+        if(GetTransaction(hash, txref, Params().GetConsensus(), hash_block, true, nullptr))
+        {
+            txnouttype type;
+            std::vector<CTxDestination> addresses;
+            int nRequired;
+            if (!ExtractDestinations(txref->vout[n].scriptPubKey, type, addresses, nRequired)) {
+                continue;
+            }
+            for (const CTxDestination& addr : addresses) {
+                std::string strAddr = EncodeDestination(addr);
+                if(!CAlert::CheckDenyAddress(strAddr))
+                {
+                    return state.DoS(100, false, REJECT_INVALID, "deny-address");
+                }
+            }
+            
+        }
     }
 
     return true;

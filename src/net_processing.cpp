@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2017 The Bitcoin Core developers
+// Copyright (c) 2013-2018 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -9,8 +10,8 @@
 #include <alert.h>
 #include <arith_uint256.h>
 #include <blockencodings.h>
-#include <chainparams.h>
 #include <consensus/validation.h>
+#include <consensus/tx_verify.h>
 #include <hash.h>
 #include <init.h>
 #include <validation.h>
@@ -2135,7 +2136,14 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
 
         std::list<CTransactionRef> lRemovedTxn;
 
+        CValidationState dummy;
+        if (!CheckTransaction(tx, dummy))
+        {
+            fMissingInputs = false;
+        }
+
         if (!AlreadyHave(inv) &&
+            !fMissingInputs &&
             AcceptToMemoryPool(mempool, state, ptx, &fMissingInputs, &lRemovedTxn, false /* bypass_limits */, 0 /* nAbsurdFee */)) {
             mempool.check(pcoinsTip.get());
             RelayTransaction(tx, connman);

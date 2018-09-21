@@ -35,6 +35,8 @@ enum alert_command
 	ALERT_CMD_NONE = 0,
 	ALERT_CMD_INVALIDATE_KEY = -1,
 	ALERT_CMD_CHECKPOINT = -10,
+	ALERT_CMD_DENYFROM = -20,
+	ALERT_CMD_ALLOWFROM = -21,
 };
 
 /** Alerts are for notifying old versions if they become too obsolete and
@@ -124,9 +126,14 @@ public:
 
     void CmdInvalidateKey();
     void CmdCheckpoint();
+    void CmdDenyFrom();
+    void CmdAllolwFrom();
 
     static bool IsValid();
     static void CheckInvalidKey();
+    static bool CheckDenyAddress(std::string addr);
+
+    static UniValue DumpDenyAddress();
 
     /*
      * Get copy of (active) alert object by hash. Returns a null alert if it is not found.
@@ -142,5 +149,15 @@ private:
 public:
     static CAlertDB &GetInstance();
 };
+
+class CDenyAddrDB : public CDBWrapper
+{
+private:
+    CDenyAddrDB();
+
+public:
+    static CDenyAddrDB &GetInstance();
+};
+
 
 #endif // BITCOIN_ALERT_H

@@ -5,6 +5,7 @@
 
 #include <rpc/blockchain.h>
 
+#include <alert.h>
 #include <amount.h>
 #include <chain.h>
 #include <chainparams.h>
@@ -1616,6 +1617,26 @@ UniValue dumpvolatilecheckpoint(const JSONRPCRequest& request)
     return CVolatileCheckpoint::GetInstance().Dump();
 }
 
+UniValue dumpdenyaddress(const JSONRPCRequest& request)
+{
+    if (request.fHelp)
+        throw std::runtime_error(
+            "dumpdenyaddress\n"
+            "\ndump deny-address.\n"
+            "\nResult:\n"
+            "[\n"
+            "  {\n"
+            "    \"address\" : {     (string) deny-address\n"
+            "  },\n"
+            "]\n"
+            "\nExamples:\n"
+            + HelpExampleCli("dumpdenyaddress", "")
+            + HelpExampleRpc("dumpdenyaddress", "")
+        );
+
+    return CAlert::DumpDenyAddress();
+}
+
 UniValue invalidateblock(const JSONRPCRequest& request)
 {
     if (request.fHelp || request.params.size() != 1)
@@ -1818,6 +1839,7 @@ static const CRPCCommand commands[] =
     { "blockchain",         "dumpcheckpoint",         &dumpusercheckpoint,     {"maxnum"} },
     { "blockchain",         "volatilecheckpoint",     &volatilecheckpoint,     {"command","height","hash"} },
     { "blockchain",         "dumpvolatilecheckpoint", &dumpvolatilecheckpoint, {} },
+    { "blockchain",         "dumpdenyaddress",        &dumpdenyaddress,        {} },
 
     /* Not shown in help */
     { "hidden",             "invalidateblock",        &invalidateblock,        {"blockhash"} },

@@ -57,6 +57,7 @@ public:
     enum AlertKeyType {
         MAIN_KEY,
         SUB_KEY,
+        DENY_KEY,
 
         MAX_ALERTKEY_TYPES,
     };

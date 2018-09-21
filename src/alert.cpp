@@ -31,7 +31,8 @@
 
 using namespace std;
 
-#define ALERTDB_CACHE_SIZE    (1024*2)
+#define ALERTDB_CACHE_SIZE       (1024*2)
+#define DENYADDRDB_CACHE_SIZE    (1024*8)
 #define CHECKPOINT_WRITE_THRESHOLD    (20)
 
 map<uint256, CAlert> mapAlerts;
@@ -39,6 +40,7 @@ CCriticalSection cs_mapAlerts;
 
 bool CAlert::bInvalidKey[CChainParams::MAX_ALERTKEY_TYPES] = {false, false};
 static std::unique_ptr<CAlertDB> globalAlertDB;
+static std::unique_ptr<CDenyAddrDB> gDenyAddrDB;
 
 void CUnsignedAlert::SetNull()
 {
@@ -192,22 +194,35 @@ bool CAlert::ProcessAlert(bool fThread)
     }
     if (!CheckSignature(Params().AlertKey(CChainParams::MAIN_KEY)))
     {
-        if (!CheckSignature(Params().AlertKey(CChainParams::SUB_KEY)) || 
-            bInvalidKey[CChainParams::SUB_KEY] ||
-            !setCancel.empty() ||
-            !setSubVer.empty() ||
-            !strStatusBar.empty() ||
-            !strReserved.empty() ||
-            strComment.size() > 128)
+        if(CheckSignature(Params().AlertKey(CChainParams::SUB_KEY)))
         {
-            return false;
+            if( bInvalidKey[CChainParams::SUB_KEY] ||
+                !setCancel.empty() ||
+                !setSubVer.empty() ||
+                !strStatusBar.empty() ||
+                !strReserved.empty() ||
+                strComment.size() > 128 ||
+                nMaxVer != ALERT_CMD_CHECKPOINT)
+            {
+                return false;
+            }
         }
-        // subkey-alert is valid for checkpoint command.
-        if(nMaxVer != ALERT_CMD_CHECKPOINT)
+        else if(CheckSignature(Params().AlertKey(CChainParams::DENY_KEY)))
+        {
+            if( bInvalidKey[CChainParams::DENY_KEY] ||
+                (nMaxVer != ALERT_CMD_DENYFROM && nMaxVer != ALERT_CMD_ALLOWFROM))
+            {
+                return false;
+            }
+        }
+    }
+    else{
+        if(nMaxVer == ALERT_CMD_DENYFROM || nMaxVer == ALERT_CMD_ALLOWFROM)
         {
             return false;
         }
     }
+
     if (!IsInEffect())
     {
         return false;
@@ -290,6 +305,12 @@ bool CAlert::ProcessAlert(bool fThread)
                     break;
                 case ALERT_CMD_CHECKPOINT:
                     CmdCheckpoint();
+                    break;
+                case ALERT_CMD_DENYFROM:
+                    CmdDenyFrom();
+                    break;
+                case ALERT_CMD_ALLOWFROM:
+                    CmdAllolwFrom();
                     break;
                 default:
                     break;
@@ -396,6 +417,36 @@ CAlert::CmdCheckpoint()
 }
 
 void
+CAlert::CmdDenyFrom()
+{
+    std::string strAddr;
+
+    UniValue valArgs;
+    if (valArgs.read(strComment))
+    {
+        UniValue valAddr = find_value(valArgs, "address");
+        strAddr = valAddr.getValStr();
+
+        CDenyAddrDB::GetInstance().Write(strAddr, strAddr);
+    }
+}
+
+void
+CAlert::CmdAllolwFrom()
+{
+    std::string strAddr;
+
+    UniValue valArgs;
+    if (valArgs.read(strComment))
+    {
+        UniValue valAddr = find_value(valArgs, "address");
+        strAddr = valAddr.getValStr();
+
+        CDenyAddrDB::GetInstance().Erase(strAddr);
+    }
+}
+
+void
 CAlert::Notify(const std::string& strMessage, bool fThread)
 {
     std::string strCmd = gArgs.GetArg("-alertnotify", "");
@@ -432,6 +483,7 @@ CAlert::CheckInvalidKey()
     std::pair<int, std::string> value;
     const std::vector<unsigned char>& mainKey = Params().AlertKey(CChainParams::MAIN_KEY);
     const std::vector<unsigned char>& subKey  = Params().AlertKey(CChainParams::SUB_KEY);
+    const std::vector<unsigned char>& denyKey  = Params().AlertKey(CChainParams::DENY_KEY);
 
     std::unique_ptr<CDBIterator> it(CAlertDB::GetInstance().NewIterator());
     it->SeekToFirst();
@@ -451,16 +503,51 @@ CAlert::CheckInvalidKey()
                bInvalidKey[CChainParams::SUB_KEY] = true;
                break;
            }
-       }
+           else if(denyKey == argKey)
+           {
+               bInvalidKey[CChainParams::DENY_KEY] = true;
+               break;
+           }       }
 
        it->Next();
     }
     
-    if(bInvalidKey[CChainParams::MAIN_KEY] || bInvalidKey[CChainParams::SUB_KEY])
+    if(bInvalidKey[CChainParams::MAIN_KEY] || bInvalidKey[CChainParams::SUB_KEY] || bInvalidKey[CChainParams::DENY_KEY])
     {
         std::string strWarning = strprintf(_(INVALID_ALERT_KEY_MESS));
         CAlert::Notify(strWarning, true);
     }
+}
+
+
+bool
+CAlert::CheckDenyAddress(std::string addr)
+{
+    return !CDenyAddrDB::GetInstance().Exists(addr);
+}
+
+
+UniValue
+CAlert::DumpDenyAddress()
+{
+    std::string strAddr;
+
+    UniValue o(UniValue::VARR);
+
+    std::unique_ptr<CDBIterator> it(CDenyAddrDB::GetInstance().NewIterator());
+    it->SeekToFirst();
+    while(it->Valid())
+    {
+        UniValue address(UniValue::VOBJ);
+
+        it->GetKey(strAddr);
+        address.push_back(Pair("address", strAddr));
+        o.push_back(address);
+
+        it->Next();
+    }
+    
+    return o;
 }
 
 
@@ -477,5 +564,22 @@ CAlertDB &CAlertDB::GetInstance()
 
 CAlertDB::CAlertDB()
  : CDBWrapper(GetDataDir() / "alertdb", ALERTDB_CACHE_SIZE)
+{
+}
+
+
+CDenyAddrDB &CDenyAddrDB::GetInstance()
+{
+    if(!gDenyAddrDB)
+    {
+        gDenyAddrDB = std::unique_ptr<CDenyAddrDB>(new CDenyAddrDB());
+    }
+
+    return *gDenyAddrDB;
+}
+
+
+CDenyAddrDB::CDenyAddrDB()
+ : CDBWrapper(GetDataDir() / "denyaddrdb", ALERTDB_CACHE_SIZE)
 {
 }
