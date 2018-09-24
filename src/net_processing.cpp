@@ -2139,7 +2139,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         CValidationState dummy;
         if (!CheckTransaction(tx, dummy))
         {
-            fMissingInputs = false;
+            fMissingInputs = true;
         }
 
         if (!AlreadyHave(inv) &&
