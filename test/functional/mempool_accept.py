@@ -37,6 +37,7 @@ class MempoolAcceptanceTest(BitcoinTestFramework):
         self.num_nodes = 1
         self.extra_args = [[
             '-txindex',
+            '-mempoolreplacement=1',
             '-acceptnonstdtxn=0',  # Try to mimic main-net
         ]] * self.num_nodes
 

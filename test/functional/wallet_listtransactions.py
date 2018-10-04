@@ -25,6 +25,9 @@ def tx_from_hex(hexstring):
 class ListTransactionsTest(BitcoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
+        self.extra_args = [[
+            "-mempoolreplacement=1",
+        ] for i in range(self.num_nodes)]
 
     def skip_test_if_missing_module(self):
         self.skip_if_no_wallet()
@@ -102,7 +105,6 @@ class ListTransactionsTest(BitcoinTestFramework):
         assert_array_result(self.nodes[0].listtransactions(label="watchonly", count=100, include_watchonly=True),
                             {"category": "receive", "amount": Decimal("0.1")},
                             {"txid": txid, "label": "watchonly"})
-
         self.run_rbf_opt_in_test()
 
     # Check that the opt-in-rbf flag works properly, for sent and received
