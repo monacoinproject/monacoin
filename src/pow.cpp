@@ -173,7 +173,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
 
     int64_t adjustmentInterval = params.DifficultyAdjustmentInterval();
     if ((pindexLast->nHeight+1) >= Params().SwitchDIGIblock()) {
-        adjustmentInterval = params.DifficultyAdjustmentIntervalDigisheld();
+        adjustmentInterval = params.DifficultyAdjustmentIntervalDigishield();
     }
 
     // Only change once per difficulty adjustment interval
@@ -223,7 +223,7 @@ unsigned int CalculateNextWorkRequired(const CBlockIndex* pindexLast, int64_t nF
     bool fNewDifficultyProtocol = ((pindexLast->nHeight+1) >= Params().SwitchDIGIblock());
     int64_t targetTimespan =  params.nPowTargetTimespan;
     if (fNewDifficultyProtocol) {
-        targetTimespan = params.nPowTargetTimespanDigisheld;
+        targetTimespan = params.nPowTargetTimespanDigishield;
     }
 
     // Limit adjustment step
