@@ -17,6 +17,7 @@
 #include <keystore.h>
 #include <validation.h>
 #include <net.h>
+#include <plugin.h>
 #include <policy/fees.h>
 #include <policy/policy.h>
 #include <policy/rbf.h>
@@ -979,6 +980,8 @@ bool CWallet::AddToWallet(const CWalletTx& wtxIn, bool fFlushOnClose)
         boost::replace_all(strCmd, "%s", wtxIn.GetHash().GetHex());
         boost::thread t(runCommand, strCmd); // thread runs free
     }
+
+    plugin::WalletNotify(wtxIn.GetHash().GetHex());
 
     return true;
 }

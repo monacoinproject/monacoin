@@ -26,6 +26,7 @@
 #include <netbase.h>
 #include <net.h>
 #include <net_processing.h>
+#include <plugin.h>
 #include <policy/feerate.h>
 #include <policy/fees.h>
 #include <policy/policy.h>
@@ -189,6 +190,9 @@ void Shutdown()
     TRY_LOCK(cs_Shutdown, lockShutdown);
     if (!lockShutdown)
         return;
+
+    plugin::Term();
+
 
     /// Note: Shutdown() must be able to handle cases in which initialization failed part of the way,
     /// for example if the data directory was found to be locked.
@@ -533,6 +537,9 @@ std::string HelpMessage(HelpMessageMode mode)
         strUsage += HelpMessageOpt("-rpcworkqueue=<n>", strprintf("Set the depth of the work queue to service RPC calls (default: %d)", DEFAULT_HTTP_WORKQUEUE));
         strUsage += HelpMessageOpt("-rpcservertimeout=<n>", strprintf("Timeout during HTTP requests (default: %d)", DEFAULT_HTTP_SERVER_TIMEOUT));
     }
+    strUsage += HelpMessageGroup(_("Plugin options:"));
+    strUsage += HelpMessageOpt("-queuedepth", _("Plugin notification queue depth (default: 1024)"));
+    strUsage += HelpMessageOpt("-queuewait", strprintf(_("Wait for processing when the plugin queue overflow (default: true)")));
 
     return strUsage;
 }
@@ -1845,6 +1852,8 @@ bool AppInitMain()
 #ifdef ENABLE_WALLET
     StartWallets(scheduler);
 #endif
+
+    plugin::Init();
 
     return true;
 }

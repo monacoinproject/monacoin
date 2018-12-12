@@ -973,6 +973,16 @@ std::string CopyrightHolders(const std::string& strPrefix)
         strYear = strPrefix;
         strYear.replace(strYear.find("2013"), sizeof("2013")-1, "2014");
         strCopyrightHolders += "\n" + strYear + "The Vertcoin Developers";
+
+        strYear = strPrefix;
+        strYear.replace(strYear.find("2013"), sizeof("2013")-1, "1994");
+        strCopyrightHolders += "\n" + strYear + "Lua.org, PUC-Rio.";
+
+        strYear = strPrefix;
+        strYear.replace(strYear.find("2013"), sizeof("2013")-1, "2010");
+        std::string cy = std::to_string(COPYRIGHT_YEAR);
+        strYear.replace(strYear.find(cy), sizeof(cy.c_str())-1, "2011");
+        strCopyrightHolders += "\n" + strYear + " Mark Pulford <mark@kyne.com.au>";
     }
     return strCopyrightHolders;
 }

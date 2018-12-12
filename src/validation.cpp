@@ -18,6 +18,7 @@
 #include <cuckoocache.h>
 #include <hash.h>
 #include <init.h>
+#include <plugin.h>
 #include <policy/fees.h>
 #include <policy/policy.h>
 #include <policy/rbf.h>
@@ -2637,6 +2638,9 @@ bool CChainState::ActivateBestChain(CValidationState &state, const CChainParams&
 
                 // Always notify the UI if a new block tip was connected
                 uiInterface.NotifyBlockTip(fInitialDownload, pindexNewTip);
+                
+                if(pindexNewTip)
+                    plugin::BlockNotify(fInitialDownload, pindexNewTip->GetBlockHash().GetHex());
             }
         }
         // When we reach this point, we switched to a new tip (stored in pindexNewTip).

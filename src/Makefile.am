@@ -110,6 +110,33 @@ BITCOIN_CORE_H = \
   keystore.h \
   dbwrapper.h \
   limitedmap.h \
+  lua/lua/lapi.h \
+  lua/lua/lauxlib.h \
+  lua/lua/lcode.h \
+  lua/lua/lctype.h \
+  lua/lua/ldebug.h \
+  lua/lua/ldo.h \
+  lua/lua/lfunc.h \
+  lua/lua/lgc.h \
+  lua/lua/llex.h \
+  lua/lua/llimits.h \
+  lua/lua/lmem.h \
+  lua/lua/lobject.h \
+  lua/lua/lopcodes.h \
+  lua/lua/lparser.h \
+  lua/lua/lprefix.h \
+  lua/lua/lstate.h \
+  lua/lua/lstring.h \
+  lua/lua/ltable.h \
+  lua/lua/ltm.h \
+  lua/lua/lua.h \
+  lua/lua/lua.hpp \
+  lua/lua/luaconf.h \
+  lua/lua/lualib.h \
+  lua/lua/lundump.h \
+  lua/lua/lvm.h \
+  lua/lua/lzio.h \
+  lua/lua-cjson/strbuf.h \
   memusage.h \
   merkleblock.h \
   miner.h \
@@ -119,6 +146,7 @@ BITCOIN_CORE_H = \
   netbase.h \
   netmessagemaker.h \
   noui.h \
+  plugin.h \
   policy/feerate.h \
   policy/fees.h \
   policy/policy.h \
@@ -203,11 +231,50 @@ libbitcoin_server_a_SOURCES = \
   httpserver.cpp \
   init.cpp \
   dbwrapper.cpp \
+  lua/lua/lapi.c \
+  lua/lua/lauxlib.c \
+  lua/lua/lbaselib.c \
+  lua/lua/lbitlib.c \
+  lua/lua/lcode.c \
+  lua/lua/lcorolib.c \
+  lua/lua/lctype.c \
+  lua/lua/ldblib.c \
+  lua/lua/ldebug.c \
+  lua/lua/ldo.c \
+  lua/lua/ldump.c \
+  lua/lua/lfunc.c \
+  lua/lua/lgc.c \
+  lua/lua/linit.c \
+  lua/lua/liolib.c \
+  lua/lua/llex.c \
+  lua/lua/lmathlib.c \
+  lua/lua/lmem.c \
+  lua/lua/loadlib.c \
+  lua/lua/lobject.c \
+  lua/lua/lopcodes.c \
+  lua/lua/loslib.c \
+  lua/lua/lparser.c \
+  lua/lua/lstate.c \
+  lua/lua/lstring.c \
+  lua/lua/lstrlib.c \
+  lua/lua/ltable.c \
+  lua/lua/ltablib.c \
+  lua/lua/ltm.c \
+  lua/lua/lua.c \
+  lua/lua/luac.c \
+  lua/lua/luauser.cpp \
+  lua/lua/lundump.c \
+  lua/lua/lutf8lib.c \
+  lua/lua/lvm.c \
+  lua/lua/lzio.c \
+  lua/lua-cjson/lua_cjson.c \
+  lua/lua-cjson/strbuf.c \
   merkleblock.cpp \
   miner.cpp \
   net.cpp \
   net_processing.cpp \
   noui.cpp \
+  plugin.cpp \
   policy/fees.cpp \
   policy/policy.cpp \
   policy/rbf.cpp \
@@ -217,6 +284,7 @@ libbitcoin_server_a_SOURCES = \
   rpc/mining.cpp \
   rpc/misc.cpp \
   rpc/net.cpp \
+  rpc/pluginrpc.cpp \
   rpc/rawtransaction.cpp \
   rpc/safemode.cpp \
   rpc/server.cpp \

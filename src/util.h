@@ -105,6 +105,7 @@ namespace BCLog {
         QT          = (1 << 19),
         LEVELDB     = (1 << 20),
         ALERT       = (1 << 21),
+        PLUGIN      = (1 << 22),
         ALL         = ~(uint32_t)0,
     };
 }
