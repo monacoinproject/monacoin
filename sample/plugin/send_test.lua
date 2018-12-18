@@ -16,7 +16,7 @@ end
 function test_sendmany()
   print("test_sendmany:")
 
-  amounts = {{p6Fy4dfgLHMuvyLvVLRBdKMobGEuNo9YTc = 1.0},{p8Dp8vHVuCWVY474j6CEiSAPaFh1bgznaw = 1.0}}
+  amounts = {p6Fy4dfgLHMuvyLvVLRBdKMobGEuNo9YTc = 1.0, p8Dp8vHVuCWVY474j6CEiSAPaFh1bgznaw = 1.0}
   amounts_json = cjson.encode(amounts)
   ret, tx = coind.sendmany("", amounts_json)
   if ret == true then
@@ -43,7 +43,7 @@ end
 function OnInit()
   -- ‚Ç‚ê‚©“K“–‚É
   test_sendfrom()
-  -- test_sendmany
+  -- test_sendmany()
   -- test_sendtoaddress()
 end
 
