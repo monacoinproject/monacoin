@@ -10,13 +10,16 @@
 #include <utiltime.h>
 #include <validation.h>
 
-
 #include <lua/luasocket/luasocket.h>
 #include <lua/luasocket/luasocket_scripts.h>
 #include <lua/luasocket/mime.h>
 #include <lua/luasocket/unix.h>
 
+#include <atomic>
+#include <chrono>
 #include <map>
+#include <memory>
+#include <mutex>
 #include <utility>
 #include <vector>
 
@@ -69,6 +72,8 @@ static CPluginQueue *pluginQueue = NULL;
 
 static int th_counter = 0;
 static std::map<int, std::thread> luaThread;
+static int mtx_counter = 0;
+static std::map<int, unique_ptr<std::mutex>> luaMutex;
 
 //============================================================================
 // UniValue to Lua
@@ -176,6 +181,15 @@ std::string& trim(std::string& str, const std::string& chars = "\t\n\v\f\r ")
 }
 
 //============================================================================
+// C++14 feature
+//============================================================================
+
+template<typename T, typename... Args>
+std::unique_ptr<T> make_unique(Args&&... args) {
+    return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+}
+
+//============================================================================
 // api func
 //============================================================================
 
@@ -187,7 +201,7 @@ std::string& trim(std::string& str, const std::string& chars = "\t\n\v\f\r ")
 static int l_CreateThread(lua_State *L)
 {
     do{
-        th_counter = (th_counter+1) & 0xffffff;
+        th_counter = (th_counter+1) & 0x7fffffff;
     } while(luaThread.find(th_counter) != luaThread.end());
 
     // thread func name
@@ -226,6 +240,94 @@ static int l_Join(lua_State *L)
     return 0;
 }
 
+
+/*
+ * l_CreateMutex()
+ */
+
+static int l_CreateMutex(lua_State *L)
+{
+    do{
+        mtx_counter = (mtx_counter+1) & 0x7fffffff;
+    } while(luaMutex.find(mtx_counter) != luaMutex.end());
+
+    // store mutex
+    luaMutex.emplace(make_pair(mtx_counter, make_unique<std::mutex>()));
+
+    lua_pushinteger(L, mtx_counter);
+    return 1;
+}
+
+
+/*
+ * l_DeleteMutex()
+ */
+
+static int l_DeleteMutex(lua_State *L)
+{
+    int mtx_no = (int)luaL_checkinteger(L, 1);
+
+    std::map<int, unique_ptr<std::mutex>>::iterator it = luaMutex.find(mtx_no);
+    if(it != luaMutex.end())
+    {
+        it->second.reset();
+        luaMutex.erase(it);
+    }
+
+    return 0;
+}
+
+
+/*
+ * l_Lock()
+ */
+
+static int l_Lock(lua_State *L)
+{
+    int mtx_no = (int)luaL_checkinteger(L, 1);
+
+    std::map<int, unique_ptr<std::mutex>>::iterator it = luaMutex.find(mtx_no);
+    if(it != luaMutex.end())
+    {
+        it->second->lock();
+    }
+
+    return 0;
+}
+
+
+/*
+ * l_Unlock()
+ */
+
+static int l_Unlock(lua_State *L)
+{
+    int mtx_no = (int)luaL_checkinteger(L, 1);
+
+    std::map<int, unique_ptr<std::mutex>>::iterator it = luaMutex.find(mtx_no);
+    if(it != luaMutex.end())
+    {
+        it->second->unlock();
+    }
+
+    return 0;
+}
+
+
+/*
+ * l_Sleep()
+ */
+
+static int l_Sleep(lua_State *L)
+{
+
+    int num = lua_gettop(L);
+    if(num == 1)
+    {
+        MilliSleep((int)luaL_checkinteger(L, 1));
+    }
+    return 0;
+}
 
 /*
  * l_IsInitialBlockDownload()
@@ -635,6 +737,11 @@ static const struct luaL_Reg coindApi [] = {
     // thread func
     {"CreateThread",           l_CreateThread},
     {"Join",                   l_Join},
+    {"CreateMutex",            l_CreateMutex},
+    {"DeleteMutex",            l_DeleteMutex},
+    {"Lock",                   l_Lock},
+    {"Unlock",                 l_Unlock},
+    {"Sleep",                  l_Sleep},
 
     // coind internal func
     {"IsInitialBlockDownload", l_IsInitialBlockDownload},
