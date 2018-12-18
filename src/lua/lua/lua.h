@@ -15,6 +15,9 @@
 
 #include "luaconf.h"
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #define LUA_VERSION_MAJOR	"5"
 #define LUA_VERSION_MINOR	"3"
@@ -482,5 +485,9 @@ struct lua_Debug {
 * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ******************************************************************************/
 
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

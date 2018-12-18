@@ -10,6 +10,12 @@
 #include <utiltime.h>
 #include <validation.h>
 
+
+#include <lua/luasocket/luasocket.h>
+#include <lua/luasocket/luasocket_scripts.h>
+#include <lua/luasocket/mime.h>
+#include <lua/luasocket/unix.h>
+
 #include <map>
 #include <utility>
 #include <vector>
@@ -653,6 +659,31 @@ static int RegisterCoindFunc(lua_State* L)
     return 1;
 }
 
+/*
+ * extension
+ */
+
+static struct luaL_Reg lua_extension [] = {
+    {"cjson",        luaopen_cjson},
+    {"socket.unix",  luaopen_socket_unix},
+    {"socket.core",  luaopen_socket_core},
+    {"socket.core",  luaopen_socket_core},
+    {"mime.core",    luaopen_mime_core},
+    {NULL, NULL}
+};
+
+static int RegisterExtension(lua_State* L)
+{
+    luaL_Reg* lib = lua_extension;
+    for (; lib->func; lib++)
+    {
+        luaL_requiref(L, lib->name, lib->func, 1);
+        lua_pop(L, 1);
+    }
+
+    return 1;
+}
+
 
 //============================================================================
 // class CPlugin
@@ -694,6 +725,11 @@ bool CPlugin::Load(const char* filename)
     L = luaL_newstate();
     CheckStack(L, LUA_STACK_SIZE);
     luaL_openlibs(L);
+
+    // register lua extension
+    RegisterExtension(L);
+    luaopen_luasocket_scripts(L);
+
     if( luaL_loadfile(L, pathPlugin.generic_string().c_str()) == LUA_ERRFILE )
     {
         lua_close(L);
@@ -701,9 +737,6 @@ bool CPlugin::Load(const char* filename)
         return false;
     }
     lua_pcall(L, 0, 0, 0);
-
-    // register lua extension
-    luaopen_cjson(L);
 
     // register api
     luaL_requiref(L, "coind", RegisterCoindFunc, 1);

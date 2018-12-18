@@ -983,6 +983,24 @@ std::string CopyrightHolders(const std::string& strPrefix)
         std::string cy = std::to_string(COPYRIGHT_YEAR);
         strYear.replace(strYear.find(cy), sizeof(cy.c_str())-1, "2011");
         strCopyrightHolders += "\n" + strYear + " Mark Pulford <mark@kyne.com.au>";
+
+        strYear = strPrefix;
+        strYear.replace(strYear.find("2013"), sizeof("2013")-1, "2004");
+        cy = std::to_string(COPYRIGHT_YEAR);
+        strYear.replace(strYear.find(cy), sizeof(cy.c_str())-1, "2013");
+        strCopyrightHolders += "\n" + strYear + "Diego Nehab";
+
+        strYear = strPrefix;
+        strYear.replace(strYear.find("2013"), sizeof("2013")-1, "2013");
+        cy = std::to_string(COPYRIGHT_YEAR);
+        strYear.replace(strYear.find(cy), sizeof(cy.c_str())-1, "2017");
+        strCopyrightHolders += "\n" + strYear + "Chukong Technologies";
+
+        strYear = strPrefix;
+        strYear.replace(strYear.find("2013"), sizeof("2013")-1, "2010");
+        cy = std::to_string(COPYRIGHT_YEAR);
+        strYear.replace(strYear.find(cy), sizeof(cy.c_str())-1, "2012");
+        strCopyrightHolders += "\n" + strYear + "cocos2d-x community";
     }
     return strCopyrightHolders;
 }

@@ -137,6 +137,25 @@ BITCOIN_CORE_H = \
   lua/lua/lvm.h \
   lua/lua/lzio.h \
   lua/lua-cjson/strbuf.h \
+  lua/luasocket/auxiliar.h \
+  lua/luasocket/buffer.h \
+  lua/luasocket/except.h \
+  lua/luasocket/inet.h \
+  lua/luasocket/io.h \
+  lua/luasocket/luasocket.h \
+  lua/luasocket/luasocket_scripts.h \
+  lua/luasocket/mime.h \
+  lua/luasocket/options.h \
+  lua/luasocket/select.h \
+  lua/luasocket/socket.h \
+  lua/luasocket/tcp.h \
+  lua/luasocket/timeout.h \
+  lua/luasocket/udp.h \
+  lua/luasocket/unix.h \
+  lua/luasocket/unixdgram.h \
+  lua/luasocket/unixstream.h \
+  lua/luasocket/usocket.h \
+  lua/luasocket/wsocket.h \
   memusage.h \
   merkleblock.h \
   miner.h \
@@ -269,6 +288,25 @@ libbitcoin_server_a_SOURCES = \
   lua/lua/lzio.c \
   lua/lua-cjson/lua_cjson.c \
   lua/lua-cjson/strbuf.c \
+  lua/luasocket/auxiliar.c \
+  lua/luasocket/buffer.c \
+  lua/luasocket/compat.c \
+  lua/luasocket/except.c \
+  lua/luasocket/inet.c \
+  lua/luasocket/io.c \
+  lua/luasocket/luasocket.c \
+  lua/luasocket/luasocket_scripts.c \
+  lua/luasocket/mime.c \
+  lua/luasocket/options.c \
+  lua/luasocket/select.c \
+  lua/luasocket/tcp.c \
+  lua/luasocket/timeout.c \
+  lua/luasocket/udp.c \
+  lua/luasocket/unix.c \
+  lua/luasocket/unixdgram.c \
+  lua/luasocket/unixstream.c \
+  lua/luasocket/usocket.c \
+  lua/luasocket/wsocket.c \
   merkleblock.cpp \
   miner.cpp \
   net.cpp \
