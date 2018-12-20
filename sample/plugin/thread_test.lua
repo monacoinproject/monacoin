@@ -25,7 +25,7 @@ function OnTerm()
   coind.Join(thread_2)
 
   -- ミューテックス削除
-  cond.DeleteMutex(mutex)
+  coind.DeleteMutex(mutex)
 end
 
 

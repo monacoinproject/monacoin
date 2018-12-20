@@ -15,7 +15,6 @@
 namespace plugin {
 
 //============================================================================
-
 //============================================================================
 
 void Init();
@@ -26,26 +25,6 @@ bool UnloadPlugin(const char *filename);
 
 void WalletNotify(const std::string &hash);
 void BlockNotify(bool initialsync, const std::string &hash);
-
-//============================================================================
-// class CPlugin
-//============================================================================
-
-class CPlugin
-{
-public:
-    CPlugin();
-    ~CPlugin();
-
-    bool Load(const char* filename);
-    void Unload();
-
-    void WalletNotify(std::string hash);
-    void BlockNotify(bool initialsync, std::string hash);
-
-private:
-    lua_State *L;
-};
 
 };
 

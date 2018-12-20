@@ -538,8 +538,6 @@ std::string HelpMessage(HelpMessageMode mode)
         strUsage += HelpMessageOpt("-rpcservertimeout=<n>", strprintf("Timeout during HTTP requests (default: %d)", DEFAULT_HTTP_SERVER_TIMEOUT));
     }
     strUsage += HelpMessageGroup(_("Plugin options:"));
-    strUsage += HelpMessageOpt("-queuedepth", _("Plugin notification queue depth (default: 1024)"));
-    strUsage += HelpMessageOpt("-queuewait", strprintf(_("Wait for processing when the plugin queue overflow (default: true)")));
 
     return strUsage;
 }

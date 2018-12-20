@@ -46,18 +46,15 @@ static bool CheckStack(lua_State *L, int n);
 
 static bool lua_pushunivalue(lua_State *L, UniValue val);
 
-static void CallWalletNotify(const std::string &hash);
-static void CallBlockNotify(bool initialsync, const std::string &hash);
-
 static void ExecLuaThread(lua_State *L, std::string funcname);
 
+class CPlugin;
 class CPluginQueue;
 
 //============================================================================
 // const value
 //============================================================================
 
-const size_t MAX_QUELE_DEPTH = 1024;
 const int LUA_STACK_SIZE = 2048;
 
 //============================================================================
@@ -66,9 +63,6 @@ const int LUA_STACK_SIZE = 2048;
 
 static map<string, CPlugin*> mapPlugins;
 static CCriticalSection cs_plugin;
-
-static std::thread threadQueue;
-static CPluginQueue *pluginQueue = NULL;
 
 static int th_counter = 0;
 static std::map<int, std::thread> luaThread;
@@ -1329,9 +1323,111 @@ static int RegisterExtension(lua_State* L)
 }
 
 
+
+//============================================================================
+// class CPluginQueue
+//============================================================================
+
+class CPluginQueue
+{
+private:
+    std::mutex cs;
+    std::condition_variable cond;
+    std::deque<UniValue*> queue;
+    bool running;
+
+public:
+    explicit CPluginQueue() : running(true)
+    {
+    }
+
+    virtual ~CPluginQueue()
+    {
+    }
+
+
+    bool Enqueue(UniValue *value)
+    {
+        std::unique_lock<std::mutex> lock(cs);
+        if(!running)
+        {
+            return false;
+        }
+
+        queue.emplace_back(value);
+        cond.notify_one();
+        return true;
+    }
+
+    void Run()
+    {
+        UniValue *val;
+        while (running) {
+            {
+                std::unique_lock<std::mutex> lock(cs);
+                while (running && queue.empty())
+                    cond.wait(lock);
+                if (!running && queue.empty())
+                    break;
+                val = queue.front();
+                queue.pop_front();
+            }
+
+            Proc(val);
+            delete(val);
+        }
+    }
+
+    virtual void Proc(UniValue* val){}
+
+    void SetRunning(bool b){running = b;}
+    bool IsRunning(){return running;}
+
+    void Interrupt()
+    {
+        std::unique_lock<std::mutex> lock(cs);
+        SetRunning(false);
+        cond.notify_all();
+    }
+};
+
+
 //============================================================================
 // class CPlugin
 //============================================================================
+
+class CPlugin : public CPluginQueue
+{
+private:
+    std::thread     th;
+    lua_State       *L;
+
+    enum NotifyType {
+        NONE,
+        INIT_NOTIFY,
+        TERM_NOTIFY,
+        BLOCK_NOTIFY,
+        WALLET_NOTIFY
+    };
+
+public:
+    CPlugin();
+    ~CPlugin();
+
+    bool Load(const char* filename);
+    void Unload();
+
+    bool InitNotify();
+    bool TermNotify();
+    bool WalletNotify(std::string hash);
+    bool BlockNotify(bool initialsync, std::string hash);
+
+    bool PushNotify(int nNotify);
+    bool PushBlockNotify(bool initialsync, std::string hash);
+    bool PushWalletNotify(std::string hash);
+
+    void Proc(UniValue* val);
+};
 
 
 /*
@@ -1385,20 +1481,11 @@ bool CPlugin::Load(const char* filename)
     }
     lua_pcall(L, 0, 0, 0);
 
+    // thread start
+    th = std::thread([this] { Run(); });
+
     // call OnInit()
-    lua_getglobal(L, "OnInit");
-    if (lua_isfunction(L, -1)) {
-        if(lua_pcall(L, 0, 0, 0))
-        {
-            lua_close(L);
-            L = NULL;
-            return false;
-        }
-    }
-    else
-    {
-        lua_pop(L,1); 
-    }
+    PushNotify(INIT_NOTIFY);
 
     return true;
 }
@@ -1412,15 +1499,11 @@ void CPlugin::Unload()
 {
     if(L)
     {
-        // call OnTerm()
-        lua_getglobal(L, "OnTerm");
-        if (lua_isfunction(L, -1)) {
-            lua_pcall(L, 0, 0, 0);
-        }
-        else
-        {
-            lua_pop(L,1); 
-        }
+       // call OnTerm()
+        PushNotify(TERM_NOTIFY);
+
+        // wait thread
+        th.join();
 
         // close
         lua_close(L);
@@ -1430,24 +1513,76 @@ void CPlugin::Unload()
 
 
 /*
- * CPlugin::WalletNotify()
+ * CPlugin::InitNotify()
  */
 
-void CPlugin::WalletNotify(std::string hash)
+bool CPlugin::InitNotify()
 {
-    lua_State *co = lua_newthread(L);
+    // call OnInit()
+    lua_getglobal(L, "OnInit");
+    if (lua_isfunction(L, -1)) {
+        if(lua_pcall(L, 0, 0, 0))
+        {
+            // close
+            lua_close(L);
+            L = NULL;
 
-    // call OnWalletNotify()
-    lua_getglobal(co, "OnWalletNotify");
-    if (lua_isfunction(co, -1)) {
-        lua_pushstring(co, hash.c_str());
-        lua_pcall(co, 1, 0, 0);
+            // stop thread loop
+            SetRunning(false);
+
+            return false;
+        }
     }
     else
     {
-        lua_pop(co,1); 
+        lua_pop(L,1); 
     }
 
+    return true;
+}
+
+
+/*
+ * CPlugin::TermNotify()
+ */
+
+bool CPlugin::TermNotify()
+{
+    // call OnTerm()
+    lua_getglobal(L, "OnTerm");
+    if (lua_isfunction(L, -1)) {
+        lua_pcall(L, 0, 0, 0);
+    }
+    else
+    {
+        lua_pop(L,1); 
+    }
+
+    // interrupt
+    Interrupt();
+
+    return true;
+}
+
+
+/*
+ * CPlugin::WalletNotify()
+ */
+
+bool CPlugin::WalletNotify(std::string hash)
+{
+    // call OnWalletNotify()
+    lua_getglobal(L, "OnWalletNotify");
+    if (lua_isfunction(L, -1)) {
+        lua_pushstring(L, hash.c_str());
+        lua_pcall(L, 1, 0, 0);
+    }
+    else
+    {
+        lua_pop(L,1); 
+    }
+
+    return true;
 }
 
 
@@ -1455,149 +1590,109 @@ void CPlugin::WalletNotify(std::string hash)
  * CPlugin::BlockNotify()
  */
 
-void CPlugin::BlockNotify(bool initialsync, std::string hash)
+bool CPlugin::BlockNotify(bool initialsync, std::string hash)
 {
-    lua_State *co = lua_newthread(L);
-
     // call OnBlockNotify()
-    lua_getglobal(co, "OnBlockNotify");
-    if (lua_isfunction(co, -1)) {
-        lua_pushboolean(co, initialsync);
-        lua_pushstring(co, hash.c_str());
-        lua_pcall(co, 2, 0, 0);
+    lua_getglobal(L, "OnBlockNotify");
+    if (lua_isfunction(L, -1)) {
+        lua_pushboolean(L, initialsync);
+        lua_pushstring(L, hash.c_str());
+        lua_pcall(L, 2, 0, 0);
     }
     else
     {
-        lua_pop(co,1); 
+        lua_pop(L,1); 
     }
+
+    return true;
 }
 
 
-//============================================================================
-// class CPluginQueue
-//============================================================================
+/*
+ * CPlugin::PushNotify()
+ */
 
-class CPluginQueue
+bool CPlugin::PushNotify(int nNotify)
 {
-private:
-    std::mutex cs;
-    std::condition_variable cond;
-    std::deque<UniValue*> queue;
-    bool running;
-    size_t maxDepth;
-    bool queuewait;
-
-    enum NotifyType {
-        NONE,
-        BLOCK_NOTIFY,
-        WALLET_NOTIFY
-    };
-
-
-public:
-    explicit CPluginQueue(size_t _maxDepth) : running(true), maxDepth(_maxDepth)
+    UniValue *val = new UniValue(UniValue::VARR);
+    if(!val)
     {
-        queuewait = gArgs.GetBoolArg("-queuewait", true);
+        return false;
     }
 
-    ~CPluginQueue()
+    val->push_back(nNotify);
+    Enqueue(val);
+    return true;
+}
+
+
+/*
+ * CPlugin::PushBlockNotify()
+ */
+
+bool CPlugin::PushBlockNotify(bool initialsync, std::string hash)
+{
+    UniValue *val = new UniValue(UniValue::VARR);
+    if(!val)
     {
+        return false;
     }
 
-    bool PushBlockNotify(bool initialsync, std::string hash)
-    {
-        UniValue *val = new UniValue(UniValue::VARR);
-        if(!val)
-        {
-            return false;
-        }
+    val->push_back((int)BLOCK_NOTIFY);
+    val->push_back(initialsync);
+    val->push_back(hash);
+    Enqueue(val);
+   return true;
+}
 
-        val->push_back((int)BLOCK_NOTIFY);
-        val->push_back(initialsync);
-        val->push_back(hash);
-        Enqueue(val);
-       return true;
+
+/*
+ * CPlugin::PushWalletNotify()
+ */
+
+bool CPlugin::PushWalletNotify(std::string hash)
+{
+    UniValue *val = new UniValue(UniValue::VARR);
+    if(!val)
+    {
+        return false;
     }
 
-    bool PushWalletNotify(std::string hash)
+    val->push_back((int)WALLET_NOTIFY);
+    val->push_back(hash);
+    Enqueue(val);
+    return true;
+}
+
+
+/*
+ * CPlugin::Proc()
+ */
+
+void CPlugin::Proc(UniValue* val)
+{
+    const std::vector<UniValue>& vecVal = val->getValues();
+    switch((NotifyType)vecVal[0].get_int())
     {
-        UniValue *val = new UniValue(UniValue::VARR);
-        if(!val)
-        {
-            return false;
-        }
-
-        val->push_back((int)WALLET_NOTIFY);
-        val->push_back(hash);
-        Enqueue(val);
-        return true;
-    }
-
-
-    bool Enqueue(UniValue *value)
-    {
-        std::unique_lock<std::mutex> lock(cs);
-        if(queuewait)
-        {
-            while(queue.size() >= maxDepth)
+        case INIT_NOTIFY:
+            if(!InitNotify())
             {
-                if(!running)
-                {
-                    return false;
-                }
-                MilliSleep(100);
+                break;
             }
-        }
-        else
-        {
-            if(queue.size() >= maxDepth || !running)
-            {
-                return false;
-            }
-        }
-
-        queue.emplace_back(value);
-        cond.notify_one();
-        return true;
+            break;
+        case TERM_NOTIFY:
+            TermNotify();
+            break;
+        case BLOCK_NOTIFY:
+            BlockNotify(vecVal[1].getBool(), vecVal[2].getValStr());
+            break;
+        case WALLET_NOTIFY:
+            WalletNotify(vecVal[1].get_str());
+            break;
+        default:
+            break;
     }
-
-    void Run()
-    {
-        UniValue *val;
-        while (true) {
-            {
-                std::unique_lock<std::mutex> lock(cs);
-                while (running && queue.empty())
-                    cond.wait(lock);
-                if (!running && queue.empty())
-                    break;
-                val = queue.front();
-                queue.pop_front();
-            }
-
-            const std::vector<UniValue>& vecVal = val->getValues();
-            switch((NotifyType)vecVal[0].get_int())
-            {
-                case BLOCK_NOTIFY:
-                    CallBlockNotify(vecVal[1].getBool(), vecVal[2].getValStr());
-                    break;
-                case WALLET_NOTIFY:
-                    CallWalletNotify(vecVal[1].get_str());
-                    break;
-                default:
-                    break;
-            }
-            delete(val);
-        }
-    }
-
-    void Interrupt()
-    {
-        std::unique_lock<std::mutex> lock(cs);
-        running = false;
-        cond.notify_all();
-    }
-};
+}
 
 
 //============================================================================
@@ -1618,47 +1713,6 @@ static bool CheckStack(lua_State *L, int n)
     return false;
 }
 
-
-/*
- * PluginQueueRun()
- */
-
-static void PluginQueueRun(CPluginQueue *queue)
-{
-    RenameThread("monacoin-pluginworker");
-    queue->Run();
-}
-
-
-/*
- * CallWalletNotify()
- */
-
-static void CallWalletNotify(const std::string &hash)
-{
-    LOCK(cs_plugin);
-    map<string, CPlugin*>::iterator me = mapPlugins.end();
-    for (map<string, CPlugin*>::iterator mi = mapPlugins.begin(); mi != me; mi++)
-    {
-        mi->second->WalletNotify(hash);
-    }
-
-}
-
-
-/*
- * CallBlockNotify()
- */
-
-static void CallBlockNotify(bool initialsync, const std::string &hash)
-{
-    LOCK(cs_plugin);
-    map<string, CPlugin*>::iterator me = mapPlugins.end();
-    for (map<string, CPlugin*>::iterator mi = mapPlugins.begin(); mi != me; mi++)
-    {
-      mi->second->BlockNotify(initialsync, hash);
-    }
-}
 
 /*
  * ExecLuaThread()
@@ -1690,16 +1744,7 @@ static void ExecLuaThread(lua_State *L, std::string funcname)
 
 void Init()
 {
-    if(pluginQueue)
-    {
-        return;
-    }
-    
-    size_t depth = gArgs.GetArg("-queuedepth", MAX_QUELE_DEPTH);
-    pluginQueue = new CPluginQueue(depth);
-    threadQueue = std::thread(PluginQueueRun, pluginQueue);
 }
-
 
 
 /*
@@ -1708,14 +1753,7 @@ void Init()
 
 void Term()
 {
-    if(pluginQueue)
-    {
-        pluginQueue->Interrupt();
-        threadQueue.join();
-        delete pluginQueue;
-        pluginQueue = NULL;
-    }
-    
+    LOCK(cs_plugin);
     map<string, CPlugin*>::iterator me = mapPlugins.end();
     for (map<string, CPlugin*>::iterator mi = mapPlugins.begin(); mi != me; mi++)
     {
@@ -1774,9 +1812,14 @@ bool UnloadPlugin(const char *filename)
 
 void WalletNotify(const std::string &hash)
 {
-    if(pluginQueue)
+    LOCK(cs_plugin);
+    map<string, CPlugin*>::iterator me = mapPlugins.end();
+    for (map<string, CPlugin*>::iterator mi = mapPlugins.begin(); mi != me; mi++)
     {
-        pluginQueue->PushWalletNotify(hash);
+        if(mi->second->IsRunning())
+        {
+            mi->second->PushWalletNotify(hash);
+        }
     }
 }
 
@@ -1787,9 +1830,14 @@ void WalletNotify(const std::string &hash)
 
 void BlockNotify(bool initialsync, const std::string &hash)
 {
-    if(pluginQueue)
+    LOCK(cs_plugin);
+    map<string, CPlugin*>::iterator me = mapPlugins.end();
+    for (map<string, CPlugin*>::iterator mi = mapPlugins.begin(); mi != me; mi++)
     {
-        pluginQueue->PushBlockNotify(initialsync, hash);
+        if(mi->second->IsRunning())
+        {
+            mi->second->PushBlockNotify(initialsync, hash);
+        }
     }
 }
 
