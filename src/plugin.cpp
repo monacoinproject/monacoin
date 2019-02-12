@@ -10,6 +10,11 @@
 #include <utiltime.h>
 #include <validation.h>
 
+#include <lua/luasec/ssl.h>
+#include <lua/luasec/context.h>
+#include <lua/luasec/luasec_scripts.h>
+#include <lua/luasec/x509.h>
+
 #include <lua/luasocket/luasocket.h>
 #include <lua/luasocket/luasocket_scripts.h>
 #include <lua/luasocket/mime.h>
@@ -33,6 +38,7 @@ using namespace std;
 
 extern "C" {
 int luaopen_cjson(lua_State *l);
+LSEC_API int luaopen_ssl_config(lua_State *L);
 }
 
 
@@ -1305,8 +1311,11 @@ static struct luaL_Reg lua_extension [] = {
     {"cjson",        luaopen_cjson},
     {"socket.unix",  luaopen_socket_unix},
     {"socket.core",  luaopen_socket_core},
-    {"socket.core",  luaopen_socket_core},
     {"mime.core",    luaopen_mime_core},
+    {"ssl.core",     luaopen_ssl_core},
+    {"ssl.context",  luaopen_ssl_context},
+    {"ssl.config",   luaopen_ssl_config},
+    {"ssl.x509",     luaopen_ssl_x509},
     {NULL, NULL}
 };
 
@@ -1469,6 +1478,7 @@ bool CPlugin::Load(const char* filename)
     // register lua extension
     RegisterExtension(L);
     luaopen_luasocket_scripts(L);
+    luaopen_luasec_scripts(L);
 
     // register api
     luaL_requiref(L, "coind", RegisterCoindFunc, 1);

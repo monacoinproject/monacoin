@@ -1001,6 +1001,10 @@ std::string CopyrightHolders(const std::string& strPrefix)
         cy = std::to_string(COPYRIGHT_YEAR);
         strYear.replace(strYear.find(cy), sizeof(cy.c_str())-1, "2012");
         strCopyrightHolders += "\n" + strYear + "cocos2d-x community";
+
+        strYear = strPrefix;
+        strYear.replace(strYear.find("2013"), sizeof("2013")-1, "2006");
+        strCopyrightHolders += "\n" + strYear + "Bruno Silvestre, UFG";
     }
     return strCopyrightHolders;
 }

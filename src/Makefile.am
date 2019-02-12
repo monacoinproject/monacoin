@@ -137,6 +137,13 @@ BITCOIN_CORE_H = \
   lua/lua/lvm.h \
   lua/lua/lzio.h \
   lua/lua-cjson/strbuf.h \
+  lua/luasec/config.h \
+  lua/luasec/context.h \
+  lua/luasec/ec.h \
+  lua/luasec/luasec_scripts.h \
+  lua/luasec/options.h \
+  lua/luasec/ssl.h \
+  lua/luasec/x509.h \
   lua/luasocket/auxiliar.h \
   lua/luasocket/buffer.h \
   lua/luasocket/except.h \
@@ -288,6 +295,12 @@ libbitcoin_server_a_SOURCES = \
   lua/lua/lzio.c \
   lua/lua-cjson/lua_cjson.c \
   lua/lua-cjson/strbuf.c \
+  lua/luasec/config.c \
+  lua/luasec/context.c \
+  lua/luasec/ec.c \
+  lua/luasec/luasec_scripts.c \
+  lua/luasec/ssl.c \
+  lua/luasec/x509.c \
   lua/luasocket/auxiliar.c \
   lua/luasocket/buffer.c \
   lua/luasocket/compat.c \
