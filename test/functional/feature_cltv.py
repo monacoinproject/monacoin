@@ -15,7 +15,6 @@ from test_framework.script import CScript, OP_1NEGATE, OP_CHECKLOCKTIMEVERIFY, O
 from test_framework.test_framework import BitcoinTestFramework
 from test_framework.util import (
     assert_equal,
-    bytes_to_hex_str,
     hex_str_to_bytes,
 )
 
@@ -115,7 +114,7 @@ class BIP65Test(BitcoinTestFramework):
         # rejected from the mempool for exactly that reason.
         assert_equal(
             [{'txid': spendtx.hash, 'allowed': False, 'reject-reason': '64: non-mandatory-script-verify-flag (Negative locktime)'}],
-            self.nodes[0].testmempoolaccept(rawtxs=[bytes_to_hex_str(spendtx.serialize())], allowhighfees=True)
+            self.nodes[0].testmempoolaccept(rawtxs=[spendtx.serialize().hex()], maxfeerate=0)
         )
 
         # Now we verify that a block with this transaction is also invalid.
