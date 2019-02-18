@@ -754,6 +754,14 @@ if test x$use_upnp != xno; then
   )
 fi
 
+AC_SUBST(MONO_CFLAGS)
+AC_SUBST(MONO_LIBS)
+if pkg-config --atleast-version=5.18 mono; then
+   MONO_CFLAGS=`pkg-config --cflags mono-2`
+   MONO_LIBS=`pkg-config --libs mono-2`
+   MONO_CFLAGS="$MONO_CFLAGS -DUSE_MONO"
+fi
+
 BITCOIN_QT_INIT
 
 dnl sets $bitcoin_enable_qt, $bitcoin_enable_qt_test, $bitcoin_enable_qt_dbus

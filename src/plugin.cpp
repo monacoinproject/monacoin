@@ -20,11 +20,26 @@
 #include <lua/luasocket/mime.h>
 #include <lua/luasocket/unix.h>
 
+#if defined(USE_MONO)
+
+#include <mono/jit/jit.h>
+#include <mono/metadata/assembly.h>
+#include <mono/metadata/debug-helpers.h>
+#include <mono/metadata/environment.h>
+#include <mono/metadata/mono-config.h>
+#include <mono/metadata/threads.h>
+#include <mono/metadata/mono-gc.h>
+
+#endif //  defined(USE_MONO)
+
+#include <algorithm>
 #include <atomic>
 #include <chrono>
+#include <iostream>
 #include <map>
 #include <memory>
 #include <mutex>
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -40,7 +55,6 @@ extern "C" {
 int luaopen_cjson(lua_State *l);
 LSEC_API int luaopen_ssl_config(lua_State *L);
 }
-
 
 namespace plugin {
 
@@ -940,11 +954,11 @@ static int l_getrawtransaction(lua_State *L)
         lua_pushboolean(L, true);
         if(verbose)
         {
-	        lua_pushunivalue(L, res);
+            lua_pushunivalue(L, res);
         }
         else
         {
-	        lua_pushstring(L, res.getValStr().c_str());
+            lua_pushstring(L, res.getValStr().c_str());
         }
     } catch (const UniValue& e) {
         printf("%s\n", e.write().c_str());
@@ -1174,8 +1188,8 @@ static int l_signrawtransaction(lua_State *L)
                 }
                 else
                 {
-	                tmpVal[1].read(str);
-	            }
+                    tmpVal[1].read(str);
+                }
             }
         case 1:                                                 // The transaction hex string
             tmpVal[0].setStr(lua_tostring (L, 1));
@@ -1213,7 +1227,7 @@ static int l_signrawtransaction(lua_State *L)
 
 static int l_combinerawtransaction(lua_State *L)
 {
-	UniValue tmpVal;
+    UniValue tmpVal;
 
     CheckStack(L, 2);
 
@@ -1401,15 +1415,15 @@ public:
 };
 
 
+
 //============================================================================
 // class CPlugin
 //============================================================================
 
 class CPlugin : public CPluginQueue
 {
-private:
+protected:
     std::thread     th;
-    lua_State       *L;
 
     enum NotifyType {
         NONE,
@@ -1420,16 +1434,16 @@ private:
     };
 
 public:
-    CPlugin();
-    ~CPlugin();
+    CPlugin() = default;
+    virtual ~CPlugin(){};
 
-    bool Load(const char* filename);
-    void Unload();
+    virtual bool Load(const char* filename) = 0;
+    virtual void Unload() = 0;
 
-    bool InitNotify();
-    bool TermNotify();
-    bool WalletNotify(std::string hash);
-    bool BlockNotify(bool initialsync, std::string hash);
+    virtual bool InitNotify() = 0;
+    virtual bool TermNotify() = 0;
+    virtual bool WalletNotify(std::string hash) = 0;
+    virtual bool BlockNotify(bool initialsync, std::string hash) = 0;
 
     bool PushNotify(int nNotify);
     bool PushBlockNotify(bool initialsync, std::string hash);
@@ -1440,190 +1454,16 @@ public:
 
 
 /*
- * CPlugin::CPlugin()
- */
-
-CPlugin::CPlugin()
-{
-    L = NULL;
-}
-
-
-/*
- * CPlugin::~CPlugin()
- */
-
-CPlugin::~CPlugin()
-{
-    Unload();
-}
-
-
-/*
- * CPlugin::Load()
- */
-bool CPlugin::Load(const char* filename)
-{
-    if(L)
-    {
-        return false;
-    }
-
-    fs::path pathPlugin = GetDataDir() / "plugin" / filename;
-
-    L = luaL_newstate();
-    CheckStack(L, LUA_STACK_SIZE);
-    luaL_openlibs(L);
-
-    // register lua extension
-    RegisterExtension(L);
-    luaopen_luasocket_scripts(L);
-    luaopen_luasec_scripts(L);
-
-    // register api
-    luaL_requiref(L, "coind", RegisterCoindFunc, 1);
-
-    if( luaL_loadfile(L, pathPlugin.generic_string().c_str()) == LUA_ERRFILE )
-    {
-        lua_close(L);
-        L = NULL;
-        return false;
-    }
-    lua_pcall(L, 0, 0, 0);
-
-    // thread start
-    th = std::thread([this] { Run(); });
-
-    // call OnInit()
-    PushNotify(INIT_NOTIFY);
-
-    return true;
-}
-
-
-/*
- * CPlugin::Unload()
- */
-
-void CPlugin::Unload()
-{
-    if(L)
-    {
-       // call OnTerm()
-        PushNotify(TERM_NOTIFY);
-
-        // wait thread
-        th.join();
-
-        // close
-        lua_close(L);
-        L = NULL;
-    }
-}
-
-
-/*
- * CPlugin::InitNotify()
- */
-
-bool CPlugin::InitNotify()
-{
-    // call OnInit()
-    lua_getglobal(L, "OnInit");
-    if (lua_isfunction(L, -1)) {
-        if(lua_pcall(L, 0, 0, 0))
-        {
-            // close
-            lua_close(L);
-            L = NULL;
-
-            // stop thread loop
-            SetRunning(false);
-
-            return false;
-        }
-    }
-    else
-    {
-        lua_pop(L,1); 
-    }
-
-    return true;
-}
-
-
-/*
- * CPlugin::TermNotify()
- */
-
-bool CPlugin::TermNotify()
-{
-    // call OnTerm()
-    lua_getglobal(L, "OnTerm");
-    if (lua_isfunction(L, -1)) {
-        lua_pcall(L, 0, 0, 0);
-    }
-    else
-    {
-        lua_pop(L,1); 
-    }
-
-    // interrupt
-    Interrupt();
-
-    return true;
-}
-
-
-/*
- * CPlugin::WalletNotify()
- */
-
-bool CPlugin::WalletNotify(std::string hash)
-{
-    // call OnWalletNotify()
-    lua_getglobal(L, "OnWalletNotify");
-    if (lua_isfunction(L, -1)) {
-        lua_pushstring(L, hash.c_str());
-        lua_pcall(L, 1, 0, 0);
-    }
-    else
-    {
-        lua_pop(L,1); 
-    }
-
-    return true;
-}
-
-
-/*
- * CPlugin::BlockNotify()
- */
-
-bool CPlugin::BlockNotify(bool initialsync, std::string hash)
-{
-    // call OnBlockNotify()
-    lua_getglobal(L, "OnBlockNotify");
-    if (lua_isfunction(L, -1)) {
-        lua_pushboolean(L, initialsync);
-        lua_pushstring(L, hash.c_str());
-        lua_pcall(L, 2, 0, 0);
-    }
-    else
-    {
-        lua_pop(L,1); 
-    }
-
-    return true;
-}
-
-
-/*
  * CPlugin::PushNotify()
  */
 
 bool CPlugin::PushNotify(int nNotify)
 {
+    if(!IsRunning())
+    {
+        return false;
+    }
+
     UniValue *val = new UniValue(UniValue::VARR);
     if(!val)
     {
@@ -1642,6 +1482,11 @@ bool CPlugin::PushNotify(int nNotify)
 
 bool CPlugin::PushBlockNotify(bool initialsync, std::string hash)
 {
+    if(!IsRunning())
+    {
+        return false;
+    }
+
     UniValue *val = new UniValue(UniValue::VARR);
     if(!val)
     {
@@ -1662,6 +1507,11 @@ bool CPlugin::PushBlockNotify(bool initialsync, std::string hash)
 
 bool CPlugin::PushWalletNotify(std::string hash)
 {
+    if(!IsRunning())
+    {
+        return false;
+    }
+
     UniValue *val = new UniValue(UniValue::VARR);
     if(!val)
     {
@@ -1706,6 +1556,498 @@ void CPlugin::Proc(UniValue* val)
 
 
 //============================================================================
+// class CLuaPlugin
+//============================================================================
+
+class CLuaPlugin : public CPlugin
+{
+protected:
+    lua_State       *L;
+
+public:
+    CLuaPlugin();
+    virtual ~CLuaPlugin();
+
+    bool Load(const char* filename);
+    void Unload();
+
+    bool InitNotify();
+    bool TermNotify();
+    bool WalletNotify(std::string hash);
+    bool BlockNotify(bool initialsync, std::string hash);
+};
+
+
+/*
+ * CLuaPlugin::CLuaPlugin()
+ */
+
+CLuaPlugin::CLuaPlugin()
+{
+    L = NULL;
+}
+
+
+/*
+ * CLuaPlugin::~CLuaPlugin()
+ */
+
+CLuaPlugin::~CLuaPlugin()
+{
+    Unload();
+}
+
+
+/*
+ * CLuaPlugin::Load()
+ */
+bool CLuaPlugin::Load(const char* filename)
+{
+    if(L)
+    {
+        return false;
+    }
+
+    fs::path pathPlugin = GetDataDir() / "plugin" / filename;
+
+    L = luaL_newstate();
+    CheckStack(L, LUA_STACK_SIZE);
+    luaL_openlibs(L);
+
+    // register lua extension
+    RegisterExtension(L);
+    luaopen_luasocket_scripts(L);
+    luaopen_luasec_scripts(L);
+
+    // register api
+    luaL_requiref(L, "coind", RegisterCoindFunc, 1);
+
+    if( luaL_loadfile(L, pathPlugin.generic_string().c_str()) == LUA_ERRFILE )
+    {
+        lua_close(L);
+        L = NULL;
+        LogPrint(BCLog::PLUGIN, "Failed to load plugin : %s", pathPlugin.generic_string().c_str());
+        return false;
+    }
+    lua_pcall(L, 0, 0, 0);
+
+    // thread start
+    th = std::thread([this] { Run(); });
+
+    // call OnInit()
+    PushNotify(INIT_NOTIFY);
+
+    return true;
+}
+
+
+/*
+ * CLuaPlugin::Unload()
+ */
+
+void CLuaPlugin::Unload()
+{
+    if(L)
+    {
+       // call OnTerm()
+        PushNotify(TERM_NOTIFY);
+
+        // wait thread
+        th.join();
+
+        // close
+        lua_close(L);
+        L = NULL;
+    }
+}
+
+
+/*
+ * CLuaPlugin::InitNotify()
+ */
+
+bool CLuaPlugin::InitNotify()
+{
+    // call OnInit()
+    lua_getglobal(L, "OnInit");
+    if (lua_isfunction(L, -1)) {
+        if(lua_pcall(L, 0, 0, 0))
+        {
+            // close
+            lua_close(L);
+            L = NULL;
+
+            // stop thread loop
+            SetRunning(false);
+
+            return false;
+        }
+    }
+    else
+    {
+        lua_pop(L,1); 
+    }
+
+    return true;
+}
+
+
+/*
+ * CLuaPlugin::TermNotify()
+ */
+
+bool CLuaPlugin::TermNotify()
+{
+    // call OnTerm()
+    lua_getglobal(L, "OnTerm");
+    if (lua_isfunction(L, -1)) {
+        lua_pcall(L, 0, 0, 0);
+    }
+    else
+    {
+        lua_pop(L,1); 
+    }
+
+    // interrupt
+    Interrupt();
+
+    return true;
+}
+
+
+/*
+ * CLuaPlugin::WalletNotify()
+ */
+
+bool CLuaPlugin::WalletNotify(std::string hash)
+{
+    // call OnWalletNotify()
+    lua_getglobal(L, "OnWalletNotify");
+    if (lua_isfunction(L, -1)) {
+        lua_pushstring(L, hash.c_str());
+        lua_pcall(L, 1, 0, 0);
+    }
+    else
+    {
+        lua_pop(L,1); 
+    }
+
+    return true;
+}
+
+
+/*
+ * CLuaPlugin::BlockNotify()
+ */
+
+bool CLuaPlugin::BlockNotify(bool initialsync, std::string hash)
+{
+    // call OnBlockNotify()
+    lua_getglobal(L, "OnBlockNotify");
+    if (lua_isfunction(L, -1)) {
+        lua_pushboolean(L, initialsync);
+        lua_pushstring(L, hash.c_str());
+        lua_pcall(L, 2, 0, 0);
+    }
+    else
+    {
+        lua_pop(L,1); 
+    }
+
+    return true;
+}
+
+
+#if defined(USE_MONO)
+
+//============================================================================
+// class CMonoDomain
+//============================================================================
+
+class CMonoDomain
+{
+public:
+    static MonoDomain* GetDomain()
+    {
+        // thread safe with C++11
+        static CMonoDomain instance;
+        return instance.domain;
+    }
+
+    CMonoDomain()
+    {
+        domain = mono_jit_init_version("monacoind", "v4.0.30319");
+        if(!domain)
+        {
+           LogPrint(BCLog::PLUGIN, "Failed to initialize MONO");
+           return;
+        }
+
+        // set mono environment
+        std::string strConfig = gArgs.GetArg("-monoconfig", "");
+        if(strConfig != "")
+        {
+            mono_config_parse(strConfig.c_str());
+        }
+        else
+        {
+            mono_config_parse(NULL);
+        }
+
+        std::string strLib = gArgs.GetArg("-monolib", "");
+        std::string strEtc = gArgs.GetArg("-monoetc", "");
+
+        if(strLib != "" && strEtc != "")
+        {
+            mono_set_dirs (strLib.c_str(), strEtc.c_str());
+        }
+    }
+
+    ~CMonoDomain()
+    {
+        if(domain)
+        {
+            mono_jit_cleanup(domain);
+        }
+    }
+
+    MonoDomain    *domain;
+};
+
+//============================================================================
+// class CMonoPlugin
+//============================================================================
+
+class CMonoPlugin : public CPlugin
+{
+private:
+    MonoDomain      *domain;
+    MonoAssembly    *assembly;
+    MonoObject      *instance;
+    MonoMethod      *onwalletnotify;
+    MonoMethod      *onblocknotify;
+    MonoMethod      *onterm;
+
+    std::string     pluginpath;
+
+public:
+    CMonoPlugin();
+    ~CMonoPlugin();
+
+    bool Load(const char* filename);
+    void Unload();
+
+    bool InitNotify();
+    bool TermNotify();
+    bool WalletNotify(std::string hash);
+    bool BlockNotify(bool initialsync, std::string hash);
+};
+
+
+/*
+ * CMonoPlugin::CMonoPlugin()
+ */
+
+CMonoPlugin::CMonoPlugin()
+{
+    domain = NULL;
+    assembly = NULL;
+}
+
+
+/*
+ * CMonoPlugin::~CMonoPlugin()
+ */
+
+CMonoPlugin::~CMonoPlugin()
+{
+    Unload();
+}
+
+
+/*
+ * CMonoPlugin::Load()
+ */
+bool CMonoPlugin::Load(const char* filename)
+{
+    fs::path pathPlugin = GetDataDir() / "plugin" / filename;
+    pluginpath = pathPlugin.generic_string();
+
+    mono_thread_attach(mono_get_root_domain());
+    domain = mono_domain_create_appdomain((char*)pluginpath.c_str(), NULL);
+    if(!domain)
+    {
+       // stop thread loop
+       SetRunning(false);
+
+       LogPrint(BCLog::PLUGIN, "Failed to create domain : %s\n", pluginpath.c_str());
+       return false;
+    }
+
+    // thread start
+    th = std::thread([this] { Run(); });
+
+    // call OnInit()
+    PushNotify(INIT_NOTIFY);
+
+    return true;
+}
+
+
+/*
+ * CMonoPlugin::Unload()
+ */
+
+void CMonoPlugin::Unload()
+{
+    if(domain)
+    {
+        // call OnTerm()
+        PushNotify(TERM_NOTIFY);
+
+        // wait thread
+        th.join();
+
+        // unload domain
+        mono_thread_attach(mono_get_root_domain());
+        mono_domain_unload(domain);
+
+        domain = NULL;
+        mono_gc_collect(mono_gc_max_generation());
+    }
+}
+
+
+/*
+ * CMonoPlugin::InitNotify()
+ */
+
+bool CMonoPlugin::InitNotify()
+{
+    mono_thread_attach(domain);
+
+    assembly = mono_domain_assembly_open (domain, pluginpath.c_str());
+    if(!assembly)
+    {
+        // stop thread loop
+        SetRunning(false);
+
+        LogPrint(BCLog::PLUGIN, "Failed to load plugin : %s", pluginpath.c_str());
+        return false;
+    }
+
+    MonoImage *image = mono_assembly_get_image(assembly);
+    MonoClass *klass = mono_class_from_name(image, "", "MonaPlugin");
+    if(!klass)
+    {
+        // stop thread loop
+        SetRunning(false);
+
+        LogPrint(BCLog::PLUGIN, "Failed to find class : %s", "MonaPlugin");
+        return false;
+    }
+
+    instance = mono_object_new(domain, klass);
+    // execute the default argument-less constructor
+    mono_runtime_object_init(instance);
+
+    MonoMethod* oninit = mono_class_get_method_from_name(klass, "OnInit", -1);
+    if(oninit)
+    {
+        mono_runtime_invoke(oninit, instance, NULL, NULL);
+    }
+
+    onwalletnotify = mono_class_get_method_from_name(klass, "OnWalletNotify", -1);
+    onblocknotify = mono_class_get_method_from_name(klass, "OnBlockNotify", -1);
+    onterm = mono_class_get_method_from_name(klass, "OnTerm", -1);
+
+    return true;
+}
+
+
+/*
+ * CMonoPlugin::TermNotify()
+ */
+
+bool CMonoPlugin::TermNotify()
+{
+    if(onterm)
+    {
+        mono_runtime_invoke(onterm, instance, NULL, NULL);
+    }
+
+    // interrupt
+    Interrupt();
+
+    return true;
+}
+
+
+/*
+ * CMonoPlugin::WalletNotify()
+ */
+
+bool CMonoPlugin::WalletNotify(std::string hash)
+{
+    if(onwalletnotify)
+    {
+        void *args[] = {mono_string_new(domain, hash.c_str())};
+        mono_runtime_invoke(onwalletnotify, instance, args, NULL);
+    }
+
+    return true;
+}
+
+
+/*
+ * CMonoPlugin::BlockNotify()
+ */
+
+bool CMonoPlugin::BlockNotify(bool initialsync, std::string hash)
+{
+    if(onblocknotify)
+    {
+        bool bInitSync = initialsync;
+        void *args[] = {&bInitSync, mono_string_new(domain, hash.c_str())};
+        mono_runtime_invoke(onblocknotify, instance, args, NULL);
+    }
+
+    return true;
+}
+
+//----------------------------------------------------------------------------
+// Mono Internal function
+//----------------------------------------------------------------------------
+
+/*
+ * CoindCommand()
+ */
+
+static MonoString *CoindCommand(MonoString *_method, MonoString *_params)
+{
+    try {
+        JSONRPCRequest request;
+        request.strMethod =  mono_string_to_utf8(_method);
+        if (!request.params.read(mono_string_to_utf8(_params)))
+        {
+            std::string err = "{\"code\":-8,\"message\":\"Invalid parameter\"}";
+            return mono_string_new(mono_domain_get(), err.c_str());
+        }
+        UniValue res = tableRPC.execute(request);
+
+        return mono_string_new(mono_domain_get(), res.write().c_str());
+
+    } catch (const UniValue& objError) {
+        return mono_string_new(mono_domain_get(), objError.write().c_str());
+    } catch (const std::exception& e) {
+        std::string err = "{\"code\":-32700,\"message\":\"Parse error\"}";
+        return mono_string_new(mono_domain_get(), err.c_str());
+    }
+}
+
+#endif // defined(USE_MONO)
+
+//============================================================================
 // local function
 //============================================================================
 
@@ -1743,6 +2085,7 @@ static void ExecLuaThread(lua_State *L, std::string funcname)
     }
 }
 
+
 //============================================================================
 // global function
 //============================================================================
@@ -1754,6 +2097,12 @@ static void ExecLuaThread(lua_State *L, std::string funcname)
 
 void Init()
 {
+#if defined(USE_MONO)
+    // create root domain
+    CMonoDomain::GetDomain();
+
+    mono_add_internal_call("MonaPlugin::CoindCommand", (void*)CoindCommand);
+#endif // defined(USE_MONO)
 }
 
 
@@ -1779,20 +2128,42 @@ void Term()
 
 bool LoadPlugin(const char *filename)
 {
+    CPlugin *pl = NULL;
+
     LOCK(cs_plugin);
     if(mapPlugins.count(filename) != 0)
     {
         return false;
     }
 
-    CPlugin *pl = new CPlugin();
-    if(pl->Load(filename))
+    std::string ext = fs::path(filename).extension().string();
+    std::transform(ext.begin(), ext.end(), ext.begin(), ::tolower);
+
+    if(ext == ".lua")
     {
-        mapPlugins.insert(make_pair(string(filename), pl));
-        return true;
+        // lua
+        pl = new CLuaPlugin();
     }
 
-    delete(pl);
+#if defined(USE_MONO)
+    else
+    {
+        // mono
+        pl = new CMonoPlugin();
+    }
+#endif // defined(USE_MONO)
+
+    if(pl)
+    {
+        if(pl->Load(filename))
+        {
+            mapPlugins.insert(make_pair(string(filename), pl));
+            return true;
+        }
+    
+        delete(pl);
+    }
+
     return false;
 }
 
@@ -1853,3 +2224,4 @@ void BlockNotify(bool initialsync, const std::string &hash)
 
 
 }
+
