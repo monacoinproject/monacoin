@@ -134,10 +134,11 @@ BITCOIN_CORE_H = \
   lua/lua/luaconf.h \
   lua/lua/lualib.h \
   lua/lua/lundump.h \
+  lua/lua/luauser.h \
   lua/lua/lvm.h \
   lua/lua/lzio.h \
   lua/lua-cjson/strbuf.h \
-  lua/luasec/config.h \
+  lua/luasec/compat.h \
   lua/luasec/context.h \
   lua/luasec/ec.h \
   lua/luasec/luasec_scripts.h \
@@ -146,6 +147,7 @@ BITCOIN_CORE_H = \
   lua/luasec/x509.h \
   lua/luasocket/auxiliar.h \
   lua/luasocket/buffer.h \
+  lua/luasocket/compat.h \
   lua/luasocket/except.h \
   lua/luasocket/inet.h \
   lua/luasocket/io.h \
@@ -153,6 +155,7 @@ BITCOIN_CORE_H = \
   lua/luasocket/luasocket_scripts.h \
   lua/luasocket/mime.h \
   lua/luasocket/options.h \
+  lua/luasocket/pierror.h \
   lua/luasocket/select.h \
   lua/luasocket/socket.h \
   lua/luasocket/tcp.h \
