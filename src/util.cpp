@@ -988,29 +988,29 @@ std::string CopyrightHolders(const std::string& strPrefix)
         strYear.replace(strYear.find("2013"), sizeof("2013")-1, "2004");
         cy = std::to_string(COPYRIGHT_YEAR);
         strYear.replace(strYear.find(cy), sizeof(cy.c_str())-1, "2013");
-        strCopyrightHolders += "\n" + strYear + "Diego Nehab";
+        strCopyrightHolders += "\n" + strYear + " Diego Nehab";
 
         strYear = strPrefix;
         strYear.replace(strYear.find("2013"), sizeof("2013")-1, "2013");
         cy = std::to_string(COPYRIGHT_YEAR);
         strYear.replace(strYear.find(cy), sizeof(cy.c_str())-1, "2017");
-        strCopyrightHolders += "\n" + strYear + "Chukong Technologies";
+        strCopyrightHolders += "\n" + strYear + " Chukong Technologies";
 
         strYear = strPrefix;
         strYear.replace(strYear.find("2013"), sizeof("2013")-1, "2010");
         cy = std::to_string(COPYRIGHT_YEAR);
         strYear.replace(strYear.find(cy), sizeof(cy.c_str())-1, "2012");
-        strCopyrightHolders += "\n" + strYear + "cocos2d-x community";
+        strCopyrightHolders += "\n" + strYear + " cocos2d-x community";
 
         strYear = strPrefix;
         strYear.replace(strYear.find("2013"), sizeof("2013")-1, "2006");
-        strCopyrightHolders += "\n" + strYear + "Bruno Silvestre, UFG";
+        strCopyrightHolders += "\n" + strYear + " Bruno Silvestre, UFG";
 
         strYear = strPrefix;
         strYear.replace(strYear.find("2013"), sizeof("2013")-1, "2019");
         cy = std::to_string(COPYRIGHT_YEAR);
         strYear.replace(strYear.find(cy), sizeof(cy.c_str())-1, "2019");
-        strCopyrightHolders += "\n" + strYear + "Mono Project";
+        strCopyrightHolders += "\n" + strYear + " Mono Project";
     }
     return strCopyrightHolders;
 }
