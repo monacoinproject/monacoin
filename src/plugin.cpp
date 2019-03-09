@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <fs.h>
 
+#include <httpserver.h>
 #include <rpc/server.h>
 #include <sync.h>
 #include <univalue.h>
@@ -76,6 +77,7 @@ class CPluginQueue;
 //============================================================================
 
 const int LUA_STACK_SIZE = 2048;
+const string strSourcecodeName = "__plugin_sourcecode";
 
 //============================================================================
 // local work
@@ -1442,6 +1444,8 @@ public:
     virtual bool Load(const char* filename) = 0;
     virtual void Unload() = 0;
 
+    virtual bool LoadSourcecode(const char* sourcecode){return true;}
+
     virtual bool InitNotify() = 0;
     virtual bool TermNotify() = 0;
     virtual bool WalletNotify(std::string hash) = 0;
@@ -1573,6 +1577,8 @@ public:
     bool Load(const char* filename);
     void Unload();
 
+    bool LoadSourcecode(const char* sourcecode);
+
     bool InitNotify();
     bool TermNotify();
     bool WalletNotify(std::string hash);
@@ -1629,6 +1635,47 @@ bool CLuaPlugin::Load(const char* filename)
         lua_close(L);
         L = NULL;
         LogPrint(BCLog::PLUGIN, "Failed to load plugin : %s", pathPlugin.generic_string().c_str());
+        return false;
+    }
+    lua_pcall(L, 0, 0, 0);
+
+    // thread start
+    th = std::thread([this] { Run(); });
+
+    // call OnInit()
+    PushNotify(INIT_NOTIFY);
+
+    return true;
+}
+
+
+/*
+ * CLuaPlugin::LoadSourcecode()
+ */
+bool CLuaPlugin::LoadSourcecode(const char* sourcecode)
+{
+    if(L)
+    {
+        return false;
+    }
+
+    L = luaL_newstate();
+    CheckStack(L, LUA_STACK_SIZE);
+    luaL_openlibs(L);
+
+    // register lua extension
+    RegisterExtension(L);
+    luaopen_luasocket_scripts(L);
+    luaopen_luasec_scripts(L);
+
+    // register api
+    luaL_requiref(L, "coind", RegisterCoindFunc, 1);
+
+    if( luaL_loadstring(L, sourcecode) == LUA_ERRFILE )
+    {
+        lua_close(L);
+        L = NULL;
+        LogPrint(BCLog::PLUGIN, "Failed to load plugin code");
         return false;
     }
     lua_pcall(L, 0, 0, 0);
@@ -2178,6 +2225,57 @@ bool UnloadPlugin(const char *filename)
 {
     LOCK(cs_plugin);
     map<string, CPlugin*>::iterator mi = mapPlugins.find(filename);
+    if(mi == mapPlugins.end())
+    {
+        return false;
+    }
+    delete(mi->second);
+    mapPlugins.erase(mi);
+
+    return true;
+}
+
+
+/*
+ * LoadPluginCode()
+ */
+
+bool LoadPluginCode(const char *sourcecode)
+{
+    CPlugin *pl = NULL;
+
+    LOCK(cs_plugin);
+    if(mapPlugins.count(strSourcecodeName) != 0)
+    {
+        return false;
+    }
+
+    // lua
+    pl = new CLuaPlugin();
+
+    std::string strCode = urlDecode(std::string(sourcecode));
+    if(pl)
+    {
+        if(pl->LoadSourcecode(strCode.c_str()))
+        {
+            mapPlugins.insert(make_pair(string(strSourcecodeName), pl));
+            return true;
+        }
+    
+        delete(pl);
+    }
+
+    return false;
+}
+
+/*
+ * UnloadPluginCode()
+ */
+
+bool UnloadPluginCode()
+{
+    LOCK(cs_plugin);
+    map<string, CPlugin*>::iterator mi = mapPlugins.find(strSourcecodeName);
     if(mi == mapPlugins.end())
     {
         return false;

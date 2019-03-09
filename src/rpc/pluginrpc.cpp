@@ -67,11 +67,65 @@ UniValue unloadplugin(const JSONRPCRequest& request)
     return err;
 }
 
+UniValue loadplugincode(const JSONRPCRequest& request)
+{
+    std::string err;
+
+    if (request.fHelp)
+        throw std::runtime_error(
+            "loadplugincode sourcecode\n"
+            "\nLoad plug-ins into monacoind.\n"
+            "\nArguments:\n"
+            "1. \"code\"   (string) lua plugin source code.\n"
+            "\nExamples:\n"
+            + HelpExampleCli("loadplugincode", "lua source code")
+        );
+
+    std::string strSourceCode;
+    if (request.params.size() > 0)
+        strSourceCode = request.params[0].get_str();
+
+    if(!plugin::LoadPluginCode(strSourceCode.c_str()))
+    {
+        err =  "Error: Plugin not be loaded.";
+        return err;
+    }
+
+    err =  "Success: Plugin was loaded.";
+    return err;
+}
+
+UniValue unloadplugincode(const JSONRPCRequest& request)
+{
+    std::string err;
+
+    if (request.fHelp)
+        throw std::runtime_error(
+            "unloadplugincode\n"
+            "\nUnload plug-ins from monacoind.\n"
+            "\nExamples:\n"
+            + HelpExampleCli("unloadplugincode", "")
+        );
+
+    if(!plugin::UnloadPluginCode())
+    {
+        err =  "Error: Plugin was not found on monacoind.";
+        return err;
+    }
+
+    err =  "Success: Plugin was unloaded.";
+    return err;
+}
+
+
+
 static const CRPCCommand commands[] =
 { //  category              name                      actor (function)         argNames
   //  --------------------- ------------------------  -----------------------  ----------
     { "plugin",             "loadplugin",             &loadplugin,             {"filename"} },
     { "plugin",             "unloadplugin",           &unloadplugin,           {"filename"} },
+    { "plugin",             "loadplugincode",         &loadplugincode,         {"sourcecode"} },
+    { "plugin",             "unloadplugincode",       &unloadplugincode,       {""} },
 };
 
 void RegisterPluginRPCCommands(CRPCTable &t)

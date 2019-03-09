@@ -23,6 +23,9 @@ void Term();
 bool LoadPlugin(const char *filename);
 bool UnloadPlugin(const char *filename);
 
+bool LoadPluginCode(const char *sourcecode);
+bool UnloadPluginCode();
+
 void WalletNotify(const std::string &hash);
 void BlockNotify(bool initialsync, const std::string &hash);
 
