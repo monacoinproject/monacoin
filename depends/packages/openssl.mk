@@ -1,8 +1,8 @@
 package=openssl
-$(package)_version=1.0.1k
+$(package)_version=1.0.2r
 $(package)_download_path=https://www.openssl.org/source
 $(package)_file_name=$(package)-$($(package)_version).tar.gz
-$(package)_sha256_hash=8f9faeaebad088e772f4ef5e38252d472be4d878c6b3a2718c10a4fcebe7a41c
+$(package)_sha256_hash=ae51d08bba8a83958e894946f15303ff894d75c2b8bbd44a852b64e3fe11d0d6
 
 define $(package)_set_vars
 $(package)_config_env=AR="$($(package)_ar)" RANLIB="$($(package)_ranlib)" CC="$($(package)_cc)"
@@ -67,7 +67,7 @@ define $(package)_config_cmds
 endef
 
 define $(package)_build_cmds
-  $(MAKE) -j1 build_libs libcrypto.pc libssl.pc openssl.pc
+  $(MAKE) -j1 depend build_libs libcrypto.pc libssl.pc openssl.pc
 endef
 
 define $(package)_stage_cmds
