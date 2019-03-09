@@ -8,12 +8,12 @@
 
 #include <lua/lua/lua.h>
 #include <lua/lua/lauxlib.h>
-#include "compat.h"
+#include <lua/luasocket/compat.h>
 
 #include "auxiliar.h"
 #include "timeout.h"
 
-#ifdef _WIN32
+#ifdef WIN32
 #include <windows.h>
 #else
 #include <time.h>
@@ -122,7 +122,7 @@ p_timeout timeout_markstart(p_timeout tm) {
 * Returns
 *   time in s.
 \*-------------------------------------------------------------------------*/
-#ifdef _WIN32
+#ifdef WIN32
 double timeout_gettime(void) {
     FILETIME ft;
     double t;
@@ -198,7 +198,7 @@ static int timeout_lua_gettime(lua_State *L)
 /*-------------------------------------------------------------------------*\
 * Sleep for n seconds.
 \*-------------------------------------------------------------------------*/
-#ifdef _WIN32
+#ifdef WIN32
 int timeout_lua_sleep(lua_State *L)
 {
     double n = luaL_checknumber(L, 1);

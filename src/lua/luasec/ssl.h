@@ -16,8 +16,8 @@
 #include <lua/luasocket/timeout.h>
 #include <lua/luasocket/socket.h>
 
-#include "compat.h"
-#include "context.h"
+#include <lua/luasec/compat.h>
+#include <lua/luasec/context.h>
 
 #if __cplusplus
 extern "C" {

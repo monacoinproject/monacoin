@@ -6,7 +6,7 @@
 
 #include <lua/lua/lua.h>
 #include <lua/lua/lauxlib.h>
-#include "compat.h"
+#include <lua/luasocket/compat.h>
 
 #include "socket.h"
 #include "timeout.h"
@@ -138,7 +138,7 @@ static void collect_fd(lua_State *L, int tab, int itab,
         fd = getfd(L);
         if (fd != SOCKET_INVALID) {
             /* make sure we don't overflow the fd_set */
-#ifdef _WIN32
+#ifdef WIN32
             if (n >= FD_SETSIZE)
                 luaL_argerror(L, tab, "too many sockets");
 #else

@@ -11,7 +11,7 @@
 #include <lua/lua/lua.h>
 #include <openssl/ssl.h>
 
-#include "compat.h"
+#include <lua/luasec/compat.h>
 
 #if __cplusplus
 extern "C" {

@@ -1323,7 +1323,9 @@ static int RegisterCoindFunc(lua_State* L)
 
 static struct luaL_Reg lua_extension [] = {
     {"cjson",        luaopen_cjson},
+#ifndef WIN32
     {"socket.unix",  luaopen_socket_unix},
+#endif
     {"socket.core",  luaopen_socket_core},
     {"mime.core",    luaopen_mime_core},
     {"ssl.core",     luaopen_ssl_core},

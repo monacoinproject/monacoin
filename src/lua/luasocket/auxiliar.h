@@ -31,7 +31,7 @@
 
 #include <lua/lua/lua.h>
 #include <lua/lua/lauxlib.h>
-#include "compat.h"
+#include <lua/luasocket/compat.h>
 
 int auxiliar_open(lua_State *L);
 void auxiliar_newclass(lua_State *L, const char *classname, luaL_Reg *func);

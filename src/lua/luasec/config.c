@@ -5,7 +5,7 @@
  *
  *--------------------------------------------------------------------------*/
 
-#include "compat.h"
+#include <lua/luasec/compat.h>
 #include "options.h"
 #include "ec.h"
 

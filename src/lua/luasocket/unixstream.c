@@ -8,7 +8,7 @@
 
 #include <lua/lua/lua.h>
 #include <lua/lua/lauxlib.h>
-#include "compat.h"
+#include <lua/luasocket/compat.h>
 
 #include "auxiliar.h"
 #include "socket.h"

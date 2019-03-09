@@ -12,7 +12,7 @@
 #include <openssl/x509v3.h>
 #include <lua/lua/lua.h>
 
-#include "compat.h"
+#include <lua/luasec/compat.h>
 
 #if __cplusplus
 extern "C" {

@@ -8,8 +8,8 @@
 #ifndef LSEC_COMPAT_H
 #define LSEC_COMPAT_H
 
-#if defined(_WIN32)
-#define LSEC_API __declspec(dllexport) 
+#if defined(WIN32)
+#define LSEC_API extern
 #else
 #define LSEC_API extern
 #endif

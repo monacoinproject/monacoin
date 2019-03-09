@@ -1,4 +1,4 @@
-#include "compat.h"
+#include <lua/luasocket/compat.h>
 
 #if LUA_VERSION_NUM==501
 /*

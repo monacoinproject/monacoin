@@ -18,8 +18,9 @@
 #include "socket.h"
 #include "timeout.h"
 
-#ifdef _WIN32
+#ifdef WIN32
 #define LUASOCKET_INET_ATON
+#define LUASOCKET_INET_PTON
 #endif
 
 int inet_open(lua_State *L);

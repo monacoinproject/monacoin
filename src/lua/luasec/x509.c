@@ -75,7 +75,7 @@ p_x509 lsec_checkp_x509(lua_State* L, int idx)
 
 /*---------------------------------------------------------------------------*/
 
-#if defined(LUASEC_INET_NTOP)
+#if defined(LUASEC_INET_NTOP) || defined(WIN32)
 /*
  * For WinXP (SP3), set the following preprocessor macros:
  *     LUASEC_INET_NTOP

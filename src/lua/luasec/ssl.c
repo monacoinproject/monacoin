@@ -31,7 +31,7 @@
 #include "context.h"
 #include "ssl.h"
 
-#ifndef SOCKET_SELECT
+#if !defined(SOCKET_SELECT) && !defined(WIN32)
 #include <sys/poll.h>
 #define WAITFD_R        POLLIN
 #define WAITFD_W        POLLOUT
