@@ -62,6 +62,7 @@ public:
 
     const Consensus::Params& GetConsensus() const { return consensus; }
     const CMessageHeader::MessageStartChars& MessageStart() const { return pchMessageStart; }
+    const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
     int GetDefaultPort() const { return nDefaultPort; }
 
     const CBlock& GenesisBlock() const { return genesis; }
@@ -98,6 +99,7 @@ protected:
 
     Consensus::Params consensus;
     CMessageHeader::MessageStartChars pchMessageStart;
+    std::vector<unsigned char> vAlertPubKey;
     int nDefaultPort;
     uint64_t nPruneAfterHeight;
     uint64_t m_assumed_blockchain_size;

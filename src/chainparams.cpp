@@ -115,6 +115,7 @@ public:
         nPruneAfterHeight = 100000;
         m_assumed_blockchain_size = 22;
         m_assumed_chain_state_size = 3;
+        vAlertPubKey = ParseHex("04fc55d919cdea21e8171fea24c3cf23864ff64a53404829ad50af86e1be1b8217115701b348d50c6aaba6983bc148d3c9e6fa8c11365889774fc1db6da6840c06");
 
         genesis = CreateGenesisBlock(1388479472, 1234534, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
@@ -230,6 +231,7 @@ public:
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 2;
         m_assumed_chain_state_size = 1;
+        vAlertPubKey = ParseHex("04887665070e79d20f722857e58ec8f402733f710135521a0b63441419bf5665ba4623bed13fca0cb2338682ab2a54ad13ce07fbc81c3c2f0912a4eb8521dd3cfb");
 
         genesis = CreateGenesisBlock(1488924140, 2122860, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
