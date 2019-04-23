@@ -78,7 +78,7 @@ The high water mark value must be an integer greater than or equal to 0.
 
 For instance:
 
-    $ monacoind -zmqpubhashtx=tcp://127.0.0.1:28332 \
+    $ monacoind -zmqpubhashtx=tcp://127.0.0.1:29402 \
                -zmqpubrawtx=ipc:///tmp/monacoind.tx.raw
                -zmqpubhashtxhwm=10000
 
