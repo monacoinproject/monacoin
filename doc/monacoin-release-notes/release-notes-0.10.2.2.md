@@ -1,6 +1,6 @@
 Monacoin Core version 0.10.2.2 is now available from:
 
-  <https://download.monacoin.org/monacoin-0.10.2.2/>
+  <https://github.com/monacoinproject/monacoin/releases>
 
 This is a new major version release, bringing bug fixes and translation 
 updates. It is recommended to upgrade to this version.

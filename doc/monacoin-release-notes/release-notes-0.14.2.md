@@ -1,6 +1,6 @@
 Monacoin Core version 0.14.2 is now available from:
 
-  <https://download.monacoin.org/monacoin-0.14.2.0/>
+  <https://github.com/monacoinproject/monacoin/releases>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
@@ -8,10 +8,6 @@ and performance improvements, as well as updated translations.
 Please report bugs using the issue tracker at github:
 
   <https://github.com/monacoinproject/monacoin/issues>
-
-To receive security and update notifications, please subscribe to:
-
-  <https://groups.google.com/forum/#!forum/monacoin-dev>
 
 Compatibility
 ==============
@@ -33,7 +29,7 @@ Notable changes
 New Multisig Address Prefix
 ---------------------------
 
-Monacoin Core now supports P2SH addresses beginning with M on mainnet and Q on testnet.
+Monacoin Core now supports P2SH addresses beginning with P on mainnet and p on testnet.
 P2SH addresses beginning with 3 on mainnet and m or n on testnet will continue to be valid.
 Old and new addresses can be used interchangeably.
 
@@ -52,11 +48,7 @@ Reset Testnet
 Testnet3 has been deprecated and replaced with Testnet4. The server port has been changed to 19403 however the RPC port remains
 the same (19402).
 
-Testnet faucets can be located at:
-- http://testnet.monacointools.com
-- http://testnet.thrasher.io
-
-Developers who require the new testnet blockchain paramaters can find them [here](https://github.com/monacoinproject/monacoin/blob/master/src/chainparams.cpp#L220).
+Developers who require the new testnet blockchain paramaters can find them [here](https://github.com/monacoinproject/monacoin/blob/master-0.14/src/chainparams.cpp#L220).
 
 Performance Improvements
 --------------
@@ -124,7 +116,7 @@ ZMQ On Windows
 
 Previously the ZeroMQ notification system was unavailable on Windows
 due to various issues with ZMQ. These have been fixed upstream and
-now ZMQ can be used on Windows. Please see [this document](https://github.com/monacoinproject/monacoin/blob/master/doc/zmq.md) for
+now ZMQ can be used on Windows. Please see [this document](https://github.com/monacoinproject/monacoin/blob/master-0.14/doc/zmq.md) for
 help with using ZMQ in general.
 
 Nested RPC Commands in Debug Console
@@ -205,15 +197,6 @@ to a `mempool.dat` file. This file preserves the mempool so that when the node
 restarts the mempool can be filled with transactions without waiting for new transactions
 to be created. This will also preserve any changes made to a transaction through
 commands such as `prioritisetransaction` so that those changes will not be lost.
-
-Final Alert
------------
-
-The Alert System was disabled and deprecated in Monacoin Core 0.10.4 and removed in 0.13.2. 
-The Alert System was retired with a maximum sequence final alert which causes any nodes
-supporting the Alert System to display a static hard-coded "Alert Key Compromised" message which also
-prevents any other alerts from overriding it. This final alert is hard-coded into this release
-so that all old nodes receive the final alert.
 
 GUI Changes
 -----------
