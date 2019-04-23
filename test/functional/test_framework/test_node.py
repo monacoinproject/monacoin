@@ -2,7 +2,7 @@
 # Copyright (c) 2017-2018 The Bitcoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-"""Class for litecoind node under test"""
+"""Class for monacoind node under test"""
 
 import contextlib
 import decimal
@@ -48,7 +48,7 @@ class ErrorMatch(Enum):
 
 
 class TestNode():
-    """A class for representing a litecoind node under test.
+    """A class for representing a monacoind node under test.
 
     This class contains:
 
@@ -198,19 +198,19 @@ class TestNode():
         self.process = subprocess.Popen(self.args + extra_args, env=subp_env, stdout=stdout, stderr=stderr, cwd=cwd, **kwargs)
 
         self.running = True
-        self.log.debug("litecoind started, waiting for RPC to come up")
+        self.log.debug("monacoind started, waiting for RPC to come up")
 
         if self.start_perf:
             self._start_perf()
 
     def wait_for_rpc_connection(self):
-        """Sets up an RPC connection to the litecoind process. Returns False if unable to connect."""
+        """Sets up an RPC connection to the monacoind process. Returns False if unable to connect."""
         # Poll at a rate of four times per second
         poll_per_s = 4
         for _ in range(poll_per_s * self.rpc_timeout):
             if self.process.poll() is not None:
                 raise FailedToStartError(self._node_msg(
-                    'litecoind exited with status {} during initialization'.format(self.process.returncode)))
+                    'monacoind exited with status {} during initialization'.format(self.process.returncode)))
             try:
                 rpc = get_rpc_proxy(rpc_url(self.datadir, self.index, self.rpchost), self.index, timeout=self.rpc_timeout, coveragedir=self.coverage_dir)
                 rpc.getblockcount()
@@ -234,7 +234,7 @@ class TestNode():
                 if "No RPC credentials" not in str(e):
                     raise
             time.sleep(1.0 / poll_per_s)
-        self._raise_assertion_error("Unable to connect to litecoind")
+        self._raise_assertion_error("Unable to connect to monacoind")
 
     def generate(self, nblocks, maxtries=1000000):
         self.log.debug("TestNode.generate() dispatches `generate` call to `generatetoaddress`")
@@ -381,7 +381,7 @@ class TestNode():
 
         if not test_success('readelf -S {} | grep .debug_str'.format(shlex.quote(self.binary))):
             self.log.warning(
-                "perf output won't be very useful without debug symbols compiled into litecoind")
+                "perf output won't be very useful without debug symbols compiled into monacoind")
 
         output_path = tempfile.NamedTemporaryFile(
             dir=self.datadir,
@@ -422,11 +422,11 @@ class TestNode():
     def assert_start_raises_init_error(self, extra_args=None, expected_msg=None, match=ErrorMatch.FULL_TEXT, *args, **kwargs):
         """Attempt to start the node and expect it to raise an error.
 
-        extra_args: extra arguments to pass through to litecoind
-        expected_msg: regex that stderr should match when litecoind fails
+        extra_args: extra arguments to pass through to monacoind
+        expected_msg: regex that stderr should match when monacoind fails
 
-        Will throw if litecoind starts without an error.
-        Will throw if an expected_msg is provided and it does not match litecoind's stdout."""
+        Will throw if monacoind starts without an error.
+        Will throw if an expected_msg is provided and it does not match monacoind's stdout."""
         with tempfile.NamedTemporaryFile(dir=self.stderr_dir, delete=False) as log_stderr, \
              tempfile.NamedTemporaryFile(dir=self.stdout_dir, delete=False) as log_stdout:
             try:
@@ -435,7 +435,7 @@ class TestNode():
                 self.stop_node()
                 self.wait_until_stopped()
             except FailedToStartError as e:
-                self.log.debug('litecoind failed to start: %s', e)
+                self.log.debug('monacoind failed to start: %s', e)
                 self.running = False
                 self.process = None
                 # Check stderr for expected message
@@ -456,9 +456,9 @@ class TestNode():
                                 'Expected message "{}" does not fully match stderr:\n"{}"'.format(expected_msg, stderr))
             else:
                 if expected_msg is None:
-                    assert_msg = "litecoind should have exited with an error"
+                    assert_msg = "monacoind should have exited with an error"
                 else:
-                    assert_msg = "litecoind should have exited with expected error " + expected_msg
+                    assert_msg = "monacoind should have exited with expected error " + expected_msg
                 self._raise_assertion_error(assert_msg)
 
     def add_p2p_connection(self, p2p_conn, *, wait_for_verack=True, **kwargs):
@@ -513,7 +513,7 @@ def arg_to_cli(arg):
         return str(arg)
 
 class TestNodeCLI():
-    """Interface to litecoin-cli for an individual node"""
+    """Interface to monacoin-cli for an individual node"""
 
     def __init__(self, binary, datadir):
         self.options = []
@@ -542,17 +542,17 @@ class TestNodeCLI():
         return results
 
     def send_cli(self, command=None, *args, **kwargs):
-        """Run litecoin-cli command. Deserializes returned string as python object."""
+        """Run monacoin-cli command. Deserializes returned string as python object."""
         pos_args = [arg_to_cli(arg) for arg in args]
         named_args = [str(key) + "=" + arg_to_cli(value) for (key, value) in kwargs.items()]
-        assert not (pos_args and named_args), "Cannot use positional arguments and named arguments in the same litecoin-cli call"
+        assert not (pos_args and named_args), "Cannot use positional arguments and named arguments in the same monacoin-cli call"
         p_args = [self.binary, "-datadir=" + self.datadir] + self.options
         if named_args:
             p_args += ["-named"]
         if command is not None:
             p_args += [command]
         p_args += pos_args + named_args
-        self.log.debug("Running litecoin-cli command: %s" % command)
+        self.log.debug("Running monacoin-cli command: %s" % command)
         process = subprocess.Popen(p_args, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
         cli_stdout, cli_stderr = process.communicate(input=self.input)
         returncode = process.poll()

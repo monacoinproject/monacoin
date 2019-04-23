@@ -38,17 +38,17 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see [*Disable-wallet mode*](/doc/build-osx.md#disable-wallet-mode)).
 
-Build Litecoin Core
+Build Monacoin Core
 ------------------------
 
-1. Clone the Litecoin Core source code:
+1. Clone the Monacoin Core source code:
 
-        git clone https://github.com/litecoin-project/litecoin
-        cd litecoin
+        git clone https://github.com/monacoinproject/monacoin
+        cd monacoin
 
-2.  Build Litecoin Core:
+2.  Build Monacoin Core:
 
-    Configure and build the headless Litecoin Core binaries as well as the GUI (if Qt is found).
+    Configure and build the headless Monacoin Core binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
 
@@ -70,13 +70,13 @@ Build Litecoin Core
 
     or
 
-        cd ~/litecoin/src
-        cp litecoind /usr/local/bin/
-        cp litecoin-cli /usr/local/bin/
+        cd ~/monacoin/src
+        cp monacoind /usr/local/bin/
+        cp monacoin-cli /usr/local/bin/
 
 Disable-wallet mode
 --------------------
-When the intention is to run only a P2P node without a wallet, Litecoin Core may be compiled in
+When the intention is to run only a P2P node without a wallet, Monacoin Core may be compiled in
 disable-wallet mode with:
 
     ./configure --disable-wallet
@@ -88,28 +88,28 @@ Mining is also possible in disable-wallet mode using the `getblocktemplate` RPC 
 Running
 -------
 
-Litecoin Core is now available at `./src/litecoind`
+Monacoin Core is now available at `./src/monacoind`
 
 Before running, you may create an empty configuration file:
 
-    mkdir -p "/Users/${USER}/Library/Application Support/Litecoin"
+    mkdir -p "/Users/${USER}/Library/Application Support/Monacoin"
 
-    touch "/Users/${USER}/Library/Application Support/Litecoin/litecoin.conf"
+    touch "/Users/${USER}/Library/Application Support/Monacoin/monacoin.conf"
 
-    chmod 600 "/Users/${USER}/Library/Application Support/Litecoin/litecoin.conf"
+    chmod 600 "/Users/${USER}/Library/Application Support/Monacoin/monacoin.conf"
 
-The first time you run litecoind, it will start downloading the blockchain. This process could take many hours, or even days on slower than average systems.
+The first time you run monacoind, it will start downloading the blockchain. This process could take many hours, or even days on slower than average systems.
 
 You can monitor the download process by looking at the debug.log file:
 
-    tail -f $HOME/Library/Application\ Support/Litecoin/debug.log
+    tail -f $HOME/Library/Application\ Support/Monacoin/debug.log
 
 Other commands:
 -------
 
-    ./src/litecoind -daemon # Starts the litecoin daemon.
-    ./src/litecoin-cli --help # Outputs a list of command-line options.
-    ./src/litecoin-cli help # Outputs a list of RPC commands when the daemon is running.
+    ./src/monacoind -daemon # Starts the monacoin daemon.
+    ./src/monacoin-cli --help # Outputs a list of command-line options.
+    ./src/monacoin-cli help # Outputs a list of RPC commands when the daemon is running.
 
 Notes
 -----

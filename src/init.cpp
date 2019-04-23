@@ -101,7 +101,7 @@ static const char* FEE_ESTIMATES_FILENAME="fee_estimates.dat";
 /**
  * The PID file facilities.
  */
-static const char* BITCOIN_PID_FILENAME = "litecoind.pid";
+static const char* BITCOIN_PID_FILENAME = "monacoind.pid";
 
 static fs::path GetPidFile()
 {
@@ -206,7 +206,7 @@ void Shutdown(InitInterfaces& interfaces)
     /// for example if the data directory was found to be locked.
     /// Be sure that anything that writes files or flushes caches only does this if the respective
     /// module was initialized.
-    RenameThread("litecoin-shutoff");
+    RenameThread("monacoin-shutoff");
     mempool.AddTransactionsUpdated(1);
 
     StopHTTPRPC();
@@ -555,8 +555,8 @@ void SetupServerArgs()
 
 std::string LicenseInfo()
 {
-    const std::string URL_SOURCE_CODE = "<https://github.com/litecoin-project/litecoin>";
-    const std::string URL_WEBSITE = "<https://litecoin.org>";
+    const std::string URL_SOURCE_CODE = "<https://github.com/monacoinproject/monacoin>";
+    const std::string URL_WEBSITE = "<https://monacoin.org>";
 
     return CopyrightHolders(strprintf(_("Copyright (C) %i-%i"), 2011, COPYRIGHT_YEAR) + " ") + "\n" +
            "\n" +
@@ -661,7 +661,7 @@ static void CleanupBlockRevFiles()
 static void ThreadImport(std::vector<fs::path> vImportFiles)
 {
     const CChainParams& chainparams = Params();
-    RenameThread("litecoin-loadblk");
+    RenameThread("monacoin-loadblk");
     ScheduleBatchPriority();
 
     {
@@ -1265,9 +1265,9 @@ bool AppInitMain(InitInterfaces& interfaces)
     // Warn about relative -datadir path.
     if (gArgs.IsArgSet("-datadir") && !fs::path(gArgs.GetArg("-datadir", "")).is_absolute()) {
         LogPrintf("Warning: relative datadir option '%s' specified, which will be interpreted relative to the " /* Continued */
-                  "current working directory '%s'. This is fragile, because if litecoin is started in the future "
+                  "current working directory '%s'. This is fragile, because if monacoin is started in the future "
                   "from a different location, it will be unable to locate the current data files. There could "
-                  "also be data loss if litecoin is started while in a temporary directory.\n",
+                  "also be data loss if monacoin is started while in a temporary directory.\n",
             gArgs.GetArg("-datadir", ""), fs::current_path().string());
     }
 
