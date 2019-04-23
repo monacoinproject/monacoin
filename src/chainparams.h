@@ -60,9 +60,16 @@ public:
         MAX_BASE58_TYPES
     };
 
+    enum AlertKeyType {
+        MAIN_KEY,
+        SUB_KEY,
+
+        MAX_ALERTKEY_TYPES,
+    };
+
     const Consensus::Params& GetConsensus() const { return consensus; }
     const CMessageHeader::MessageStartChars& MessageStart() const { return pchMessageStart; }
-    const std::vector<unsigned char>& AlertKey() const { return vAlertPubKey; }
+    const std::vector<unsigned char>& AlertKey(AlertKeyType type) const { return vAlertPubKey[type]; }
     int GetDefaultPort() const { return nDefaultPort; }
 
     const CBlock& GenesisBlock() const { return genesis; }
@@ -95,7 +102,7 @@ protected:
 
     Consensus::Params consensus;
     CMessageHeader::MessageStartChars pchMessageStart;
-    std::vector<unsigned char> vAlertPubKey;
+    std::vector<unsigned char> vAlertPubKey[MAX_ALERTKEY_TYPES];
     int nDefaultPort;
     uint64_t nPruneAfterHeight;
     std::vector<std::string> vSeeds;

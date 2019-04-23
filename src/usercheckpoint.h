@@ -58,7 +58,7 @@ public:
     CBlockIndex* GetLastCheckpoint();
     int GetMaxCheckpointHeight();
 
-    UniValue Dump();
+    UniValue Dump(int nMax);
 };
 
 #endif // BITCOIN_USERCHECKPOINT_H

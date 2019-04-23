@@ -1,10 +1,12 @@
 // Copyright (c) 2010 Satoshi Nakamoto
 // Copyright (c) 2009-2015 The Bitcoin Core developers
+// Copyright (c) 2013-2019 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #include "alert.h"
 
+#include "chainparams.h"
 #include "clientversion.h"
 #include "net.h"
 #include "netmessagemaker.h"
@@ -12,8 +14,11 @@
 #include "pubkey.h"
 #include "timedata.h"
 #include "ui_interface.h"
+#include "usercheckpoint.h"
 #include "util.h"
 #include "utilstrencodings.h"
+#include "validation.h"
+#include "volatilecheckpoint.h"
 
 #include <stdint.h>
 #include <algorithm>
@@ -26,8 +31,14 @@
 
 using namespace std;
 
+#define ALERTDB_CACHE_SIZE    (1024*2)
+#define CHECKPOINT_WRITE_THRESHOLD    (20)
+
 map<uint256, CAlert> mapAlerts;
 CCriticalSection cs_mapAlerts;
+
+bool CAlert::bInvalidKey[CChainParams::MAX_ALERTKEY_TYPES] = {false, false};
+static std::unique_ptr<CAlertDB> globalAlertDB;
 
 void CUnsignedAlert::SetNull()
 {
@@ -103,7 +114,7 @@ uint256 CAlert::GetHash() const
 
 bool CAlert::IsInEffect() const
 {
-    return (GetAdjustedTime() < nExpiration);
+    return (GetAdjustedTime() < nExpiration || GetAdjustedTime() < nRelayUntil);
 }
 
 bool CAlert::Cancels(const CAlert& alert) const
@@ -138,6 +149,7 @@ bool CAlert::RelayTo(CNode* pnode, CConnman& connman) const
     {
         if (AppliesTo(pnode->nVersion, pnode->strSubVer) ||
             AppliesToMe() ||
+            nMaxVer < ALERT_CMD_NONE || 
             GetAdjustedTime() < nRelayUntil)
         {
             const CNetMsgMaker msgMaker(PROTOCOL_VERSION);
@@ -172,12 +184,34 @@ CAlert CAlert::getAlertByHash(const uint256 &hash)
     return retval;
 }
 
-bool CAlert::ProcessAlert(const std::vector<unsigned char>& alertKey, bool fThread)
+bool CAlert::ProcessAlert(bool fThread)
 {
-    if (!CheckSignature(alertKey))
+    if(bInvalidKey[CChainParams::MAIN_KEY])
+    {
         return false;
+    }
+    if (!CheckSignature(Params().AlertKey(CChainParams::MAIN_KEY)))
+    {
+        if (!CheckSignature(Params().AlertKey(CChainParams::SUB_KEY)) || 
+            bInvalidKey[CChainParams::SUB_KEY] ||
+            !setCancel.empty() ||
+            !setSubVer.empty() ||
+            !strStatusBar.empty() ||
+            !strReserved.empty() ||
+            strComment.size() > 128)
+        {
+            return false;
+        }
+        // subkey-alert is valid for checkpoint command.
+        if(nMaxVer != ALERT_CMD_CHECKPOINT)
+        {
+            return false;
+        }
+    }
     if (!IsInEffect())
+    {
         return false;
+    }
 
     // alert.nID=max is reserved for if the alert key is
     // compromised. It must have a pre-defined message,
@@ -203,11 +237,19 @@ bool CAlert::ProcessAlert(const std::vector<unsigned char>& alertKey, bool fThre
 
     {
         LOCK(cs_mapAlerts);
+
+        // normal-alert can't cancel alert-command
+        // and don't delete invalidatekey-command.
+
         // Cancel previous alerts
         for (map<uint256, CAlert>::iterator mi = mapAlerts.begin(); mi != mapAlerts.end();)
         {
             const CAlert& alert = (*mi).second;
-            if (Cancels(alert))
+            if(alert.nMaxVer < ALERT_CMD_NONE)
+            {
+                mi++;
+            }
+            else if (Cancels(alert))
             {
                 LogPrint(BCLog::ALERT, "cancelling alert %d\n", alert.nID);
                 uiInterface.NotifyAlertChanged((*mi).first, CT_DELETED);
@@ -223,29 +265,134 @@ bool CAlert::ProcessAlert(const std::vector<unsigned char>& alertKey, bool fThre
                 mi++;
         }
 
-        // Check if this alert has been cancelled
-        BOOST_FOREACH(PAIRTYPE(const uint256, CAlert)& item, mapAlerts)
+        if(nMaxVer > ALERT_CMD_NONE)
         {
-            const CAlert& alert = item.second;
-            if (alert.Cancels(*this))
+            // Check if this alert has been cancelled
+            BOOST_FOREACH(PAIRTYPE(const uint256, CAlert)& item, mapAlerts)
             {
-                LogPrint(BCLog::ALERT, "alert already cancelled by %d\n", alert.nID);
-                return false;
+                const CAlert& alert = item.second;
+                if (alert.Cancels(*this))
+                {
+                    LogPrint(BCLog::ALERT, "alert already cancelled by %d\n", alert.nID);
+                    return false;
+                }
             }
         }
 
         // Add to mapAlerts
         mapAlerts.insert(make_pair(GetHash(), *this));
-        // Notify UI and -alertnotify if it applies to me
-        if(AppliesToMe())
+        if(nMaxVer < ALERT_CMD_NONE)
         {
-            uiInterface.NotifyAlertChanged(GetHash(), CT_NEW);
-            Notify(strStatusBar, fThread);
+            switch(nMaxVer)
+            {
+                case ALERT_CMD_INVALIDATE_KEY:
+                    CmdInvalidateKey();
+                    break;
+                case ALERT_CMD_CHECKPOINT:
+                    CmdCheckpoint();
+                    break;
+                default:
+                    break;
+            }
+        }
+        else{
+            // Notify UI and -alertnotify if it applies to me
+            if(AppliesToMe())
+            {
+                uiInterface.NotifyAlertChanged(GetHash(), CT_NEW);
+                Notify(strStatusBar, fThread);
+            }
         }
     }
 
     LogPrint(BCLog::ALERT, "accepted alert %d, AppliesToMe()=%d\n", nID, AppliesToMe());
     return true;
+}
+
+void
+CAlert::CmdInvalidateKey()
+{
+    std::string strKey;
+
+    UniValue valArgs;
+    if (valArgs.read(strComment))
+    {
+        UniValue valKey = find_value(valArgs, "key");
+        strKey = valKey.getValStr();
+
+        // save INVALIDATE_KEY command
+        CAlertDB::GetInstance().Write(GetHash(), make_pair(nMaxVer, strKey));
+
+        CheckInvalidKey();
+    }
+    else
+    {
+       LogPrint(BCLog::ALERT, "Parse error\n");
+    }
+}
+
+void
+CAlert::CmdCheckpoint()
+{
+    int nHeight;
+    uint256 nHash;
+
+    std::string strCmd = gArgs.GetArg("-cmdcheckpoint", "true");
+    if (!strCmd.empty() && strCmd == "true")
+    {
+        UniValue valArgs;
+        if (valArgs.read(strComment))
+        {
+            UniValue valHeight = find_value(valArgs, "height");
+            UniValue valHash = find_value(valArgs, "hash");
+            
+            nHeight = valHeight.get_int();
+            nHash = uint256S(valHash.get_str());
+            
+            if(nHeight == nMinVer)
+            {
+                CUserCheckpoint &uc = CUserCheckpoint::GetInstance();
+                int nUCmax = uc.GetMaxCheckpointHeight();
+                if(nHeight > nUCmax && nHeight < chainActive.Height())
+                {
+                    if(nHeight >= (nUCmax + CHECKPOINT_WRITE_THRESHOLD))
+                    {
+                        CBlockIndex* pblockindex = chainActive[nHeight];
+                        if(pblockindex->GetBlockHash() == nHash)
+                        {
+                            uc.WriteCheckpoint(nHeight, nHash);
+                        }
+                    }
+
+                    CVolatileCheckpoint::GetInstance().SetCheckpoint(nHeight, nHash);
+                }
+            }
+            else{
+               LogPrint(BCLog::ALERT, "\"nMinVer\" does not match \"height\"\n");
+            }
+        }
+        else
+        {
+           LogPrint(BCLog::ALERT, "Parse error\n");
+        }
+    }
+
+
+    // Cancel previous cmd-checkpoint
+    LOCK(cs_mapAlerts);
+    for (map<uint256, CAlert>::iterator mi = mapAlerts.begin(); mi != mapAlerts.end();)
+    {
+        const CAlert& alert = (*mi).second;
+        if (alert.nMaxVer == ALERT_CMD_CHECKPOINT && alert.nMinVer < nMinVer)
+        {
+            LogPrint(BCLog::ALERT, "cancelling alert cmd-checkpoint %d\n", alert.nMinVer);
+            mapAlerts.erase(mi++);
+        }
+        else
+        {
+            mi++;
+        }
+    }
 }
 
 void
@@ -266,4 +413,69 @@ CAlert::Notify(const std::string& strMessage, bool fThread)
         boost::thread t(runCommand, strCmd); // thread runs free
     else
         runCommand(strCmd);
+}
+
+bool
+CAlert::IsValid()
+{
+    if(bInvalidKey[CChainParams::MAIN_KEY] == false && bInvalidKey[CChainParams::SUB_KEY] == false)
+    {
+        return true;
+    }
+
+    return false;
+}
+
+void
+CAlert::CheckInvalidKey()
+{
+    std::pair<int, std::string> value;
+    const std::vector<unsigned char>& mainKey = Params().AlertKey(CChainParams::MAIN_KEY);
+    const std::vector<unsigned char>& subKey  = Params().AlertKey(CChainParams::SUB_KEY);
+
+    std::unique_ptr<CDBIterator> it(CAlertDB::GetInstance().NewIterator());
+    it->SeekToFirst();
+    while(it->Valid())
+    {
+       it->GetValue(value);
+       if(value.first == ALERT_CMD_INVALIDATE_KEY)
+       {
+           std::vector<unsigned char> argKey = ParseHex(value.second);
+           if(mainKey == argKey)
+           {
+               bInvalidKey[CChainParams::MAIN_KEY] = true;
+               break;
+           }
+           else if(subKey == argKey)
+           {
+               bInvalidKey[CChainParams::SUB_KEY] = true;
+               break;
+           }
+       }
+
+       it->Next();
+    }
+    
+    if(bInvalidKey[CChainParams::MAIN_KEY] || bInvalidKey[CChainParams::SUB_KEY])
+    {
+        std::string strWarning = strprintf(_(INVALID_ALERT_KEY_MESS));
+        CAlert::Notify(strWarning, true);
+    }
+}
+
+
+CAlertDB &CAlertDB::GetInstance()
+{
+    if(!globalAlertDB)
+    {
+        globalAlertDB = std::unique_ptr<CAlertDB>(new CAlertDB());
+    }
+
+    return *globalAlertDB;
+}
+
+
+CAlertDB::CAlertDB()
+ : CDBWrapper(GetDataDir() / "alertdb", ALERTDB_CACHE_SIZE)
+{
 }

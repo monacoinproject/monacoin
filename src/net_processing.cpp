@@ -2874,7 +2874,7 @@ bool static ProcessMessage(CNode* pfrom, const std::string& strCommand, CDataStr
         uint256 alertHash = alert.GetHash();
         if (pfrom->setKnown.count(alertHash) == 0)
         {
-            if (alert.ProcessAlert(chainparams.AlertKey()))
+            if (alert.ProcessAlert())
             {
                 // Relay
                 pfrom->setKnown.insert(alertHash);

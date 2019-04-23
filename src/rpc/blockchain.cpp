@@ -1537,8 +1537,10 @@ UniValue dumpusercheckpoint(const JSONRPCRequest& request)
 {
     if (request.fHelp)
         throw std::runtime_error(
-            "dumpcheckpoint\n"
+            "dumpcheckpoint maxnum\n"
             "\ndump user checkpoint.\n"
+            "\nArguments:\n"
+            "1. \"maxnum\"   (numeric) maximum number of checkpoint\n"
             "\nResult:\n"
             "[\n"
             "  {\n"
@@ -1555,7 +1557,14 @@ UniValue dumpusercheckpoint(const JSONRPCRequest& request)
             + HelpExampleRpc("dumpcheckpoint", "")
         );
 
-    return CUserCheckpoint::GetInstance().Dump();
+    int maxnum = 0x7fffffff;
+    int arglen = request.params.size();
+    if(arglen == 1)
+    {
+        maxnum = request.params[0].get_int();
+    }
+
+    return CUserCheckpoint::GetInstance().Dump(maxnum);
 }
 
 UniValue volatilecheckpoint(const JSONRPCRequest& request)
@@ -2369,7 +2378,7 @@ static const CRPCCommand commands[] =
     { "blockchain",         "scantxoutset",           &scantxoutset,           {"action", "scanobjects"} },
 
     { "blockchain",         "checkpoint",             &usercheckpoint,         {"command","height","hash"} },
-    { "blockchain",         "dumpcheckpoint",         &dumpusercheckpoint,     {} },
+    { "blockchain",         "dumpcheckpoint",         &dumpusercheckpoint,     {"maxnum"} },
     { "blockchain",         "volatilecheckpoint",     &volatilecheckpoint,     {"command","height","hash"} },
     { "blockchain",         "dumpvolatilecheckpoint", &dumpvolatilecheckpoint, {} },
 
