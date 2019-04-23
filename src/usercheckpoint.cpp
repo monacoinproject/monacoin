@@ -70,7 +70,7 @@ CBlockIndex* CUserCheckpoint::GetLastCheckpoint()
 
 }
 
-UniValue CUserCheckpoint::Dump()
+UniValue CUserCheckpoint::Dump(int nMax)
 {
     int height = 0;
     uint256 hash;
@@ -79,7 +79,7 @@ UniValue CUserCheckpoint::Dump()
 
     std::unique_ptr<CDBIterator> it(NewIterator());
     it->SeekToFirst();
-    while(it->Valid())
+    while(it->Valid() && nMax-- > 0)
     {
         UniValue checkpoint(UniValue::VOBJ);
 

@@ -12,6 +12,7 @@
 #include <addrman.h>
 #include <amount.h>
 #include <banman.h>
+#include <alert.h>
 #include <chain.h>
 #include <chainparams.h>
 #include <checkpoints.h>
@@ -1810,7 +1811,11 @@ bool AppInitMain(InitInterfaces& interfaces)
         return false;
     }
 
-    // ********************************************************* Step 13: finished
+    // ********************************************************* Step 13: check alert-key
+
+    CAlert::CheckInvalidKey();
+
+    // ********************************************************* Step 14: finished
 
     SetRPCWarmupFinished();
     uiInterface.InitMessage(_("Done loading"));
