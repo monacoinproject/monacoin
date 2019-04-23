@@ -137,14 +137,16 @@ CTxDestination DecodeDestination(const std::string& str, const CChainParams& par
 }
 } // namespace
 
-CKey DecodeSecret(const std::string& str)
+CKey DecodeSecret(const std::string& str, bool bAllowOldPubkey)
 {
     CKey key;
     std::vector<unsigned char> data;
     if (DecodeBase58Check(str, data)) {
         const std::vector<unsigned char>& privkey_prefix = Params().Base58Prefix(CChainParams::SECRET_KEY);
-        if ((data.size() == 32 + privkey_prefix.size() || (data.size() == 33 + privkey_prefix.size() && data.back() == 1)) &&
-            std::equal(privkey_prefix.begin(), privkey_prefix.end(), data.begin())) {
+        const std::vector<unsigned char>& old_privkey_prefix = Params().Base58Prefix(CChainParams::OLD_SECRET_KEY);
+        if ( (data.size() == 32 + privkey_prefix.size() || (data.size() == 33 + privkey_prefix.size() && data.back() == 1)) &&
+             (std::equal(privkey_prefix.begin(), privkey_prefix.end(), data.begin()) || (bAllowOldPubkey && std::equal(old_privkey_prefix.begin(), old_privkey_prefix.end(), data.begin())))
+           ) {
             bool compressed = data.size() == 33 + privkey_prefix.size();
             key.Set(data.begin() + privkey_prefix.size(), data.begin() + privkey_prefix.size() + 32, compressed);
         }
