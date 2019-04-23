@@ -209,6 +209,7 @@ BITCOIN_CORE_H = \
   validationinterface.h \
   versionbits.h \
   versionbitsinfo.h \
+  volatilecheckpoint.h \
   walletinitinterface.h \
   wallet/coincontrol.h \
   wallet/crypter.h \
@@ -288,6 +289,7 @@ libbitcoin_server_a_SOURCES = \
   validation.cpp \
   validationinterface.cpp \
   versionbits.cpp \
+  volatilecheckpoint.cpp \
   $(BITCOIN_CORE_H)
 
 if !ENABLE_WALLET
