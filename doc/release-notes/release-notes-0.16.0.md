@@ -197,7 +197,7 @@ Other changed command-line options
 
 Testing changes
 ----------------
-- The default regtest JSON-RPC port has been changed to 18443 to avoid conflict with testnet's default of 18332.
+- The default regtest JSON-RPC port has been changed to 18443 to avoid conflict with testnet's default of 19402.
 - Segwit is now always active in regtest mode by default. Thus, if you upgrade a regtest node you will need to either -reindex or use the old rules by adding `vbparams=segwit:0:999999999999` to your regtest bitcoin.conf. Failure to do this will result in a CheckBlockIndex() assertion failure that will look like: Assertion `(pindexFirstNeverProcessed != nullptr) == (pindex->nChainTx == 0)' failed.
 
 0.16.0 change log
@@ -312,7 +312,7 @@ Testing changes
 - #11415 `69ec021` Disallow using addresses in createmultisig (achow101)
 - #12278 `288deac` Add special error for genesis coinbase to getrawtransaction (MeshCollider)
 - #11362 `c6223b3` Remove nBlockMaxSize from miner opt struct as it is no longer used (gmaxwell)
-- #10825 `28485c7` Set regtest JSON-RPC port to 18443 to avoid conflict with testnet 18332 (fametrano)
+- #10825 `28485c7` Set regtest JSON-RPC port to 18443 to avoid conflict with testnet 19402 (fametrano)
 - #11303 `e542728` Fix estimatesmartfee rounding display issue (TheBlueMatt)
 - #7061 `8c2de82` Add RPC call "rescanblockchain <startheight> <stopheight>" (jonasschnelli)
 - #11055 `95e14dc` RPC getreceivedbyaddress should return error if called with address not owned by the wallet (jnewbery)
