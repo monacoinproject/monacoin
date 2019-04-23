@@ -18,6 +18,7 @@ namespace signals2 {
 class connection;
 }
 } // namespace boost
+class uint256;
 
 /** General change type (added, updated, removed). */
 enum ChangeType
@@ -99,7 +100,7 @@ public:
     /**
      * Status bar alerts changed.
      */
-    ADD_SIGNALS_DECL_WRAPPER(NotifyAlertChanged, void, );
+    ADD_SIGNALS_DECL_WRAPPER(NotifyAlertChanged, void, const uint256 &, ChangeType);
 
     /** A wallet has been loaded. */
     ADD_SIGNALS_DECL_WRAPPER(LoadWallet, void, std::shared_ptr<CWallet> wallet);
