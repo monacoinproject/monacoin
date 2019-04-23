@@ -17,7 +17,7 @@ namespace block_bench {
 // a block off the wire, but before we can relay the block on to peers using
 // compact block relay.
 
-// Litecoin uses block height 878439, hash 0babe680f55a55d54339511226755f0837261da89a4e78eba4d6436a63026df8
+// Monacoin uses block height 878439, hash 0babe680f55a55d54339511226755f0837261da89a4e78eba4d6436a63026df8
 // which contains 3808 transactions.
 
 static void DeserializeBlockTest(benchmark::State& state)

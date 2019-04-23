@@ -1,6 +1,6 @@
-# `litecoin.conf` Configuration File
+# `monacoin.conf` Configuration File
 
-The configuration file is used by `litecoind`, `litecoin-qt` and `litecoin-cli`.
+The configuration file is used by `monacoind`, `monacoin-qt` and `monacoin-cli`.
 
 All command-line options (except for `-?`, `-help`, `-version` and `-conf`) may be specified in a configuration file, and all configuration file options (except for `includeconf`) may also be specified on the command line. Command-line options override values set in the configuration file and configuration file options override values set in the GUI.
 
@@ -32,6 +32,6 @@ Network specific options can be:
 
 ## Configuration File Path
 
-The configuration file is not automatically created; you can create it using your favorite text editor. By default, the configuration file name is `litecoin.conf` and it is located in the Litecoin data directory, but both the Litecoin data directory and the configuration file path may be changed using the `-datadir` and `-conf` command-line options.
+The configuration file is not automatically created; you can create it using your favorite text editor. By default, the configuration file name is `monacoin.conf` and it is located in the Monacoin data directory, but both the Monacoin data directory and the configuration file path may be changed using the `-datadir` and `-conf` command-line options.
 
-The `includeconf=<file>` option in the `litecoin.conf` file can be used to include additional configuration files.
+The `includeconf=<file>` option in the `monacoin.conf` file can be used to include additional configuration files.

@@ -30,8 +30,8 @@ class HTTPBasicsTest(BitcoinTestFramework):
         #Append rpcauth to bitcoin.conf before initialization
         rpcauth = "rpcauth=rt:93648e835a54c573682c2eb19f882535$7681e9c5b74bdd85e78166031d2058e1069b3ed7ed967c93fc63abba06f31144"
         rpcauth2 = "rpcauth=rt2:f8607b1a88861fac29dfccf9b52ff9f$ff36a0c23c8c62b4846112e50fa888416e94c17bfd4c42f88fd8f55ec6a3137e"
-        rpcuser = "rpcuser=rpcuserðŸ’»"
-        rpcpassword = "rpcpassword=rpcpasswordðŸ”‘"
+        rpcuser = "rpcuser=rpcuserïýyŽ¹"
+        rpcpassword = "rpcpassword=rpcpasswordïýz½ƒ
 
         self.user = ''.join(SystemRandom().choice(string.ascii_letters + string.digits) for _ in range(10))
         config = configparser.ConfigParser()
@@ -42,11 +42,11 @@ class HTTPBasicsTest(BitcoinTestFramework):
         rpcauth3 = lines[1]
         self.password = lines[3]
 
-        with open(os.path.join(get_datadir_path(self.options.tmpdir, 0), "litecoin.conf"), 'a', encoding='utf8') as f:
+        with open(os.path.join(get_datadir_path(self.options.tmpdir, 0), "monacoin.conf"), 'a', encoding='utf8') as f:
             f.write(rpcauth+"\n")
             f.write(rpcauth2+"\n")
             f.write(rpcauth3+"\n")
-        with open(os.path.join(get_datadir_path(self.options.tmpdir, 1), "litecoin.conf"), 'a', encoding='utf8') as f:
+        with open(os.path.join(get_datadir_path(self.options.tmpdir, 1), "monacoin.conf"), 'a', encoding='utf8') as f:
             f.write(rpcuser+"\n")
             f.write(rpcpassword+"\n")
 
@@ -167,7 +167,7 @@ class HTTPBasicsTest(BitcoinTestFramework):
 
         # rpcuser and rpcpassword authpair
         self.log.info('Correct...')
-        rpcuserauthpair = "rpcuserðŸ’»:rpcpasswordðŸ”‘"
+        rpcuserauthpair = "rpcuserïýyŽ¹:rpcpasswordïýz½ƒ
 
         headers = {"Authorization": "Basic " + str_to_b64str(rpcuserauthpair)}
 

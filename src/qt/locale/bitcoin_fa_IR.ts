@@ -66,11 +66,11 @@
         <translation>آدرس‌های گیرنده</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>اینها آدرس‌های شما برای ارسال وجوه هستند. همیشه قبل از ارسال، مقدار و آدرس گیرنده را بررسی کنید.</translation>
     </message>
     <message>
-        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your Monacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>اینها آدرس‌های بیتکوین شما برای دریافت وجوه هستند. توصیه می‌شود برای هر دریافت از یک آدرس جدید استفاده کنید.</translation>
     </message>
     <message>
@@ -176,8 +176,8 @@
         <translation>تایید رمزگذاری کیف پول</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
-        <translation>اخطار: اگر کیف‌پول خود را رمزگذاری کرده و رمز خود را فراموش کنید، شما &lt;b&gt;تمام Litecoin‌های خود را از دست خواهید داد&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MONACOINS&lt;/b&gt;!</source>
+        <translation>اخطار: اگر کیف‌پول خود را رمزگذاری کرده و رمز خود را فراموش کنید، شما &lt;b&gt;تمام Monacoin‌های خود را از دست خواهید داد&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -334,8 +334,8 @@
         <translation>فهرست‌بندی نمایه بلاک‌ها…</translation>
     </message>
     <message>
-        <source>Send coins to a Litecoin address</source>
-        <translation>ارسال کوین به آدرس litecoin</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation>ارسال کوین به آدرس monacoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -358,8 +358,8 @@
         <translation>تایید پیام</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>litecoin</translation>
+        <source>Monacoin</source>
+        <translation>monacoin</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -382,12 +382,12 @@
         <translation>رمزنگاری کلیدهای شخصی متعلق به کیف‌پول</translation>
     </message>
     <message>
-        <source>Sign messages with your Litecoin addresses to prove you own them</source>
-        <translation>پیام‌ها را با آدرس Litecoin خود امضا کنید تا مالکیت آن‌ها را اثبات کنید</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation>پیام‌ها را با آدرس Monacoin خود امضا کنید تا مالکیت آن‌ها را اثبات کنید</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Litecoin addresses</source>
-        <translation>پیام‌ها را تائید کنید تا از امضاشدن آن‌ها با آدرس Litecoin مطمئن شوید</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation>پیام‌ها را تائید کنید تا از امضاشدن آن‌ها با آدرس Monacoin مطمئن شوید</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -406,8 +406,8 @@
         <translation>نوار ابزار</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and litecoin: URIs)</source>
-        <translation>درخواست پرداخت (ساخت کد QR و Litecoin: URIs)</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation>درخواست پرداخت (ساخت کد QR و Monacoin: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -418,16 +418,16 @@
         <translation>نمایش لیست آدرس‌ها و لیبل‌های دریافتی استفاده شده</translation>
     </message>
     <message>
-        <source>Open a litecoin: URI or payment request</source>
-        <translation>بازکردن Litecoin: آدرس یا درخواست پرداخت</translation>
+        <source>Open a monacoin: URI or payment request</source>
+        <translation>بازکردن Monacoin: آدرس یا درخواست پرداخت</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>گزینه های خط فرمان</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Litecoin network</source>
-        <translation><numerusform>%n ارتباط فعال به شبکه Litecoin</numerusform><numerusform>%n ارتباط فعال به شبکه Litecoin</numerusform></translation>
+        <source>%n active connection(s) to Monacoin network</source>
+        <translation><numerusform>%n ارتباط فعال به شبکه Monacoin</numerusform><numerusform>%n ارتباط فعال به شبکه Monacoin</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -538,7 +538,7 @@
         <translation>wallet رمزگذاری شد و در حال حاضر قفل است</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Litecoin can no longer continue safely and will quit.</source>
+        <source>A fatal error occurred. Monacoin can no longer continue safely and will quit.</source>
         <translation>خطای بحرانی رخ داده است. بیتکوین دیگر به صورت ایمن قادر به ادامه دادن نمی‌باشد و خارج خواهد شد.</translation>
     </message>
 </context>
@@ -696,8 +696,8 @@
         <translation>ویرایش آدرس ارسالی</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Litecoin address.</source>
-        <translation>آدرس وارد شده "%1" آدرس معتبر litecoin نیست.</translation>
+        <source>The entered address "%1" is not a valid Monacoin address.</source>
+        <translation>آدرس وارد شده "%1" آدرس معتبر monacoin نیست.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -753,8 +753,8 @@
         <translation>استفاده کردن از پوشه داده مخصوص:</translation>
     </message>
     <message>
-        <source>Litecoin</source>
-        <translation>litecoin</translation>
+        <source>Monacoin</source>
+        <translation>monacoin</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -907,8 +907,8 @@
         <translation>شبکه Tor</translation>
     </message>
     <message>
-        <source>Connect to the Litecoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>اتصال به شبکه litecoin با استفاده از پراکسی SOCKS5 برای استفاده از سرویس مخفی تور</translation>
+        <source>Connect to the Monacoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>اتصال به شبکه monacoin با استفاده از پراکسی SOCKS5 برای استفاده از سرویس مخفی تور</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -990,8 +990,8 @@
         <translation>فرم</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Litecoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>اطلاعات نمایش داده شده ممکن است روزآمد نباشد. wallet شما به صورت خودکار بعد از برقراری اتصال با شبکه litecoin به روز می شود اما این فرایند هنوز تکمیل نشده است.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>اطلاعات نمایش داده شده ممکن است روزآمد نباشد. wallet شما به صورت خودکار بعد از برقراری اتصال با شبکه monacoin به روز می شود اما این فرایند هنوز تکمیل نشده است.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1712,8 +1712,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>درخواست پرداخت منقضی شد یا تاریخ آن گذشت.</translation>
     </message>
     <message>
-        <source>Warning: Invalid Litecoin address</source>
-        <translation>هشدار: آدرس litecoin نامعتبر</translation>
+        <source>Warning: Invalid Monacoin address</source>
+        <translation>هشدار: آدرس monacoin نامعتبر</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -1755,8 +1755,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>این پرداحت,عادی هست.</translation>
     </message>
     <message>
-        <source>The Litecoin address to send the payment to</source>
-        <translation>آدرس litecoin برای ارسال پرداحت به آن</translation>
+        <source>The Monacoin address to send the payment to</source>
+        <translation>آدرس monacoin برای ارسال پرداحت به آن</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -1844,8 +1844,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>امضا</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Litecoin address</source>
-        <translation>پیام را امضا کنید تا ثابت کنید این آدرس Litecoin متعلق به شماست</translation>
+        <source>Sign the message to prove you own this Monacoin address</source>
+        <translation>پیام را امضا کنید تا ثابت کنید این آدرس Monacoin متعلق به شماست</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -1860,8 +1860,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
         <translation>تایید پیام</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Litecoin address</source>
-        <translation>پیام را تایید کنید تا مطمئن شوید که توسط آدرس Litecoin مشخص شده امضا شده است.</translation>
+        <source>Verify the message to ensure it was signed with the specified Monacoin address</source>
+        <translation>پیام را تایید کنید تا مطمئن شوید که توسط آدرس Monacoin مشخص شده امضا شده است.</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2305,8 +2305,8 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
 <context>
     <name>bitcoin-core</name>
     <message>
-        <source>Litecoin Core</source>
-        <translation>هسته litecoin</translation>
+        <source>Monacoin Core</source>
+        <translation>هسته monacoin</translation>
     </message>
     <message>
         <source>Change index out of range</source>
@@ -2398,7 +2398,7 @@ Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis p
     </message>
     <message>
         <source>Transaction too large for fee policy</source>
-        <translation>حجم تراکنش خیلی زیاد است به خاطر سیاست های کارمزدی litecoin</translation>
+        <translation>حجم تراکنش خیلی زیاد است به خاطر سیاست های کارمزدی monacoin</translation>
     </message>
     <message>
         <source>Transaction too large</source>
