@@ -72,6 +72,7 @@ public:
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
         consensus.nPowTargetTimespan = 1.1 * 24 * 60 * 60; // 1.1 days
         consensus.nPowTargetSpacing = 1.5 * 60; // 1.5 minutes
+        consensus.nPowTargetTimespanDigishield  = 1.5 * 60;
         consensus.fPowAllowMinDifficultyBlocks = false;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 7560; // 75% of 10080
@@ -98,6 +99,7 @@ public:
 
         // Hardfork params
         nSwitchKGWblock = 80000;
+        nSwitchDIGIblock = 140000;
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -189,6 +191,7 @@ public:
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 1.1 * 24 * 60 * 60; // 1.1 days
         consensus.nPowTargetSpacing = 1.5 * 60; // 1.5 minutes
+        consensus.nPowTargetTimespanDigishield  = 1.5 * 60;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 75; // 75% for testchains
@@ -219,6 +222,7 @@ public:
 
         // Hardfork params
         nSwitchKGWblock = 10;
+        nSwitchDIGIblock = 20;
 
         nDefaultPort = 19403;
         nPruneAfterHeight = 1000;
@@ -288,6 +292,7 @@ public:
         consensus.powLimit = uint256S("7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 1.1 * 24 * 60 * 60; // 1.5 days
         consensus.nPowTargetSpacing = 1.5 * 60; // 1.5 minutes
+        consensus.nPowTargetTimespanDigishield  = 1.5 * 60;
         consensus.fPowAllowMinDifficultyBlocks = true;
         consensus.fPowNoRetargeting = true;
         consensus.nRuleChangeActivationThreshold = 108; // 75% for testchains
@@ -310,6 +315,7 @@ public:
 
         // Hardfork params
         nSwitchKGWblock = 20;
+        nSwitchDIGIblock = 40;
 
         pchMessageStart[0] = 0xfa;
         pchMessageStart[1] = 0xbf;
