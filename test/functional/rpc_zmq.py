@@ -10,7 +10,7 @@ from test_framework.util import assert_equal
 
 class RPCZMQTest(BitcoinTestFramework):
 
-    address = "tcp://127.0.0.1:28332"
+    address = "tcp://127.0.0.1:29402"
 
     def set_test_params(self):
         self.num_nodes = 1

@@ -57,8 +57,8 @@ If you use this option, it is recommended to upgrade to this version as soon as 
 Reset Testnet
 -------------
 
-Testnet3 has been deprecated and replaced with Testnet4. The server port has been changed to 19335 however the RPC port remains
-the same (19332).
+Testnet3 has been deprecated and replaced with Testnet4. The server port has been changed to 19403 however the RPC port remains
+the same (19402).
 
 Testnet faucets can be located at:
 - http://testnet.monacointools.com
