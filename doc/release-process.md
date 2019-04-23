@@ -66,7 +66,7 @@ Setup Gitian descriptors:
     export SIGNER="(your Gitian key, ie bluematt, sipa, etc)"
     export VERSION=(new version, e.g. 0.8.0)
     git fetch
-    git checkout v${VERSION}
+    git checkout ${VERSION}
     popd
 
 Ensure your gitian.sigs.ltc are up-to-date if you wish to gverify your builds against other Gitian signatures.
@@ -117,16 +117,16 @@ The gbuild invocations below <b>DO NOT DO THIS</b> by default.
     export GITIAN_MEMORY=3000
     
     pushd ./gitian-builder
-    ./bin/gbuild --num-make $GITIAN_THREADS --memory $GITIAN_MEMORY --commit monacoin=v${VERSION} ../monacoin/contrib/gitian-descriptors/gitian-linux.yml
+    ./bin/gbuild --num-make $GITIAN_THREADS --memory $GITIAN_MEMORY --commit monacoin=${VERSION} ../monacoin/contrib/gitian-descriptors/gitian-linux.yml
     ./bin/gsign --signer "$SIGNER" --release ${VERSION}-linux --destination ../gitian.sigs.ltc/ ../monacoin/contrib/gitian-descriptors/gitian-linux.yml
     mv build/out/monacoin-*.tar.gz build/out/src/monacoin-*.tar.gz ../
 
-    ./bin/gbuild --num-make $GITIAN_THREADS --memory $GITIAN_MEMORY --commit monacoin=v${VERSION} ../monacoin/contrib/gitian-descriptors/gitian-win.yml
+    ./bin/gbuild --num-make $GITIAN_THREADS --memory $GITIAN_MEMORY --commit monacoin=${VERSION} ../monacoin/contrib/gitian-descriptors/gitian-win.yml
     ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-unsigned --destination ../gitian.sigs.ltc/ ../monacoin/contrib/gitian-descriptors/gitian-win.yml
     mv build/out/monacoin-*-win-unsigned.tar.gz inputs/monacoin-win-unsigned.tar.gz
     mv build/out/monacoin-*.zip build/out/monacoin-*.exe ../
 
-    ./bin/gbuild --num-make $GITIAN_THREADS --memory $GITIAN_MEMORY --commit monacoin=v${VERSION} ../monacoin/contrib/gitian-descriptors/gitian-osx.yml
+    ./bin/gbuild --num-make $GITIAN_THREADS --memory $GITIAN_MEMORY --commit monacoin=${VERSION} ../monacoin/contrib/gitian-descriptors/gitian-osx.yml
     ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-unsigned --destination ../gitian.sigs.ltc/ ../monacoin/contrib/gitian-descriptors/gitian-osx.yml
     mv build/out/monacoin-*-osx-unsigned.tar.gz inputs/monacoin-osx-unsigned.tar.gz
     mv build/out/monacoin-*.tar.gz build/out/monacoin-*.dmg ../
@@ -192,7 +192,7 @@ Codesigner only: Commit the detached codesign payloads:
     tar xf signature-win.tar.gz
     git add -a
     git commit -m "point to ${VERSION}"
-    git tag -s v${VERSION} HEAD
+    git tag -s ${VERSION} HEAD
     git push the current branch and new tag
 
 Non-codesigners: wait for Windows/macOS detached signatures:
@@ -203,7 +203,7 @@ Non-codesigners: wait for Windows/macOS detached signatures:
 Create (and optionally verify) the signed macOS binary:
 
     pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../monacoin/contrib/gitian-descriptors/gitian-osx-signer.yml
+    ./bin/gbuild -i --commit signature=${VERSION} ../monacoin/contrib/gitian-descriptors/gitian-osx-signer.yml
     ./bin/gsign --signer "$SIGNER" --release ${VERSION}-osx-signed --destination ../gitian.sigs.ltc/ ../monacoin/contrib/gitian-descriptors/gitian-osx-signer.yml
     ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-osx-signed ../monacoin/contrib/gitian-descriptors/gitian-osx-signer.yml
     mv build/out/monacoin-osx-signed.dmg ../monacoin-${VERSION}-osx.dmg
@@ -212,7 +212,7 @@ Create (and optionally verify) the signed macOS binary:
 Create (and optionally verify) the signed Windows binaries:
 
     pushd ./gitian-builder
-    ./bin/gbuild -i --commit signature=v${VERSION} ../monacoin/contrib/gitian-descriptors/gitian-win-signer.yml
+    ./bin/gbuild -i --commit signature=${VERSION} ../monacoin/contrib/gitian-descriptors/gitian-win-signer.yml
     ./bin/gsign --signer "$SIGNER" --release ${VERSION}-win-signed --destination ../gitian.sigs.ltc/ ../monacoin/contrib/gitian-descriptors/gitian-win-signer.yml
     ./bin/gverify -v -d ../gitian.sigs.ltc/ -r ${VERSION}-win-signed ../monacoin/contrib/gitian-descriptors/gitian-win-signer.yml
     mv build/out/monacoin-*win64-setup.exe ../monacoin-${VERSION}-win64-setup.exe

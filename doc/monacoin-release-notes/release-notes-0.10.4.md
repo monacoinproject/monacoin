@@ -1,6 +1,6 @@
 Monacoin Core version 0.10.4.0 is now available from:
 
-  <https://download.monacoin.org/monacoin-0.10.4.0/>
+  <https://github.com/monacoinproject/monacoin/releases>
 
 This is a new minor version release, bringing bug fixes, the BIP65
 (CLTV) consensus change, and relay policy preparation for BIP113. It is

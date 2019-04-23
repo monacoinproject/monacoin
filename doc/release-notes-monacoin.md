@@ -1,6 +1,6 @@
 Monacoin Core version 0.17.1 is now available from:
 
-  <https://download.monacoin.org/monacoin-0.17.1/>
+  <https://github.com/monacoinproject/monacoin/releases>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
@@ -9,9 +9,6 @@ Please report bugs using the issue tracker at GitHub:
 
   <https://github.com/monacoinproject/monacoin/issues>
 
-To receive security and update notifications, please subscribe to:
-
-  <https://groups.google.com/forum/#!forum/monacoin-dev>
 
 How to Upgrade
 ==============
@@ -217,7 +214,7 @@ produce a transaction. Examples include hardware wallets, multisig setups, and
 [CoinJoin](https://bitcointalk.org/?topic=279249) transactions.
 
 For backend RPC convenience, the Monacoin devs have supported to keep the acronym `PSBT`
-instead of `PSLT` to make crosschain application support easier.
+instead of `PSMN` to make crosschain application support easier.
 
 ### Overall workflow
 
