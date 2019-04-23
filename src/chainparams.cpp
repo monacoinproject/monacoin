@@ -96,6 +96,9 @@ public:
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0xcb6251d70bea2cea1834ef22ee159523017d1e6fd4dfe82526754571e919f807"); //1639061
 
+        // Hardfork params
+        nSwitchKGWblock = 80000;
+
         /**
          * The message start string is designed to be unlikely to occur in normal data.
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
@@ -213,6 +216,10 @@ public:
         pchMessageStart[1] = 0xd2;
         pchMessageStart[2] = 0xc8;
         pchMessageStart[3] = 0xf1;
+
+        // Hardfork params
+        nSwitchKGWblock = 10;
+
         nDefaultPort = 19403;
         nPruneAfterHeight = 1000;
         m_assumed_blockchain_size = 2;
@@ -300,6 +307,9 @@ public:
 
         // By default assume that the signatures in ancestors of this block are valid.
         consensus.defaultAssumeValid = uint256S("0x00");
+
+        // Hardfork params
+        nSwitchKGWblock = 20;
 
         pchMessageStart[0] = 0xfa;
         pchMessageStart[1] = 0xbf;
