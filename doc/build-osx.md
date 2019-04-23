@@ -42,17 +42,17 @@ from the root of the repository.
 
 **Note**: You only need Berkeley DB if the wallet is enabled (see [*Disable-wallet mode*](/doc/build-osx.md#disable-wallet-mode)).
 
-## Build Bitcoin Core
+## Build Monacoin Core
 
-1. Clone the Bitcoin Core source code:
+1. Clone the Monacoin Core source code:
     ```shell
-    git clone https://github.com/bitcoin/bitcoin
-    cd bitcoin
+    git clone https://github.com/monacoinproject/monacoin
+    cd monacoin
     ```
 
-2.  Build Bitcoin Core:
+2.  Build Monacoin Core:
 
-    Configure and build the headless Bitcoin Core binaries as well as the GUI (if Qt is found).
+    Configure and build the headless Monacoin Core binaries as well as the GUI (if Qt is found).
 
     You can disable the GUI build by passing `--without-gui` to configure.
     ```shell
@@ -72,7 +72,7 @@ from the root of the repository.
     ```
 
 ## `disable-wallet` mode
-When the intention is to run only a P2P node without a wallet, Bitcoin Core may be
+When the intention is to run only a P2P node without a wallet, Monacoin Core may be
 compiled in `disable-wallet` mode with:
 ```shell
 ./configure --disable-wallet
@@ -83,15 +83,15 @@ In this case there is no dependency on Berkeley DB 4.8.
 Mining is also possible in disable-wallet mode using the `getblocktemplate` RPC call.
 
 ## Running
-Bitcoin Core is now available at `./src/bitcoind`
+Monacoin Core is now available at `./src/monacoind`
 
 Before running, you may create an empty configuration file:
 ```shell
 mkdir -p "/Users/${USER}/Library/Application Support/Bitcoin"
 
-touch "/Users/${USER}/Library/Application Support/Bitcoin/bitcoin.conf"
+touch "/Users/${USER}/Library/Application Support/Monacoin/monacoin.conf"
 
-chmod 600 "/Users/${USER}/Library/Application Support/Bitcoin/bitcoin.conf"
+chmod 600 "/Users/${USER}/Library/Application Support/Monacoin/monacoin.conf"
 ```
 
 The first time you run bitcoind, it will start downloading the blockchain. This process could
@@ -104,9 +104,9 @@ tail -f $HOME/Library/Application\ Support/Bitcoin/debug.log
 
 ## Other commands:
 ```shell
-./src/bitcoind -daemon      # Starts the bitcoin daemon.
-./src/bitcoin-cli --help    # Outputs a list of command-line options.
-./src/bitcoin-cli help      # Outputs a list of RPC commands when the daemon is running.
+./src/monacoind -daemon      # Starts the bitcoin daemon.
+./src/monacoin-cli --help    # Outputs a list of command-line options.
+./src/monacoin-cli help      # Outputs a list of RPC commands when the daemon is running.
 ```
 
 ## Notes

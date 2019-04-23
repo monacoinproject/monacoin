@@ -62,8 +62,12 @@
         <translation>Færslugildi sem þiggja til sín</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Þetta eru Bitcoin færslugildin sem senda greiðslur. Skoðið ævinlega vel upphæðina og færslugildin sem þiggja greiðslur áður en mynt er send.</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Þetta eru Monacoin færslugildin sem senda greiðslur. Skoðið ævinlega vel upphæðina og færslugildin sem þiggja greiðslur áður en mynt er send.</translation>
+    </message>
+    <message>
+        <source>These are your Monacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Þetta eru Monacoin færslugildin sem þiggja greiðslur. Mælt er með að nota aldrei sama færslugildið til að þiggja fleiri en eina greiðslu.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -128,6 +132,10 @@
         <translation>Endurtaktu nýja lykilsetningu</translation>
     </message>
     <message>
+        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <translation>Skráðu nýju lykilsetninguna í veskið. &lt;br/&gt;Vinsamlegast notaðu lykilsetningu með &lt;b&gt;tíu eða fleiri slembibókstöfum&lt;/b&gt;, eða &lt;b&gt;átta eða fleiri orðum&lt;/b&gt;.</translation>
+    </message>
+    <message>
         <source>Encrypt wallet</source>
         <translation>Dulkóða veski</translation>
     </message>
@@ -152,12 +160,16 @@
         <translation>Breyta lykilsetningu</translation>
     </message>
     <message>
+        <source>Enter the old passphrase and new passphrase to the wallet.</source>
+        <translation>Skráðu gömlu lykilsetninguna og þá nýju í veskið.</translation>
+    </message>
+    <message>
         <source>Confirm wallet encryption</source>
         <translation>Staðfesta dulkóðun veskis</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>Viðvörun: Ef þú dulkóðar veskið og týnir lykilsetningunn þá munt þú &lt;b&gt;TAPA ALLRI ÞINNI BITCOIN MYNT&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
+        <translation>Viðvörun: Ef þú dulkóðar veskið og týnir lykilsetningunn þá munt þú &lt;b&gt;TAPA ALLRI ÞINNI LITECOIN MYNT&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -166,10 +178,6 @@
     <message>
         <source>Wallet encrypted</source>
         <translation>Veski dulkóðað</translation>
-    </message>
-    <message>
-        <source>Wallet to be encrypted</source>
-        <translation>Veski sem á að dulkóða</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -220,7 +228,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Undirrita &amp;skilaboð</translation>
@@ -314,8 +322,8 @@
         <translation>Endurraða blokkum á drifi...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Senda mynt í Bitcoin færslugildi</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation>Senda mynt í Monacoin færslugildi</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -338,6 +346,10 @@
         <translation>&amp;Yfirfara skilaboð...</translation>
     </message>
     <message>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
+    </message>
+    <message>
         <source>&amp;Send</source>
         <translation>&amp;Senda</translation>
     </message>
@@ -358,12 +370,12 @@
         <translation>Dulkóða einkalyklana sem tilheyra veskinu þínu</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Kvitta undir skilaboð með Bitcoin færslugildunum þínum til að sanna að þú eigir þau</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation>Kvitta undir skilaboð með Monacoin færslugildunum þínum til að sanna að þú eigir þau</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Yfirfara skilaboð til að tryggja að kvittað hafi verið fyrir þau með tilteknum Bitcoin færslugildum</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation>Yfirfara skilaboð til að tryggja að kvittað hafi verið fyrir þau með tilteknum Monacoin færslugildum</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -382,8 +394,8 @@
         <translation>Tólaborð flipa</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Óska eftir greiðslum (býr til QR kóða og bitcoin: URI)</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation>Óska eftir greiðslum (býr til QR kóða og monacoin: URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -394,12 +406,8 @@
         <translation>Sýna færslugildi sem notuð hafa verið til að taka við mynt og merkingar þeirra</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI or payment request</source>
-        <translation>Opna bitcoin: URI eða greiðslubeiðni</translation>
-    </message>
-    <message>
-        <source>&amp;Command-line options</source>
-        <translation>&amp;Valkostir skipanalínu</translation>
+        <source>Open a monacoin: URI or payment request</source>
+        <translation>Opna monacoin: URI eða greiðslubeiðni</translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -438,8 +446,8 @@
         <translation>Uppfært</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation>Sýna %1 hjálparskilaboðin til að fá lista yfir valkosti Bitcoin aðgerðir í skipanalínu</translation>
+        <source>Show the %1 help message to get a list with possible Monacoin command-line options</source>
+        <translation>Sýna %1 hjálparskilaboðin til að fá lista yfir valkosti Monacoin aðgerðir í skipanalínu</translation>
     </message>
     <message>
         <source>%1 client</source>
@@ -508,8 +516,8 @@
         <translation>Veskið er &lt;b&gt;dulkóðað&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</source>
-        <translation>Alvarleg villa átti sér stað. Bitcoin getur ekki haldið áfram með öruggum hætti og stoppar hér.</translation>
+        <source>A fatal error occurred. Monacoin can no longer continue safely and will quit.</source>
+        <translation>Alvarleg villa átti sér stað. Monacoin getur ekki haldið áfram með öruggum hætti og stoppar hér.</translation>
     </message>
 </context>
 <context>
@@ -588,12 +596,6 @@
     </message>
     </context>
 <context>
-    <name>CreateWalletActivity</name>
-    </context>
-<context>
-    <name>CreateWalletDialog</name>
-    </context>
-<context>
     <name>EditAddressDialog</name>
     <message>
         <source>Edit Address</source>
@@ -628,8 +630,8 @@
         <translation>Breyta sendingarfærslugildi</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>Færslugildið sem slegið var inn "%1" er ekki leyfilegt Bitcoin færslugildi.</translation>
+        <source>The entered address "%1" is not a valid Monacoin address.</source>
+        <translation>Færslugildið sem slegið var inn "%1" er ekki leyfilegt Monacoin færslugildi.</translation>
     </message>
     </context>
 <context>
@@ -641,8 +643,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -662,9 +664,6 @@
     </context>
 <context>
     <name>OpenURIDialog</name>
-    </context>
-<context>
-    <name>OpenWalletActivity</name>
     </context>
 <context>
     <name>OptionsDialog</name>
@@ -726,11 +725,10 @@
     </message>
     </context>
 <context>
+    <name>QObject::QObject</name>
+    </context>
+<context>
     <name>QRImageWidget</name>
-    <message>
-        <source>Resulting URI too long, try to reduce the text for label / message.</source>
-        <translation>URI varð of langt, reyndu að minnka texta í merki / skilaboðum.</translation>
-    </message>
     </context>
 <context>
     <name>RPCConsole</name>
@@ -788,7 +786,11 @@
         <source>Wallet</source>
         <translation>Veski</translation>
     </message>
-</context>
+    <message>
+        <source>Resulting URI too long, try to reduce the text for label / message.</source>
+        <translation>URI varð of langt, reyndu að minnka texta í merki / skilaboðum.</translation>
+    </message>
+    </context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
@@ -854,6 +856,9 @@
     </context>
 <context>
     <name>SignVerifyMessageDialog</name>
+    </context>
+<context>
+    <name>SplashScreen</name>
     </context>
 <context>
     <name>TrafficGraphWidget</name>
@@ -942,7 +947,7 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Error reading %s! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
         <translation>Villa við lestur %s! Allir lyklar fóru inn á réttan hátt, en færslugögn eða færslugildi gætu verið röng eða horfin.</translation>
@@ -951,5 +956,17 @@
         <source>Warning: The network does not appear to fully agree! Some miners appear to be experiencing issues.</source>
         <translation>Viðvörun: Netið er ekki í fullu samræmi! Einhver námuvinnsla virðist í ólagi.</translation>
     </message>
-    </context>
+    <message>
+        <source>Information</source>
+        <translation>Upplýsingar</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Viðvörun</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Villa</translation>
+    </message>
+</context>
 </TS>

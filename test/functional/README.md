@@ -87,12 +87,12 @@ over the network (`CBlock`, `CTransaction`, etc, along with the network-level
 wrappers for them, `msg_block`, `msg_tx`, etc).
 
 - P2P tests have two threads. One thread handles all network communication
-with the bitcoind(s) being tested in a callback-based event loop; the other
+with the monacoind(s) being tested in a callback-based event loop; the other
 implements the test logic.
 
-- `P2PConnection` is the class used to connect to a bitcoind.  `P2PInterface`
+- `P2PConnection` is the class used to connect to a monacoind.  `P2PInterface`
 contains the higher level logic for processing P2P payloads and connecting to
-the Bitcoin Core node application logic. For custom behaviour, subclass the
+the Monacoin Core node application logic. For custom behaviour, subclass the
 P2PInterface object and override the callback methods.
 
 - Can be used to write tests where specific P2P protocol behavior is tested.
@@ -110,13 +110,13 @@ Base class for functional tests.
 Generally useful functions.
 
 #### [test_framework/mininode.py](test_framework/mininode.py)
-Basic code to support P2P connectivity to a bitcoind.
+Basic code to support P2P connectivity to a monacoind.
 
 #### [test_framework/script.py](test_framework/script.py)
 Utilities for manipulating transaction scripts (originally from python-bitcoinlib)
 
 #### [test_framework/key.py](test_framework/key.py)
-Test-only secp256k1 elliptic curve implementation
+Wrapper around OpenSSL EC_Key (originally from python-bitcoinlib)
 
 #### [test_framework/bignum.py](test_framework/bignum.py)
 Helpers for script.py

@@ -66,12 +66,12 @@
         <translation>Vastaanotto-osoitteet</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Nämä ovat Bitcoin-osoitteesi maksujen lähettämistä varten. Tarkista aina määrä ja vastaanotto-osoite ennen kolikoiden lähettämistä.</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Nämä ovat Monacoin-osoitteesi maksujen lähettämistä varten. Tarkista aina määrä ja vastaanotto-osoite ennen kolikoiden lähettämistä.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
-        <translation>Nämä ovat sinun Bitcoin osoitteesi maksujen vastaanottamista varten. Käytä 'Luo uusi vastaanotto-osoite' painiketta vastaantto tabissä luodaksesi uuden osoitteen.</translation>
+        <source>These are your Monacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Tässä ovat Monacoin vastaanotto-osoitteesi. On suositeltavaa käyttää uutta vastaanotto-osoitetta jokaista lähetystä varten.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -136,8 +136,12 @@
         <translation>Toista uusi tunnuslause</translation>
     </message>
     <message>
-        <source>Show passphrase</source>
-        <translation>Näytä salasanalause</translation>
+        <source>Show password</source>
+        <translation>Näytä salasana</translation>
+    </message>
+    <message>
+        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <translation>Kirjoita uusi salauslause lompakolle.&lt;br/&gt;Käytä salauslausetta jossa on joko&lt;b&gt;kymmenen tai useampi satunnainen merkki&lt;/b&gt;, tai&lt;b&gt;vähintään kahdeksan sanaa&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
@@ -164,12 +168,16 @@
         <translation>Vaihda salasana</translation>
     </message>
     <message>
+        <source>Enter the old passphrase and new passphrase to the wallet.</source>
+        <translation>Syötä vanha ja uusi tunnuslause lompakolle.</translation>
+    </message>
+    <message>
         <source>Confirm wallet encryption</source>
         <translation>Vahvista lompakon salaaminen</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>Varoitus: Jos salaat lompakkosi ja menetät tunnuslauseesi, &lt;b&gt;MENETÄT KAIKKI BITCOINISI&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MONACOINS&lt;/b&gt;!</source>
+        <translation>Varoitus: Jos salaat lompakkosi ja menetät tunnuslauseesi, &lt;b&gt;MENETÄT KAIKKI MONACOINISI&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -180,28 +188,8 @@
         <translation>Lompakko salattiin</translation>
     </message>
     <message>
-        <source>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Syötä uusi salasanalause lompakolle &lt;br/&gt;Ole hyvä ja käytä salasanalausetta, jossa on &lt;b&gt;kymmenen tai enemmän sattumanvaraisia merkkjä tai &lt;b&gt;kahdeksan tai enemmän sanoja&lt;/b&gt; .</translation>
-    </message>
-    <message>
-        <source>Enter the old passphrase and new passphrase for the wallet.</source>
-        <translation>Syötä vanha ja uusi salasanalause lompakolle.</translation>
-    </message>
-    <message>
-        <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>Muista, että salaamalla lompakkosi et täysin pysty suojaamaan bitcoineja varkaudelta, jotka aiheutuvat koneellasi olevista haittaohjelmista.</translation>
-    </message>
-    <message>
-        <source>Wallet to be encrypted</source>
-        <translation>Lompakko tulee salata</translation>
-    </message>
-    <message>
-        <source>Your wallet is about to be encrypted. </source>
-        <translation>Lompakkosi tulee kohta salatuksi.</translation>
-    </message>
-    <message>
-        <source>Your wallet is now encrypted. </source>
-        <translation>Lompakkosi on nyt salattu.</translation>
+        <source>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your monacoins from being stolen by malware infecting your computer.</source>
+        <translation>Lompakkosi on nyt salattu. Muistathan, että lompakon salaus ei riitä suojaamaan monacoinejasi viruksen tai muun haittaohjelman tekemältä varkaudelta.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -252,7 +240,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>&amp;Allekirjoita viesti...</translation>
@@ -326,14 +314,6 @@
         <translation>Avaa &amp;URI...</translation>
     </message>
     <message>
-        <source>Create Wallet...</source>
-        <translation>Luo lompakko...</translation>
-    </message>
-    <message>
-        <source>Create a new wallet</source>
-        <translation>Luo uusi lompakko</translation>
-    </message>
-    <message>
         <source>Wallet:</source>
         <translation>Lompakko:</translation>
     </message>
@@ -362,8 +342,8 @@
         <translation>Välipalvelin on &lt;b&gt;käytössä&lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Lähetä kolikoita Bitcoin-osoitteeseen</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation>Lähetä kolikoita Monacoin-osoitteeseen</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -386,6 +366,10 @@
         <translation>Varmista &amp;viesti...</translation>
     </message>
     <message>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
+    </message>
+    <message>
         <source>&amp;Send</source>
         <translation>&amp;Lähetä</translation>
     </message>
@@ -399,19 +383,19 @@
     </message>
     <message>
         <source>Show or hide the main Window</source>
-        <translation>Näytä tai piilota Bitcoin-ikkuna</translation>
+        <translation>Näytä tai piilota Monacoin-ikkuna</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
         <translation>Suojaa yksityiset avaimet, jotka kuuluvat lompakkoosi</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Allekirjoita viestisi omalla Bitcoin -osoitteellasi todistaaksesi, että omistat ne</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation>Allekirjoita viestisi omalla Monacoin -osoitteellasi todistaaksesi, että omistat ne</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Varmista, että viestisi on allekirjoitettu määritetyllä Bitcoin -osoitteella</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation>Varmista, että viestisi on allekirjoitettu määritetyllä Monacoin -osoitteella</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -430,8 +414,8 @@
         <translation>Välilehtipalkki</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Pyydä maksuja (Luo QR koodit ja bitcoin: URIt)</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation>Pyydä maksuja (Luo QR koodit ja monacoin: URIt)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -442,16 +426,16 @@
         <translation>Näytä vastaanottamiseen käytettyjen osoitteiden ja nimien lista</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI or payment request</source>
-        <translation>Avaa bitcoin: URI tai maksupyyntö</translation>
+        <source>Open a monacoin: URI or payment request</source>
+        <translation>Avaa monacoin: URI tai maksupyyntö</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Komentorivin valinnat</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n aktiivinen yhteys Bitcoin-verkkoon</numerusform><numerusform>%n aktiivista yhteyttä Bitcoin-verkkoon</numerusform></translation>
+        <source>%n active connection(s) to Monacoin network</source>
+        <translation><numerusform>%n aktiivinen yhteys Monacoin-verkkoon</numerusform><numerusform>%n aktiivista yhteyttä Monacoin-verkkoon</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -494,40 +478,12 @@
         <translation>Rahansiirtohistoria on ajan tasalla</translation>
     </message>
     <message>
-        <source>&amp;Sending addresses</source>
-        <translation>&amp;Lähetysosoitteet</translation>
-    </message>
-    <message>
-        <source>&amp;Receiving addresses</source>
-        <translation>&amp;Vastaanotto-osoitteet</translation>
-    </message>
-    <message>
-        <source>Open Wallet</source>
-        <translation>Avaa lompakko</translation>
-    </message>
-    <message>
-        <source>Open a wallet</source>
-        <translation>Avaa lompakko</translation>
-    </message>
-    <message>
-        <source>Close Wallet...</source>
-        <translation>Sulje lompakko...</translation>
-    </message>
-    <message>
-        <source>Close wallet</source>
-        <translation>Sulje lompakko</translation>
-    </message>
-    <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation>Näytä %1 ohjeet saadaksesi listan mahdollisista Bitcoinin komentorivivalinnoista</translation>
+        <source>Show the %1 help message to get a list with possible Monacoin command-line options</source>
+        <translation>Näytä %1 ohjeet saadaksesi listan mahdollisista Monacoinin komentorivivalinnoista</translation>
     </message>
     <message>
         <source>default wallet</source>
         <translation>oletuslompakko</translation>
-    </message>
-    <message>
-        <source>No wallets available</source>
-        <translation>Lompakoita ei ole saatavilla</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -538,8 +494,8 @@
         <translation>Pienennä</translation>
     </message>
     <message>
-        <source>Zoom</source>
-        <translation>Lähennä/loitonna</translation>
+        <source>Restore</source>
+        <translation>Palauta</translation>
     </message>
     <message>
         <source>Main Window</source>
@@ -556,14 +512,6 @@
     <message>
         <source>Catching up...</source>
         <translation>Saavutetaan verkkoa...</translation>
-    </message>
-    <message>
-        <source>Error: %1</source>
-        <translation>Virhe: %1</translation>
-    </message>
-    <message>
-        <source>Warning: %1</source>
-        <translation>Varoitus: %1</translation>
     </message>
     <message>
         <source>Date: %1
@@ -630,8 +578,8 @@
         <translation>Lompakko on &lt;b&gt;salattu&lt;/b&gt; ja tällä hetkellä &lt;b&gt;lukittuna&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</source>
-        <translation>Peruuttamaton virhe on tapahtunut. Bitcoin ei voi enää jatkaa turvallisesti ja sammutetaan.</translation>
+        <source>A fatal error occurred. Monacoin can no longer continue safely and will quit.</source>
+        <translation>Peruuttamaton virhe on tapahtunut. Monacoin ei voi enää jatkaa turvallisesti ja sammutetaan.</translation>
     </message>
 </context>
 <context>
@@ -718,7 +666,7 @@
     </message>
     <message>
         <source>Copy transaction ID</source>
-        <translation>Kopioi siirron ID</translation>
+        <translation>Kopioi transaktion ID</translation>
     </message>
     <message>
         <source>Lock unspent</source>
@@ -786,60 +734,6 @@
     </message>
 </context>
 <context>
-    <name>CreateWalletActivity</name>
-    <message>
-        <source>Creating Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
-        <translation>Luodaan lompakkoa &lt;b&gt;%1&lt;/b&gt;...</translation>
-    </message>
-    <message>
-        <source>Create wallet failed</source>
-        <translation>Lompakon luonti epäonnistui</translation>
-    </message>
-    <message>
-        <source>Create wallet warning</source>
-        <translation>Luo lompakkovaroitus</translation>
-    </message>
-</context>
-<context>
-    <name>CreateWalletDialog</name>
-    <message>
-        <source>Create Wallet</source>
-        <translation>Luo lompakko</translation>
-    </message>
-    <message>
-        <source>Wallet Name</source>
-        <translation>Lompakon nimi</translation>
-    </message>
-    <message>
-        <source>Encrypt the wallet. The wallet will be encrypted with a passphrase of your choice.</source>
-        <translation>Salaa lompakko. Lompakko salataan valitsemallasa salasanalla.</translation>
-    </message>
-    <message>
-        <source>Encrypt Wallet</source>
-        <translation>Salaa lompakko</translation>
-    </message>
-    <message>
-        <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
-        <translation>Poista tämän lompakon yksityiset avaimet käytöstä. Lompakot, joissa yksityiset avaimet on poistettu käytöstä, eivät sisällä yksityisiä avaimia, eikä niissä voi olla HD-juurisanoja tai tuotuja yksityisiä avaimia. Tämä on ihanteellinen katselulompakkoihin.</translation>
-    </message>
-    <message>
-        <source>Disable Private Keys</source>
-        <translation>Poista yksityisavaimet käytöstä</translation>
-    </message>
-    <message>
-        <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
-        <translation>Luo tyhjä lompakko. Tyhjissä lompakoissa ei aluksi ole yksityisavaimia tai skriptejä. Myöhemmin voidaan tuoda yksityisavaimia ja -osoitteita, tai asettaa HD-siemen.</translation>
-    </message>
-    <message>
-        <source>Make Blank Wallet</source>
-        <translation>Luo tyhjä lompakko</translation>
-    </message>
-    <message>
-        <source>Create</source>
-        <translation>Luo</translation>
-    </message>
-</context>
-<context>
     <name>EditAddressDialog</name>
     <message>
         <source>Edit Address</source>
@@ -874,8 +768,8 @@
         <translation>Muokkaa lähettävää osoitetta</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>Antamasi osoite "%1" ei ole kelvollinen Bitcoin-osoite.</translation>
+        <source>The entered address "%1" is not a valid Monacoin address.</source>
+        <translation>Antamasi osoite "%1" ei ole kelvollinen Monacoin-osoite.</translation>
     </message>
     <message>
         <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
@@ -955,10 +849,6 @@
         <translation>Kun valitset OK, %1 aloittaa lataamaan ja käsittelemään koko %4 lohkoketjua (%2GB) aloittaen ensimmäisestä siirrosta %3 jolloin %4 käynnistettiin ensimmäistä kertaa.</translation>
     </message>
     <message>
-        <source>Reverting this setting requires re-downloading the entire blockchain. It is faster to download the full chain first and prune it later. Disables some advanced features.</source>
-        <translation>Tämän asetuksen peruuttaminen vaatii koko lohkoketjun uudelleenlataamisen. On nopeampaa ladata koko ketju ensin ja karsia se myöhemmin. Tämä myös poistaa käytöstä joitain edistyneitä toimintoja.</translation>
-    </message>
-    <message>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
         <translation>Tämä alustava synkronointi on erittäin vaativa ja saattaa tuoda esiin laiteongelmia, joita ei aikaisemmin ole havaittu. Aina kun ajat %1:n, jatketaan siitä kohdasta, mihin viimeksi jäätiin.</translation>
     </message>
@@ -975,12 +865,8 @@
         <translation>Määritä oma kansio:</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
-    </message>
-    <message>
-        <source>Discard blocks after verification, except most recent %1 GB (prune)</source>
-        <translation>Hävitä lohkot varmistuksen jälkeen, poislukien viimeiset %1 GB (karsinta)</translation>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
@@ -991,8 +877,8 @@
         <translation>Noin %1 GB tietoa varastoidaan tähän hakemistoon.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin block chain.</source>
-        <translation>%1 lataa ja tallentaa kopion Bitcoinin lohkoketjusta.</translation>
+        <source>%1 will download and store a copy of the Monacoin block chain.</source>
+        <translation>%1 lataa ja tallentaa kopion Monacoinin lohkoketjusta.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -1014,10 +900,6 @@
         <source>(of %n GB needed)</source>
         <translation><numerusform>(tarvitaan %n GB)</numerusform><numerusform>(tarvitaan %n GB)</numerusform></translation>
     </message>
-    <message numerus="yes">
-        <source>(%n GB needed for full chain)</source>
-        <translation><numerusform>(tarvitaan %n GB koko ketjua varten)</numerusform><numerusform>(tarvitaan %n GB koko ketjua varten)</numerusform></translation>
-    </message>
 </context>
 <context>
     <name>ModalOverlay</name>
@@ -1026,12 +908,12 @@
         <translation>Lomake</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation>Viimeiset tapahtumat eivät välttämättä vielä näy, joten lompakkosi saldo voi olla virheellinen. Tieto korjautuu, kunhan lompakkosi synkronointi bitcoin-verkon kanssa on päättynyt. Tiedot näkyvät alla.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the monacoin network, as detailed below.</source>
+        <translation>Viimeiset tapahtumat eivät välttämättä vielä näy, joten lompakkosi saldo voi olla virheellinen. Tieto korjautuu, kunhan lompakkosi synkronointi monacoin-verkon kanssa on päättynyt. Tiedot näkyvät alla.</translation>
     </message>
     <message>
-        <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Verkko ei tule hyväksymään sellaisten bitcoinien käyttämistä, jotka liittyvät vielä näkymättömissä oleviin siirtoihin.</translation>
+        <source>Attempting to spend monacoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>Verkko ei tule hyväksymään sellaisten monacoinien käyttämistä, jotka liittyvät vielä näkymättömissä oleviin siirtoihin.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1065,11 +947,7 @@
         <source>Hide</source>
         <translation>Piilota</translation>
     </message>
-    <message>
-        <source>Unknown. Syncing Headers (%1, %2%)...</source>
-        <translation>Tuntematon. Synkronoidaan tunnisteita (%1, %2%)...</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>OpenURIDialog</name>
     <message>
@@ -1091,25 +969,6 @@
     <message>
         <source>Select payment request file to open</source>
         <translation>Valitse maksypyynnön tiedosto avattavaksi</translation>
-    </message>
-</context>
-<context>
-    <name>OpenWalletActivity</name>
-    <message>
-        <source>Open wallet failed</source>
-        <translation>Lompakon avaaminen epäonnistui</translation>
-    </message>
-    <message>
-        <source>Open wallet warning</source>
-        <translation>Avoimen lompakon varoitus</translation>
-    </message>
-    <message>
-        <source>default wallet</source>
-        <translation>oletuslompakko</translation>
-    </message>
-    <message>
-        <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
-        <translation>Avataan lompakkoa &lt;b&gt;%1&lt;/b&gt;...</translation>
     </message>
 </context>
 <context>
@@ -1164,7 +1023,7 @@
     </message>
     <message>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>Ulkopuoliset URL-osoitteet (esim. block explorer), jotka esiintyvät siirrot-välilehdellä valikossa. %s URL-osoitteessa korvataan siirtotunnuksella. Useampi URL-osoite on eroteltu pystyviivalla |.</translation>
+        <translation>Ulkopuoliset URL-osoitteet (esim. block explorer,) jotka esiintyvät siirrot-välilehdellä valikossa. %s URL-osoitteessa korvataan siirtotunnuksella. Useampi URL-osoite on eroteltu pystyviivalla |.</translation>
     </message>
     <message>
         <source>Open the %1 configuration file from the working directory.</source>
@@ -1203,10 +1062,6 @@
         <translation>Tämän asetuksen muuttaminen vaatii koko lohkoketjun uudelleenlataamista.</translation>
     </message>
     <message>
-        <source>MiB</source>
-        <translation>MiB</translation>
-    </message>
-    <message>
         <source>(0 = auto, &lt;0 = leave that many cores free)</source>
         <translation>(0 = auto, &lt;0 = jätä näin monta ydintä vapaaksi)</translation>
     </message>
@@ -1224,15 +1079,15 @@
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Jos poistat varmistamattomien vaihtorahojen käytön, ei siirtojen vaihtorahaa ei voida käyttää ennen vähintään yhtä varmistusta. Tämä vaikuttaa myös taseesi lasketaan.</translation>
+        <translation>Jos poistat varmistamattomien vaihtorahojen käytön, rahansiirron vaihtorahaa ei voida käyttää ennen vähintään yhtä varmistusta. Tämä vaikuttaa myös kuinka taseesi lasketaan.</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
         <translation>&amp;Käytä varmistamattomia vaihtorahoja</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Avaa Bitcoin-asiakasohjelman portti reitittimellä automaattisesti. Tämä toimii vain, jos reitittimesi tukee UPnP:tä ja se on käytössä.</translation>
+        <source>Automatically open the Monacoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Avaa Monacoin-asiakasohjelman portti reitittimellä automaattisesti. Tämä toimii vain, jos reitittimesi tukee UPnP:tä ja se on käytössä.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1247,8 +1102,8 @@
         <translation>Hyväksy sisääntulevia yhteyksiä</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation>Yhdistä Bitcoin-verkkoon SOCKS5-välityspalvelimen kautta.</translation>
+        <source>Connect to the Monacoin network through a SOCKS5 proxy.</source>
+        <translation>Yhdistä Monacoin-verkkoon SOCKS5-välityspalvelimen kautta.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1283,8 +1138,8 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Yhdistä Bitcoin-verkkoon erillisen SOCKS5-välityspalvelimen kautta piilotettuja Tor-palveluja varten.</translation>
+        <source>Connect to the Monacoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Yhdistä Monacoin-verkkoon erillisen SOCKS5-välityspalvelimen kautta piilotettuja Tor-palveluja varten.</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -1316,11 +1171,11 @@
     </message>
     <message>
         <source>&amp;Unit to show amounts in:</source>
-        <translation>Yksikkö jona bitcoin-määrät näytetään</translation>
+        <translation>Yksikkö jona monacoin-määrät näytetään</translation>
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Valitse mitä yksikköä käytetään ensisijaisesti bitcoin-määrien näyttämiseen.</translation>
+        <translation>Valitse mitä yksikköä käytetään ensisijaisesti monacoin-määrien näyttämiseen.</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1329,10 +1184,6 @@
     <message>
         <source>&amp;Third party transaction URLs</source>
         <translation>&amp;Kolmannen osapuolen rahansiirto URL:t</translation>
-    </message>
-    <message>
-        <source>Options set in this dialog are overridden by the command line or in the configuration file:</source>
-        <translation>Seuraavat komentorivillä tai asetustiedostossa annetut määritykset menevät tässä ikkunassa asetettujen asetusten edelle:</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -1394,8 +1245,8 @@
         <translation>Lomake</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Näytetyt tiedot eivät välttämättä ole ajantasalla. Lompakkosi synkronoituu Bitcoin-verkon kanssa automaattisesti yhteyden muodostamisen jälkeen, mutta synkronointi on vielä meneillään.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>Näytetyt tiedot eivät välttämättä ole ajantasalla. Lompakkosi synkronoituu Monacoin-verkon kanssa automaattisesti yhteyden muodostamisen jälkeen, mutta synkronointi on vielä meneillään.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1435,11 +1286,11 @@
     </message>
     <message>
         <source>Your current total balance</source>
-        <translation>Tililläsi tällä hetkellä olevien Bitcoinien määrä</translation>
+        <translation>Tililläsi tällä hetkellä olevien Monacoinien määrä</translation>
     </message>
     <message>
         <source>Your current balance in watch-only addresses</source>
-        <translation>Nykyinen tase seurattavassa osoitetteissa</translation>
+        <translation>Nykyinen tase seurantaosoitetteissa</translation>
     </message>
     <message>
         <source>Spendable:</source>
@@ -1451,15 +1302,15 @@
     </message>
     <message>
         <source>Unconfirmed transactions to watch-only addresses</source>
-        <translation>Vahvistamattomat rahansiirrot vain seurattaviin osoitteisiin</translation>
+        <translation>Vahvistamattomat rahansiirrot vain katseltaviin osoitteisiin</translation>
     </message>
     <message>
         <source>Mined balance in watch-only addresses that has not yet matured</source>
-        <translation>Louhittu, ei vielä kypsynyt saldo vain seurattavissa osoitteissa</translation>
+        <translation>Louhittu, ei vielä kypsynyt saldo vain katseltavissa osoitteissa</translation>
     </message>
     <message>
         <source>Current total balance in watch-only addresses</source>
-        <translation>Nykyinen tase seurattavassa osoitetteissa</translation>
+        <translation>Nykyinen tase seurantaosoitetteissa</translation>
     </message>
 </context>
 <context>
@@ -1469,44 +1320,28 @@
         <translation>Maksupyyntövirhe</translation>
     </message>
     <message>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation>Bitcoinia ei voi käynnistää: klikkaa-maksaaksesi -käsittelijän virhe</translation>
+        <source>Cannot start monacoin: click-to-pay handler</source>
+        <translation>Monacoinia ei voi käynnistää: klikkaa-maksaaksesi -käsittelijän virhe</translation>
     </message>
     <message>
         <source>URI handling</source>
         <translation>URI käsittely</translation>
     </message>
     <message>
-        <source>'bitcoin://' is not a valid URI. Use 'bitcoin:' instead.</source>
-        <translation>'bitcoin://' ei ole kelvollinen URI. Käytä 'bitcoin:' sen sijaan.</translation>
-    </message>
-    <message>
-        <source>You are using a BIP70 URL which will be unsupported in the future.</source>
-        <translation>Käytät BIP70 -URL:ia, jonka tuki päättyy lähitulevaisuudessa.</translation>
+        <source>'monacoin://' is not a valid URI. Use 'monacoin:' instead.</source>
+        <translation>'monacoin://' ei ole kelvollinen URI. Käytä 'monacoin:' sen sijaan.</translation>
     </message>
     <message>
         <source>Payment request fetch URL is invalid: %1</source>
         <translation>Maksupyynnön haku URL on virheellinen: %1</translation>
     </message>
     <message>
-        <source>Cannot process payment request because BIP70 support was not compiled in.</source>
-        <translation>Maksupyyntöä ei voida käsitellä, sillä BIP70-tukea ei ole käännetty ohjelmaan.</translation>
-    </message>
-    <message>
-        <source>Due to widespread security flaws in BIP70 it's strongly recommended that any merchant instructions to switch wallets be ignored.</source>
-        <translation>BIP70:n laajalle levinneiden tietoturvavirheiden vuoksi on erittäin suositeltavaa, että kaikki kauppiaan ohjeet lompakkojen vaihtamiseksi jätetään huomioimatta.</translation>
-    </message>
-    <message>
-        <source>If you are receiving this error you should request the merchant provide a BIP21 compatible URI.</source>
-        <translation>Tämän virheen saadessasi tulee sinun pyytää kauppiaalta BIP21 -yhteensopivaa URI-osoitetta.</translation>
-    </message>
-    <message>
         <source>Invalid payment address %1</source>
         <translation>Virheellinen maksuosoite %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation>URIa ei voitu jäsentää! Tämä voi johtua virheellisestä Bitcoin-osoitteesta tai väärin muotoilluista URI parametreista.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Monacoin address or malformed URI parameters.</source>
+        <translation>URIa ei voitu jäsentää! Tämä voi johtua virheellisestä Monacoin-osoitteesta tai väärin muotoilluista URI parametreista.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1607,8 +1442,8 @@
         <translation>Määrä</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>Syötä Bitcoin-osoite (esim. %1)</translation>
+        <source>Enter a Monacoin address (e.g. %1)</source>
+        <translation>Syötä Monacoin-osoite (esim. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1683,6 +1518,21 @@
         <translation>%1 GB</translation>
     </message>
     <message>
+        <source>%1 didn't yet exit safely...</source>
+        <translation>%1 ei vielä sulkeutunut turvallisesti...</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>tuntematon</translation>
+    </message>
+</context>
+<context>
+    <name>QObject::QObject</name>
+    <message>
+        <source>Error parsing command line arguments: %1.</source>
+        <translation>Virhe käsitellessä komentorivin valintaa: %1.</translation>
+    </message>
+    <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
         <translation>Virhe: Annettua data-hakemistoa "%1" ei ole olemassa.</translation>
     </message>
@@ -1694,14 +1544,6 @@
         <source>Error: %1</source>
         <translation>Virhe: %1</translation>
     </message>
-    <message>
-        <source>%1 didn't yet exit safely...</source>
-        <translation>%1 ei vielä sulkeutunut turvallisesti...</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>tuntematon</translation>
-    </message>
 </context>
 <context>
     <name>QRImageWidget</name>
@@ -1712,18 +1554,6 @@
     <message>
         <source>&amp;Copy Image</source>
         <translation>&amp;Kopioi kuva</translation>
-    </message>
-    <message>
-        <source>Resulting URI too long, try to reduce the text for label / message.</source>
-        <translation>Tuloksen URI on liian pitkä, yritä lyhentää otsikon tai viestin tekstiä.</translation>
-    </message>
-    <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Virhe käännettäessä URI:a QR-koodiksi.</translation>
-    </message>
-    <message>
-        <source>QR code support not available.</source>
-        <translation>Tukea QR-koodeille ei ole saatavilla.</translation>
     </message>
     <message>
         <source>Save QR Code</source>
@@ -1765,18 +1595,6 @@
         <translation>Data-hakemisto</translation>
     </message>
     <message>
-        <source>To specify a non-default location of the data directory use the '%1' option.</source>
-        <translation>Käytä '%1' -valitsinta määritelläksesi muun kuin oletuksen data-hakemistolle.</translation>
-    </message>
-    <message>
-        <source>Blocksdir</source>
-        <translation>Blocksdir</translation>
-    </message>
-    <message>
-        <source>To specify a non-default location of the blocks directory use the '%1' option.</source>
-        <translation>Käytä '%1' -valitsinta määritelläksesi muun kuin oletuksen lohkohakemistolle.</translation>
-    </message>
-    <message>
         <source>Startup time</source>
         <translation>Käynnistysaika</translation>
     </message>
@@ -1815,10 +1633,6 @@
     <message>
         <source>Wallet: </source>
         <translation>Lompakko:</translation>
-    </message>
-    <message>
-        <source>(none)</source>
-        <translation>(tyhjä)</translation>
     </message>
     <message>
         <source>&amp;Reset</source>
@@ -1982,7 +1796,7 @@
     </message>
     <message>
         <source>Ban for</source>
-        <translation>Estä</translation>
+        <translation>Estä </translation>
     </message>
     <message>
         <source>&amp;Unban</source>
@@ -2015,10 +1829,6 @@
     <message>
         <source>Executing command without any wallet</source>
         <translation>Suoritetaan komento ilman lomakkoa</translation>
-    </message>
-    <message>
-        <source>Executing command using "%1" wallet</source>
-        <translation>Suoritetaan komento käyttäen lompakkoa "%1"</translation>
     </message>
     <message>
         <source>(node id: %1)</source>
@@ -2068,8 +1878,8 @@
         <translation>&amp;Viesti:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation>Valinnainen viesti liitetään maksupyyntöön ja näytetään avattaessa. Viestiä ei lähetetä Bitcoin-verkkoon.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Monacoin network.</source>
+        <translation>Valinnainen viesti liitetään maksupyyntöön ja näytetään avattaessa. Viestiä ei lähetetä Monacoin-verkkoon.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2082,10 +1892,6 @@
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
         <translation>Valinnainen pyyntömäärä. Jätä tyhjäksi tai nollaksi jos et pyydä tiettyä määrää.</translation>
-    </message>
-    <message>
-        <source>&amp;Create new receiving address</source>
-        <translation> &amp;Luo uusi vastaanottoosoite</translation>
     </message>
     <message>
         <source>Clear all fields of the form.</source>
@@ -2106,6 +1912,10 @@
     <message>
         <source>Requested payments history</source>
         <translation>Pyydettyjen maksujen historia</translation>
+    </message>
+    <message>
+        <source>&amp;Request payment</source>
+        <translation>&amp;Vastaanota maksu</translation>
     </message>
     <message>
         <source>Show the selected request (does the same as double clicking an entry)</source>
@@ -2189,6 +1999,14 @@
     <message>
         <source>Wallet</source>
         <translation>Lompakko</translation>
+    </message>
+    <message>
+        <source>Resulting URI too long, try to reduce the text for label / message.</source>
+        <translation>Tuloksen URI on liian pitkä, yritä lyhentää otsikon tai viestin tekstiä.</translation>
+    </message>
+    <message>
+        <source>Error encoding URI into QR Code.</source>
+        <translation>Virhe käännettäessä URI:a QR-koodiksi.</translation>
     </message>
 </context>
 <context>
@@ -2297,14 +2115,6 @@
         <translation>pudota kulujen asetukset</translation>
     </message>
     <message>
-        <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
-
-Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis per kB" for a transaction size of 500 bytes (half of 1 kB) would ultimately yield a fee of only 50 satoshis.</source>
-        <translation>Määrittele siirtotapahtuman näennäiskooksi siirtomaksu kilotavua (1,000 tavua) kohti.
-
-Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 tavun (puoli kt) siirrolle "100 sat / kt", johtaa tämä lopulta vain 50 satoshin maksuun.</translation>
-    </message>
-    <message>
         <source>per kilobyte</source>
         <translation>per kilotavu</translation>
     </message>
@@ -2339,14 +2149,6 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     <message>
         <source>Dust:</source>
         <translation>Tomu:</translation>
-    </message>
-    <message>
-        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
-        <translation>Mikäli lohkoissa ei ole tilaa kaikille siirtotapahtumille, voi louhijat sekä välittävät solmut pakottaa vähimmäispalkkion. Tämän vähimmäispalkkion maksaminen on täysin OK, mutta huomaa, että se saattaa johtaa siihen, ettei siirto vahvistu koskaan, jos bitcoin-siirtoja on enemmän kuin mitä verkko pystyy käsittelemään.</translation>
-    </message>
-    <message>
-        <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
-        <translation>Liian alhainen maksu saattaa johtaa siirtoon, joka ei koskaan vahvistu (lue työkaluohje)</translation>
     </message>
     <message>
         <source>Confirmation time target:</source>
@@ -2409,10 +2211,6 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>%1 (%2 lohkoa)</translation>
     </message>
     <message>
-        <source> from wallet '%1'</source>
-        <translation> lompakosta '%1'</translation>
-    </message>
-    <message>
         <source>%1 to %2</source>
         <translation>%1 to %2</translation>
     </message>
@@ -2429,6 +2227,10 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Voit korottaa palkkiota myöhemmin (osoittaa Replace-By-Fee:tä, BIP-125).</translation>
     </message>
     <message>
+        <source>from wallet %1</source>
+        <translation>lompakosta %1</translation>
+    </message>
+    <message>
         <source>Please, review your transaction.</source>
         <translation>Tarkistathan siirtosi.</translation>
     </message>
@@ -2437,16 +2239,8 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Siirtokulu</translation>
     </message>
     <message>
-        <source>Not signalling Replace-By-Fee, BIP-125.</source>
-        <translation>Ei signalointia Korvattavissa-korkeammalla-kululla, BIP-125.</translation>
-    </message>
-    <message>
         <source>Total Amount</source>
         <translation>Yhteensä</translation>
-    </message>
-    <message>
-        <source>To review recipient list click "Show Details..."</source>
-        <translation>Valitse "Näytä yksityiskohdat" nähdäksesi listan vastaanottajsta.</translation>
     </message>
     <message>
         <source>Confirm send coins</source>
@@ -2493,8 +2287,8 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation><numerusform>Vahvistuminen alkaa arviolta %n lohkon sisällä.</numerusform><numerusform>Vahvistuminen alkaa arviolta %n lohkon sisällä.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation>Varoitus: Virheellinen Bitcoin-osoite</translation>
+        <source>Warning: Invalid Monacoin address</source>
+        <translation>Varoitus: Virheellinen Monacoin-osoite </translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2536,8 +2330,8 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Tämä on normaali maksu.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to send the payment to</source>
-        <translation>Bitcoin-osoite johon maksu lähetetään</translation>
+        <source>The Monacoin address to send the payment to</source>
+        <translation>Monacoin-osoite johon maksu lähetetään</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2556,8 +2350,8 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Poista tämä alkio</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Kulu vähennetään lähetettävästä määrästä. Saaja vastaanottaa vähemmän bitcoineja kuin merkitset Määrä-kenttään. Jos saajia on monia, kulu jaetaan tasan.</translation>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less monacoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <translation>Kulu vähennetään lähetettävästä määrästä. Saaja vastaanottaa vähemmän monacoineja kuin merkitset Määrä-kenttään. Jos saajia on monia, kulu jaetaan tasan.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
@@ -2584,8 +2378,8 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Aseta nimi tälle osoitteelle lisätäksesi sen käytettyjen osoitteiden listalle.</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation>Viesti joka liitettiin bitcoin: URI:iin tallennetaan rahansiirtoon viitteeksi. Tätä viestiä ei lähetetä Bitcoin-verkkoon.</translation>
+        <source>A message that was attached to the monacoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Monacoin network.</source>
+        <translation>Viesti joka liitettiin monacoin: URI:iin tallennetaan rahansiirtoon viitteeksi. Tätä viestiä ei lähetetä Monacoin-verkkoon.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2629,12 +2423,12 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>&amp;Allekirjoita viesti</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation>Voit allekirjoittaa viestit / sopimukset omalla osoitteellasi todistaaksesi että voit vastaanottaa siihen lähetetyt bitcoinit. Varo allekirjoittamasta mitään epämääräistä, sillä phishing-hyökkääjät voivat huijata sinua luovuttamaan henkilöllisyytesi allekirjoituksella. Allekirjoita ainoastaan täysin yksityiskohtainen selvitys siitä, mihin olet sitoutumassa.</translation>
+        <source>You can sign messages/agreements with your addresses to prove you can receive monacoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <translation>Voit allekirjoittaa viestit / sopimukset omalla osoitteellasi todistaaksesi että voit vastaanottaa siihen lähetetyt monacoinit. Varo allekirjoittamasta mitään epämääräistä, sillä phishing-hyökkääjät voivat huijata sinua luovuttamaan henkilöllisyytesi allekirjoituksella. Allekirjoita ainoastaan täysin yksityiskohtainen selvitys siitä, mihin olet sitoutumassa.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to sign the message with</source>
-        <translation>Bitcoin-osoite jolla viesti allekirjoitetaan</translation>
+        <source>The Monacoin address to sign the message with</source>
+        <translation>Monacoin-osoite jolla viesti allekirjoitetaan</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2665,8 +2459,8 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Kopioi tämänhetkinen allekirjoitus leikepöydälle</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
-        <translation>Allekirjoita viesti todistaaksesi, että omistat tämän Bitcoin-osoitteen</translation>
+        <source>Sign the message to prove you own this Monacoin address</source>
+        <translation>Allekirjoita viesti todistaaksesi, että omistat tämän Monacoin-osoitteen</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2689,12 +2483,12 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Syötä vastaanottajan osoite, viesti ja allekirjoitus (varmista että kopioit rivinvaihdot, välilyönnit, sarkaimet yms. täsmälleen) alle vahvistaaksesi viestin. Varo lukemasta allekirjoitukseen enempää kuin mitä viestissä itsessään on välttääksesi man-in-the-middle -hyökkäyksiltä. Huomaa, että tämä todentaa ainoastaan allekirjoittavan vastaanottajan osoitteen, tämä ei voi todentaa minkään tapahtuman lähettäjää!</translation>
     </message>
     <message>
-        <source>The Bitcoin address the message was signed with</source>
-        <translation>Bitcoin-osoite jolla viesti on allekirjoitettu</translation>
+        <source>The Monacoin address the message was signed with</source>
+        <translation>Monacoin-osoite jolla viesti on allekirjoitettu</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>Tarkista viestin allekirjoitus varmistaaksesi, että se allekirjoitettiin tietyllä Bitcoin-osoitteella</translation>
+        <source>Verify the message to ensure it was signed with the specified Monacoin address</source>
+        <translation>Tarkista viestin allekirjoitus varmistaaksesi, että se allekirjoitettiin tietyllä Monacoin-osoitteella</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2755,6 +2549,13 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     <message>
         <source>Message verified.</source>
         <translation>Viesti varmistettu.</translation>
+    </message>
+</context>
+<context>
+    <name>SplashScreen</name>
+    <message>
+        <source>[testnet]</source>
+        <translation>[testnet]</translation>
     </message>
 </context>
 <context>
@@ -2836,7 +2637,7 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     </message>
     <message>
         <source>watch-only</source>
-        <translation>vain seurattava</translation>
+        <translation>vain katseltava</translation>
     </message>
     <message>
         <source>label</source>
@@ -2889,18 +2690,6 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     <message>
         <source>Transaction total size</source>
         <translation>Maksutapahtuman kokonaiskoko</translation>
-    </message>
-    <message>
-        <source>Transaction virtual size</source>
-        <translation>Tapahtuman näennäiskoko</translation>
-    </message>
-    <message>
-        <source>Output index</source>
-        <translation>Ulostulon indeksi</translation>
-    </message>
-    <message>
-        <source> (Certificate was not verified)</source>
-        <translation> (Varmennetta ei vahvistettu)</translation>
     </message>
     <message>
         <source>Merchant</source>
@@ -3018,7 +2807,7 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     </message>
     <message>
         <source>watch-only</source>
-        <translation>vain seurattava</translation>
+        <translation>vain katseltava</translation>
     </message>
     <message>
         <source>(n/a)</source>
@@ -3042,7 +2831,7 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     </message>
     <message>
         <source>Whether or not a watch-only address is involved in this transaction.</source>
-        <translation>Onko rahansiirrossa mukana ainoastaan seurattava osoite vai ei.</translation>
+        <translation>Onko rahansiirrossa mukana ainoastaan katseltava osoite vai ei.</translation>
     </message>
     <message>
         <source>User-defined intent/purpose of the transaction.</source>
@@ -3165,7 +2954,7 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     </message>
     <message>
         <source>Watch-only</source>
-        <translation>Vain seurattava</translation>
+        <translation>Vain katseltava</translation>
     </message>
     <message>
         <source>Date</source>
@@ -3221,15 +3010,7 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
 </context>
 <context>
     <name>WalletController</name>
-    <message>
-        <source>Close wallet</source>
-        <translation>Sulje lompakko</translation>
-    </message>
-    <message>
-        <source>Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled.</source>
-        <translation>Lompakon sulkeminen liian pitkäksi aikaa saattaa johtaa tarpeeseen synkronoida koko ketju uudelleen, mikäli karsinta on käytössä.</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>WalletFrame</name>
     <message>
@@ -3324,7 +3105,7 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     </message>
 </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Jaettu MIT -ohjelmistolisenssin alaisuudessa, katso mukana tuleva %s tiedosto tai %s</translation>
@@ -3354,20 +3135,16 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>HTTP-palvelinta ei voitu käynnistää. Katso debug-lokista lisätietoja.</translation>
     </message>
     <message>
+        <source>Monacoin Core</source>
+        <translation>Monacoin-ydin</translation>
+    </message>
+    <message>
         <source>The %s developers</source>
         <translation>%s kehittäjät</translation>
     </message>
     <message>
-        <source>Can't generate a change-address key. No keys in the internal keypool and can't generate any keys.</source>
-        <translation>Vaihtorahaosoitetta ei voida luoda. Sisäisessä varannossa ei ole avaimia, eikä uusia avaimia voida luoda.</translation>
-    </message>
-    <message>
         <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
         <translation>Ei voida lukita data-hakemistoa %s. %s on luultavasti jo käynnissä.</translation>
-    </message>
-    <message>
-        <source>Cannot provide specific connections and have addrman find outgoing connections at the same.</source>
-        <translation>Ei voida tarjota tiettyjä yhteyksiä, ja antaa addrmanin löytää lähteviä yhteyksiä samanaikaisesti.</translation>
     </message>
     <message>
         <source>Error reading %s! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
@@ -3388,10 +3165,6 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     <message>
         <source>This is a pre-release test build - use at your own risk - do not use for mining or merchant applications</source>
         <translation>Tämä on esi-julkaistu kokeiluversio - Käyttö omalla vastuullasi - Ethän käytä louhimiseen tai kauppasovelluksiin.</translation>
-    </message>
-    <message>
-        <source>This is the transaction fee you may discard if change is smaller than dust at this level</source>
-        <translation>Voit ohittaa tämän siirtomaksun, mikäli vaihtoraha on pienempi kuin tomun arvo tällä hetkellä</translation>
     </message>
     <message>
         <source>Unable to replay blocks. You will need to rebuild the database using -reindex-chainstate.</source>
@@ -3415,7 +3188,7 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     </message>
     <message>
         <source>%s corrupt, salvage failed</source>
-        <translation>%s vioittunut, korjaaminen epäonnistui</translation>
+        <translation>%s korruptoitunut, korjaaminen epäonnistui</translation>
     </message>
     <message>
         <source>-maxmempool must be at least %d MB</source>
@@ -3424,14 +3197,6 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     <message>
         <source>Cannot resolve -%s address: '%s'</source>
         <translation>-%s -osoitteen '%s' selvittäminen epäonnistui</translation>
-    </message>
-    <message>
-        <source>Change index out of range</source>
-        <translation>Vaihda hakemisto alueen ulkopuolelle</translation>
-    </message>
-    <message>
-        <source>Config setting for %s only applied on %s network when in [%s] section.</source>
-        <translation>Konfigurointiasetuksen %s käyttöön vain %s -verkossa, kun osassa [%s].</translation>
     </message>
     <message>
         <source>Copyright (C) %i-%i</source>
@@ -3458,10 +3223,6 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Virhe ladattaessa %s</translation>
     </message>
     <message>
-        <source>Error loading %s: Private keys can only be disabled during creation</source>
-        <translation>Virhe %s:n lataamisessa: Yksityiset avaimet voidaan poistaa käytöstä vain luomisen aikana</translation>
-    </message>
-    <message>
         <source>Error loading %s: Wallet corrupted</source>
         <translation>Virhe ladattaessa %s: Lompakko vioittunut</translation>
     </message>
@@ -3478,12 +3239,12 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Virhe avattaessa lohkoindeksiä</translation>
     </message>
     <message>
-        <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
-        <translation>Ei onnistuttu kuuntelemaan missään portissa. Käytä -listen=0 jos haluat tätä.</translation>
+        <source>Error: Disk space is low!</source>
+        <translation>Varoitus: Levytila on vähissä!</translation>
     </message>
     <message>
-        <source>Failed to rescan the wallet during initialization</source>
-        <translation>Lompakkoa ei voitu tarkastaa alustuksen yhteydessä.</translation>
+        <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
+        <translation>Ei onnistuttu kuuntelemaan missään portissa. Käytä -listen=0 jos haluat tätä.</translation>
     </message>
     <message>
         <source>Importing...</source>
@@ -3514,24 +3275,12 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Määrättyä lohkohakemistoa "%s" ei ole olemassa.</translation>
     </message>
     <message>
-        <source>Unknown address type '%s'</source>
-        <translation>Tuntematon osoitetyyppi '%s'</translation>
-    </message>
-    <message>
-        <source>Unknown change type '%s'</source>
-        <translation>Tuntematon vaihtorahatyyppi '%s'</translation>
-    </message>
-    <message>
         <source>Upgrading txindex database</source>
         <translation>Päivitetään txindex -tietokantaa</translation>
     </message>
     <message>
         <source>Loading P2P addresses...</source>
         <translation>Ladataan P2P-vertaisten osoitteita...</translation>
-    </message>
-    <message>
-        <source>Error: Disk space is too low!</source>
-        <translation>Virhe: Liian vähän levytilaa!</translation>
     </message>
     <message>
         <source>Loading banlist...</source>
@@ -3582,10 +3331,6 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Päivitetään UTXO-tietokantaa</translation>
     </message>
     <message>
-        <source>User Agent comment (%s) contains unsafe characters.</source>
-        <translation>User Agent -kommentti (%s) sisältää turvattomia merkkejä.</translation>
-    </message>
-    <message>
         <source>Verifying blocks...</source>
         <translation>Varmistetaan lohkoja...</translation>
     </message>
@@ -3596,10 +3341,6 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     <message>
         <source>Error: Listening for incoming connections failed (listen returned error %s)</source>
         <translation>Virhe: Saapuvien yhteyksien kuuntelu epäonnistui (kuuntelu palautti virheen %s)</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
-        <translation>Virheellinen summa -maxtxfee =: '%s' (täytyy olla vähintään %s minrelay-kulu, jotta estetään jumiutuneet siirtotapahtumat)</translation>
     </message>
     <message>
         <source>The transaction amount is too small to send after the fee has been deducted</source>
@@ -3618,8 +3359,8 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Virhe päivittäessä chainstate-tietokantaa</translation>
     </message>
     <message>
-        <source>Error: Disk space is low for %s</source>
-        <translation>Virhe: levytila vähissä kohteessa %s</translation>
+        <source>Information</source>
+        <translation>Tietoa</translation>
     </message>
     <message>
         <source>Invalid -onion address or hostname: '%s'</source>
@@ -3642,10 +3383,6 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Pitää määritellä portti argumentilla -whitebind: '%s'</translation>
     </message>
     <message>
-        <source>Prune mode is incompatible with -blockfilterindex.</source>
-        <translation>Karsintatila ei ole yhteensopiva -blockfilterindex valinnan kanssa</translation>
-    </message>
-    <message>
         <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
         <translation>Vähennetään -maxconnections arvoa %d:stä %d:hen järjestelmän rajoitusten vuoksi.</translation>
     </message>
@@ -3666,12 +3403,6 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Määritelty -walletdir "%s" ei ole hakemisto</translation>
     </message>
     <message>
-        <source>The specified config file %s does not exist
-</source>
-        <translation>Määriteltyä asetustiedostoa %s ei löytynyt
-</translation>
-    </message>
-    <message>
         <source>The transaction amount is too small to pay the fee</source>
         <translation>Rahansiirron määrä on liian pieni kattaakseen maksukulun</translation>
     </message>
@@ -3684,6 +3415,10 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Siirtosumma liian pieni</translation>
     </message>
     <message>
+        <source>Transaction too large for fee policy</source>
+        <translation>Rahansiirto on liian suuri maksukulukäytännölle</translation>
+    </message>
+    <message>
         <source>Transaction too large</source>
         <translation>Siirtosumma liian iso</translation>
     </message>
@@ -3692,20 +3427,16 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Kytkeytyminen kohteeseen %s ei onnistunut tällä tietokonella (kytkeytyminen palautti virheen %s)</translation>
     </message>
     <message>
-        <source>Unable to create the PID file '%s': %s</source>
-        <translation>PID-tiedostoa '%s' ei voitu luoda: %s</translation>
-    </message>
-    <message>
-        <source>Unable to generate initial keys</source>
-        <translation>Alkuavaimia ei voi luoda</translation>
-    </message>
-    <message>
-        <source>Unknown -blockfilterindex value %s.</source>
-        <translation>Tuntematon -lohkosuodatusindeksiarvo %s.</translation>
-    </message>
-    <message>
         <source>Verifying wallet(s)...</source>
         <translation>Varmistetaan lompakko(ja)...</translation>
+    </message>
+    <message>
+        <source>Wallet %s resides outside wallet directory %s</source>
+        <translation>Lompakko %s sijaitsee lompakkohakemiston %s ulkopuolella.</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Varoitus</translation>
     </message>
     <message>
         <source>Warning: unknown new rules activated (versionbit %i)</source>
@@ -3724,24 +3455,16 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Tämän siirtomaksun maksat, kun siirtomaksun arviointi ei ole käytettävissä.</translation>
     </message>
     <message>
-        <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
-        <translation>Tämä tuote sisältää OpenSSL Projektin kehittämän ohjelmiston käytettäväksi OpenSSL Toolkit %s:ssä ja Eric Youngin kirjoittaman salausohjelmiston ja Thomas Bernardin kirjoittaman UPnP-ohjelmiston.</translation>
-    </message>
-    <message>
-        <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>
-        <translation>Verkon versiokenttä (%i) ylittää sallitun pituuden (%i). Vähennä uacomments:in arvoa tai kokoa.</translation>
-    </message>
-    <message>
-        <source>Warning: Wallet file corrupt, data salvaged! Original %s saved as %s in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
-        <translation>Varoitus: Lompakkotiedosto on vioittunut, tiedot on korjattu. Alkuperäinen %s talletettu nimellä %s kohteeseen %s; mikäli taseesi tai siirtotapahtumat ovat virheellisiä, on suositeltavaa palauttaa lompakko varmuuskopioista.</translation>
-    </message>
-    <message>
         <source>%s is set very high!</source>
         <translation>%s on asetettu todella korkeaksi!</translation>
     </message>
     <message>
         <source>Error loading wallet %s. Duplicate -wallet filename specified.</source>
         <translation>Virhe ladattaessa lompakkoa %s. -wallet -tiedostonimi esiintyy useaan kertaan.</translation>
+    </message>
+    <message>
+        <source>Keypool ran out, please call keypoolrefill first</source>
+        <translation>Avainallas tyhjentyi, ole hyvä ja kutsu keypoolrefill ensin</translation>
     </message>
     <message>
         <source>Starting network threads...</source>
@@ -3780,16 +3503,8 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
         <translation>Lompakon saldo ei riitä</translation>
     </message>
     <message>
-        <source>Cannot upgrade a non HD split wallet without upgrading to support pre split keypool. Please use -upgradewallet=169900 or -upgradewallet with no version specified.</source>
-        <translation>Muuta kuin HD-jaettua lompakkoa ei voi päivittää ilman päivitystä tukemaan esijaettua avainvarastoa. Käytä -upgradewallet = 169900 tai -upgradewallet ilman määritettyä versiota.</translation>
-    </message>
-    <message>
         <source>Fee estimation failed. Fallbackfee is disabled. Wait a few blocks or enable -fallbackfee.</source>
         <translation>Siirtomaksun arviointi epäonnistui. Odota muutama lohko tai käytä -fallbackfee -valintaa..</translation>
-    </message>
-    <message>
-        <source>Warning: Private keys detected in wallet {%s} with disabled private keys</source>
-        <translation>Varoitus: lompakosta {%s} tunnistetut yksityiset avaimet, on poistettu käytöstä</translation>
     </message>
     <message>
         <source>Cannot write to data directory '%s'; check permissions.</source>
@@ -3814,6 +3529,10 @@ Huom: Koska siirtomaksu lasketaan tavujen mukaan, niin määrittelemällä 500 t
     <message>
         <source>Done loading</source>
         <translation>Lataus on valmis</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Virhe</translation>
     </message>
 </context>
 </TS>

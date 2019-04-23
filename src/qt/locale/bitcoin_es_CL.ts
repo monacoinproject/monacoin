@@ -3,31 +3,31 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation>Click derecho para editar la dirección o etiqueta</translation>
+        <translation>Haga clic para editar la dirección o etiqueta</translation>
     </message>
     <message>
         <source>Create a new address</source>
-        <translation>Crear una nueva dirección</translation>
+        <translation>Crea una nueva dirección</translation>
     </message>
     <message>
         <source>&amp;New</source>
-        <translation>&amp;Nuevo</translation>
+        <translation>y nueva</translation>
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation>Copiar la dirección actualmente seleccionada al sistema de portapapeles</translation>
+        <translation>Copia la dirección seleccionada al portapapeles</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
-        <translation>&amp;Copiar</translation>
+        <translation>y copiar</translation>
     </message>
     <message>
         <source>C&amp;lose</source>
-        <translation>C&amp;errar</translation>
+        <translation>C y perder</translation>
     </message>
     <message>
         <source>Delete the currently selected address from the list</source>
-        <translation>Borrar la dirección actualmente seleccionada de la lista</translation>
+        <translation>Eliminar la dirección seleccionada de la lista</translation>
     </message>
     <message>
         <source>Enter address or label to search</source>
@@ -35,12 +35,11 @@
     </message>
     <message>
         <source>Export the data in the current tab to a file</source>
-        <translation>
-Exportar los datos en la pestaña actual a un archivo</translation>
+        <translation>Exportar los datos de la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation>&amp;Exportar</translation>
+        <translation>y exportar</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
@@ -48,27 +47,31 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Choose the address to send coins to</source>
-        <translation>Elija la dirección para enviar las monedas</translation>
+        <translation>Selecciones la dirección para enviar monedas a</translation>
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation>Elige la dirección para recibir las monedas</translation>
+        <translation>Selecciona la dirección para recibir monedas con</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
-        <translation>Escoger</translation>
+        <translation>Seleccione</translation>
     </message>
     <message>
         <source>Sending addresses</source>
-        <translation>Enviando dirección</translation>
+        <translation>Enviando direcciones</translation>
     </message>
     <message>
         <source>Receiving addresses</source>
-        <translation>Recibiendo dirección</translation>
+        <translation>Recibiendo direcciones</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Estas son sus direcciones de Bitcoin para enviar pagos. Siempre verifique el monto y la dirección de recepción antes de enviar monedas.</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Estas son tus direcciones de Monacoin para recibir pagos. Siempre revise el monto y la dirección de envío antes de enviar criptomonedas.</translation>
+    </message>
+    <message>
+        <source>These are your Monacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Estas son tus direcciones para recibir pagos. Es recomendable utilizar una nueva dirección para cada transacción.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -76,7 +79,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Copy &amp;Label</source>
-        <translation>Copiar y etiquetar</translation>
+        <translation>Copiar etiqueta</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -84,11 +87,11 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Export Address List</source>
-        <translation>Exportar la lista de direcciones</translation>
+        <translation>Exportar lista de direcciones</translation>
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>
-        <translation>Archivo separado por comas (* .csv)</translation>
+        <translation>Archivos separados por coma (*.csv)</translation>
     </message>
     <message>
         <source>Exporting Failed</source>
@@ -96,7 +99,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>There was an error trying to save the address list to %1. Please try again.</source>
-        <translation>Se produjo un error al intentar guardar la lista de direcciones en %1. Inténtalo de nuevo.</translation>
+        <translation>Había un error intentando guardar la lista de direcciones en %1. Por favor inténtelo de nuevo.</translation>
     </message>
 </context>
 <context>
@@ -111,18 +114,18 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>(no label)</source>
-        <translation>(no etiqueta)</translation>
+        <translation>(sin etiqueta)</translation>
     </message>
 </context>
 <context>
     <name>AskPassphraseDialog</name>
     <message>
         <source>Passphrase Dialog</source>
-        <translation>Diálogo de contraseña</translation>
+        <translation>Dialogo de contraseña</translation>
     </message>
     <message>
         <source>Enter passphrase</source>
-        <translation>Poner contraseña</translation>
+        <translation>Introduce contraseña actual      </translation>
     </message>
     <message>
         <source>New passphrase</source>
@@ -130,105 +133,113 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Repeat new passphrase</source>
-        <translation>Repetir nueva contraseña</translation>
+        <translation>Repite nueva contraseña</translation>
+    </message>
+    <message>
+        <source>Show password</source>
+        <translation>Mostrar contraseña</translation>
+    </message>
+    <message>
+        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <translation>Introduce la nueva contraseña para la billetera.&lt;br/&gt;Por favor utiliza una  contraseña de&lt;b&gt;10 o más caracteres aleatorios&lt;/b&gt;, u &lt;b&gt;ocho o más palabras&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
-        <translation>Encriptar la billetera</translation>
+        <translation>Codificar billetera</translation>
     </message>
     <message>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Esta operación necesita su contraseña de billetera para desbloquearla.</translation>
+        <translation>Esta operación necesita la contraseña para desbloquear la billetera.</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
-        <translation>Desbloquear la billetera</translation>
+        <translation>Desbloquea billetera</translation>
     </message>
     <message>
         <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Esta operación necesita su contraseña de billetera para descifrarla.</translation>
+        <translation>Esta operación necesita la contraseña para decodificar la billetara.</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
-        <translation>Descifrar la billetera</translation>
+        <translation>Decodificar cartera</translation>
     </message>
     <message>
         <source>Change passphrase</source>
-        <translation>Cambiar frase de contraseña</translation>
+        <translation>Cambia contraseña</translation>
+    </message>
+    <message>
+        <source>Enter the old passphrase and new passphrase to the wallet.</source>
+        <translation>Introduzca la contraseña antigua y la nueva para la billetera.</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
-        <translation>Confirmar el cifrado de la billetera</translation>
+        <translation>Confirmar cifrado del monedero</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>Advertencia: si encriptas tu billetera y pierdes tu contraseña &lt;b&gt; PIERDES TODOS TUS BITCOINS &lt;/b&gt; !</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MONACOINS&lt;/b&gt;!</source>
+        <translation>Advertencia: Si encriptas tu billetera y pierdes tu contraseña, vas a perder&lt;b&gt;TODOS TUS MONACOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
-        <translation>¿Estás seguro de que deseas encriptar tu billetera?</translation>
+        <translation>¿Seguro que quieres seguir codificando la billetera?</translation>
     </message>
     <message>
         <source>Wallet encrypted</source>
-        <translation>Billetera encriptada</translation>
-    </message>
-    <message>
-        <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>Recuerda que codificando tu billetera no garantiza mantener a salvo tus bitcoins en caso de tener virus en el computador.</translation>
+        <translation>Billetera codificada</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
-        <translation>IMPORTANTE: todas las copias de seguridad anteriores que haya realizado de su archivo de billetera se deben reemplazar con el archivo de monedero cifrado recién generado. Por razones de seguridad, las copias de seguridad anteriores del archivo monedero sin encriptar serán inútiles tan pronto como comience a usar el nuevo monedero cifrado.</translation>
+        <translation>IMPORTANTE: Cualquier respaldo anterior que hayas hecho del archivo de tu billetera debe ser reemplazado por el nuevo archivo encriptado que has generado. Por razones de seguridad, todos los respaldos realizados anteriormente serán inutilizables al momento de que utilices tu nueva billetera encriptada.</translation>
     </message>
     <message>
         <source>Wallet encryption failed</source>
-        <translation>El cifrado de Wallet falló</translation>
+        <translation>Falló la codificación de la billetera</translation>
     </message>
     <message>
         <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>El cifrado de Wallet falló debido a un error interno. Su billetera no estaba encriptada.</translation>
+        <translation>El proceso de encriptación de la billetera fallo por culpa de un problema interno. Tu billetera no fue encriptada.</translation>
     </message>
     <message>
         <source>The supplied passphrases do not match.</source>
-        <translation>Las frases de contraseña suministradas no coinciden.</translation>
+        <translation>La contraseña introducida no coincide.</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
-        <translation>El desbloqueo de la billetera falló</translation>
+        <translation>Ha fallado el desbloqueo de la billetera</translation>
     </message>
     <message>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>La frase de contraseña ingresada para el descifrado de la billetera fue incorrecta.</translation>
+        <translation>La contraseña introducida para el cifrado del monedero es incorrecta.</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
-        <translation>El descifrado de la billetera falló</translation>
+        <translation>Ha fallado la decodificación de la billetera</translation>
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
-        <translation>La frase de contraseña de la billetera se cambió con éxito.</translation>
+        <translation>La contraseña del monedero ha sido cambiada con éxito.</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
-        <translation>Advertencia: ¡la tecla Bloq Mayús está activada!</translation>
+        <translation>Precaucion: Mayúsculas Activadas</translation>
     </message>
 </context>
 <context>
     <name>BanTableModel</name>
     <message>
         <source>IP/Netmask</source>
-        <translation>IP / Máscara de red</translation>
+        <translation>IP/Máscara</translation>
     </message>
     <message>
         <source>Banned Until</source>
-        <translation>Prohibido hasta</translation>
+        <translation>Suspendido hasta</translation>
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
-        <translation>Firma y mensaje ...</translation>
+        <translation>Firmar &amp;Mensaje...</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
@@ -236,11 +247,11 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>&amp;Overview</source>
-        <translation>&amp;Visión de conjunto</translation>
+        <translation>&amp;Vista general</translation>
     </message>
     <message>
         <source>Show general overview of wallet</source>
-        <translation>Mostrar vista general de la billetera</translation>
+        <translation>Muestra una vista general de la billetera</translation>
     </message>
     <message>
         <source>&amp;Transactions</source>
@@ -248,15 +259,15 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Browse transaction history</source>
-        <translation>Examinar el historial de transacciones</translation>
+        <translation>Explora el historial de transacciónes</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
-        <translation>S&amp;alir</translation>
+        <translation>&amp;Salir</translation>
     </message>
     <message>
         <source>Quit application</source>
-        <translation>Salir de la aplicación</translation>
+        <translation>Salir del programa</translation>
     </message>
     <message>
         <source>&amp;About %1</source>
@@ -264,15 +275,15 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Show information about %1</source>
-        <translation>Mostrar información sobre %1</translation>
+        <translation>Mostrar Información sobre %1</translation>
     </message>
     <message>
         <source>About &amp;Qt</source>
-        <translation>Acerca de &amp;Qt</translation>
+        <translation>Acerca de</translation>
     </message>
     <message>
         <source>Show information about Qt</source>
-        <translation>Mostrar información sobre Qt</translation>
+        <translation>Mostrar Información sobre Qt</translation>
     </message>
     <message>
         <source>&amp;Options...</source>
@@ -284,35 +295,31 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>&amp;Encrypt Wallet...</source>
-        <translation>&amp;Billetera Encriptada</translation>
+        <translation>&amp;Codificar la billetera...</translation>
     </message>
     <message>
         <source>&amp;Backup Wallet...</source>
-        <translation>&amp;Billetera Copia de seguridad...</translation>
+        <translation>&amp;Respaldar billetera...</translation>
     </message>
     <message>
         <source>&amp;Change Passphrase...</source>
-        <translation>&amp;Cambiar contraseña...</translation>
+        <translation>&amp;Cambiar la contraseña...</translation>
     </message>
     <message>
         <source>Open &amp;URI...</source>
-        <translation>Abrir &amp;URL...</translation>
-    </message>
-    <message>
-        <source>Wallet:</source>
-        <translation>Billetera:</translation>
+        <translation>Abrir y url...</translation>
     </message>
     <message>
         <source>Click to disable network activity.</source>
-        <translation>Haga clic para deshabilitar la actividad de la red.</translation>
+        <translation>Click para deshabilitar la actividad de red.</translation>
     </message>
     <message>
         <source>Network activity disabled.</source>
-        <translation>Actividad de red deshabilitada.</translation>
+        <translation>Actividad de red deshabilitada</translation>
     </message>
     <message>
         <source>Click to enable network activity again.</source>
-        <translation>Haga clic para habilitar nuevamente la actividad de la red.</translation>
+        <translation>Click para volver a habilitar la actividad de red.</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
@@ -320,63 +327,63 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Reindexing blocks on disk...</source>
-        <translation>Reindexando bloques en el disco ...</translation>
+        <translation>Cargando el index de bloques...</translation>
     </message>
     <message>
-        <source>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
-        <translation>Proxy &lt;b&gt;habilitado&lt;/b&gt;: %1</translation>
-    </message>
-    <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Enviando monedas a una dirección de Bitcoin</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation>Enviar monedas a una dirección monacoin</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
-        <translation>Monedero de respaldo a otra ubicación</translation>
+        <translation>Respaldar billetera en otra ubicación</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
-        <translation>Cambiar la contraseña usando la encriptación de la billetera</translation>
+        <translation>Cambiar la contraseña utilizada para la codificación de la billetera</translation>
     </message>
     <message>
         <source>&amp;Debug window</source>
-        <translation>&amp;Ventana desarrollador</translation>
+        <translation>Ventana &amp;Debug</translation>
     </message>
     <message>
         <source>Open debugging and diagnostic console</source>
-        <translation>Abrir consola de diagnóstico y desarrollo</translation>
+        <translation>Abre consola de depuración y diagnóstico</translation>
     </message>
     <message>
         <source>&amp;Verify message...</source>
-        <translation>&amp;Verificar Mensaje...</translation>
+        <translation>Verificar mensaje....</translation>
+    </message>
+    <message>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>&amp;Send</source>
-        <translation>&amp;Enviar</translation>
+        <translation>&amp;Envía</translation>
     </message>
     <message>
         <source>&amp;Receive</source>
-        <translation>&amp;Recibir</translation>
+        <translation>y recibir</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
-        <translation>&amp;Mostrar / Ocultar</translation>
+        <translation>&amp;Mostrar/Ocultar</translation>
     </message>
     <message>
         <source>Show or hide the main Window</source>
-        <translation>Mostrar u ocultar la Ventana Principal</translation>
+        <translation>Mostrar u ocultar la ventana principal</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
-        <translation>Encripta las claves privadas que pertenecen a tu billetera</translation>
+        <translation>Cifrar las claves privadas de su monedero</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Firme mensajes con sus direcciones de Bitcoin para demostrar que los posee</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation>Firmar un mensaje para provar que usted es dueño de esta dirección</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Verifique los mensajes para asegurarse de que fueron firmados con las direcciones de Bitcoin especificadas</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation>Verificar mensajes comprobando que están firmados con direcciones Monacoin concretas</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -384,7 +391,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation>&amp;Configuraciones</translation>
+        <translation>&amp;Configuración</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -392,39 +399,39 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Tabs toolbar</source>
-        <translation>Barra de herramientas de pestañas</translation>
+        <translation>Barra de pestañas</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Solicitar pagos (genera códigos QR y bitcoin: URIs)</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation>Pide pagos (genera codigos QR and monacoin: URls)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
-        <translation>Mostrar la lista de direcciones y etiquetas de envío usadas</translation>
+        <translation>Mostrar la lista de direcciones de envío y etiquetas</translation>
     </message>
     <message>
         <source>Show the list of used receiving addresses and labels</source>
-        <translation>Mostrar la lista de direcciones y etiquetas de recepción usadas</translation>
+        <translation>Mostrar la lista de direcciones de recepción y etiquetas</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI or payment request</source>
-        <translation>Abra un bitcoin: URI o solicitud de pago</translation>
+        <source>Open a monacoin: URI or payment request</source>
+        <translation>Abrir un identificador URI monacoin o una petición de pago</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
-        <translation>Y opciones de línea de comando</translation>
+        <translation>&amp;Opciones de linea de comando</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n conexión activa hacia la red Bitcoin</numerusform><numerusform>%n conexiones activas hacia la red Bitcoin</numerusform></translation>
+        <source>%n active connection(s) to Monacoin network</source>
+        <translation><numerusform>%n conexión activa hacia la red Monacoin</numerusform><numerusform>%n conexiones activas hacia la red Monacoin</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
-        <translation>Bloques de indexación en el disco ...</translation>
+        <translation>Indexando bloques en disco...</translation>
     </message>
     <message>
         <source>Processing blocks on disk...</source>
-        <translation>Procesamiento de bloques en el disco ...</translation>
+        <translation>Procesando bloques en disco...</translation>
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
@@ -432,15 +439,15 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>%1 behind</source>
-        <translation>%1 detrás</translation>
+        <translation>%1 atrás</translation>
     </message>
     <message>
         <source>Last received block was generated %1 ago.</source>
-        <translation>El último bloque recibido se generó hace %1.</translation>
+        <translation>El último bloque recibido fue generado hace %1</translation>
     </message>
     <message>
         <source>Transactions after this will not yet be visible.</source>
-        <translation>Las transacciones posteriores a esto aún no estarán visibles.</translation>
+        <translation>Las transacciones posteriores aún no están visibles.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -448,7 +455,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Warning</source>
-        <translation>Advertencia</translation>
+        <translation>Atención</translation>
     </message>
     <message>
         <source>Information</source>
@@ -456,23 +463,16 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Up to date</source>
-        <translation>A hoy</translation>
+        <translation>Actualizado</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation>Muestre el mensaje de ayuda %1 para obtener una lista con posibles opciones de línea de comandos de Bitcoin</translation>
+        <source>Show the %1 help message to get a list with possible Monacoin command-line options</source>
+        <translation>Mostrar el mensaje de ayuda %1 para obtener una lista de los posibles comandos de Monacoin</translation>
     </message>
     <message>
         <source>&amp;Window</source>
-        <translation>Ventana</translation>
-    </message>
-    <message>
-        <source>Minimize</source>
-        <translation>Minimizar</translation>
-    </message>
-    <message>
-        <source>Main Window</source>
-        <translation>Ventana principal</translation>
+        <translation>y windows
+</translation>
     </message>
     <message>
         <source>%1 client</source>
@@ -480,15 +480,11 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>
-        <translation>Conectando con sus pares ...</translation>
+        <translation>Conectando a pares...</translation>
     </message>
     <message>
         <source>Catching up...</source>
-        <translation>Alcanzando...</translation>
-    </message>
-    <message>
-        <source>Error: %1</source>
-        <translation>Error: %1</translation>
+        <translation>Recuperando...</translation>
     </message>
     <message>
         <source>Date: %1
@@ -503,12 +499,6 @@ Exportar los datos en la pestaña actual a un archivo</translation>
 </translation>
     </message>
     <message>
-        <source>Wallet: %1
-</source>
-        <translation>Billetera: %1
-</translation>
-    </message>
-    <message>
         <source>Type: %1
 </source>
         <translation>Tipo: %1
@@ -517,13 +507,13 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     <message>
         <source>Label: %1
 </source>
-        <translation>Etiqueta: %1
+        <translation>Etiqueta %1
 </translation>
     </message>
     <message>
         <source>Address: %1
 </source>
-        <translation>Dirección: %1
+        <translation>Dirección %1
 </translation>
     </message>
     <message>
@@ -536,34 +526,30 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>HD key generation is &lt;b&gt;enabled&lt;/b&gt;</source>
-        <translation>La generación de la clave HD está &lt;b&gt; activada &lt;/ b&gt;</translation>
+        <translation>La generación de clave HD está &lt;b&gt;habilitada&lt;/b&gt;</translation>
     </message>
     <message>
         <source>HD key generation is &lt;b&gt;disabled&lt;/b&gt;</source>
-        <translation>La generación de la clave HD está &lt;b&gt; desactivada &lt;/ b&gt;</translation>
-    </message>
-    <message>
-        <source>Private key &lt;b&gt;disabled&lt;/b&gt;</source>
-        <translation>Llave privada &lt;b&gt;deshabilitada&lt;/b&gt;</translation>
+        <translation>La generación de clave HD está &lt;b&gt;deshabilitada&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;unlocked&lt;/b&gt;</source>
-        <translation>La billetera está &lt;b&gt; encriptada &lt;/ b&gt; y actualmente &lt;b&gt; desbloqueada &lt;/ b&gt;</translation>
+        <translation>La billetera esta &lt;b&gt;codificada&lt;/b&gt; y actualmente &lt;b&gt;desbloqueda&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Wallet is &lt;b&gt;encrypted&lt;/b&gt; and currently &lt;b&gt;locked&lt;/b&gt;</source>
-        <translation>La billetera está &lt;b&gt; encriptada &lt;/ b&gt; y actualmente está &lt;b&gt; bloqueada &lt;/ b&gt;</translation>
+        <translation>La billetera esta &lt;b&gt;codificada&lt;/b&gt; y actualmente &lt;b&gt;bloqueda&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</source>
-        <translation>Se produjo un error fatal. Bitcoin ya no puede continuar de manera segura y no continuará</translation>
+        <source>A fatal error occurred. Monacoin can no longer continue safely and will quit.</source>
+        <translation>Ha ocurrido un error fatal. Monacoin no puede seguir seguro y se cerrará.</translation>
     </message>
 </context>
 <context>
     <name>CoinControlDialog</name>
     <message>
         <source>Coin Selection</source>
-        <translation>Selección de monedas</translation>
+        <translation>Selección de moneda</translation>
     </message>
     <message>
         <source>Quantity:</source>
@@ -579,7 +565,8 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Fee:</source>
-        <translation>Comisión:</translation>
+        <translation>comisión:
+</translation>
     </message>
     <message>
         <source>Dust:</source>
@@ -587,7 +574,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>After Fee:</source>
-        <translation>Después de comisión:</translation>
+        <translation>Después de aplicar la comisión:</translation>
     </message>
     <message>
         <source>Change:</source>
@@ -595,7 +582,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>(un)select all</source>
-        <translation>(de)seleccionar todo</translation>
+        <translation>(des)marcar todos</translation>
     </message>
     <message>
         <source>Tree mode</source>
@@ -639,31 +626,31 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Copy amount</source>
-        <translation>Copiar cantidad</translation>
+        <translation>Copiar Cantidad</translation>
     </message>
     <message>
         <source>Copy transaction ID</source>
-        <translation>Copiar ID de la transacción</translation>
+        <translation>Copiar ID de transacción</translation>
     </message>
     <message>
         <source>Lock unspent</source>
-        <translation>Bloquear no utilizado</translation>
+        <translation>Bloquear lo no gastado</translation>
     </message>
     <message>
         <source>Unlock unspent</source>
-        <translation>Desbloquear no utilizado</translation>
+        <translation>Desbloquear lo no gastado</translation>
     </message>
     <message>
         <source>Copy quantity</source>
-        <translation>Cantidad de copia</translation>
+        <translation>Copiar cantidad</translation>
     </message>
     <message>
         <source>Copy fee</source>
-        <translation>Tarifa de copia</translation>
+        <translation>Copiar comisión</translation>
     </message>
     <message>
         <source>Copy after fee</source>
-        <translation>Copiar después de la tarifa</translation>
+        <translation>Copiar después de la comisión</translation>
     </message>
     <message>
         <source>Copy bytes</source>
@@ -695,11 +682,11 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Can vary +/- %1 satoshi(s) per input.</source>
-        <translation>Puede variar +/- %1 satoshi (s) por entrada.</translation>
+        <translation>Puede variar +/- %1 satoshi(s) por entrada.</translation>
     </message>
     <message>
         <source>(no label)</source>
-        <translation>(no etiqueta)</translation>
+        <translation>(sin etiqueta)</translation>
     </message>
     <message>
         <source>change from %1 (%2)</source>
@@ -711,12 +698,6 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
 </context>
 <context>
-    <name>CreateWalletActivity</name>
-    </context>
-<context>
-    <name>CreateWalletDialog</name>
-    </context>
-<context>
     <name>EditAddressDialog</name>
     <message>
         <source>Edit Address</source>
@@ -724,23 +705,23 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>&amp;Label</source>
-        <translation>Y etiqueta</translation>
+        <translation>&amp;Etiqueta</translation>
     </message>
     <message>
         <source>The label associated with this address list entry</source>
-        <translation>La etiqueta asociada a esta entrada está en la lista de direcciones</translation>
+        <translation>La etiqueta asociada con esta entrada de la lista de direcciones</translation>
     </message>
     <message>
         <source>The address associated with this address list entry. This can only be modified for sending addresses.</source>
-        <translation>La dirección asociada con esta entrada está en la lista de direcciones. Esto solo se puede modificar para enviar direcciones.</translation>
+        <translation>La dirección asociada con esta entrada en la libreta de direcciones. Solo puede ser modificada para direcciones de envío.</translation>
     </message>
     <message>
         <source>&amp;Address</source>
-        <translation>Y dirección</translation>
+        <translation>&amp;Dirección</translation>
     </message>
     <message>
         <source>New sending address</source>
-        <translation>Nueva dirección de envío</translation>
+        <translation>Nueva dirección para enviar</translation>
     </message>
     <message>
         <source>Edit receiving address</source>
@@ -748,11 +729,11 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Edit sending address</source>
-        <translation>Editar dirección de envío</translation>
+        <translation>Editar dirección de envio</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>La dirección ingresada "%1" no es una dirección válida de Bitcoin.</translation>
+        <source>The entered address "%1" is not a valid Monacoin address.</source>
+        <translation>La dirección introducida "%1" no es una dirección Monacoin valida.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -760,30 +741,30 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>New key generation failed.</source>
-        <translation>Nueva generación de claves fallida.</translation>
+        <translation>La generación de nueva clave falló.</translation>
     </message>
 </context>
 <context>
     <name>FreespaceChecker</name>
     <message>
         <source>A new data directory will be created.</source>
-        <translation>Se creará un nuevo directorio de datos.</translation>
+        <translation>Un nuevo directorio de datos será creado.</translation>
     </message>
     <message>
         <source>name</source>
-        <translation>nombre</translation>
+        <translation>Nombre</translation>
     </message>
     <message>
         <source>Directory already exists. Add %1 if you intend to create a new directory here.</source>
-        <translation>El directorio ya existe. Agregue %1 si tiene la intención de crear un nuevo directorio aquí.</translation>
+        <translation>El directorio ya existe. Agrega %1 si deseas crear un nuevo directorio aquí.</translation>
     </message>
     <message>
         <source>Path already exists, and is not a directory.</source>
-        <translation>La ruta ya existe, y no es un directorio ...</translation>
+        <translation>Ruta de acceso existente, pero no es un directorio.</translation>
     </message>
     <message>
         <source>Cannot create data directory here.</source>
-        <translation>No se puede crear el directorio de datos aquí.</translation>
+        <translation>Es imposible crear la carpeta de datos aquí.</translation>
     </message>
 </context>
 <context>
@@ -798,11 +779,11 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>About %1</source>
-        <translation>Alrededor de %1</translation>
+        <translation>Sobre %1</translation>
     </message>
     <message>
         <source>Command-line options</source>
-        <translation>Opciones de línea de comando</translation>
+        <translation>opciones de linea de comando</translation>
     </message>
 </context>
 <context>
@@ -813,35 +794,31 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Welcome to %1.</source>
-        <translation>Bienvenido al %1</translation>
+        <translation>Bienvenido a %1.</translation>
     </message>
     <message>
         <source>As this is the first time the program is launched, you can choose where %1 will store its data.</source>
-        <translation>Como esta es la primera vez que se lanza el programa, puede elegir dónde %1 almacenará sus datos.</translation>
-    </message>
-    <message>
-        <source>When you click OK, %1 will begin to download and process the full %4 block chain (%2GB) starting with the earliest transactions in %3 when %4 initially launched.</source>
-        <translation>Al hacer clic OK, %1 iniciará el proceso de descarga y procesará el blockchain completo de %4 (%2 GB), iniciando desde el la transacción más antigua %3 cuando %4 se ejecutó inicialmente.</translation>
+        <translation>Al ser la primera vez que se ejecuta el programa, puede elegir donde %1 almacenará sus datos.</translation>
     </message>
     <message>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
-        <translation>Esta sincronización inicial es muy exigente y puede exponer problemas de hardware con su computadora que anteriormente habían pasado desapercibidos. Cada vez que ejecuta %1, continuará la descarga donde lo dejó.</translation>
+        <translation>El primer proceso de sincronización consume muchos recursos, y es posible que puedan ocurrir problemas de hardware que anteriormente no hayas notado. Cada vez que ejecutes %1 automáticamente se reiniciará el proceso de sincronización desde el punto que lo dejaste anteriormente.</translation>
     </message>
     <message>
         <source>If you have chosen to limit block chain storage (pruning), the historical data must still be downloaded and processed, but will be deleted afterward to keep your disk usage low.</source>
-        <translation>Si ha elegido limitar el almacenamiento de la cadena de bloques (pruning), los datos históricos todavía se deben descargar y procesar, pero se eliminarán posteriormente para mantener el uso del disco bajo.</translation>
+        <translation>Si elegiste la opción de limitar el tamaño del blockchain (pruning), de igual manera será descargada y procesada la información histórica, pero será eliminada al finalizar este proceso para disminuir el uso del disco duro.</translation>
     </message>
     <message>
         <source>Use the default data directory</source>
-        <translation>Use el directorio de datos predeterminado</translation>
+        <translation>Usar el directorio de datos predeterminado</translation>
     </message>
     <message>
         <source>Use a custom data directory:</source>
-        <translation>Use un directorio de datos personalizado:</translation>
+        <translation>usar un directorio de datos personalizado:</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
@@ -849,19 +826,19 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Approximately %1 GB of data will be stored in this directory.</source>
-        <translation>Aproximadamente %1 GB de datos se almacenarán en este directorio.</translation>
+        <translation>Aproximadamente %1 GB de información será almacenado en este directorio.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin block chain.</source>
-        <translation>%1 descargará y almacenará una copia de la cadena de bloques de Bitcoin.</translation>
+        <source>%1 will download and store a copy of the Monacoin block chain.</source>
+        <translation>%1 descargará y almacenará una copia del blockchain de Monacoin.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
-        <translation>La billetera también se almacenará en este directorio.</translation>
+        <translation>El monedero también será almacenado en este directorio.</translation>
     </message>
     <message>
         <source>Error: Specified data directory "%1" cannot be created.</source>
-        <translation>Error: no se puede crear el directorio de datos especificado "%1".</translation>
+        <translation>Error: El directorio de datos especificado "%1" no pudo ser creado.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -875,24 +852,24 @@ Exportar los datos en la pestaña actual a un archivo</translation>
         <source>(of %n GB needed)</source>
         <translation><numerusform>(de %n GB requerido)</numerusform><numerusform>(de %n GB requeridos)</numerusform></translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ModalOverlay</name>
     <message>
         <source>Form</source>
-        <translation>Formar</translation>
+        <translation>Formulario</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation>Es posible que las transacciones recientes aún no estén visibles y, por lo tanto, el saldo de su billetera podría ser incorrecto. Esta información será correcta una vez que su billetera haya terminado de sincronizarse con la red bitcoin, como se detalla a continuación.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the monacoin network, as detailed below.</source>
+        <translation>Las transacciones recientes aún no pueden ser visibles, y por lo tanto el saldo de su monedero podría ser incorrecto. Esta información será correcta cuando su monedero haya terminado de sincronizarse con la red de monacoin, como se detalla abajo.</translation>
     </message>
     <message>
-        <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>La red no aceptará intentar gastar bitcoins que se vean afectados por transacciones aún no mostradas</translation>
+        <source>Attempting to spend monacoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>La red no aceptará el intentar gastar monacoins que están afectados por transacciones aún no mostradas.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
-        <translation>Cantidad de bloques restantes</translation>
+        <translation>Número de bloques restantes</translation>
     </message>
     <message>
         <source>Unknown...</source>
@@ -908,7 +885,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Progress increase per hour</source>
-        <translation>Aumento de progreso por hora</translation>
+        <translation>Avance del progreso por hora</translation>
     </message>
     <message>
         <source>calculating...</source>
@@ -916,30 +893,26 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Estimated time left until synced</source>
-        <translation>Tiempo estimado restante hasta sincronización</translation>
+        <translation>Tiempo estimado restante hasta la sincronización</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation>Esconder</translation>
+        <translation>Ocultar</translation>
     </message>
-    <message>
-        <source>Unknown. Syncing Headers (%1, %2%)...</source>
-        <translation>Desconocido. Sincronizando cabeceras (%1, %2%)...</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>OpenURIDialog</name>
     <message>
         <source>Open URI</source>
-        <translation>URI abierto</translation>
+        <translation>Abrir URI</translation>
     </message>
     <message>
         <source>Open payment request from URI or file</source>
-        <translation>Abrir solicitud de pago de URI o archivo</translation>
+        <translation>Abrir solicitud de pago desde URI o un archivo</translation>
     </message>
     <message>
         <source>URI:</source>
-        <translation>URI:</translation>
+        <translation>url:</translation>
     </message>
     <message>
         <source>Select payment request file</source>
@@ -947,12 +920,9 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Select payment request file to open</source>
-        <translation>Seleccione el archivo de solicitud de pago para abrir</translation>
+        <translation>Seleccionar archivo de solicitud de pago para abrir</translation>
     </message>
 </context>
-<context>
-    <name>OpenWalletActivity</name>
-    </context>
 <context>
     <name>OptionsDialog</name>
     <message>
@@ -965,47 +935,35 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Automatically start %1 after logging in to the system.</source>
-        <translation>Inicie automáticamente %1 después de iniciar sesión en el sistema.</translation>
+        <translation>Iniciar automáticamente %1 al inicial el sistema.</translation>
     </message>
     <message>
         <source>&amp;Start %1 on system login</source>
-        <translation>&amp; Comience %1 en el inicio de sesión del sistema</translation>
+        <translation>&amp;Iniciar %1 al iniciar el sistema</translation>
     </message>
     <message>
         <source>Size of &amp;database cache</source>
-        <translation>Tamaño de la memoria caché de la base de datos</translation>
+        <translation>Tamaño del caché de la base de &amp;datos</translation>
     </message>
     <message>
         <source>Number of script &amp;verification threads</source>
-        <translation>Cantidad de secuencias de comandos y verificación</translation>
+        <translation>Número de hilos de &amp;verificación de scripts</translation>
     </message>
     <message>
         <source>IP address of the proxy (e.g. IPv4: 127.0.0.1 / IPv6: ::1)</source>
-        <translation>Dirección IP del proxy (por ejemplo, IPv4: 127.0.0.1 / IPv6: :: 1)</translation>
+        <translation>Dirección IP del proxy (Ejemplo. IPv4: 127.0.0.1 / IPv6: ::1)</translation>
     </message>
     <message>
         <source>Shows if the supplied default SOCKS5 proxy is used to reach peers via this network type.</source>
-        <translation>Muestra si el proxy SOCKS5 suministrado se utiliza para llegar a los pares a través de este tipo de red.</translation>
-    </message>
-    <message>
-        <source>Use separate SOCKS&amp;5 proxy to reach peers via Tor hidden services:</source>
-        <translation>Use SOCKS&amp;5 y proxy por separado para llegar a sus compañeros a través de los servicios ocultos de Tor:</translation>
-    </message>
-    <message>
-        <source>Hide the icon from the system tray.</source>
-        <translation>Ocultar el icono de la bandeja del sistema.</translation>
-    </message>
-    <message>
-        <source>&amp;Hide tray icon</source>
-        <translation>Ocultar icono de bandeja</translation>
+        <translation>Muestra si el proxy SOCKS5 por defecto se utiliza para conectarse a pares a través de este tipo de red.</translation>
     </message>
     <message>
         <source>Minimize instead of exit the application when the window is closed. When this option is enabled, the application will be closed only after selecting Exit in the menu.</source>
-        <translation>Minimice en lugar de salir de la aplicación cuando la ventana esté cerrada. Cuando esta opción está habilitada, la aplicación se cerrará solo después de seleccionar Salir en el menú.</translation>
+        <translation>Minimizar en vez de salir de la aplicación cuando la ventana está cerrada. Cuando se activa esta opción, la aplicación sólo se cerrará después de seleccionar Salir en el menú.</translation>
     </message>
     <message>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
-        <translation>URL de terceros (por ejemplo, un explorador de bloques) que aparecen en la pestaña de transacciones como elementos del menú contextual. %s en la URL se reemplaza por hash de transacción. Varias URL están separadas por una barra vertical |.</translation>
+        <translation>URLs de terceros (por ejemplo, un explorador de bloques) que aparecen en la pestaña de transacciones como elementos del menú contextual. El %s en la URL es reemplazado por el valor hash de la transacción. Se pueden separar múltiples URLs por una barra vertical |.</translation>
     </message>
     <message>
         <source>Open the %1 configuration file from the working directory.</source>
@@ -1017,79 +975,63 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Reset all client options to default.</source>
-        <translation>Restablecer todas las opciones del cliente a los valores predeterminados.</translation>
+        <translation>Reestablece todas las opciones.</translation>
     </message>
     <message>
         <source>&amp;Reset Options</source>
-        <translation>Y Restablecer opciones</translation>
+        <translation>&amp;Restablecer opciones</translation>
     </message>
     <message>
         <source>&amp;Network</source>
         <translation>&amp;Red</translation>
     </message>
     <message>
-        <source>(0 = auto, &lt;0 = leave that many cores free)</source>
-        <translation>(0 = auto, &lt;0 = deja esta cantidad de núcleos libres)</translation>
-    </message>
-    <message>
         <source>W&amp;allet</source>
-        <translation>Billetera</translation>
+        <translation>Cartera</translation>
     </message>
     <message>
         <source>Expert</source>
-        <translation>Experto</translation>
+        <translation>experto</translation>
     </message>
     <message>
         <source>Enable coin &amp;control features</source>
-        <translation>Habilite las funciones de moneda y control</translation>
-    </message>
-    <message>
-        <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
-        <translation>Si deshabilita el gasto de un cambio no confirmado, el cambio de una transacción no se puede usar hasta que esa transacción tenga al menos una confirmación. Esto también afecta cómo se calcula su saldo.</translation>
+        <translation>Habilitar opciones de &amp;control de monedero</translation>
     </message>
     <message>
         <source>&amp;Spend unconfirmed change</source>
-        <translation>&amp; Gastar cambio no confirmado</translation>
+        <translation>Gastar cambio sin confirmar</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Abra automáticamente el puerto cliente de Bitcoin en el enrutador. Esto solo funciona cuando su enrutador admite UPnP y está habilitado.</translation>
+        <source>Automatically open the Monacoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Abre automáticamente el puerto del cliente Monacoin en el router. Esto funciona solo cuando tu router es compatible con UPnP y está habilitado.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
-        <translation>Puerto de mapa usando &amp; UPnP</translation>
+        <translation>Direcciona el puerto usando &amp;UPnP</translation>
     </message>
     <message>
         <source>Accept connections from outside.</source>
-        <translation>Acepta conexiones desde afuera.</translation>
+        <translation>Aceptar conexiones externas.</translation>
     </message>
     <message>
-        <source>Allow incomin&amp;g connections</source>
-        <translation>Permitir conexiones entrantes</translation>
-    </message>
-    <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation>Conéctese a la red de Bitcoin a través de un proxy SOCKS5.</translation>
-    </message>
-    <message>
-        <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
-        <translation>Conectar a través del proxy SOCKS5 (proxy predeterminado):</translation>
+        <source>Connect to the Monacoin network through a SOCKS5 proxy.</source>
+        <translation>Conectar a la red de Monacoin a través de un proxy SOCKS5</translation>
     </message>
     <message>
         <source>Proxy &amp;IP:</source>
-        <translation>Proxy &amp;IP:</translation>
+        <translation>&amp;IP Proxy:</translation>
     </message>
     <message>
         <source>&amp;Port:</source>
-        <translation>Puerto:</translation>
+        <translation>&amp;Puerto:</translation>
     </message>
     <message>
         <source>Port of the proxy (e.g. 9050)</source>
-        <translation>Puerto del proxy (por ejemplo, 9050)</translation>
+        <translation>Puerto del servidor proxy (ej. 9050)</translation>
     </message>
     <message>
         <source>Used for reaching peers via:</source>
-        <translation>Utilizado para llegar a los compañeros a través de:</translation>
+        <translation>Usado para alcanzar compañeros vía:</translation>
     </message>
     <message>
         <source>IPv4</source>
@@ -1104,52 +1046,45 @@ Exportar los datos en la pestaña actual a un archivo</translation>
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Conéctese a la red de Bitcoin a través de un proxy SOCKS5 separado para los servicios Tor ocultos.</translation>
+        <source>Connect to the Monacoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Conectar a la red de Monacoin a través de un proxy SOCKS5 diferente para los servicios anónimos de Tor.</translation>
     </message>
     <message>
         <source>&amp;Window</source>
-        <translation>Ventana</translation>
+        <translation>y windows
+</translation>
     </message>
     <message>
         <source>Show only a tray icon after minimizing the window.</source>
-        <translation>Mostrar solo un icono de bandeja después de minimizar la ventana.</translation>
+        <translation>Muestra solo un ícono en la bandeja después de minimizar la ventana</translation>
     </message>
     <message>
         <source>&amp;Minimize to the tray instead of the taskbar</source>
-        <translation>Minimice la bandeja en lugar de la barra de tareas</translation>
+        <translation>&amp;Minimiza a la bandeja en vez de la barra de tareas</translation>
     </message>
     <message>
         <source>M&amp;inimize on close</source>
-        <translation>Minimice al cerrar</translation>
+        <translation>M&amp;inimiza a la bandeja al cerrar</translation>
     </message>
     <message>
         <source>&amp;Display</source>
-        <translation>Monitor</translation>
+        <translation>&amp;Mostrado</translation>
     </message>
     <message>
         <source>User Interface &amp;language:</source>
-        <translation>Interfaz de usuario e idioma:</translation>
-    </message>
-    <message>
-        <source>The user interface language can be set here. This setting will take effect after restarting %1.</source>
-        <translation>El idioma de la interfaz de usuario puede establecerse aquí. Esta configuración tendrá efecto después de reiniciar %1.</translation>
+        <translation>&amp;Lenguaje de la interfaz:</translation>
     </message>
     <message>
         <source>&amp;Unit to show amounts in:</source>
-        <translation>Unidad para mostrar montos en:</translation>
+        <translation>&amp;Unidad en la que mostrar cantitades:</translation>
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Elija la unidad de subdivisión predeterminada para mostrar en la interfaz y al enviar monedas.</translation>
+        <translation>Elige la subdivisión por defecto para mostrar cantidaded en la interfaz cuando se envien monedas</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
-        <translation>Ya sea para mostrar las funciones de control de monedas o no.</translation>
-    </message>
-    <message>
-        <source>&amp;Third party transaction URLs</source>
-        <translation>URLs de transacciones de terceros</translation>
+        <translation>Mostrar o no funcionalidad de Coin Control</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -1157,27 +1092,27 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>&amp;Cancel</source>
-        <translation>Cancelar</translation>
+        <translation>&amp;Cancela</translation>
     </message>
     <message>
         <source>default</source>
-        <translation>defecto</translation>
+        <translation>predeterminado</translation>
     </message>
     <message>
         <source>none</source>
-        <translation>ninguno</translation>
+        <translation>Nada</translation>
     </message>
     <message>
         <source>Confirm options reset</source>
-        <translation>Confirmar restablecimiento de opciones</translation>
+        <translation>Confirmar reestablecimiento de las opciones</translation>
     </message>
     <message>
         <source>Client restart required to activate changes.</source>
-        <translation>Se requiere el reinicio del cliente para activar los cambios.</translation>
+        <translation>Es necesario reiniciar el cliente para activar los cambios.</translation>
     </message>
     <message>
         <source>Client will be shut down. Do you want to proceed?</source>
-        <translation>El cliente será cluasurado. Quieres proceder?</translation>
+        <translation>El cliente se cerrará. Desea proceder?</translation>
     </message>
     <message>
         <source>Configuration options</source>
@@ -1185,7 +1120,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>The configuration file is used to specify advanced user options which override GUI settings. Additionally, any command-line options will override this configuration file.</source>
-        <translation>El archivo de configuración se utiliza para especificar opciones de usuario avanzadas que anulan la configuración de la GUI. Además, cualquier opción de línea de comandos anulará este archivo de configuración.</translation>
+        <translation>El archivo de configuración es utilizado para especificar opciones avanzadas del usuario, que invalidan los ajustes predeterminados. Adicionalmente, cualquier opción ingresada por la línea de comandos invalidará este archivo de configuración.</translation>
     </message>
     <message>
         <source>Error</source>
@@ -1193,38 +1128,38 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>The configuration file could not be opened.</source>
-        <translation>El archivo de configuración no se pudo abrir.</translation>
+        <translation>El archivo de configuración no pudo ser abierto.</translation>
     </message>
     <message>
         <source>This change would require a client restart.</source>
-        <translation>Este cambio requeriría un reinicio del cliente.</translation>
+        <translation>Estos cambios requieren el reinicio del cliente.</translation>
     </message>
     <message>
         <source>The supplied proxy address is invalid.</source>
-        <translation>La dirección proxy suministrada no es válida.</translation>
+        <translation>El proxy ingresado es inválido. </translation>
     </message>
 </context>
 <context>
     <name>OverviewPage</name>
     <message>
         <source>Form</source>
-        <translation>Configurar</translation>
+        <translation>Formulario</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>La información mostrada puede estar desactualizada. Su billetera se sincroniza automáticamente con la red de Bitcoin después de establecer una conexión, pero este proceso aún no se ha completado.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>La información entregada puede estar desactualizada. Tu billetera se sincroniza automáticamente con la red de Monacoin después de establecer una conexión, pero este proceso aún no se ha completado.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
-        <translation>Ver-solo:</translation>
+        <translation>Solo observación:</translation>
     </message>
     <message>
         <source>Available:</source>
-        <translation>Disponible</translation>
+        <translation>Disponible:</translation>
     </message>
     <message>
         <source>Your current spendable balance</source>
-        <translation>Su saldo disponible actual</translation>
+        <translation>Tu saldo disponible para gastar</translation>
     </message>
     <message>
         <source>Pending:</source>
@@ -1232,7 +1167,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Total of transactions that have yet to be confirmed, and do not yet count toward the spendable balance</source>
-        <translation>Total de transacciones que aún no se han confirmado y aún no cuentan para el saldo disponible</translation>
+        <translation>Total de transacciones que aún no se han sido confirmadas, y que no son contabilizadas dentro del saldo disponible para gastar</translation>
     </message>
     <message>
         <source>Immature:</source>
@@ -1240,11 +1175,11 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Mined balance that has not yet matured</source>
-        <translation>Balance minero que aún no ha madurado</translation>
+        <translation>Saldo minado que no ha madurado</translation>
     </message>
     <message>
         <source>Balances</source>
-        <translation>Balances</translation>
+        <translation>Saldos</translation>
     </message>
     <message>
         <source>Total:</source>
@@ -1252,11 +1187,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Your current total balance</source>
-        <translation>Su saldo total actual</translation>
-    </message>
-    <message>
-        <source>Your current balance in watch-only addresses</source>
-        <translation>Tu saldo actual en solo ver direcciones</translation>
+        <translation>Saldo total actual</translation>
     </message>
     <message>
         <source>Spendable:</source>
@@ -1266,28 +1197,12 @@ Exportar los datos en la pestaña actual a un archivo</translation>
         <source>Recent transactions</source>
         <translation>Transacciones recientes</translation>
     </message>
-    <message>
-        <source>Unconfirmed transactions to watch-only addresses</source>
-        <translation>Transacciones no confirmadas para ver solo direcciones</translation>
-    </message>
-    <message>
-        <source>Mined balance in watch-only addresses that has not yet matured</source>
-        <translation>Balance minero ver solo direcciones que aún no ha madurado</translation>
-    </message>
-    <message>
-        <source>Current total balance in watch-only addresses</source>
-        <translation>Saldo total actual en direcciones de solo reloj</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>PaymentServer</name>
     <message>
         <source>Payment request error</source>
-        <translation>Error de solicitud de pago</translation>
-    </message>
-    <message>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation>No se puede iniciar Bitcoin: controlador de clic para pagar</translation>
+        <translation>Error en la solicitud de pago</translation>
     </message>
     <message>
         <source>URI handling</source>
@@ -1295,23 +1210,15 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Payment request fetch URL is invalid: %1</source>
-        <translation>La URL de búsqueda de solicitud de pago no es válida: %1</translation>
+        <translation>Lectura de URL para la solicitud de pagos es invalida: %1</translation>
     </message>
     <message>
         <source>Invalid payment address %1</source>
         <translation>Dirección de pago inválida %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation>¡URI no puede ser analizado! Esto puede deberse a una dirección de Bitcoin no válida o a parámetros de URI mal formados.</translation>
-    </message>
-    <message>
         <source>Payment request file handling</source>
-        <translation>Manejo de archivos de solicitud de pago</translation>
-    </message>
-    <message>
-        <source>Payment request file cannot be read! This can be caused by an invalid payment request file.</source>
-        <translation>¡El archivo de solicitud de pago no se puede leer! Esto puede deberse a un archivo de solicitud de pago no válido.</translation>
+        <translation>Manejo del archivo de solicitud de pago</translation>
     </message>
     <message>
         <source>Payment request rejected</source>
@@ -1319,23 +1226,19 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Payment request network doesn't match client network.</source>
-        <translation>La red de solicitud de pago no coincide con la red del cliente.</translation>
+        <translation>Red de solicitud de pagos no coincide con la red del cliente.</translation>
     </message>
     <message>
         <source>Payment request expired.</source>
-        <translation>Solicitud de pago caducada.</translation>
+        <translation>Solicitud de pago expirada</translation>
     </message>
     <message>
         <source>Payment request is not initialized.</source>
-        <translation>La solicitud de pago no está inicializada.</translation>
-    </message>
-    <message>
-        <source>Unverified payment requests to custom payment scripts are unsupported.</source>
-        <translation>Las solicitudes de pago no verificadas para los scripts de pago personalizados no son compatibles.</translation>
+        <translation>La solicitud de pago no se ha iniciado.</translation>
     </message>
     <message>
         <source>Invalid payment request.</source>
-        <translation>Solicitud de pago inválida</translation>
+        <translation>Solicitud de pago invalida.</translation>
     </message>
     <message>
         <source>Requested payment amount of %1 is too small (considered dust).</source>
@@ -1343,11 +1246,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Refund from %1</source>
-        <translation>Reembolso de %1</translation>
-    </message>
-    <message>
-        <source>Payment request %1 is too large (%2 bytes, allowed %3 bytes).</source>
-        <translation>Solicitud de pago %1 es muy grande (Actualmente %2 bytes, máximo %3 bytes)</translation>
+        <translation>Reembolsar desde %1</translation>
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
@@ -1355,34 +1254,34 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Payment request cannot be parsed!</source>
-        <translation>¡La solicitud de pago no se puede analizar!</translation>
+        <translation>La solicitud de pago no puede ser analizada!</translation>
     </message>
     <message>
         <source>Bad response from server %1</source>
-        <translation>Mala respuesta del servidor %1</translation>
+        <translation>Mala respuesta desde el servidor %1</translation>
     </message>
     <message>
         <source>Network request error</source>
-        <translation>Error de solicitud de red</translation>
+        <translation>Error en petición de la red</translation>
     </message>
     <message>
         <source>Payment acknowledged</source>
-        <translation>Pago reconocido</translation>
+        <translation>Pago declarado</translation>
     </message>
 </context>
 <context>
     <name>PeerTableModel</name>
     <message>
         <source>User Agent</source>
-        <translation>Agente de usuario</translation>
+        <translation>User Agent</translation>
     </message>
     <message>
         <source>Node/Service</source>
-        <translation>Nodo / Servicio</translation>
+        <translation>Nodo/Servicio</translation>
     </message>
     <message>
         <source>NodeId</source>
-        <translation>NodeId</translation>
+        <translation>ID del nodo</translation>
     </message>
     <message>
         <source>Ping</source>
@@ -1390,7 +1289,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation>Expedido</translation>
+        <translation>Enviado</translation>
     </message>
     <message>
         <source>Received</source>
@@ -1404,8 +1303,8 @@ Exportar los datos en la pestaña actual a un archivo</translation>
         <translation>Cantidad</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>Ingrese una dirección de Bitcoin (por ejemplo, %1)</translation>
+        <source>Enter a Monacoin address (e.g. %1)</source>
+        <translation>Ingresa una dirección de Monacoin (Ejemplo: %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1413,7 +1312,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>%1 h</source>
-        <translation>%1 d</translation>
+        <translation>%1 h</translation>
     </message>
     <message>
         <source>%1 m</source>
@@ -1425,11 +1324,11 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>None</source>
-        <translation>Ninguno</translation>
+        <translation>Nada</translation>
     </message>
     <message>
         <source>N/A</source>
-        <translation>N/D</translation>
+        <translation>N/A</translation>
     </message>
     <message>
         <source>%1 ms</source>
@@ -1437,39 +1336,15 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message numerus="yes">
         <source>%n second(s)</source>
-        <translation><numerusform>%n segundos</numerusform><numerusform>%n segundos</numerusform></translation>
-    </message>
-    <message numerus="yes">
-        <source>%n minute(s)</source>
-        <translation><numerusform>%n minutos</numerusform><numerusform>%n minutos</numerusform></translation>
-    </message>
-    <message numerus="yes">
-        <source>%n hour(s)</source>
-        <translation><numerusform>%n horas</numerusform><numerusform>%n horas</numerusform></translation>
-    </message>
-    <message numerus="yes">
-        <source>%n day(s)</source>
-        <translation><numerusform>%n días </numerusform><numerusform>%n días </numerusform></translation>
-    </message>
-    <message numerus="yes">
-        <source>%n week(s)</source>
-        <translation><numerusform>%n semanas</numerusform><numerusform>%n semanas</numerusform></translation>
+        <translation><numerusform>%n segundo</numerusform><numerusform>%n segundos</numerusform></translation>
     </message>
     <message>
         <source>%1 and %2</source>
         <translation>%1 y %2</translation>
     </message>
-    <message numerus="yes">
-        <source>%n year(s)</source>
-        <translation><numerusform>%n años</numerusform><numerusform>%n años</numerusform></translation>
-    </message>
     <message>
         <source>%1 B</source>
         <translation>%1 B</translation>
-    </message>
-    <message>
-        <source>%1 KB</source>
-        <translation>%1 KB</translation>
     </message>
     <message>
         <source>%1 MB</source>
@@ -1480,20 +1355,23 @@ Exportar los datos en la pestaña actual a un archivo</translation>
         <translation>%1 GB</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" does not exist.</source>
-        <translation>Error: el directorio de datos especificado "%1" no existe.</translation>
-    </message>
-    <message>
-        <source>Error: %1</source>
-        <translation>Error: %1</translation>
-    </message>
-    <message>
         <source>%1 didn't yet exit safely...</source>
-        <translation>%1 aún no salió de forma segura ...</translation>
+        <translation>%1 aun no se ha cerrado de forma segura...</translation>
     </message>
     <message>
         <source>unknown</source>
         <translation>desconocido</translation>
+    </message>
+</context>
+<context>
+    <name>QObject::QObject</name>
+    <message>
+        <source>Error: Specified data directory "%1" does not exist.</source>
+        <translation>Error: El directorio de datos "%1" especificado no existe.</translation>
+    </message>
+    <message>
+        <source>Error: %1</source>
+        <translation>Error: %1</translation>
     </message>
 </context>
 <context>
@@ -1504,11 +1382,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>&amp;Copy Image</source>
-        <translation>Copiar imagen</translation>
-    </message>
-    <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Fallo al codificar URI en código QR.</translation>
+        <translation>&amp;Copiar imagen</translation>
     </message>
     <message>
         <source>Save QR Code</source>
@@ -1523,19 +1397,19 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     <name>RPCConsole</name>
     <message>
         <source>N/A</source>
-        <translation>N/D</translation>
+        <translation>N/A</translation>
     </message>
     <message>
         <source>Client version</source>
-        <translation>Versión cliente</translation>
+        <translation>Versión del Cliente</translation>
     </message>
     <message>
         <source>&amp;Information</source>
-        <translation>Información</translation>
+        <translation>&amp;Información</translation>
     </message>
     <message>
         <source>Debug window</source>
-        <translation>Ventana de depuración</translation>
+        <translation>Ventana Debug</translation>
     </message>
     <message>
         <source>General</source>
@@ -1543,7 +1417,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Using BerkeleyDB version</source>
-        <translation>Usando la versión BerkeleyDB</translation>
+        <translation>Utilizando la versión de BerkeleyDB</translation>
     </message>
     <message>
         <source>Datadir</source>
@@ -1567,27 +1441,27 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Block chain</source>
-        <translation>Cadena de bloques</translation>
+        <translation>Bloquea cadena</translation>
     </message>
     <message>
         <source>Current number of blocks</source>
-        <translation>Número actual de bloques</translation>
+        <translation>Cantidad de bloques actual</translation>
     </message>
     <message>
         <source>Memory Pool</source>
-        <translation>Grupo de memoria</translation>
+        <translation>Memory Pool</translation>
     </message>
     <message>
         <source>Current number of transactions</source>
-        <translation>Número actual de transacciones</translation>
+        <translation>Numero total de transacciones</translation>
     </message>
     <message>
         <source>Memory usage</source>
-        <translation>Uso de memoria</translation>
+        <translation>Memoria utilizada</translation>
     </message>
     <message>
         <source>&amp;Reset</source>
-        <translation>Reiniciar</translation>
+        <translation>&amp;Reestablecer</translation>
     </message>
     <message>
         <source>Received</source>
@@ -1595,23 +1469,23 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Sent</source>
-        <translation>Expedido</translation>
+        <translation>Enviado</translation>
     </message>
     <message>
         <source>&amp;Peers</source>
-        <translation>Pares</translation>
+        <translation>&amp;Peers</translation>
     </message>
     <message>
         <source>Banned peers</source>
-        <translation>Pares prohibidos</translation>
+        <translation>Peers baneados</translation>
     </message>
     <message>
         <source>Select a peer to view detailed information.</source>
-        <translation>Seleccione un par para ver información detallada.</translation>
+        <translation>Selecciona un peer para ver la información detallada.</translation>
     </message>
     <message>
         <source>Whitelisted</source>
-        <translation>Incluido en la lista blanca</translation>
+        <translation>En la lista blanca</translation>
     </message>
     <message>
         <source>Direction</source>
@@ -1619,7 +1493,8 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Version</source>
-        <translation>Versión</translation>
+        <translation>version
+</translation>
     </message>
     <message>
         <source>Starting Block</source>
@@ -1627,7 +1502,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Synced Headers</source>
-        <translation>Encabezados sincronizados</translation>
+        <translation>Cabeceras sincronizadas</translation>
     </message>
     <message>
         <source>Synced Blocks</source>
@@ -1635,15 +1510,15 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>User Agent</source>
-        <translation>Agente de usuario</translation>
+        <translation>User Agent</translation>
     </message>
     <message>
         <source>Decrease font size</source>
-        <translation>Disminuir tamaño de letra</translation>
+        <translation>Disminuir tamaño de fuente</translation>
     </message>
     <message>
         <source>Increase font size</source>
-        <translation>Aumenta el tamaño de la fuente</translation>
+        <translation>Aumentar tamaño de fuente</translation>
     </message>
     <message>
         <source>Services</source>
@@ -1651,35 +1526,31 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Ban Score</source>
-        <translation>Puntuación Ban</translation>
+        <translation>Puntuación de bloqueo</translation>
     </message>
     <message>
         <source>Connection Time</source>
-        <translation>Tiempo de conexión</translation>
+        <translation>Duración de la conexión</translation>
     </message>
     <message>
         <source>Last Send</source>
-        <translation>Último envío</translation>
+        <translation>Ultimo envío</translation>
     </message>
     <message>
         <source>Last Receive</source>
-        <translation>Última recepción</translation>
+        <translation>Ultima recepción</translation>
     </message>
     <message>
         <source>Ping Time</source>
-        <translation>Tiempo Ping</translation>
-    </message>
-    <message>
-        <source>The duration of a currently outstanding ping.</source>
-        <translation>La duración de un ping actualmente pendiente.</translation>
+        <translation>Tiempo de Ping</translation>
     </message>
     <message>
         <source>Ping Wait</source>
-        <translation>Ping espera</translation>
+        <translation>Espera de Ping</translation>
     </message>
     <message>
         <source>Min Ping</source>
-        <translation>Min Ping</translation>
+        <translation>Ping minimo</translation>
     </message>
     <message>
         <source>Time Offset</source>
@@ -1691,43 +1562,43 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>&amp;Open</source>
-        <translation>Abierto</translation>
+        <translation>&amp;Abrir</translation>
     </message>
     <message>
         <source>&amp;Console</source>
-        <translation>Consola</translation>
+        <translation>&amp;Consola</translation>
     </message>
     <message>
         <source>&amp;Network Traffic</source>
-        <translation>Tráfico de red</translation>
+        <translation>&amp;Tráfico de Red</translation>
     </message>
     <message>
         <source>Totals</source>
-        <translation>Totales</translation>
+        <translation>Total:</translation>
     </message>
     <message>
         <source>In:</source>
-        <translation>En:</translation>
+        <translation>Entrada:</translation>
     </message>
     <message>
         <source>Out:</source>
-        <translation>Fuera:</translation>
+        <translation>Salida:</translation>
     </message>
     <message>
         <source>Debug log file</source>
-        <translation>Archivo de registro de depuración</translation>
+        <translation>Archivo del registro de depuración</translation>
     </message>
     <message>
         <source>Clear console</source>
-        <translation>Consola limpia</translation>
+        <translation>Limpiar Consola</translation>
     </message>
     <message>
         <source>1 &amp;hour</source>
-        <translation>1 hora</translation>
+        <translation>1 &amp;hora</translation>
     </message>
     <message>
         <source>1 &amp;day</source>
-        <translation>1 día</translation>
+        <translation>1 &amp;día</translation>
     </message>
     <message>
         <source>1 &amp;week</source>
@@ -1739,11 +1610,11 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>&amp;Disconnect</source>
-        <translation>Desconectar</translation>
+        <translation>&amp;Desconectar</translation>
     </message>
     <message>
         <source>Ban for</source>
-        <translation>Prohibición de</translation>
+        <translation>Prohibir para</translation>
     </message>
     <message>
         <source>&amp;Unban</source>
@@ -1751,35 +1622,27 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Welcome to the %1 RPC console.</source>
-        <translation>Bienvenido a la consola %1 RPC.</translation>
+        <translation>Bienvenido a la consola RPC %1.</translation>
     </message>
     <message>
         <source>Use up and down arrows to navigate history, and %1 to clear screen.</source>
-        <translation>Use las flechas hacia arriba y hacia abajo para navegar por el historial, y %1 para borrar la pantalla.</translation>
-    </message>
-    <message>
-        <source>Type %1 for an overview of available commands.</source>
-        <translation>Escriba %1 para obtener una descripción general de los comandos disponibles.</translation>
-    </message>
-    <message>
-        <source>For more information on using this console type %1.</source>
-        <translation>Para obtener más información sobre el uso de esta consola, escriba %1.</translation>
+        <translation>Usa las flechas (arriba y abajo) para navegar por el historial, y %1 para limpiar la consola.</translation>
     </message>
     <message>
         <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramifications of a command.</source>
-        <translation>ADVERTENCIA: los estafadores han estado activos, pidiendo a los usuarios que escriban comandos aquí, robando el contenido de su billetera. No use esta consola sin entender completamente las ramificaciones de un comando</translation>
+        <translation>ADVERTENCIA: No uses esta consola sin comprender las consecuencias de la ejecución de cada comando.</translation>
     </message>
     <message>
         <source>Network activity disabled</source>
-        <translation>Actividad de red deshabilitada</translation>
+        <translation>Actividad de red desactivada</translation>
     </message>
     <message>
         <source>(node id: %1)</source>
-        <translation>(ID de nodo: %1)</translation>
+        <translation>(identificador del nodo: %1)</translation>
     </message>
     <message>
         <source>via %1</source>
-        <translation>a través de %1</translation>
+        <translation>via %1</translation>
     </message>
     <message>
         <source>never</source>
@@ -1791,7 +1654,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Outbound</source>
-        <translation>Salida</translation>
+        <translation>Saliente</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -1810,47 +1673,43 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     <name>ReceiveCoinsDialog</name>
     <message>
         <source>&amp;Amount:</source>
-        <translation>Cantidad</translation>
+        <translation>Cantidad:</translation>
     </message>
     <message>
         <source>&amp;Label:</source>
-        <translation>Etiqueta:</translation>
+        <translation>&amp;Etiqueta:</translation>
     </message>
     <message>
         <source>&amp;Message:</source>
-        <translation>Mensaje:</translation>
+        <translation>&amp;mensaje</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation>Un mensaje opcional para adjuntar a la solicitud de pago, que se mostrará cuando se abra la solicitud. Nota: El mensaje no se enviará con el pago a través de la red de Bitcoin.</translation>
-    </message>
-    <message>
-        <source>An optional label to associate with the new receiving address.</source>
-        <translation>Una etiqueta opcional para asociar con la nueva dirección de recepción</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Monacoin network.</source>
+        <translation>Mensaje opcional adjunto a la solicitud de pago, que será mostrado cuando la solicitud sea abierta. Nota: Este mensaje no será enviado con el pago a través de la red Monacoin.</translation>
     </message>
     <message>
         <source>Use this form to request payments. All fields are &lt;b&gt;optional&lt;/b&gt;.</source>
-        <translation>Use este formulario para solicitar pagos. Todos los campos son &lt;b&gt; opcionales &lt;/ b&gt;.</translation>
+        <translation>Usa este formulario para solicitar un pago. Todos los campos son &lt;b&gt;opcionales&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
-        <translation>Un monto opcional para solicitar. Deje esto vacío o en cero para no solicitar una cantidad específica.</translation>
+        <translation>Monto opcional a solicitar. Deja este campo vacío o en cero si no quieres definir un monto específico.</translation>
     </message>
     <message>
         <source>Clear all fields of the form.</source>
-        <translation>Borre todos los campos del formulario.</translation>
+        <translation>Limpiar todos los campos del formulario.</translation>
     </message>
     <message>
         <source>Clear</source>
-        <translation>Aclarar</translation>
+        <translation>Limpiar</translation>
     </message>
     <message>
         <source>Requested payments history</source>
-        <translation>Historial de pagos solicitado</translation>
+        <translation>Historial de pagos solicitados</translation>
     </message>
     <message>
-        <source>Show the selected request (does the same as double clicking an entry)</source>
-        <translation>Mostrar la solicitud seleccionada (hace lo mismo que hacer doble clic en una entrada)</translation>
+        <source>&amp;Request payment</source>
+        <translation>Solicitud de pago</translation>
     </message>
     <message>
         <source>Show</source>
@@ -1858,7 +1717,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Remove the selected entries from the list</source>
-        <translation>Eliminar las entradas seleccionadas de la lista</translation>
+        <translation>Borrar de la lista las direcciones seleccionadas</translation>
     </message>
     <message>
         <source>Remove</source>
@@ -1878,22 +1737,22 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Copy amount</source>
-        <translation>Copiar cantidad</translation>
+        <translation>Copiar Cantidad</translation>
     </message>
 </context>
 <context>
     <name>ReceiveRequestDialog</name>
     <message>
         <source>QR Code</source>
-        <translation>Código QR</translation>
+        <translation>Código QR </translation>
     </message>
     <message>
         <source>Copy &amp;URI</source>
-        <translation>Copiar URI</translation>
+        <translation>Copiar &amp;URI</translation>
     </message>
     <message>
         <source>Copy &amp;Address</source>
-        <translation>Copiar dirección</translation>
+        <translation>&amp;Copia dirección</translation>
     </message>
     <message>
         <source>&amp;Save Image...</source>
@@ -1929,7 +1788,11 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Wallet</source>
-        <translation>Billetera</translation>
+        <translation>Cartera</translation>
+    </message>
+    <message>
+        <source>Error encoding URI into QR Code.</source>
+        <translation>Fallo al codificar URI en código QR.</translation>
     </message>
 </context>
 <context>
@@ -1948,7 +1811,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>(no label)</source>
-        <translation>(no etiqueta)</translation>
+        <translation>(sin etiqueta)</translation>
     </message>
     <message>
         <source>(no message)</source>
@@ -1999,11 +1862,12 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Fee:</source>
-        <translation>Comisión:</translation>
+        <translation>comisión:
+</translation>
     </message>
     <message>
         <source>After Fee:</source>
-        <translation>Después de comisión:</translation>
+        <translation>Después de aplicar la comisión:</translation>
     </message>
     <message>
         <source>Change:</source>
@@ -2035,7 +1899,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Hide</source>
-        <translation>Esconder</translation>
+        <translation>Ocultar</translation>
     </message>
     <message>
         <source>Recommended:</source>
@@ -2055,7 +1919,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Clear all fields of the form.</source>
-        <translation>Borre todos los campos del formulario.</translation>
+        <translation>Limpiar todos los campos del formulario.</translation>
     </message>
     <message>
         <source>Dust:</source>
@@ -2083,20 +1947,19 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Copy quantity</source>
-        <translation>Cantidad de copia</translation>
-    </message>
-    <message>
-        <source>Copy amount</source>
         <translation>Copiar cantidad</translation>
     </message>
     <message>
+        <source>Copy amount</source>
+        <translation>Copiar Cantidad</translation>
+    </message>
+    <message>
         <source>Copy fee</source>
-        <translation>
-Tarifa de copia</translation>
+        <translation>Copiar comisión</translation>
     </message>
     <message>
         <source>Copy after fee</source>
-        <translation>Copiar después de la tarifa</translation>
+        <translation>Copiar después de la comisión</translation>
     </message>
     <message>
         <source>Copy bytes</source>
@@ -2164,11 +2027,11 @@ Tarifa de copia</translation>
     </message>
     <message>
         <source>Payment request expired.</source>
-        <translation>Solicitud de pago caducada.</translation>
+        <translation>Solicitud de pago expirada</translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation>Peligro: Dirección de Bitcoin inválida</translation>
+        <source>Warning: Invalid Monacoin address</source>
+        <translation>Peligro: Dirección de Monacoin inválida</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2184,7 +2047,7 @@ Tarifa de copia</translation>
     </message>
     <message>
         <source>(no label)</source>
-        <translation>(no etiqueta)</translation>
+        <translation>(sin etiqueta)</translation>
     </message>
 </context>
 <context>
@@ -2199,7 +2062,7 @@ Tarifa de copia</translation>
     </message>
     <message>
         <source>&amp;Label:</source>
-        <translation>Etiqueta:</translation>
+        <translation>&amp;Etiqueta:</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2210,8 +2073,8 @@ Tarifa de copia</translation>
         <translation>Este es un pago normal</translation>
     </message>
     <message>
-        <source>The Bitcoin address to send the payment to</source>
-        <translation>Dirección Bitcoin a enviar el pago</translation>
+        <source>The Monacoin address to send the payment to</source>
+        <translation>Dirección Monacoin a enviar el pago</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2291,8 +2154,8 @@ Tarifa de copia</translation>
         <translation>&amp;Firmar Mensaje</translation>
     </message>
     <message>
-        <source>The Bitcoin address to sign the message with</source>
-        <translation>Dirección Bitcoin con la que firmar el mensaje</translation>
+        <source>The Monacoin address to sign the message with</source>
+        <translation>Dirección Monacoin con la que firmar el mensaje</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2323,7 +2186,7 @@ Tarifa de copia</translation>
         <translation>Copiar la firma actual al portapapeles del sistema</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
+        <source>Sign the message to prove you own this Monacoin address</source>
         <translation>Firmar un mensjage para probar que usted es dueño de esta dirección</translation>
     </message>
     <message>
@@ -2343,12 +2206,12 @@ Tarifa de copia</translation>
         <translation>&amp;Firmar Mensaje</translation>
     </message>
     <message>
-        <source>The Bitcoin address the message was signed with</source>
-        <translation>La dirección Bitcoin con la que se firmó el mensaje</translation>
+        <source>The Monacoin address the message was signed with</source>
+        <translation>La dirección Monacoin con la que se firmó el mensaje</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>Verifica el mensaje para asegurar que fue firmado con la dirección de Bitcoin especificada.</translation>
+        <source>Verify the message to ensure it was signed with the specified Monacoin address</source>
+        <translation>Verifica el mensaje para asegurar que fue firmado con la dirección de Monacoin especificada.</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2409,6 +2272,13 @@ Tarifa de copia</translation>
     <message>
         <source>Message verified.</source>
         <translation>Mensaje verificado.</translation>
+    </message>
+</context>
+<context>
+    <name>SplashScreen</name>
+    <message>
+        <source>[testnet]</source>
+        <translation>[red-de-pruebas]</translation>
     </message>
 </context>
 <context>
@@ -2656,7 +2526,7 @@ Tarifa de copia</translation>
     </message>
     <message>
         <source>(no label)</source>
-        <translation>(no etiqueta)</translation>
+        <translation>(sin etiqueta)</translation>
     </message>
     <message>
         <source>Transaction status. Hover over this field to show number of confirmations.</source>
@@ -2747,11 +2617,11 @@ Tarifa de copia</translation>
     </message>
     <message>
         <source>Copy amount</source>
-        <translation>Copiar cantidad</translation>
+        <translation>Copiar Cantidad</translation>
     </message>
     <message>
         <source>Copy transaction ID</source>
-        <translation>Copiar ID de la transacción</translation>
+        <translation>Copiar ID de transacción</translation>
     </message>
     <message>
         <source>Copy raw transaction</source>
@@ -2775,11 +2645,11 @@ Tarifa de copia</translation>
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>
-        <translation>Archivo separado por comas (* .csv)</translation>
+        <translation>Archivos separados por coma (*.csv)</translation>
     </message>
     <message>
         <source>Confirmed</source>
-        <translation>Confirmado</translation>
+        <translation>Archivo separado de coma (*.csv)</translation>
     </message>
     <message>
         <source>Watch-only</source>
@@ -2890,12 +2760,11 @@ Tarifa de copia</translation>
     <name>WalletView</name>
     <message>
         <source>&amp;Export</source>
-        <translation>&amp;Exportar</translation>
+        <translation>Exportar</translation>
     </message>
     <message>
         <source>Export the data in the current tab to a file</source>
-        <translation>
-Exportar los datos en la pestaña actual a un archivo</translation>
+        <translation>Exportar los datos de la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Backup Wallet</source>
@@ -2923,7 +2792,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Distribuido bajo la licencia de software MIT, vea el archivo adjunto %s o %s</translation>
@@ -2949,12 +2818,12 @@ Exportar los datos en la pestaña actual a un archivo</translation>
         <translation>No se ha podido iniciar el servidor HTTP. Ver debug log para detalles.</translation>
     </message>
     <message>
-        <source>The %s developers</source>
-        <translation>Los desarrolladores de %s</translation>
+        <source>Monacoin Core</source>
+        <translation>monacoin core</translation>
     </message>
     <message>
-        <source>This is the transaction fee you may discard if change is smaller than dust at this level</source>
-        <translation>Esta es la cuota de transacción que puede descartar si el cambio es más pequeño que el polvo a este nivel.</translation>
+        <source>The %s developers</source>
+        <translation>Los desarrolladores de %s</translation>
     </message>
     <message>
         <source>%d of last 100 blocks have unexpected version</source>
@@ -3015,6 +2884,10 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     <message>
         <source>Error opening block database</source>
         <translation>Error cargando base de datos de bloques</translation>
+    </message>
+    <message>
+        <source>Error: Disk space is low!</source>
+        <translation>Atención: Poco espacio en el disco duro</translation>
     </message>
     <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
@@ -3089,16 +2962,12 @@ Exportar los datos en la pestaña actual a un archivo</translation>
         <translation>Error actualizando la base de datos chainstate</translation>
     </message>
     <message>
+        <source>Information</source>
+        <translation>Información</translation>
+    </message>
+    <message>
         <source>Invalid -onion address or hostname: '%s'</source>
         <translation>Dirección de -onion o dominio '%s' inválido</translation>
-    </message>
-    <message>
-        <source>Invalid -proxy address or hostname: '%s'</source>
-        <translation>Dirección de -proxy o dominio ' %s' inválido</translation>
-    </message>
-    <message>
-        <source>Invalid amount for -paytxfee=&lt;amount&gt;: '%s' (must be at least %s)</source>
-        <translation>Cantidad inválida para -paytxfee=&lt;amount&gt;: '%s' (debe ser por lo menos %s)</translation>
     </message>
     <message>
         <source>Invalid netmask specified in -whitelist: '%s'</source>
@@ -3129,6 +2998,10 @@ Exportar los datos en la pestaña actual a un archivo</translation>
         <translation>Monto a transferir muy pequeño</translation>
     </message>
     <message>
+        <source>Transaction too large for fee policy</source>
+        <translation>Operación demasiado grande para la política de comision</translation>
+    </message>
+    <message>
         <source>Transaction too large</source>
         <translation>Transacción muy grande</translation>
     </message>
@@ -3139,6 +3012,10 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     <message>
         <source>Verifying wallet(s)...</source>
         <translation>Verificando billetera(s)...</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Atención</translation>
     </message>
     <message>
         <source>Warning: unknown new rules activated (versionbit %i)</source>
@@ -3171,6 +3048,10 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     <message>
         <source>Error loading wallet %s. Duplicate -wallet filename specified.</source>
         <translation>Error cargando el monedero %s. Se ha especificado un nombre de fichero -wallet duplicado.</translation>
+    </message>
+    <message>
+        <source>Keypool ran out, please call keypoolrefill first</source>
+        <translation>Keypool se ha agotado, llame a keypoolrefill primero</translation>
     </message>
     <message>
         <source>Starting network threads...</source>
@@ -3206,7 +3087,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Insufficient funds</source>
-        <translation>Fondos Insuficientes</translation>
+        <translation>Fondos insuficientes</translation>
     </message>
     <message>
         <source>Loading block index...</source>
@@ -3214,7 +3095,7 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Loading wallet...</source>
-        <translation>Cargando billetera...</translation>
+        <translation>Cargando cartera...</translation>
     </message>
     <message>
         <source>Cannot downgrade wallet</source>
@@ -3222,11 +3103,15 @@ Exportar los datos en la pestaña actual a un archivo</translation>
     </message>
     <message>
         <source>Rescanning...</source>
-        <translation>Reescaneando</translation>
+        <translation>Rescaneando...</translation>
     </message>
     <message>
         <source>Done loading</source>
-        <translation>Listo Cargando</translation>
+        <translation>Carga completa</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Error</translation>
     </message>
 </context>
 </TS>

@@ -47,11 +47,11 @@
     </message>
     <message>
         <source>Choose the address to send coins to</source>
-        <translation>Wählen Sie die Adresse aus, an die Sie Bitcoins senden möchten</translation>
+        <translation>Wählen Sie die Adresse aus, an die Sie Monacoins senden möchten</translation>
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation>Wählen Sie die Adresse aus, mit der Sie Bitcoins empfangen wollen</translation>
+        <translation>Wählen Sie die Adresse aus, mit der Sie Monacoins empfangen wollen</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
@@ -66,12 +66,12 @@
         <translation>Empfangsadressen</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Dies sind Ihre Bitcoin-Adressen zum Tätigen von Überweisungen. Bitte prüfen Sie den Betrag und die Adresse des Empfängers, bevor Sie Bitcoins überweisen.</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Dies sind Ihre Monacoin-Adressen zum Tätigen von Überweisungen. Bitte prüfen Sie den Betrag und die Adresse des Empfängers, bevor Sie Monacoins überweisen.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
-        <translation>Dies sind Ihre Bitcoin-Adressen zum Empfangen von Zahlungen. Benutze den 'Neue Empfangsadresse erstellen' Button im Empfangen-Tab, um eine neue Addresse zu erstellen.</translation>
+        <source>These are your Monacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Dies sind Ihre Monacoin-Adressen zum Empfangen von Zahlungen. Es wird empfohlen, für jede Transaktion eine neue Empfangsadresse zu verwenden.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -136,8 +136,12 @@
         <translation>Neue Passphrase bestätigen</translation>
     </message>
     <message>
-        <source>Show passphrase</source>
-        <translation>Zeige Passphrase</translation>
+        <source>Show password</source>
+        <translation>Zeige das Passwort</translation>
+    </message>
+    <message>
+        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <translation>Geben Sie die neue Passphrase für die Wallet ein.&lt;br&gt;Bitte benutzen Sie eine Passphrase bestehend aus &lt;b&gt;zehn oder mehr zufälligen Zeichen&lt;/b&gt; oder &lt;b&gt;acht oder mehr Wörtern&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
@@ -164,12 +168,16 @@
         <translation>Passphrase ändern</translation>
     </message>
     <message>
+        <source>Enter the old passphrase and new passphrase to the wallet.</source>
+        <translation>Geben Sie die alte und die neue Wallet-Passphrase ein.</translation>
+    </message>
+    <message>
         <source>Confirm wallet encryption</source>
         <translation>Wallet-Verschlüsselung bestätigen</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>Warnung: Wenn Sie Ihre Wallet verschlüsseln und Ihre Passphrase verlieren, werden Sie &lt;b&gt;ALLE IHRE BITCOINS VERLIEREN&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
+        <translation>Warnung: Wenn Sie Ihre Wallet verschlüsseln und Ihre Passphrase verlieren, werden Sie &lt;b&gt;ALLE IHRE LITECOINS VERLIEREN&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -180,28 +188,8 @@
         <translation>Wallet verschlüsselt</translation>
     </message>
     <message>
-        <source>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Geben Sie die neue Passphrase für die Wallet ein.&lt;br/&gt;Bitte benutzen Sie eine Passphrase bestehend aus &lt;b&gt;zehn oder mehr zufälligen Zeichen&lt;/b&gt; oder &lt;b&gt;acht oder mehr Wörtern&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>Enter the old passphrase and new passphrase for the wallet.</source>
-        <translation>Geben Sie die alte und die neue Wallet-Passphrase ein.</translation>
-    </message>
-    <message>
-        <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>Beachten Sie, dass das Verschlüsseln Ihrer Wallet nicht komplett vor Diebstahl Ihrer Bitcoins durch Malware schützt, die Ihren Computer infiziert hat.</translation>
-    </message>
-    <message>
-        <source>Wallet to be encrypted</source>
-        <translation>Wallet zu verschlüsseln</translation>
-    </message>
-    <message>
-        <source>Your wallet is about to be encrypted. </source>
-        <translation>Wallet wird verschlüsselt.</translation>
-    </message>
-    <message>
-        <source>Your wallet is now encrypted. </source>
-        <translation>Deine Wallet ist jetzt verschlüsselt.</translation>
+        <source>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your monacoins from being stolen by malware infecting your computer.</source>
+        <translation>Ihre Wallet ist jetzt verschlüsselt. Denken Sie daran, dass auch eine Verschlüsselung ihre Monacoins nicht vollkommen vor Diebstahl schützen kann, sollte ihr PC mit Malware infiziert sein. </translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -252,7 +240,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Nachricht s&amp;ignieren...</translation>
@@ -326,14 +314,6 @@
         <translation>&amp;URI öffnen...</translation>
     </message>
     <message>
-        <source>Create Wallet...</source>
-        <translation>Wallet erstellen...</translation>
-    </message>
-    <message>
-        <source>Create a new wallet</source>
-        <translation>Neue Wallet erstellen</translation>
-    </message>
-    <message>
         <source>Wallet:</source>
         <translation>Wallet:</translation>
     </message>
@@ -362,8 +342,8 @@
         <translation>Proxy ist &lt;b&gt;aktiviert&lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Bitcoins an eine Bitcoin-Adresse überweisen</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation>Monacoins an eine Monacoin-Adresse überweisen</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -386,6 +366,10 @@
         <translation>Nachricht &amp;verifizieren...</translation>
     </message>
     <message>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
+    </message>
+    <message>
         <source>&amp;Send</source>
         <translation>&amp;Überweisen</translation>
     </message>
@@ -406,12 +390,12 @@
         <translation>Verschlüsselt die zu Ihrer Wallet gehörenden privaten Schlüssel</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Nachrichten signieren, um den Besitz Ihrer Bitcoin-Adressen zu beweisen</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation>Nachrichten signieren, um den Besitz Ihrer Monacoin-Adressen zu beweisen</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Nachrichten verifizieren, um sicherzustellen, dass diese mit den angegebenen Bitcoin-Adressen signiert wurden</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation>Nachrichten verifizieren, um sicherzustellen, dass diese mit den angegebenen Monacoin-Adressen signiert wurden</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -430,8 +414,8 @@
         <translation>Registerkartenleiste</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Zahlungen anfordern (erzeugt QR-Codes und "bitcoin:"-URIs)</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation>Zahlungen anfordern (erzeugt QR-Codes und "monacoin:"-URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -442,16 +426,16 @@
         <translation>Liste verwendeter Empfangsadressen und Bezeichnungen anzeigen</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI or payment request</source>
-        <translation>Eine "bitcoin:"-URI oder Zahlungsanforderung öffnen</translation>
+        <source>Open a monacoin: URI or payment request</source>
+        <translation>Eine "monacoin:"-URI oder Zahlungsanforderung öffnen</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Kommandozeilenoptionen</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n aktive Verbindung zum Bitcoin-Netzwerk</numerusform><numerusform>%n aktive Verbindungen zum Bitcoin-Netzwerk</numerusform></translation>
+        <source>%n active connection(s) to Monacoin network</source>
+        <translation><numerusform>%n aktive Verbindung zum Monacoin-Netzwerk</numerusform><numerusform>%n aktive Verbindungen zum Monacoin-Netzwerk</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -518,7 +502,7 @@
         <translation>Wallet schließen</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
+        <source>Show the %1 help message to get a list with possible Monacoin command-line options</source>
         <translation>Zeige den "%1"-Hilfetext, um eine Liste mit möglichen Kommandozeilenoptionen zu erhalten</translation>
     </message>
     <message>
@@ -526,8 +510,12 @@
         <translation>Standard Wallet</translation>
     </message>
     <message>
-        <source>No wallets available</source>
-        <translation>Keine Wallets verfügbar</translation>
+        <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
+        <translation>Öffne Wallet&lt;b&gt;%1&lt;/b&gt; ...</translation>
+    </message>
+    <message>
+        <source>Open Wallet Failed</source>
+        <translation>Wallet öffnen fehlgeschlagen</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -540,6 +528,10 @@
     <message>
         <source>Zoom</source>
         <translation>Vergrößern</translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation>Wiederherstellen</translation>
     </message>
     <message>
         <source>Main Window</source>
@@ -556,14 +548,6 @@
     <message>
         <source>Catching up...</source>
         <translation>Hole auf...</translation>
-    </message>
-    <message>
-        <source>Error: %1</source>
-        <translation>Fehler: %1</translation>
-    </message>
-    <message>
-        <source>Warning: %1</source>
-        <translation>Warnung: %1</translation>
     </message>
     <message>
         <source>Date: %1
@@ -630,8 +614,8 @@
         <translation>Wallet ist &lt;b&gt;verschlüsselt&lt;/b&gt; und aktuell &lt;b&gt;gesperrt&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</source>
-        <translation>Ein schwerer Fehler ist aufgetreten. Bitcoin kann nicht stabil weiter ausgeführt werden und wird beendet.</translation>
+        <source>A fatal error occurred. Monacoin can no longer continue safely and will quit.</source>
+        <translation>Ein schwerer Fehler ist aufgetreten. Monacoin kann nicht stabil weiter ausgeführt werden und wird beendet.</translation>
     </message>
 </context>
 <context>
@@ -786,60 +770,6 @@
     </message>
 </context>
 <context>
-    <name>CreateWalletActivity</name>
-    <message>
-        <source>Creating Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
-        <translation>Erstelle Wallet&lt;b&gt;%1&lt;/b&gt; ...</translation>
-    </message>
-    <message>
-        <source>Create wallet failed</source>
-        <translation>Fehler beim Wallet erstellen aufgetreten</translation>
-    </message>
-    <message>
-        <source>Create wallet warning</source>
-        <translation>Warnung beim Wallet erstellen aufgetreten</translation>
-    </message>
-</context>
-<context>
-    <name>CreateWalletDialog</name>
-    <message>
-        <source>Create Wallet</source>
-        <translation>Wallet erstellen</translation>
-    </message>
-    <message>
-        <source>Wallet Name</source>
-        <translation>Wallet Name</translation>
-    </message>
-    <message>
-        <source>Encrypt the wallet. The wallet will be encrypted with a passphrase of your choice.</source>
-        <translation>Verschlüssele das Wallet. Das Wallet wird mit einer Passphrase deiner Wahl verschlüsselt.</translation>
-    </message>
-    <message>
-        <source>Encrypt Wallet</source>
-        <translation>Wallet verschlüsseln</translation>
-    </message>
-    <message>
-        <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
-        <translation>Deaktiviert private Schlüssel für dieses Wallet. Wallets mit deaktivierten privaten Schlüsseln werden keine privaten Schlüssel haben und können keinen HD Seed oder private Schlüssel importieren. Das ist ideal für Wallets, die nur beobachten.</translation>
-    </message>
-    <message>
-        <source>Disable Private Keys</source>
-        <translation>Private Keys deaktivieren</translation>
-    </message>
-    <message>
-        <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
-        <translation>Erzeugt ein leeres Wallet. Leere Wallets haben zu Anfang keine privaten Schlüssel oder Scripte. Private Schlüssel oder Adressen können importiert werden, ebenso können jetzt oder später HD-Seeds gesetzt werden.</translation>
-    </message>
-    <message>
-        <source>Make Blank Wallet</source>
-        <translation>Eine leere Wallet erstellen</translation>
-    </message>
-    <message>
-        <source>Create</source>
-        <translation>Erstellen</translation>
-    </message>
-</context>
-<context>
     <name>EditAddressDialog</name>
     <message>
         <source>Edit Address</source>
@@ -874,8 +804,8 @@
         <translation>Zahlungsadresse bearbeiten</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>Die eingegebene Adresse "%1" ist keine gültige Bitcoin-Adresse.</translation>
+        <source>The entered address "%1" is not a valid Monacoin address.</source>
+        <translation>Die eingegebene Adresse "%1" ist keine gültige Monacoin-Adresse.</translation>
     </message>
     <message>
         <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
@@ -955,10 +885,6 @@
         <translation>Wenn Sie auf OK klicken, beginnt %1 mit dem Herunterladen und Verarbeiten der gesamten %4-Blockchain (%2GB), beginnend mit den frühesten Transaktionen in %3 beim ersten Start von %4.</translation>
     </message>
     <message>
-        <source>Reverting this setting requires re-downloading the entire blockchain. It is faster to download the full chain first and prune it later. Disables some advanced features.</source>
-        <translation>Um diese Einstellung wiederherzustellen, muss die gesamte Blockchain neu heruntergeladen werden. Es ist schneller, die gesamte Chain zuerst herunterzuladen und später zu bearbeiten. Deaktiviert einige erweiterte Funktionen.</translation>
-    </message>
-    <message>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
         <translation>Diese initiale Synchronisation führt zur hohen Last und kann Harewareprobleme, die bisher nicht aufgetreten sind, mit ihrem Computer verursachen. Jedes Mal, wenn Sie %1 ausführen, wird der Download zum letzten Synchronisationspunkt fortgesetzt.</translation>
     </message>
@@ -975,12 +901,8 @@
         <translation>Ein benutzerdefiniertes Datenverzeichnis verwenden:</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
-    </message>
-    <message>
-        <source>Discard blocks after verification, except most recent %1 GB (prune)</source>
-        <translation>Verwerfe Blöcke nachdem sie verifiziert worden sind, ausser die %1 GB (prune)</translation>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
@@ -991,8 +913,8 @@
         <translation>Etwa %1 GB Daten werden in diesem Verzeichnis gespeichert.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin block chain.</source>
-        <translation>%1 wird eine Kopie der Bitcoin-Blockchain herunterladen und speichern.</translation>
+        <source>%1 will download and store a copy of the Monacoin block chain.</source>
+        <translation>%1 wird eine Kopie der Monacoin-Blockchain herunterladen und speichern.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -1014,10 +936,6 @@
         <source>(of %n GB needed)</source>
         <translation><numerusform>(von %n GB benötigt)</numerusform><numerusform>(von %n GB benötigt)</numerusform></translation>
     </message>
-    <message numerus="yes">
-        <source>(%n GB needed for full chain)</source>
-        <translation><numerusform>(%n GB benötigt für komplette Blockchain)</numerusform><numerusform>(%n GB benötigt für komplette Blockchain)</numerusform></translation>
-    </message>
 </context>
 <context>
     <name>ModalOverlay</name>
@@ -1026,12 +944,12 @@
         <translation>Formular</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation>Neueste Transaktionen werden eventuell noch nicht angezeigt, daher könnte Ihr Kontostand veraltet sein. Er wird korrigiert, sobald Ihr Wallet die Synchronisation mit dem Bitcoin-Netzwerk erfolgreich abgeschlossen hat. Details dazu finden sich weiter unten.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the monacoin network, as detailed below.</source>
+        <translation>Neueste Transaktionen werden eventuell noch nicht angezeigt, daher könnte Ihr Kontostand veraltet sein. Er wird korrigiert, sobald Ihr Wallet die Synchronisation mit dem Monacoin-Netzwerk erfolgreich abgeschlossen hat. Details dazu finden sich weiter unten.</translation>
     </message>
     <message>
-        <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Versuche, Bitcoins aus noch nicht angezeigten Transaktionen auszugeben, werden vom Netzwerk nicht akzeptiert.</translation>
+        <source>Attempting to spend monacoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>Versuche, Monacoins aus noch nicht angezeigten Transaktionen auszugeben, werden vom Netzwerk nicht akzeptiert.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1094,25 +1012,6 @@
     </message>
 </context>
 <context>
-    <name>OpenWalletActivity</name>
-    <message>
-        <source>Open wallet failed</source>
-        <translation>Wallet öffnen fehlgeschlagen</translation>
-    </message>
-    <message>
-        <source>Open wallet warning</source>
-        <translation>Wallet öffnen Warnung</translation>
-    </message>
-    <message>
-        <source>default wallet</source>
-        <translation>Standard Wallet</translation>
-    </message>
-    <message>
-        <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
-        <translation>Öffne Wallet&lt;b&gt;%1&lt;/b&gt; ...</translation>
-    </message>
-</context>
-<context>
     <name>OptionsDialog</name>
     <message>
         <source>Options</source>
@@ -1165,10 +1064,6 @@
     <message>
         <source>Third party URLs (e.g. a block explorer) that appear in the transactions tab as context menu items. %s in the URL is replaced by transaction hash. Multiple URLs are separated by vertical bar |.</source>
         <translation>Externe URLs (z.B. ein Block-Explorer), die im Kontextmenü des Transaktionsverlaufs eingefügt werden. In der URL wird %s durch den Transaktionshash ersetzt. Bei Angabe mehrerer URLs müssen diese durch "|" voneinander getrennt werden.</translation>
-    </message>
-    <message>
-        <source>Open the %1 configuration file from the working directory.</source>
-        <translation>Öffnen Sie die %1 Konfigurationsdatei aus dem Arbeitsverzeichnis.</translation>
     </message>
     <message>
         <source>Open Configuration File</source>
@@ -1231,8 +1126,8 @@
         <translation>&amp;Unbestätigtes Wechselgeld darf ausgegeben werden</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automatisch den Bitcoin-Clientport auf dem Router öffnen. Dies funktioniert nur, wenn Ihr Router UPnP unterstützt und dies aktiviert ist.</translation>
+        <source>Automatically open the Monacoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automatisch den Monacoin-Clientport auf dem Router öffnen. Dies funktioniert nur, wenn Ihr Router UPnP unterstützt und dies aktiviert ist.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1247,8 +1142,8 @@
         <translation>Erlaube eingehende Verbindungen</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation>Über einen SOCKS5-Proxy mit dem Bitcoin-Netzwerk verbinden.</translation>
+        <source>Connect to the Monacoin network through a SOCKS5 proxy.</source>
+        <translation>Über einen SOCKS5-Proxy mit dem Monacoin-Netzwerk verbinden.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1283,8 +1178,8 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Über einen separaten SOCKS5 Proxy für Tor Hidden Services mit dem Bitcoin-Netzwerk verbinden.</translation>
+        <source>Connect to the Monacoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Über einen separaten SOCKS5 Proxy für Tor Hidden Services mit dem Monacoin-Netzwerk verbinden.</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -1320,7 +1215,7 @@
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Wählen Sie die standardmäßige Untereinheit, die in der Benutzeroberfläche und beim Überweisen von Bitcoins angezeigt werden soll.</translation>
+        <translation>Wählen Sie die standardmäßige Untereinheit, die in der Benutzeroberfläche und beim Überweisen von Monacoins angezeigt werden soll.</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1394,8 +1289,8 @@
         <translation>Formular</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Die angezeigten Informationen sind möglicherweise nicht mehr aktuell. Ihre Wallet wird automatisch synchronisiert, nachdem eine Verbindung zum Bitcoin-Netzwerk hergestellt wurde. Dieser Prozess ist jedoch derzeit noch nicht abgeschlossen.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>Die angezeigten Informationen sind möglicherweise nicht mehr aktuell. Ihre Wallet wird automatisch synchronisiert, nachdem eine Verbindung zum Monacoin-Netzwerk hergestellt wurde. Dieser Prozess ist jedoch derzeit noch nicht abgeschlossen.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1469,16 +1364,16 @@
         <translation>Fehler bei der Zahlungsanforderung</translation>
     </message>
     <message>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation>Kann Bitcoin nicht starten: Klicken-zum-Bezahlen-Handler</translation>
+        <source>Cannot start monacoin: click-to-pay handler</source>
+        <translation>Kann Monacoin nicht starten: Klicken-zum-Bezahlen-Handler</translation>
     </message>
     <message>
         <source>URI handling</source>
         <translation>URI-Verarbeitung</translation>
     </message>
     <message>
-        <source>'bitcoin://' is not a valid URI. Use 'bitcoin:' instead.</source>
-        <translation>'bitcoin://' ist kein gültiger URL. Bitte 'bitcoin:' nutzen.</translation>
+        <source>'monacoin://' is not a valid URI. Use 'monacoin:' instead.</source>
+        <translation>'monacoin://' ist kein gültiger URL. Bitte 'monacoin:' nutzen.</translation>
     </message>
     <message>
         <source>You are using a BIP70 URL which will be unsupported in the future.</source>
@@ -1493,20 +1388,12 @@
         <translation>Zahlungsanfrage kann nicht verarbeitet werden, da die Unterstützung für BIP70 nicht mitkompiliert wurde.</translation>
     </message>
     <message>
-        <source>Due to widespread security flaws in BIP70 it's strongly recommended that any merchant instructions to switch wallets be ignored.</source>
-        <translation>Aufgrund der weit verbreiteten Sicherheitsmängel in BIP70 wird dringend empfohlen, dass alle Anweisungen des Händlers zum Wechseln von Wallets ignoriert werden.</translation>
-    </message>
-    <message>
-        <source>If you are receiving this error you should request the merchant provide a BIP21 compatible URI.</source>
-        <translation>Wenn du diese Fehlermeldung erhälst, solltest du Kontakt mit dem Händler aufnehmen und eine mit BIP21 kompatible URL zur Verwendung nachfragen.</translation>
-    </message>
-    <message>
         <source>Invalid payment address %1</source>
         <translation>Ungültige Zahlungsadresse %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation>URI kann nicht analysiert werden! Dies kann durch eine ungültige Bitcoin-Adresse oder fehlerhafte URI-Parameter verursacht werden.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Monacoin address or malformed URI parameters.</source>
+        <translation>URI kann nicht analysiert werden! Dies kann durch eine ungültige Monacoin-Adresse oder fehlerhafte URI-Parameter verursacht werden.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1607,8 +1494,8 @@
         <translation>Betrag</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>Bitcoin-Adresse eingeben (z.B. %1)</translation>
+        <source>Enter a Monacoin address (e.g. %1)</source>
+        <translation>Monacoin-Adresse eingeben (z.B. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1616,15 +1503,15 @@
     </message>
     <message>
         <source>%1 h</source>
-        <translation>%1 h</translation>
+        <translation>%1 S</translation>
     </message>
     <message>
         <source>%1 m</source>
-        <translation>%1 min</translation>
+        <translation>%1 M</translation>
     </message>
     <message>
         <source>%1 s</source>
-        <translation>%1 s</translation>
+        <translation>%1 S</translation>
     </message>
     <message>
         <source>None</source>
@@ -1683,6 +1570,21 @@
         <translation>%1 GB</translation>
     </message>
     <message>
+        <source>%1 didn't yet exit safely...</source>
+        <translation>%1 wurde noch nicht sicher beendet...</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>unbekannt</translation>
+    </message>
+</context>
+<context>
+    <name>QObject::QObject</name>
+    <message>
+        <source>Error parsing command line arguments: %1.</source>
+        <translation>Fehler beim Verarbeiten von Befehlszeilenargumenten: %1</translation>
+    </message>
+    <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
         <translation>Fehler: Angegebenes Datenverzeichnis "%1" existiert nicht.</translation>
     </message>
@@ -1694,14 +1596,6 @@
         <source>Error: %1</source>
         <translation>Fehler: %1</translation>
     </message>
-    <message>
-        <source>%1 didn't yet exit safely...</source>
-        <translation>%1 wurde noch nicht sicher beendet...</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>unbekannt</translation>
-    </message>
 </context>
 <context>
     <name>QRImageWidget</name>
@@ -1712,18 +1606,6 @@
     <message>
         <source>&amp;Copy Image</source>
         <translation>Grafik &amp;kopieren</translation>
-    </message>
-    <message>
-        <source>Resulting URI too long, try to reduce the text for label / message.</source>
-        <translation>Resultierende URI ist zu lang, bitte den Text für Bezeichnung/Nachricht kürzen.</translation>
-    </message>
-    <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Beim Enkodieren der URI in den QR-Code ist ein Fehler aufgetreten.</translation>
-    </message>
-    <message>
-        <source>QR code support not available.</source>
-        <translation>QR Code Funktionalität nicht vorhanden</translation>
     </message>
     <message>
         <source>Save QR Code</source>
@@ -1846,7 +1728,7 @@
     </message>
     <message>
         <source>Whitelisted</source>
-        <translation>Auf Weißliste</translation>
+        <translation>Zugelassene</translation>
     </message>
     <message>
         <source>Direction</source>
@@ -2038,7 +1920,7 @@
     </message>
     <message>
         <source>Outbound</source>
-        <translation>Ausgehend</translation>
+        <translation>ausgehend</translation>
     </message>
     <message>
         <source>Yes</source>
@@ -2068,8 +1950,8 @@
         <translation>&amp;Nachricht:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation>Eine optionale Nachricht, die an die Zahlungsanforderung angehängt wird. Sie wird angezeigt, wenn die Anforderung geöffnet wird. Hinweis: Diese Nachricht wird nicht mit der Zahlung über das Bitcoin-Netzwerk gesendet.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Monacoin network.</source>
+        <translation>Eine optionale Nachricht, die an die Zahlungsanforderung angehängt wird. Sie wird angezeigt, wenn die Anforderung geöffnet wird. Hinweis: Diese Nachricht wird nicht mit der Zahlung über das Monacoin-Netzwerk gesendet.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2082,10 +1964,6 @@
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
         <translation>Ein optional angeforderter Betrag. Lassen Sie dieses Feld leer oder setzen Sie es auf 0, um keinen spezifischen Betrag anzufordern.</translation>
-    </message>
-    <message>
-        <source>&amp;Create new receiving address</source>
-        <translation>Neue Empfangsadresse erstellen</translation>
     </message>
     <message>
         <source>Clear all fields of the form.</source>
@@ -2106,6 +1984,10 @@
     <message>
         <source>Requested payments history</source>
         <translation>Verlauf der angeforderten Zahlungen</translation>
+    </message>
+    <message>
+        <source>&amp;Request payment</source>
+        <translation>&amp;Zahlung anfordern</translation>
     </message>
     <message>
         <source>Show the selected request (does the same as double clicking an entry)</source>
@@ -2190,6 +2072,14 @@
         <source>Wallet</source>
         <translation>Wallet</translation>
     </message>
+    <message>
+        <source>Resulting URI too long, try to reduce the text for label / message.</source>
+        <translation>Resultierende URI ist zu lang, bitte den Text für Bezeichnung/Nachricht kürzen.</translation>
+    </message>
+    <message>
+        <source>Error encoding URI into QR Code.</source>
+        <translation>Beim Enkodieren der URI in den QR-Code ist ein Fehler aufgetreten.</translation>
+    </message>
 </context>
 <context>
     <name>RecentRequestsTableModel</name>
@@ -2226,7 +2116,7 @@
     <name>SendCoinsDialog</name>
     <message>
         <source>Send Coins</source>
-        <translation>Bitcoins überweisen</translation>
+        <translation>Monacoins überweisen</translation>
     </message>
     <message>
         <source>Coin Control Features</source>
@@ -2341,8 +2231,8 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>"Dust":</translation>
     </message>
     <message>
-        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
-        <translation>Nur die minimale Gebühr zu bezahlen ist so lange in Ordnung, wie weniger Transaktionsvolumen als Platz in den Blöcken vorhanden ist. Aber Vorsicht, diese Option kann dazu führen, dass Transaktionen nicht bestätigt werden, wenn mehr Bedarf an Bitcoin-Transaktionen besteht als das Netzwerk verarbeiten kann.</translation>
+        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for monacoin transactions than the network can process.</source>
+        <translation>Nur die minimale Gebühr zu bezahlen ist so lange in Ordnung, wie weniger Transaktionsvolumen als Platz in den Blöcken vorhanden ist. Aber Vorsicht, diese Option kann dazu führen, dass Transaktionen nicht bestätigt werden, wenn mehr Bedarf an Monacoin-Transaktionen besteht als das Netzwerk verarbeiten kann.</translation>
     </message>
     <message>
         <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
@@ -2409,14 +2299,6 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>%1 (%2 Blöcke)</translation>
     </message>
     <message>
-        <source> from wallet '%1'</source>
-        <translation>von der Wallet '%1'</translation>
-    </message>
-    <message>
-        <source>%1 to '%2'</source>
-        <translation>%1 an '%2'</translation>
-    </message>
-    <message>
         <source>%1 to %2</source>
         <translation>%1 an %2</translation>
     </message>
@@ -2433,8 +2315,12 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Sie können die Gebühr später erhöhen (zeigt Replace-By-Fee, BIP-125).</translation>
     </message>
     <message>
+        <source>from wallet %1</source>
+        <translation>aus Wallet %1</translation>
+    </message>
+    <message>
         <source>Please, review your transaction.</source>
-        <translation>Bitte überprüfen sie ihre Transaktion.</translation>
+        <translation>Bitte überprüfen sie ihre Transaktion. </translation>
     </message>
     <message>
         <source>Transaction fee</source>
@@ -2447,10 +2333,6 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
     <message>
         <source>Total Amount</source>
         <translation>Gesamtbetrag</translation>
-    </message>
-    <message>
-        <source>To review recipient list click "Show Details..."</source>
-        <translation>Um die Empfängerliste anzuzeigen, klicke auf "Details anzeigen..."</translation>
     </message>
     <message>
         <source>Confirm send coins</source>
@@ -2497,8 +2379,8 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation><numerusform>Voraussichtlicher Beginn der Bestätigung innerhalb von %n Block</numerusform><numerusform>Voraussichtlicher Beginn der Bestätigung innerhalb von %n Blöcken.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation>Warnung: Ungültige Bitcoin-Adresse</translation>
+        <source>Warning: Invalid Monacoin address</source>
+        <translation>Warnung: Ungültige Monacoin-Adresse</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2540,7 +2422,7 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Dies ist eine normale Überweisung.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to send the payment to</source>
+        <source>The Monacoin address to send the payment to</source>
         <translation>Die Zahlungsadresse der Überweisung</translation>
     </message>
     <message>
@@ -2560,8 +2442,8 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Diesen Eintrag entfernen</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Die Gebühr wird vom zu überweisenden Betrag abgezogen. Der Empfänger wird also weniger Bitcoins erhalten, als Sie im Betrags-Feld eingegeben haben. Falls mehrere Empfänger ausgewählt wurden, wird die Gebühr gleichmäßig verteilt.</translation>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less monacoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <translation>Die Gebühr wird vom zu überweisenden Betrag abgezogen. Der Empfänger wird also weniger Monacoins erhalten, als Sie im Betrags-Feld eingegeben haben. Falls mehrere Empfänger ausgewählt wurden, wird die Gebühr gleichmäßig verteilt.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
@@ -2588,8 +2470,8 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Adressbezeichnung eingeben, die dann zusammen mit der Adresse der Liste bereits verwendeter Adressen hinzugefügt wird.</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation>Eine an die "bitcoin:"-URI angefügte Nachricht, die zusammen mit der Transaktion gespeichert wird. Hinweis: Diese Nachricht wird nicht über das Bitcoin-Netzwerk gesendet.</translation>
+        <source>A message that was attached to the monacoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Monacoin network.</source>
+        <translation>Eine an die "monacoin:"-URI angefügte Nachricht, die zusammen mit der Transaktion gespeichert wird. Hinweis: Diese Nachricht wird nicht über das Monacoin-Netzwerk gesendet.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2633,12 +2515,12 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Nachricht &amp;signieren</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation>Sie können Nachrichten/Vereinbarungen mit Hilfe Ihrer Adressen signieren, um zu beweisen, dass Sie Bitcoins empfangen können, die an diese Adressen überwiesen werden. Seien Sie vorsichtig und signieren Sie nichts Vages oder Willkürliches, um Ihre Indentität vor Phishingangriffen zu schützen. Signieren Sie nur vollständig-detaillierte Aussagen, mit denen Sie auch einverstanden sind.</translation>
+        <source>You can sign messages/agreements with your addresses to prove you can receive monacoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <translation>Sie können Nachrichten/Vereinbarungen mit Hilfe Ihrer Adressen signieren, um zu beweisen, dass Sie Monacoins empfangen können, die an diese Adressen überwiesen werden. Seien Sie vorsichtig und signieren Sie nichts Vages oder Willkürliches, um Ihre Indentität vor Phishingangriffen zu schützen. Signieren Sie nur vollständig-detaillierte Aussagen, mit denen Sie auch einverstanden sind.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to sign the message with</source>
-        <translation>Die Bitcoin-Adresse mit der die Nachricht signiert wird</translation>
+        <source>The Monacoin address to sign the message with</source>
+        <translation>Die Monacoin-Adresse mit der die Nachricht signiert wird</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2669,8 +2551,8 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Aktuelle Signatur in die Zwischenablage kopieren</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
-        <translation>Die Nachricht signieren, um den Besitz dieser Bitcoin-Adresse zu beweisen</translation>
+        <source>Sign the message to prove you own this Monacoin address</source>
+        <translation>Die Nachricht signieren, um den Besitz dieser Monacoin-Adresse zu beweisen</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2693,12 +2575,12 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Geben Sie die Zahlungsadresse des Empfängers, Nachricht (achten Sie darauf Zeilenumbrüche, Leerzeichen, Tabulatoren usw. exakt zu kopieren) und Signatur unten ein, um die Nachricht zu verifizieren. Vorsicht, interpretieren Sie nicht mehr in die Signatur hinein, als in der signierten Nachricht selber enthalten ist, um nicht von einem Man-in-the-middle-Angriff hinters Licht geführt zu werden. Beachten Sie dass dies nur beweist, dass die signierende Partei über diese Adresse Überweisungen empfangen kann.</translation>
     </message>
     <message>
-        <source>The Bitcoin address the message was signed with</source>
-        <translation>Die Bitcoin-Adresse mit der die Nachricht signiert wurde</translation>
+        <source>The Monacoin address the message was signed with</source>
+        <translation>Die Monacoin-Adresse mit der die Nachricht signiert wurde</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>Die Nachricht verifizieren, um sicherzustellen, dass diese mit der angegebenen Bitcoin-Adresse signiert wurde</translation>
+        <source>Verify the message to ensure it was signed with the specified Monacoin address</source>
+        <translation>Die Nachricht verifizieren, um sicherzustellen, dass diese mit der angegebenen Monacoin-Adresse signiert wurde</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2759,6 +2641,13 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
     <message>
         <source>Message verified.</source>
         <translation>Nachricht verifiziert.</translation>
+    </message>
+</context>
+<context>
+    <name>SplashScreen</name>
+    <message>
+        <source>[testnet]</source>
+        <translation>[Testnet]</translation>
     </message>
 </context>
 <context>
@@ -2903,16 +2792,12 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Ausgabeindex</translation>
     </message>
     <message>
-        <source> (Certificate was not verified)</source>
-        <translation>(Zertifikat wurde nicht verifiziert)</translation>
-    </message>
-    <message>
         <source>Merchant</source>
         <translation>Händler</translation>
     </message>
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
-        <translation>Erzeugte Bitcoins müssen %1 Blöcke lang reifen, bevor sie ausgegeben werden können. Als Sie diesen Block erzeugten, wurde er an das Netzwerk übertragen, um ihn der Blockchain hinzuzufügen. Falls dies fehlschlägt wird der Status in "nicht angenommen" geändert und Sie werden keine Bitcoins gutgeschrieben bekommen. Das kann gelegentlich passieren, wenn ein anderer Knoten einen Block fast zeitgleich erzeugt.</translation>
+        <translation>Erzeugte Monacoins müssen %1 Blöcke lang reifen, bevor sie ausgegeben werden können. Als Sie diesen Block erzeugten, wurde er an das Netzwerk übertragen, um ihn der Blockchain hinzuzufügen. Falls dies fehlschlägt wird der Status in "nicht angenommen" geändert und Sie werden keine Monacoins gutgeschrieben bekommen. Das kann gelegentlich passieren, wenn ein anderer Knoten einen Block fast zeitgleich erzeugt.</translation>
     </message>
     <message>
         <source>Debug information</source>
@@ -3230,8 +3115,8 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Wallet schließen</translation>
     </message>
     <message>
-        <source>Are you sure you wish to close the wallet &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation>Sind Sie sich sicher, dass Sie die Wallet &lt;i&gt;%1&lt;/i&gt; schließen möchten?</translation>
+        <source>Are you sure you wish to close wallet &lt;i&gt;%1&lt;/i&gt;?</source>
+        <translation>Sind Sie sich sicher, dass Sie Ihre Brieftasche &lt;i&gt;%1&lt;/i&gt; schließen möchten?</translation>
     </message>
     <message>
         <source>Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled.</source>
@@ -3249,7 +3134,7 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
     <name>WalletModel</name>
     <message>
         <source>Send Coins</source>
-        <translation>Bitcoins überweisen</translation>
+        <translation>Monacoins überweisen</translation>
     </message>
     <message>
         <source>Fee bump error</source>
@@ -3332,7 +3217,7 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
     </message>
 </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Veröffentlicht unter der MIT-Softwarelizenz, siehe beiliegende Datei %s oder %s.</translation>
@@ -3360,6 +3245,10 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
     <message>
         <source>Unable to start HTTP server. See debug log for details.</source>
         <translation>Kann HTTP Server nicht starten. Siehe debug log für Details.</translation>
+    </message>
+    <message>
+        <source>Monacoin Core</source>
+        <translation>Monacoin Core</translation>
     </message>
     <message>
         <source>The %s developers</source>
@@ -3404,7 +3293,7 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
     </message>
     <message>
         <source>Unable to replay blocks. You will need to rebuild the database using -reindex-chainstate.</source>
-        <translation>Fehler beim Verarbeiten von Blöcken. Sie müssen die Datenbank mit Hilfe des Arguments '-reindex-chainstate' neu aufbauen.</translation>
+        <translation>Fehler beim Verarbeiten von Blöcken. Sie müssen die Datenbank mit Hilfe des Arguments '-reindex-chainstate' neu aufbauen. </translation>
     </message>
     <message>
         <source>Unable to rewind the database to a pre-fork state. You will need to redownload the blockchain</source>
@@ -3488,6 +3377,10 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Fehler beim Öffnen der Blockdatenbank</translation>
     </message>
     <message>
+        <source>Error: Disk space is low!</source>
+        <translation>Fehler: Zu wenig freier Speicherplatz auf dem Datenträger!</translation>
+    </message>
+    <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
         <translation>Fehler: Es konnte kein Port abgehört werden. Wenn dies so gewünscht wird -listen=0 verwenden.</translation>
     </message>
@@ -3508,10 +3401,6 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Initialisierungsplausibilitätsprüfung fehlgeschlagen. %s wird beendet.</translation>
     </message>
     <message>
-        <source>Invalid P2P permission: '%s'</source>
-        <translation>Ungültige P2P Genehmigung: '%s'</translation>
-    </message>
-    <message>
         <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
         <translation>Ungültiger Betrag für -%s=&lt;amount&gt;: '%s'</translation>
     </message>
@@ -3528,12 +3417,8 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Angegebener Blöcke-Ordner "%s" existiert nicht.</translation>
     </message>
     <message>
-        <source>Unknown address type '%s'</source>
-        <translation>Unbekannter Adresstyp '%s'</translation>
-    </message>
-    <message>
-        <source>Unknown change type '%s'</source>
-        <translation>Unbekannter Änderungstyp '%s'</translation>
+        <source>Unable to create the PID file '%s': %s</source>
+        <translation>Erstellung der PID-Datei '%s': %s ist nicht möglich</translation>
     </message>
     <message>
         <source>Upgrading txindex database</source>
@@ -3542,10 +3427,6 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
     <message>
         <source>Loading P2P addresses...</source>
         <translation>Lade P2P-Adressen...</translation>
-    </message>
-    <message>
-        <source>Error: Disk space is too low!</source>
-        <translation>Fehler: Zu wenig freier Speicherplatz auf dem Datenträger!</translation>
     </message>
     <message>
         <source>Loading banlist...</source>
@@ -3586,10 +3467,6 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
     <message>
         <source>Unable to generate keys</source>
         <translation>Schlüssel können nicht generiert werden</translation>
-    </message>
-    <message>
-        <source>Unsupported logging category %s=%s.</source>
-        <translation>Nicht unterstützte Protokollkategorie %s=%s.</translation>
     </message>
     <message>
         <source>Upgrading UTXO database</source>
@@ -3636,6 +3513,10 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Fehler: Zu wenig Speicherplatz auf der Festplatte %s</translation>
     </message>
     <message>
+        <source>Information</source>
+        <translation>Hinweis</translation>
+    </message>
+    <message>
         <source>Invalid -onion address or hostname: '%s'</source>
         <translation>Ungültige Onion-Adresse oder ungültiger Hostname: '%s'</translation>
     </message>
@@ -3654,10 +3535,6 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
     <message>
         <source>Need to specify a port with -whitebind: '%s'</source>
         <translation>Angabe eines Ports benötigt für -whitebind: '%s'</translation>
-    </message>
-    <message>
-        <source>Prune mode is incompatible with -blockfilterindex.</source>
-        <translation>Kürzungsmodus ist nicht mit -blockfilterindex kompatibel.</translation>
     </message>
     <message>
         <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
@@ -3702,6 +3579,10 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Transaktionsbetrag zu niedrig</translation>
     </message>
     <message>
+        <source>Transaction too large for fee policy</source>
+        <translation>Transaktion ist für die Gebührenrichtlinie zu groß</translation>
+    </message>
+    <message>
         <source>Transaction too large</source>
         <translation>Transaktion zu groß</translation>
     </message>
@@ -3710,20 +3591,20 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Kann auf diesem Computer nicht an %s binden (bind meldete Fehler %s)</translation>
     </message>
     <message>
-        <source>Unable to create the PID file '%s': %s</source>
-        <translation>Erstellung der PID-Datei '%s': %s ist nicht möglich</translation>
-    </message>
-    <message>
         <source>Unable to generate initial keys</source>
         <translation>Initialschlüssel können nicht generiert werden</translation>
     </message>
     <message>
-        <source>Unknown -blockfilterindex value %s.</source>
-        <translation>Unbekannter -blockfilterindex Wert %s.</translation>
-    </message>
-    <message>
         <source>Verifying wallet(s)...</source>
         <translation>Verifiziere Wallet(s)...</translation>
+    </message>
+    <message>
+        <source>Wallet %s resides outside wallet directory %s</source>
+        <translation>Wallet %s liegt außerhalb des Wallet-Verzeichnisses %s</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Warnung</translation>
     </message>
     <message>
         <source>Warning: unknown new rules activated (versionbit %i)</source>
@@ -3750,16 +3631,16 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
         <translation>Gesamtlänge des Netzwerkversionstrings (%i) erreicht die maximale Länge (%i). Reduzieren Sie die Nummer oder die Größe von uacomments.</translation>
     </message>
     <message>
-        <source>Warning: Wallet file corrupt, data salvaged! Original %s saved as %s in %s; if your balance or transactions are incorrect you should restore from a backup.</source>
-        <translation>Warnung: wallet.dat beschädigt, Datenrettung erfolgreich! Original %s wurde als wallet %s in %s gespeichert. Falls Ihr Kontostand oder Transaktionen nicht korrekt sind, sollten Sie von einer Datensicherung wiederherstellen.</translation>
-    </message>
-    <message>
         <source>%s is set very high!</source>
         <translation>%s wurde sehr hoch eingestellt!</translation>
     </message>
     <message>
         <source>Error loading wallet %s. Duplicate -wallet filename specified.</source>
         <translation>Fehler beim Laden der Wallet %s. -wallet Dateiname doppelt angegeben.</translation>
+    </message>
+    <message>
+        <source>Keypool ran out, please call keypoolrefill first</source>
+        <translation>Der Keypool ist erschöpft. Bitte rufen Sie zunächst keypoolrefill auf.</translation>
     </message>
     <message>
         <source>Starting network threads...</source>
@@ -3811,7 +3692,7 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
     </message>
     <message>
         <source>Cannot write to data directory '%s'; check permissions.</source>
-        <translation>Es konnte nicht in das Datenverzeichnis '%s' geschrieben werden; Überprüfen Sie die Berechtigungen.</translation>
+        <translation>Es konnte nicht in das Datenverzeichnis '%s' geschrieben werden; Überprüfen Sie die Berechtigungen. </translation>
     </message>
     <message>
         <source>Loading block index...</source>
@@ -3832,6 +3713,10 @@ Hinweis: Eine Gebühr von "100 Satoshis pro kB" bei einer Größe der Transaktio
     <message>
         <source>Done loading</source>
         <translation>Laden abgeschlossen</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Fehler</translation>
     </message>
 </context>
 </TS>

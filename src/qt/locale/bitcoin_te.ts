@@ -30,14 +30,6 @@
         <translation>ప్రస్తుతం ఎంచుకున్న చిరునామా ను జాబితా నుండి తీసివేయండి</translation>
     </message>
     <message>
-        <source>Enter address or label to search</source>
-        <translation>చిరునామా లేదా ఏదైనా పేరును వెతకండి</translation>
-    </message>
-    <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation>ప్రస్తుతం ఉన్న సమాచారాన్ని ఫైల్ లోనికి ఎగుమతి చేసుకోండి</translation>
-    </message>
-    <message>
         <source>&amp;Export</source>
         <translation>ఎగుమతి చేయండి</translation>
     </message>
@@ -48,10 +40,6 @@
     <message>
         <source>Choose the address to send coins to</source>
         <translation>కోయిన్స్ పంపుటకు చిరునామా ను ఎంచుకోండి</translation>
-    </message>
-    <message>
-        <source>Choose the address to receive coins with</source>
-        <translation>నాణెం అందుకోవటానికి చిరునామాను ఎంచుకోండి</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
@@ -66,20 +54,12 @@
         <translation>అందుకునే చిరునామాలు</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>ఇవి మీరు పంపే చెల్లింపుల బిట్‌కాయిన్ చిరునామాలు. నాణేలు పంపే ముందు ప్రతిసారి అందుకునే చిరునామా మరియు చెల్లింపు మొత్తం సరిచూసుకోండి.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
-        <translation>చెల్లింపులు స్వీకరించడానికి ఇవి మీ బిట్‌కాయిన్ చిరునామాలు. క్రొత్త చిరునామాలను సృష్టించడానికి స్వీకరించు ట్యాబ్‌లోని 'క్రొత్త స్వీకరించే చిరునామాను సృష్టించండి' బటన్‌ను ఉపయోగించండి.</translation>
-    </message>
-    <message>
-        <source>&amp;Copy Address</source>
-        <translation>చిరునామాను కాపీ చెయ్యండి</translation>
-    </message>
-    <message>
-        <source>Copy &amp;Label</source>
-        <translation>కాపీ &amp; ఉల్లాకు</translation>
+        <source>These are your Monacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>ఇవి మీరు అందుకునే చెల్లింపుల బిట్‌కాయిన్ చిరునామాలు. ప్రతీ లావాదేవీకి క్రొత్త అందుకునే చిరునామా వాడటం మంచిది.</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
@@ -90,18 +70,10 @@
         <translation>చిరునామా జాబితాను ఎగుమతి చేయండి</translation>
     </message>
     <message>
-        <source>Comma separated file (*.csv)</source>
-        <translation>కోమా వల్ల విభజించిన ఫైల్ (*.csv)</translation>
-    </message>
-    <message>
         <source>Exporting Failed</source>
         <translation>ఎగుమతి విఫలమయ్యింది</translation>
     </message>
-    <message>
-        <source>There was an error trying to save the address list to %1. Please try again.</source>
-        <translation>చిరునామా పట్టికను %1 లోనికి ప్రోదుపరుచుటలో లోపము. మరుల ప్రయత్నించి చుడండి.</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>AddressTableModel</name>
     <message>
@@ -112,11 +84,7 @@
         <source>Address</source>
         <translation>చిరునామా</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>( ఉల్లాకు లేదు )</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>AskPassphraseDialog</name>
     <message>
@@ -136,31 +104,15 @@
         <translation>క్రొత్త సంకేతపదము మరలా ఇవ్వండి</translation>
     </message>
     <message>
-        <source>Show passphrase</source>
-        <translation>సంకేతపదము చూపించు</translation>
-    </message>
-    <message>
-        <source>Encrypt wallet</source>
-        <translation>జోలె‌ను సంకేతపరుచు</translation>
+        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <translation>జోలెకు క్రొత్త సంకేతపదము ఇవ్వండి.&lt;br/&gt; &lt;b&gt;పది లేదా ఎక్కువ యాదృచ్ఛిక అక్షరాలు&lt;/b&gt;, లేక &lt;b&gt;ఎనిమిది కంటే ఎక్కువ పదాలు&lt;/b&gt; కలిగి ఉన్న సంకేతపదము దయచేసి వాడండి.</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
         <translation>వాలెట్ అన్లాక్</translation>
     </message>
     <message>
-        <source>Decrypt wallet</source>
-        <translation>డీక్రిప్ట్ వాలెట్</translation>
-    </message>
-    <message>
-        <source>Change passphrase</source>
-        <translation>పాస్‌ఫ్రేజ్‌ని మార్చండి</translation>
-    </message>
-    <message>
-        <source>Confirm wallet encryption</source>
-        <translation>వాలెట్ గుప్తీకరణను నిర్ధారించండి</translation>
-    </message>
-    <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR LITECOINS&lt;/b&gt;!</source>
         <translation>హెచ్చరిక: మీ జోలెని సంకేతపరిచి మీ సంకేతపదము కోల్పోతే, &lt;b&gt;మీ బిట్‌కాయిన్లు అన్నీ కోల్పోతారు&lt;/b&gt;</translation>
     </message>
     <message>
@@ -172,26 +124,6 @@
         <translation>జోలె సంకేతపరబడింది</translation>
     </message>
     <message>
-        <source>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>వాలెట్ కోసం క్రొత్త పాస్‌ఫ్రేజ్‌ని నమోదు చేయండి.&lt;br/&gt; దయచేసి &lt;b&gt;పది లేదా అంతకంటే ఎక్కువ యాదృచ్ఛిక అక్షరాల&lt;/b&gt; పాస్‌ఫ్రేజ్‌ని లేదా &lt;b&gt;ఎనిమిది లేదా అంతకంటే ఎక్కువ పదాలను ఉపయోగించండి.&lt;/b&gt;</translation>
-    </message>
-    <message>
-        <source>Enter the old passphrase and new passphrase for the wallet.</source>
-        <translation>వాలెట్ కోసం పాత పాస్‌ఫ్రేజ్ మరియు కొత్త పాస్‌ఫ్రేజ్‌ని నమోదు చేయండి.</translation>
-    </message>
-    <message>
-        <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>మీ వాలెట్‌ను గుప్తీకరించడం వల్ల మీ కంప్యూటర్‌కు హాని కలిగించే మాల్వేర్ దొంగిలించకుండా మీ బిట్‌కాయిన్‌లను పూర్తిగా రక్షించలేమని గుర్తుంచుకోండి.</translation>
-    </message>
-    <message>
-        <source>Wallet to be encrypted</source>
-        <translation>ఎన్క్రిప్ట్ చేయవలసిన వాలెట్</translation>
-    </message>
-    <message>
-        <source>Your wallet is about to be encrypted. </source>
-        <translation>మీ వాలెట్ గుప్తీకరించబోతోంది.</translation>
-    </message>
-    <message>
         <source>Wallet encryption failed</source>
         <translation>జోలె సంకేతపరచడం విఫలమయ్యింది</translation>
     </message>
@@ -200,10 +132,14 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>E&amp;xit</source>
         <translation>నిష్క్రమించు</translation>
+    </message>
+    <message>
+        <source>Monacoin</source>
+        <translation>బిట్కోయిన్</translation>
     </message>
     <message>
         <source>&amp;Send</source>
@@ -244,16 +180,6 @@
         <source>Date</source>
         <translation>తేదీ</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>( ఉల్లాకు లేదు )</translation>
-    </message>
-    </context>
-<context>
-    <name>CreateWalletActivity</name>
-    </context>
-<context>
-    <name>CreateWalletDialog</name>
     </context>
 <context>
     <name>EditAddressDialog</name>
@@ -267,7 +193,7 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Bitcoin</source>
+        <source>Monacoin</source>
         <translation>బిట్కోయిన్</translation>
     </message>
     <message>
@@ -280,9 +206,6 @@
     </context>
 <context>
     <name>OpenURIDialog</name>
-    </context>
-<context>
-    <name>OpenWalletActivity</name>
     </context>
 <context>
     <name>OptionsDialog</name>
@@ -307,6 +230,9 @@
         <translation>తెలియదు</translation>
     </message>
 </context>
+<context>
+    <name>QObject::QObject</name>
+    </context>
 <context>
     <name>QRImageWidget</name>
     </context>
@@ -334,7 +260,7 @@
         <source>Wallet</source>
         <translation>వాలెట్</translation>
     </message>
-</context>
+    </context>
 <context>
     <name>RecentRequestsTableModel</name>
     <message>
@@ -349,10 +275,6 @@
         <source>Message</source>
         <translation>సందేశం</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>( ఉల్లాకు లేదు )</translation>
-    </message>
     </context>
 <context>
     <name>SendCoinsDialog</name>
@@ -360,11 +282,7 @@
         <source>Quantity:</source>
         <translation>పరిమాణం</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>( ఉల్లాకు లేదు )</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>SendCoinsEntry</name>
     </context>
@@ -376,6 +294,9 @@
     </context>
 <context>
     <name>SignVerifyMessageDialog</name>
+    </context>
+<context>
+    <name>SplashScreen</name>
     </context>
 <context>
     <name>TrafficGraphWidget</name>
@@ -424,17 +345,9 @@
         <source>Label</source>
         <translation>ఉల్లాకు</translation>
     </message>
-    <message>
-        <source>(no label)</source>
-        <translation>( ఉల్లాకు లేదు )</translation>
-    </message>
     </context>
 <context>
     <name>TransactionView</name>
-    <message>
-        <source>Comma separated file (*.csv)</source>
-        <translation>కోమా వల్ల విభజించిన ఫైల్ (*.csv)</translation>
-    </message>
     <message>
         <source>Date</source>
         <translation>తేదీ</translation>
@@ -474,12 +387,24 @@
         <source>&amp;Export</source>
         <translation>ఎగుమతి చేయండి</translation>
     </message>
-    <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation>ప్రస్తుతం ఉన్న సమాచారాన్ని ఫైల్ లోనికి ఎగుమతి చేసుకోండి</translation>
-    </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
-    </context>
+    <name>monacoin-core</name>
+    <message>
+        <source>Monacoin Core</source>
+        <translation>బిట్కోయిన్ కోర్</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation>వర్తమానము</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>హెచ్చరిక</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>లోపం</translation>
+    </message>
+</context>
 </TS>

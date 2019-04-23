@@ -66,12 +66,12 @@
         <translation>Prijímajúce adresy</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Toto sú Vaše Bitcoin adresy pre posielanie platieb. Vždy skontrolujte sumu a prijímaciu adresu pred poslaním mincí.</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Toto sú Vaše Monacoin adresy pre posielanie platieb. Vždy skontrolujte sumu a prijímaciu adresu pred poslaním mincí.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
-        <translation>Toto sú vaše Bitcoin adresy pre prijímanie platieb. Pre vytvorenie nových adries použite tlačidlo 'Vytvoriť novú prijímajúcu adresu' na karte Prijať.</translation>
+        <source>These are your Monacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Toto sú vaše Monacoin adresy pre prijímanie platieb. Odporúča sa použiť vždy novú prijímaciu adresu pre každú transakciu.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -136,8 +136,12 @@
         <translation>Zopakujte nové heslo</translation>
     </message>
     <message>
-        <source>Show passphrase</source>
-        <translation>Zobraziť frázu</translation>
+        <source>Show password</source>
+        <translation>Ukázať heslo</translation>
+    </message>
+    <message>
+        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <translation>Zadajte nové heslo k peňaženke.&lt;br/&gt;Prosím použite heslo s dĺžkou &lt;b&gt;desať alebo viac náhodných znakov&lt;/b&gt;, prípadne &lt;b&gt;osem alebo viac slov&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
@@ -164,12 +168,16 @@
         <translation>Zmena hesla</translation>
     </message>
     <message>
+        <source>Enter the old passphrase and new passphrase to the wallet.</source>
+        <translation>Zadajte staré heslo a nové heslo k peňaženke.</translation>
+    </message>
+    <message>
         <source>Confirm wallet encryption</source>
         <translation>Potvrďte zašifrovanie peňaženky</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>Varovanie: Ak zašifrujete peňaženku a stratíte heslo, &lt;b&gt;STRATÍTE VŠETKY VAŠE BITCOINY&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MONACOINS&lt;/b&gt;!</source>
+        <translation>Varovanie: Ak zašifrujete peňaženku a stratíte heslo, &lt;b&gt;STRATÍTE VŠETKY VAŠE MONACOINY&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -180,28 +188,8 @@
         <translation>Peňaženka zašifrovaná</translation>
     </message>
     <message>
-        <source>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Zadajte novú prístupovú frázu pre peňaženku.&lt;br/&gt;Prosím použite frázu dlhú &lt;b&gt;desať či viac náhodných znakov&lt;/b&gt;, alebo &lt;b&gt;osem či viac slov&lt;/b&gt;.</translation>
-    </message>
-    <message>
-        <source>Enter the old passphrase and new passphrase for the wallet.</source>
-        <translation>Zadajte starú a novú frázu pre túto peňaženku.</translation>
-    </message>
-    <message>
-        <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>Pamätajte, že zašifrovanie peňaženky neochráni úplne vaše bitcoiny pred ukradnutím škodlivými programami vo vašom počítači.</translation>
-    </message>
-    <message>
-        <source>Wallet to be encrypted</source>
-        <translation>Peňaženka na zašifrovanie</translation>
-    </message>
-    <message>
-        <source>Your wallet is about to be encrypted. </source>
-        <translation>Vaša peňaženka bude zašifrovaná.</translation>
-    </message>
-    <message>
-        <source>Your wallet is now encrypted. </source>
-        <translation>Vaša peňaženka je zašifrovaná.</translation>
+        <source>Your wallet is now encrypted. Remember that encrypting your wallet cannot fully protect your monacoins from being stolen by malware infecting your computer.</source>
+        <translation>Vaša peňaženka je teraz zašifrovaná. Zašifrovanie peňaženky Vás plne nechráni pred krádežou monacoinov škodlivými programami, ktoré prenikli do vášho počítača.</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
@@ -252,7 +240,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>Podpísať &amp;správu...</translation>
@@ -311,7 +299,7 @@
     </message>
     <message>
         <source>&amp;Encrypt Wallet...</source>
-        <translation>&amp;Zašifrovať peňaženku...</translation>
+        <translation>&amp;Zašifrovať Peňaženku...</translation>
     </message>
     <message>
         <source>&amp;Backup Wallet...</source>
@@ -319,19 +307,11 @@
     </message>
     <message>
         <source>&amp;Change Passphrase...</source>
-        <translation>&amp;Zmeniť heslo...</translation>
+        <translation>&amp;Zmena Hesla...</translation>
     </message>
     <message>
         <source>Open &amp;URI...</source>
         <translation>Otvoriť &amp;URI...</translation>
-    </message>
-    <message>
-        <source>Create Wallet...</source>
-        <translation>Vytvoriť peňaženku...</translation>
-    </message>
-    <message>
-        <source>Create a new wallet</source>
-        <translation>Vytvoriť novú peňaženku</translation>
     </message>
     <message>
         <source>Wallet:</source>
@@ -362,8 +342,8 @@
         <translation>Proxy je &lt;b&gt;zapnuté&lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Poslať bitcoins na adresu</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation>Poslať monacoins na adresu</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -386,6 +366,10 @@
         <translation>O&amp;veriť správu...</translation>
     </message>
     <message>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
+    </message>
+    <message>
         <source>&amp;Send</source>
         <translation>&amp;Odoslať</translation>
     </message>
@@ -406,12 +390,12 @@
         <translation>Zašifruj súkromné kľúče ktoré patria do vašej peňaženky</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Podpísať správu s vašou adresou Bitcoin aby ste preukázali že ju vlastníte</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation>Podpísať správu s vašou adresou Monacoin aby ste preukázali že ju vlastníte</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Overiť či správa bola podpísaná uvedenou Bitcoin adresou</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation>Overiť či správa bola podpísaná uvedenou Monacoin adresou</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -430,8 +414,8 @@
         <translation>Lišta záložiek</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Vyžiadať platby (vygeneruje QR kódy a bitcoin: URI)</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation>Vyžiadať platby (vygeneruje QR kódy a monacoin: URI)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -442,16 +426,16 @@
         <translation>Zobraziť zoznam použitých prijímacích adries a ich popisov</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI or payment request</source>
-        <translation>Otvoriť bitcoin URI alebo výzvu k platbe</translation>
+        <source>Open a monacoin: URI or payment request</source>
+        <translation>Otvoriť monacoin URI alebo výzvu k platbe</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
         <translation>&amp;Možnosti príkazového riadku</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n aktívne pripojenie do siete Bitcoin</numerusform><numerusform>%n aktívne pripojenia do siete Bitcoin</numerusform><numerusform>%n aktívnych pripojení do siete Bitcoin</numerusform><numerusform>%n aktívnych pripojení do siete Bitcoin</numerusform></translation>
+        <source>%n active connection(s) to Monacoin network</source>
+        <translation><numerusform>%n aktívne pripojenie do siete Monacoin</numerusform><numerusform>%n aktívne pripojenia do siete Monacoin</numerusform><numerusform>%n aktívnych pripojení do siete Monacoin</numerusform><numerusform>%n aktívnych pripojení do siete Monacoin</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
@@ -487,7 +471,7 @@
     </message>
     <message>
         <source>Information</source>
-        <translation>Informácie</translation>
+        <translation>Informácia</translation>
     </message>
     <message>
         <source>Up to date</source>
@@ -518,16 +502,20 @@
         <translation>Zatvoriť peňaženku</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation>Ukáž %1 zoznam možných nastavení Bitcoinu pomocou príkazového riadku</translation>
+        <source>Show the %1 help message to get a list with possible Monacoin command-line options</source>
+        <translation>Ukáž %1 zoznam možných nastavení Monacoinu pomocou príkazového riadku</translation>
     </message>
     <message>
         <source>default wallet</source>
         <translation>predvolená peňaženka</translation>
     </message>
     <message>
-        <source>No wallets available</source>
-        <translation>Nie je dostupná žiadna peňaženka</translation>
+        <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
+        <translation>Otvára sa peňaženka &lt;b&gt;%1&lt;/b&gt;...</translation>
+    </message>
+    <message>
+        <source>Open Wallet Failed</source>
+        <translation>Otvorenie peňaženky zlyhalo</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -540,6 +528,10 @@
     <message>
         <source>Zoom</source>
         <translation>Priblížiť</translation>
+    </message>
+    <message>
+        <source>Restore</source>
+        <translation>Obnoviť</translation>
     </message>
     <message>
         <source>Main Window</source>
@@ -556,14 +548,6 @@
     <message>
         <source>Catching up...</source>
         <translation>Sťahujem...</translation>
-    </message>
-    <message>
-        <source>Error: %1</source>
-        <translation>Chyba: %1</translation>
-    </message>
-    <message>
-        <source>Warning: %1</source>
-        <translation>Upozornenie: %1</translation>
     </message>
     <message>
         <source>Date: %1
@@ -630,8 +614,8 @@
         <translation>Peňaženka je &lt;b&gt;zašifrovaná&lt;/b&gt; a momentálne &lt;b&gt;zamknutá&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</source>
-        <translation>Vyskytla sa kritická chyba. Bitcoin nemôže ďalej bezpečne pokračovať a ukončí sa.</translation>
+        <source>A fatal error occurred. Monacoin can no longer continue safely and will quit.</source>
+        <translation>Vyskytla sa kritická chyba. Monacoin nemôže ďalej bezpečne pokračovať a ukončí sa.</translation>
     </message>
 </context>
 <context>
@@ -778,65 +762,11 @@
     </message>
     <message>
         <source>change from %1 (%2)</source>
-        <translation>zmeniť z %1 (%2)</translation>
+        <translation>zmena od %1 (%2)</translation>
     </message>
     <message>
         <source>(change)</source>
         <translation>(zmena)</translation>
-    </message>
-</context>
-<context>
-    <name>CreateWalletActivity</name>
-    <message>
-        <source>Creating Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
-        <translation>Vytvára sa peňaženka &lt;b&gt;%1&lt;/b&gt;...</translation>
-    </message>
-    <message>
-        <source>Create wallet failed</source>
-        <translation>Vytvorenie peňaženky zlyhalo</translation>
-    </message>
-    <message>
-        <source>Create wallet warning</source>
-        <translation>Varovanie vytvárania peňaženky</translation>
-    </message>
-</context>
-<context>
-    <name>CreateWalletDialog</name>
-    <message>
-        <source>Create Wallet</source>
-        <translation>Vytvoriť peňaženku</translation>
-    </message>
-    <message>
-        <source>Wallet Name</source>
-        <translation>Názov peňaženky</translation>
-    </message>
-    <message>
-        <source>Encrypt the wallet. The wallet will be encrypted with a passphrase of your choice.</source>
-        <translation>Zašifrovať peňaženku. Peňaženka bude zašifrovaná frázou, ktoré si zvolíte.</translation>
-    </message>
-    <message>
-        <source>Encrypt Wallet</source>
-        <translation>Zašifrovať peňaženku</translation>
-    </message>
-    <message>
-        <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
-        <translation>Vypnúť súkromné kľúče pre túto peňaženku. Peňaženky s vypnutými súkromnými kľúčmi nebudú mať súkromné kľúče a nemôžu mať HD inicializáciu ani importované súkromné kľúče. Toto je ideálne pre peňaženky iba na sledovanie.</translation>
-    </message>
-    <message>
-        <source>Disable Private Keys</source>
-        <translation>Vypnúť súkromné kľúče</translation>
-    </message>
-    <message>
-        <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
-        <translation>Vytvoriť prázdnu peňaženku. Prázdne peňaženky na začiatku nemajú žiadne súkromné kľúče ani skripty. Neskôr môžu byť importované súkromné kľúče a adresy alebo nastavená HD inicializácia.</translation>
-    </message>
-    <message>
-        <source>Make Blank Wallet</source>
-        <translation>Vytvoriť prázdnu peňaženku</translation>
-    </message>
-    <message>
-        <source>Create</source>
-        <translation>Vytvoriť</translation>
     </message>
 </context>
 <context>
@@ -874,8 +804,8 @@
         <translation>Upraviť odosielaciu adresu</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>Vložená adresa "%1" nieje platnou adresou Bitcoin.</translation>
+        <source>The entered address "%1" is not a valid Monacoin address.</source>
+        <translation>Vložená adresa "%1" nieje platnou adresou Monacoin.</translation>
     </message>
     <message>
         <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
@@ -955,10 +885,6 @@
         <translation>Hneď po stlačení OK, začne %1 stťahovať a spracovávať celý %4 reťazec blokov (%2 GB), začínajúc nejstaršími transakcemi z roku %3, kdey bol %4 spustený.</translation>
     </message>
     <message>
-        <source>Reverting this setting requires re-downloading the entire blockchain. It is faster to download the full chain first and prune it later. Disables some advanced features.</source>
-        <translation>Zvrátenie tohto nastavenia vyžaduje opätovné stiahnutie celého reťazca blokov. Je rýchlejšie najprv stiahnuť celý reťazec blokov a potom ho redukovať neskôr. Vypne niektoré pokročilé funkcie.</translation>
-    </message>
-    <message>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
         <translation>Prvá synchronizácia je veľmi náročná a môžu sa tak vďaka nej začat na Vašom počítači projavovať doteraz skryté hárdwarové problémy. Vždy, keď spustíte %1, bude sťahovanie pokračovať tam, kde skončilo.</translation>
     </message>
@@ -975,12 +901,8 @@
         <translation>Použiť vlastný dátový adresár:</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
-    </message>
-    <message>
-        <source>Discard blocks after verification, except most recent %1 GB (prune)</source>
-        <translation>Zahodiť bloky po ich overení, okrem posledných %1 GB (redukovanie)</translation>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
@@ -991,7 +913,7 @@
         <translation>Približne %1 GB dát bude uložených v tejto zložke.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin block chain.</source>
+        <source>%1 will download and store a copy of the Monacoin block chain.</source>
         <translation>%1 bude sťahovať kopiu reťazca blokov.</translation>
     </message>
     <message>
@@ -1014,10 +936,6 @@
         <source>(of %n GB needed)</source>
         <translation><numerusform>(z %n GB potrebného)</numerusform><numerusform>(z %n GB potrebných)</numerusform><numerusform>(z %n GB potrebných)</numerusform><numerusform>(z %n GB potrebných)</numerusform></translation>
     </message>
-    <message numerus="yes">
-        <source>(%n GB needed for full chain)</source>
-        <translation><numerusform>(%n GB potrebný pre plný reťazec)</numerusform><numerusform>(%n GB potrebné pre plný reťazec)</numerusform><numerusform>(%n GB potrebných pre plný reťazec)</numerusform><numerusform>(%n GB potrebných pre plný reťazec)</numerusform></translation>
-    </message>
 </context>
 <context>
     <name>ModalOverlay</name>
@@ -1026,12 +944,12 @@
         <translation>Formulár</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation>Nedávne transakcie nemusia byť ešte viditeľné preto môže byť zostatok vo vašej peňaženke nesprávny. Táto informácia bude správna keď sa dokončí synchronizovanie peňaženky so sieťou bitcoin, ako je rozpísané nižšie.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the monacoin network, as detailed below.</source>
+        <translation>Nedávne transakcie nemusia byť ešte viditeľné preto môže byť zostatok vo vašej peňaženke nesprávny. Táto informácia bude správna keď sa dokončí synchronizovanie peňaženky so sieťou monacoin, ako je rozpísané nižšie.</translation>
     </message>
     <message>
-        <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Pokus o minutie bitcoinov, ktoré sú ovplyvnené ešte nezobrazenými transakciami, nebude sieťou akceptovaný.</translation>
+        <source>Attempting to spend monacoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>Pokus o minutie monacoinov, ktoré sú ovplyvnené ešte nezobrazenými transakciami, nebude sieťou akceptovaný.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1094,25 +1012,6 @@
     </message>
 </context>
 <context>
-    <name>OpenWalletActivity</name>
-    <message>
-        <source>Open wallet failed</source>
-        <translation>Otvorenie peňaženky zlyhalo</translation>
-    </message>
-    <message>
-        <source>Open wallet warning</source>
-        <translation>Varovanie otvárania peňaženky</translation>
-    </message>
-    <message>
-        <source>default wallet</source>
-        <translation>predvolená peňaženka</translation>
-    </message>
-    <message>
-        <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
-        <translation>Otvára sa peňaženka &lt;b&gt;%1&lt;/b&gt;...</translation>
-    </message>
-</context>
-<context>
     <name>OptionsDialog</name>
     <message>
         <source>Options</source>
@@ -1172,7 +1071,7 @@
     </message>
     <message>
         <source>Open Configuration File</source>
-        <translation>Otvoriť konfiguračný súbor</translation>
+        <translation>Otvoriť konfiguračný súbor </translation>
     </message>
     <message>
         <source>Reset all client options to default.</source>
@@ -1188,7 +1087,7 @@
     </message>
     <message>
         <source>Disables some advanced features but all blocks will still be fully validated. Reverting this setting requires re-downloading the entire blockchain. Actual disk usage may be somewhat higher.</source>
-        <translation>Zakáže niektoré pokročilé funkcie, ale všetky bloky budú stále plne overené. Obnovenie tohto nastavenia vyžaduje opätovné prevzatie celého reťazca blokov. Skutočné využitie disku môže byť o niečo vyššie.</translation>
+        <translation>Zakáže niektoré pokročilé funkcie, ale všetky bloky budú stále plne overené. Obnovenie tohto nastavenia vyžaduje opätovné prevzatie celého blockchainu. Skutočné využitie disku môže byť o niečo vyššie.</translation>
     </message>
     <message>
         <source>Prune &amp;block storage to</source>
@@ -1200,7 +1099,7 @@
     </message>
     <message>
         <source>Reverting this setting requires re-downloading the entire blockchain.</source>
-        <translation>Obnovenie tohto nastavenia vyžaduje opätovné stiahnutie celého reťazca blokov.</translation>
+        <translation>Obnovenie tohto nastavenia vyžaduje opätovné prevzatie celého blockchainu.</translation>
     </message>
     <message>
         <source>MiB</source>
@@ -1220,7 +1119,7 @@
     </message>
     <message>
         <source>Enable coin &amp;control features</source>
-        <translation>Povoliť možnosti &amp;kontroly mincí</translation>
+        <translation>Povoliť možnosti &amp;kontroly minci</translation>
     </message>
     <message>
         <source>If you disable the spending of unconfirmed change, the change from a transaction cannot be used until that transaction has at least one confirmation. This also affects how your balance is computed.</source>
@@ -1231,8 +1130,8 @@
         <translation>&amp;Minúť nepotvrdený výdavok</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Automaticky otvorit port pre Bitcoin na routeri. Toto funguje len ak router podporuje UPnP a je táto podpora aktivovaná.</translation>
+        <source>Automatically open the Monacoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Automaticky otvorit port pre Monacoin na routeri. Toto funguje len ak router podporuje UPnP a je táto podpora aktivovaná.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1247,8 +1146,8 @@
         <translation>Povoliť prichá&amp;dzajúce spojenia</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation>Pripojiť do siete Bitcoin cez proxy server SOCKS5.</translation>
+        <source>Connect to the Monacoin network through a SOCKS5 proxy.</source>
+        <translation>Pripojiť do siete Monacoin cez proxy server SOCKS5.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1283,8 +1182,8 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Pripojiť k Bitcoinovej sieti cez separované SOCKS5 proxy pre skrytú službu Tor.</translation>
+        <source>Connect to the Monacoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Pripojiť k Monacoinovej sieti cez separované SOCKS5 proxy pre skrytú službu Tor.</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -1300,7 +1199,7 @@
     </message>
     <message>
         <source>M&amp;inimize on close</source>
-        <translation>M&amp;inimalizovať pri zatvorení</translation>
+        <translation>M&amp;inimalizovať pri zavretí</translation>
     </message>
     <message>
         <source>&amp;Display</source>
@@ -1320,11 +1219,11 @@
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Zvoľte ako deliť bitcoin pri zobrazovaní pri platbách a užívateľskom rozhraní.</translation>
+        <translation>Zvoľte ako deliť monacoin pri zobrazovaní pri platbách a užívateľskom rozhraní.</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
-        <translation>Či zobrazovať možnosti kontroly mincí alebo nie.</translation>
+        <translation>Či zobrazovať možnosti kontroly minci alebo nie.</translation>
     </message>
     <message>
         <source>&amp;Third party transaction URLs</source>
@@ -1394,8 +1293,8 @@
         <translation>Formulár</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Zobrazené informácie môžu byť neaktuálne. Vaša peňaženka sa automaticky synchronizuje so sieťou Bitcoin po nadviazaní spojenia, ale tento proces ešte nie je ukončený.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>Zobrazené informácie môžu byť neaktuálne. Vaša peňaženka sa automaticky synchronizuje so sieťou Monacoin po nadviazaní spojenia, ale tento proces ešte nie je ukončený.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1469,16 +1368,16 @@
         <translation>Chyba pri vyžiadaní platby</translation>
     </message>
     <message>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation>Nemôžeme spustiť Bitcoin: obsluha click-to-pay</translation>
+        <source>Cannot start monacoin: click-to-pay handler</source>
+        <translation>Nemôžeme spustiť Monacoin: obsluha click-to-pay</translation>
     </message>
     <message>
         <source>URI handling</source>
         <translation>URI manipulácia</translation>
     </message>
     <message>
-        <source>'bitcoin://' is not a valid URI. Use 'bitcoin:' instead.</source>
-        <translation>'bitcoin://' je neplatná URI. Použite 'bitcoin:'</translation>
+        <source>'monacoin://' is not a valid URI. Use 'monacoin:' instead.</source>
+        <translation>'monacoin://' je neplatná URI. Použite 'monacoin:'</translation>
     </message>
     <message>
         <source>You are using a BIP70 URL which will be unsupported in the future.</source>
@@ -1493,20 +1392,12 @@
         <translation>Nemožno spracovať žiadosť o platbu, pretože podpora pre BIP70 nebola zahrnutá.</translation>
     </message>
     <message>
-        <source>Due to widespread security flaws in BIP70 it's strongly recommended that any merchant instructions to switch wallets be ignored.</source>
-        <translation>Kvôli mnohým bezpečnostným chybám v BIP70 sa dôrazne odporúča ignorovať inštrukcie na prepínanie peňaženiek od akýchkoľvek obchodníkov.</translation>
-    </message>
-    <message>
-        <source>If you are receiving this error you should request the merchant provide a BIP21 compatible URI.</source>
-        <translation>Ak dostávate túto chybu mali by ste od obchodníka vyžiadať URI adresu kompatibilnú s BIP21.</translation>
-    </message>
-    <message>
         <source>Invalid payment address %1</source>
         <translation>Neplatná adresa platby %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation>URI sa nedá analyzovať! To môže byť spôsobené neplatnou Bitcoin adresou alebo zle nastavenými vlastnosťami URI.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Monacoin address or malformed URI parameters.</source>
+        <translation>URI sa nedá analyzovať! To môže byť spôsobené neplatnou Monacoin adresou alebo zle nastavenými vlastnosťami URI.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1554,7 +1445,7 @@
     </message>
     <message>
         <source>Error communicating with %1: %2</source>
-        <translation>Chyba komunikácie s %1: %2</translation>
+        <translation>Chyba komunikácie s %1: %2 </translation>
     </message>
     <message>
         <source>Payment request cannot be parsed!</source>
@@ -1607,8 +1498,8 @@
         <translation>Suma</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>Zadajte bitcoin adresu (napr. %1)</translation>
+        <source>Enter a Monacoin address (e.g. %1)</source>
+        <translation>Zadajte monacoin adresu (napr. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1660,7 +1551,7 @@
     </message>
     <message>
         <source>%1 and %2</source>
-        <translation>%1 a  %2</translation>
+        <translation> %1 a  %2</translation>
     </message>
     <message numerus="yes">
         <source>%n year(s)</source>
@@ -1683,6 +1574,21 @@
         <translation>%1 GB</translation>
     </message>
     <message>
+        <source>%1 didn't yet exit safely...</source>
+        <translation>%1 ešte nebol bezpečne ukončený...</translation>
+    </message>
+    <message>
+        <source>unknown</source>
+        <translation>neznámy</translation>
+    </message>
+</context>
+<context>
+    <name>QObject::QObject</name>
+    <message>
+        <source>Error parsing command line arguments: %1.</source>
+        <translation>Chyba pri spracovaní argumentov príkazového riadku: %1.</translation>
+    </message>
+    <message>
         <source>Error: Specified data directory "%1" does not exist.</source>
         <translation>Chyba: Zadaný adresár pre dáta „%1“ neexistuje.</translation>
     </message>
@@ -1694,14 +1600,6 @@
         <source>Error: %1</source>
         <translation>Chyba: %1</translation>
     </message>
-    <message>
-        <source>%1 didn't yet exit safely...</source>
-        <translation>%1 ešte nebol bezpečne ukončený...</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>neznámy</translation>
-    </message>
 </context>
 <context>
     <name>QRImageWidget</name>
@@ -1712,18 +1610,6 @@
     <message>
         <source>&amp;Copy Image</source>
         <translation>&amp;Kopírovať obrázok</translation>
-    </message>
-    <message>
-        <source>Resulting URI too long, try to reduce the text for label / message.</source>
-        <translation>Výsledné URI je príliš dlhé, skúste skrátiť text pre popis alebo správu.</translation>
-    </message>
-    <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Chyba kódovania URI do QR Code.</translation>
-    </message>
-    <message>
-        <source>QR code support not available.</source>
-        <translation>Nie je dostupná podpora QR kódov.</translation>
     </message>
     <message>
         <source>Save QR Code</source>
@@ -1746,7 +1632,7 @@
     </message>
     <message>
         <source>&amp;Information</source>
-        <translation>&amp;Informácie</translation>
+        <translation>&amp;Informácia</translation>
     </message>
     <message>
         <source>Debug window</source>
@@ -1770,7 +1656,7 @@
     </message>
     <message>
         <source>Blocksdir</source>
-        <translation>Priečinok s blokmi</translation>
+        <translation>Blocksdir</translation>
     </message>
     <message>
         <source>To specify a non-default location of the blocks directory use the '%1' option.</source>
@@ -2007,7 +1893,7 @@
     </message>
     <message>
         <source>WARNING: Scammers have been active, telling users to type commands here, stealing their wallet contents. Do not use this console without fully understanding the ramifications of a command.</source>
-        <translation>UPOZORNENIE: Podvodníci sú aktívni a hovoria používateľom, aby sem zadávali príkazy, ktorými im ale následne vykradnú ich peňaženky. Nepoužívajte túto konzolu, ak plne nepoznáte dôsledky jednotlivých príkazov.</translation>
+        <translation>UPOZORNENIE: Podvodníci sú aktívni a hovoria používateľom, aby sem zadávali príkazy, ktorými im ale následne vykradnú ich peňaženky. Nepoužívajte túto konzolu, ak plne nepoynáte dôsledky jednotlivých príkazov.</translation>
     </message>
     <message>
         <source>Network activity disabled</source>
@@ -2069,8 +1955,8 @@
         <translation>&amp;Správa:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation>Pridať voliteľnú správu k výzve na zaplatenie, ktorá sa zobrazí keď bude výzva otvorená. Poznámka: Správa nebude poslaná s platbou cez sieť Bitcoin.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Monacoin network.</source>
+        <translation>Pridať voliteľnú správu k výzve na zaplatenie, ktorá sa zobrazí keď bude výzva otvorená. Poznámka: Správa nebude poslaná s platbou cez sieť Monacoin.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2083,10 +1969,6 @@
     <message>
         <source>An optional amount to request. Leave this empty or zero to not request a specific amount.</source>
         <translation>Voliteľná požadovaná suma. Nechajte prázdne alebo nulu ak nepožadujete určitú sumu.</translation>
-    </message>
-    <message>
-        <source>&amp;Create new receiving address</source>
-        <translation>Vytvoriť novú adresu pre prijímanie</translation>
     </message>
     <message>
         <source>Clear all fields of the form.</source>
@@ -2107,6 +1989,10 @@
     <message>
         <source>Requested payments history</source>
         <translation>História vyžiadaných platieb</translation>
+    </message>
+    <message>
+        <source>&amp;Request payment</source>
+        <translation>&amp;Vyžiadať platbu</translation>
     </message>
     <message>
         <source>Show the selected request (does the same as double clicking an entry)</source>
@@ -2191,6 +2077,14 @@
         <source>Wallet</source>
         <translation>Peňaženka</translation>
     </message>
+    <message>
+        <source>Resulting URI too long, try to reduce the text for label / message.</source>
+        <translation>Výsledné URI je príliš dlhé, skúste skrátiť text pre popis alebo správu.</translation>
+    </message>
+    <message>
+        <source>Error encoding URI into QR Code.</source>
+        <translation>Chyba kódovania URI do QR Code.</translation>
+    </message>
 </context>
 <context>
     <name>RecentRequestsTableModel</name>
@@ -2227,11 +2121,11 @@
     <name>SendCoinsDialog</name>
     <message>
         <source>Send Coins</source>
-        <translation>Poslať Bitcoins</translation>
+        <translation>Poslať Monacoins</translation>
     </message>
     <message>
         <source>Coin Control Features</source>
-        <translation>Možnosti kontroly mincí</translation>
+        <translation>Možnosti kontroly minci</translation>
     </message>
     <message>
         <source>Inputs...</source>
@@ -2342,8 +2236,8 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Prach:</translation>
     </message>
     <message>
-        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
-        <translation>Ak je v blokoch menej objemu transakcií ako priestoru, ťažiari ako aj vysielacie uzly, môžu uplatniť minimálny poplatok. Platiť iba minimálny poplatok je v poriadku, ale uvedomte si, že to môže mať za následok transakciu, ktorá sa nikdy nepotvrdí, akonáhle je väčší dopyt po bitcoinových transakciách, než dokáže sieť spracovať.</translation>
+        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for monacoin transactions than the network can process.</source>
+        <translation>Ak je v blokoch menej objemu transakcií ako priestoru, ťažiari ako aj vysielacie uzly, môžu uplatniť minimálny poplatok. Platiť iba minimálny poplatok je v poriadku, ale uvedomte si, že to môže mať za následok transakciu, ktorá sa nikdy nepotvrdí, akonáhle je väčší dopyt po monacoinových transakciách, než dokáže sieť spracovať.</translation>
     </message>
     <message>
         <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
@@ -2410,14 +2304,6 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>%1 (%2 blokov)</translation>
     </message>
     <message>
-        <source> from wallet '%1'</source>
-        <translation> z peňaženky '%1'</translation>
-    </message>
-    <message>
-        <source>%1 to '%2'</source>
-        <translation>%1 do '%2'</translation>
-    </message>
-    <message>
         <source>%1 to %2</source>
         <translation>%1 do %2</translation>
     </message>
@@ -2434,6 +2320,10 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Poplatok môžete navýšiť neskôr (vysiela sa "Replace-By-Fee" - nahradenie poplatkom, BIP-125).</translation>
     </message>
     <message>
+        <source>from wallet %1</source>
+        <translation>z peňaženky %1</translation>
+    </message>
+    <message>
         <source>Please, review your transaction.</source>
         <translation>Prosím, skontrolujte Vašu transakciu.</translation>
     </message>
@@ -2448,10 +2338,6 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     <message>
         <source>Total Amount</source>
         <translation>Celková suma</translation>
-    </message>
-    <message>
-        <source>To review recipient list click "Show Details..."</source>
-        <translation>Pre prezretie zoznamu príjemcov kliknite "Zobraziť detaily..."</translation>
     </message>
     <message>
         <source>Confirm send coins</source>
@@ -2498,8 +2384,8 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation><numerusform>Odhadovaný začiatok potvrdzovania po %n bloku.</numerusform><numerusform>Odhadovaný začiatok potvrdzovania po %n blokoch.</numerusform><numerusform>Odhadovaný začiatok potvrdzovania po %n blokoch.</numerusform><numerusform>Odhadovaný začiatok potvrdzovania po %n blokoch.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation>Varovanie: Neplatná Bitcoin adresa</translation>
+        <source>Warning: Invalid Monacoin address</source>
+        <translation>Varovanie: Neplatná Monacoin adresa</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2541,7 +2427,7 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Toto je normálna platba.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to send the payment to</source>
+        <source>The Monacoin address to send the payment to</source>
         <translation>Zvoľte adresu kam poslať platbu</translation>
     </message>
     <message>
@@ -2561,8 +2447,8 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Odstrániť túto položku</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Poplatok sa odpočíta od čiastky, ktorú odosielate. Príjemca dostane menej bitcoinov ako zadáte. Ak je vybraných viacero príjemcov, poplatok je rozdelený rovným dielom.</translation>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less monacoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <translation>Poplatok sa odpočíta od čiastky, ktorú odosielate. Príjemca dostane menej monacoinov ako zadáte. Ak je vybraných viacero príjemcov, poplatok je rozdelený rovným dielom.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
@@ -2589,8 +2475,8 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Vložte popis pre túto adresu aby sa uložila do zoznamu použitých adries</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation>Správa ktorá bola pripojená k bitcoin: URI a ktorá bude uložená s transakcou pre Vaše potreby. Poznámka: Táto správa nebude poslaná cez sieť Bitcoin.</translation>
+        <source>A message that was attached to the monacoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Monacoin network.</source>
+        <translation>Správa ktorá bola pripojená k monacoin: URI a ktorá bude uložená s transakcou pre Vaše potreby. Poznámka: Táto správa nebude poslaná cez sieť Monacoin.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2634,12 +2520,12 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>&amp;Podpísať Správu</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <source>You can sign messages/agreements with your addresses to prove you can receive monacoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
         <translation>Môžete podpísať správy svojou adresou a dokázať, že viete prijímať mince zaslané na túto adresu. Buďte však opatrní a podpíšte len podrobné prehlásenia, s ktorými plne súhlasíte, nakoľko útoky typu "phishing" Vás môžu lákať k podpísaniu nejasných alebo príliš všeobecných tvrdení čím prevezmú vašu identitu.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to sign the message with</source>
-        <translation>Bitcoin adresa pre podpísanie správy s</translation>
+        <source>The Monacoin address to sign the message with</source>
+        <translation>Monacoin adresa pre podpísanie správy s</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2670,7 +2556,7 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Kopírovať tento podpis do systémovej schránky</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
+        <source>Sign the message to prove you own this Monacoin address</source>
         <translation>Podpíšte správu aby ste dokázali že vlastníte túto adresu</translation>
     </message>
     <message>
@@ -2694,12 +2580,12 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Vložte adresu príjemcu, správu (uistite sa, že presne kopírujete ukončenia riadkov, medzery, odrážky, atď.) a podpis pre potvrdenie správy. Buďte opatrní a nedomýšľajte si viac než je uvedené v samotnej podpísanej správe a môžete sa tak vyhnúť podvodu MITM útokom. Toto len potvrdzuje, že podpisujúca strana môže prijímať na tejto adrese, nepotvrdzuje to vlastníctvo žiadnej transakcie!</translation>
     </message>
     <message>
-        <source>The Bitcoin address the message was signed with</source>
-        <translation>Adresa Bitcoin, ktorou bola podpísaná správa</translation>
+        <source>The Monacoin address the message was signed with</source>
+        <translation>Adresa Monacoin, ktorou bola podpísaná správa</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>Overím správy sa uistiť že bola podpísaná označenou Bitcoin adresou</translation>
+        <source>Verify the message to ensure it was signed with the specified Monacoin address</source>
+        <translation>Overím správy sa uistiť že bola podpísaná označenou Monacoin adresou</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2760,6 +2646,13 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     <message>
         <source>Message verified.</source>
         <translation>Správa overená.</translation>
+    </message>
+</context>
+<context>
+    <name>SplashScreen</name>
+    <message>
+        <source>[testnet]</source>
+        <translation>[testovacia sieť]</translation>
     </message>
 </context>
 <context>
@@ -2902,10 +2795,6 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     <message>
         <source>Output index</source>
         <translation>Index výstupu</translation>
-    </message>
-    <message>
-        <source> (Certificate was not verified)</source>
-        <translation>(Certifikát nebol overený)</translation>
     </message>
     <message>
         <source>Merchant</source>
@@ -3231,12 +3120,12 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Zatvoriť peňaženku</translation>
     </message>
     <message>
-        <source>Are you sure you wish to close the wallet &lt;i&gt;%1&lt;/i&gt;?</source>
-        <translation>Naozaj chcete zavrieť peňaženku &lt;i&gt;%1&lt;/i&gt;?</translation>
+        <source>Are you sure you wish to close wallet &lt;i&gt;%1&lt;/i&gt;?</source>
+        <translation>Ste si istí, že si želáte zatvoriť peňaženku &lt;i&gt;%1&lt;/i&gt;?</translation>
     </message>
     <message>
         <source>Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled.</source>
-        <translation>Zatvorenie peňaženky na príliš dlhú dobu môže mať za následok potrebu znova synchronizovať celý reťazec blokov (blockchain) v prípade, že je aktivované redukovanie blokov.</translation>
+        <translation>Zatvorenie peňaženky na príliš dlhú dobu môže mať za následok potrebu znova synchronizovať celý blockchain v prípade, že je aktivované redukovanie blockchainu. </translation>
     </message>
 </context>
 <context>
@@ -3333,10 +3222,10 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     </message>
 </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
-        <translation>Distribuované pod softvérovou licenciou MIT, pozri sprievodný súbor %s alebo %s</translation>
+        <translation>Distribuované pod softvérovou licenciou MIT, viď sprievodný súbor %s alebo %s</translation>
     </message>
     <message>
         <source>Prune configured below the minimum of %d MiB.  Please use a higher number.</source>
@@ -3344,11 +3233,11 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     </message>
     <message>
         <source>Prune: last wallet synchronisation goes beyond pruned data. You need to -reindex (download the whole blockchain again in case of pruned node)</source>
-        <translation>Redukovanie: posledná synchronizácia peňaženky prebehla pred časmi blokov v redukovaných dátach. Je potrebné vykonať -reindex (v prípade redukovaného režimu stiahne znovu celý reťazec blokov)</translation>
+        <translation>Prerezávanie: posledná synchronizácia peňaženky prebehla pred už prerezanými dátami. Je treba previesť -reindex (v prípade prerezávacieho režimu stiahne znovu celý reťazec blokov)</translation>
     </message>
     <message>
         <source>Rescans are not possible in pruned mode. You will need to use -reindex which will download the whole blockchain again.</source>
-        <translation>V redukovanom režime nie je možné reťazec blokov preskenovať. Musíte vykonať -reindex, čo znova stiahne celý reťaec blokov.</translation>
+        <translation>V prerezávaciom režime nie je možné reťazec blokov preskenovať. Musíte vykonať -reindex, čo znova stiahne celý reťaec blokov.</translation>
     </message>
     <message>
         <source>Error: A fatal internal error occurred, see debug.log for details</source>
@@ -3361,6 +3250,10 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     <message>
         <source>Unable to start HTTP server. See debug log for details.</source>
         <translation>Nepodarilo sa spustiť HTTP server. Pre viac detailov zobrazte debug log.</translation>
+    </message>
+    <message>
+        <source>Monacoin Core</source>
+        <translation>Monacoin Core</translation>
     </message>
     <message>
         <source>The %s developers</source>
@@ -3420,7 +3313,7 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     </message>
     <message>
         <source>%d of last 100 blocks have unexpected version</source>
-        <translation>%d z posledných 100 blokov má neočakávanú verziu</translation>
+        <translation>%d z poslednźých 100 blokov má neočakávanú verziu</translation>
     </message>
     <message>
         <source>%s corrupt, salvage failed</source>
@@ -3487,6 +3380,10 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Chyba otvárania databázy blokov</translation>
     </message>
     <message>
+        <source>Error: Disk space is low!</source>
+        <translation>Chyba: Málo miesta na disku!</translation>
+    </message>
+    <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
         <translation>Chyba počúvania na ktoromkoľvek porte. Použi -listen=0 ak toto chcete.</translation>
     </message>
@@ -3507,10 +3404,6 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Kontrola čistoty pri inicializácií zlyhala. %s sa vypína.</translation>
     </message>
     <message>
-        <source>Invalid P2P permission: '%s'</source>
-        <translation>Neplatné oprávnenie P2P: '%s'</translation>
-    </message>
-    <message>
         <source>Invalid amount for -%s=&lt;amount&gt;: '%s'</source>
         <translation>Neplatná suma pre -%s=&lt;amount&gt;: '%s'</translation>
     </message>
@@ -3527,12 +3420,8 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Zadaný adresár blokov "%s" neexistuje.</translation>
     </message>
     <message>
-        <source>Unknown address type '%s'</source>
-        <translation>Neznámy typ adresy '%s'</translation>
-    </message>
-    <message>
-        <source>Unknown change type '%s'</source>
-        <translation>Neznámy typ zmeny '%s'</translation>
+        <source>Unable to create the PID file '%s': %s</source>
+        <translation>Nepodarilo sa vytvoriť súbor PID '%s': %s</translation>
     </message>
     <message>
         <source>Upgrading txindex database</source>
@@ -3541,10 +3430,6 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     <message>
         <source>Loading P2P addresses...</source>
         <translation>Načítavam P2P adresy…</translation>
-    </message>
-    <message>
-        <source>Error: Disk space is too low!</source>
-        <translation>Chyba: Príliš málo miesta na disku!</translation>
     </message>
     <message>
         <source>Loading banlist...</source>
@@ -3620,7 +3505,7 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     </message>
     <message>
         <source>You need to rebuild the database using -reindex to go back to unpruned mode.  This will redownload the entire blockchain</source>
-        <translation>K návratu k neredukovanému režimu je potrebné prestavať databázu použitím -reindex. Tiež sa znova stiahne celý reťazec blokov</translation>
+        <translation>K návratu k neprerezávaciemu režimu je treba prestavať databázu použitím -reindex. Tiež sa znova stiahne celý reťazec blokov</translation>
     </message>
     <message>
         <source>Error reading from database, shutting down.</source>
@@ -3633,6 +3518,10 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     <message>
         <source>Error: Disk space is low for %s</source>
         <translation>Chyba: Málo miesta na disku pre %s</translation>
+    </message>
+    <message>
+        <source>Information</source>
+        <translation>Informácia</translation>
     </message>
     <message>
         <source>Invalid -onion address or hostname: '%s'</source>
@@ -3653,10 +3542,6 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     <message>
         <source>Need to specify a port with -whitebind: '%s'</source>
         <translation>Je potrebné zadať port s -whitebind: '%s'</translation>
-    </message>
-    <message>
-        <source>Prune mode is incompatible with -blockfilterindex.</source>
-        <translation>Režim redukovania je nekompatibilný s -blockfilterindex.</translation>
     </message>
     <message>
         <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
@@ -3701,6 +3586,10 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Suma transakcie príliš malá</translation>
     </message>
     <message>
+        <source>Transaction too large for fee policy</source>
+        <translation>Transakcia je príliš veľká pre aktuálne podmienky poplatkov</translation>
+    </message>
+    <message>
         <source>Transaction too large</source>
         <translation>Transakcia príliš veľká</translation>
     </message>
@@ -3709,20 +3598,20 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Na tomto počítači sa nedá vytvoriť väzba %s (vytvorenie väzby vrátilo chybu %s)</translation>
     </message>
     <message>
-        <source>Unable to create the PID file '%s': %s</source>
-        <translation>Nepodarilo sa vytvoriť súbor PID '%s': %s</translation>
-    </message>
-    <message>
         <source>Unable to generate initial keys</source>
         <translation>Nepodarilo sa vygenerovať úvodné kľúče</translation>
     </message>
     <message>
-        <source>Unknown -blockfilterindex value %s.</source>
-        <translation>Neznáma -blockfilterindex hodnota %s.</translation>
-    </message>
-    <message>
         <source>Verifying wallet(s)...</source>
         <translation>Kontrolujem peňaženku(y)…</translation>
+    </message>
+    <message>
+        <source>Wallet %s resides outside wallet directory %s</source>
+        <translation>Peňaženka %s sa nachádza mimo priečinku pre peňaženky %s </translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Upozornenie</translation>
     </message>
     <message>
         <source>Warning: unknown new rules activated (versionbit %i)</source>
@@ -3742,7 +3631,7 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     </message>
     <message>
         <source>This product includes software developed by the OpenSSL Project for use in the OpenSSL Toolkit %s and cryptographic software written by Eric Young and UPnP software written by Thomas Bernard.</source>
-        <translation>Tento produkt zahŕňa programy vyvinuté projektom OpenSSL pre použitie v OpenSSL Toolkite %s a kryptografický program od Erika Younga a program UPnP od Thomasa Bernarda.</translation>
+        <translation>Tento produkt zahrňuje programy vyvinuté projektom OpenSSL pre použití v OpenSSL Toolkite %s a kryptografický program od Erika Younga a program UPnP od Thomasa Bernarda.</translation>
     </message>
     <message>
         <source>Total length of network version string (%i) exceeds maximum length (%i). Reduce the number or size of uacomments.</source>
@@ -3759,6 +3648,10 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     <message>
         <source>Error loading wallet %s. Duplicate -wallet filename specified.</source>
         <translation>Chyba pri načítaní peňaženky %s. Zadaný duplicitný názov súboru -wallet.</translation>
+    </message>
+    <message>
+        <source>Keypool ran out, please call keypoolrefill first</source>
+        <translation>Vyčerpal sa zásobník kľúčov, zavolať najskôr keypoolrefill</translation>
     </message>
     <message>
         <source>Starting network threads...</source>
@@ -3809,10 +3702,6 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
         <translation>Upozornenie: Boli zistené súkromné kľúče v peňaženke {%s} so zakázanými súkromnými kľúčmi.</translation>
     </message>
     <message>
-        <source>Cannot write to data directory '%s'; check permissions.</source>
-        <translation>Nie je možné zapísať do adresára ' %s'. Skontrolujte povolenia.</translation>
-    </message>
-    <message>
         <source>Loading block index...</source>
         <translation>Načítavanie zoznamu blokov...</translation>
     </message>
@@ -3831,6 +3720,10 @@ Poznámka: Keďže poplatok je počítaný za bajt, poplatok o hodnote "100 sato
     <message>
         <source>Done loading</source>
         <translation>Dokončené načítavanie</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Chyba</translation>
     </message>
 </context>
 </TS>

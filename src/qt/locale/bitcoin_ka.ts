@@ -66,8 +66,12 @@
         <translation>მიმღები მისამართი</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>ეს არის თქვენი ბიტკოინ-მისამართები, რომელთაგანაც შეგიძლიათ გადახდა. აუცილებლად შეამოწმეთ თანხა და მიმღები მისამართი გაგზავნამდე.</translation>
+    </message>
+    <message>
+        <source>These are your Monacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>ეს არის თქვენი ბიტკოინ-მისამართები, რომლებზეც შეგიძლიათ მიიღოთ თანხები. რეკომენდებულია ყოველი ტრანსაქციისათვის ახალი მიმღები მისამართის გამოყენება.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -132,6 +136,14 @@
         <translation>გაიმეორეთ ახალი ფრაზა-პაროლი</translation>
     </message>
     <message>
+        <source>Show password</source>
+        <translation>პაროლის ჩვენება</translation>
+    </message>
+    <message>
+        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <translation>აკრიფეთ ახალი პასფრაზა საფულისათვის.&lt;br/&gt; გამოიყენეთ &lt;b&gt;ათი ან მეტი შემთხვევითი სიმბოლოსაგან &lt;/b&gt;, ან &lt;b&gt;რვა ან მეტი სიტყვისაგან&lt;/b&gt; შემდგარი პასფრაზა.</translation>
+    </message>
+    <message>
         <source>Encrypt wallet</source>
         <translation>საფულის დაშიფრვა</translation>
     </message>
@@ -156,11 +168,15 @@
         <translation>პაროლის შეცვლა</translation>
     </message>
     <message>
+        <source>Enter the old passphrase and new passphrase to the wallet.</source>
+        <translation>აკრიფეთ ძველი და ახალი პასფრაზები საფულისათვის.</translation>
+    </message>
+    <message>
         <source>Confirm wallet encryption</source>
         <translation>საფულის დაშიფრვის დადასტურება</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MONACOINS&lt;/b&gt;!</source>
         <translation>გაფრთხილება: თუ თქვენ დაშიფრავთ თქვენს საფულეს და ამის შემდეგ დაკარგავთ გასაშიფრ ფრაზას, &lt;b&gt;თქვენ დაკარგავთ ყველა ბიტკოინს!&lt;/b&gt;</translation>
     </message>
     <message>
@@ -204,7 +220,7 @@
     </message>
     </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>ხელ&amp;მოწერა</translation>
@@ -294,8 +310,8 @@
         <translation>დისკზე ბლოკების რეინდექსაცია...</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>მონეტების გაგზავნა Bitcoin-მისამართზე</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation>მონეტების გაგზავნა Monacoin-მისამართზე</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -318,6 +334,10 @@
         <translation>&amp;ვერიფიკაცია</translation>
     </message>
     <message>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
+    </message>
+    <message>
         <source>&amp;Send</source>
         <translation>&amp;გაგზავნა</translation>
     </message>
@@ -338,12 +358,12 @@
         <translation>თქვენი საფულის პირადი გასაღებების დაშიფრვა</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>მესიჯებზე ხელმოწერა თქვენი Bitcoin-მისამართებით იმის დასტურად, რომ ის თქვენია</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation>მესიჯებზე ხელმოწერა თქვენი Monacoin-მისამართებით იმის დასტურად, რომ ის თქვენია</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>შეამოწმეთ, რომ მესიჯები ხელმოწერილია მითითებული Bitcoin-მისამართით</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation>შეამოწმეთ, რომ მესიჯები ხელმოწერილია მითითებული Monacoin-მისამართით</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -362,8 +382,8 @@
         <translation>ბარათების პანელი</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>გადახდის მოთხოვნა (შეიქმნება QR-კოდები და bitcoin: ბმულები)</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation>გადახდის მოთხოვნა (შეიქმნება QR-კოდები და monacoin: ბმულები)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -374,8 +394,8 @@
         <translation>გამოყენებული მიღების მისამართებისა და ნიშნულების სიის ჩვენება</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI or payment request</source>
-        <translation>bitcoin: URI-ის ან გადახდის მოთხოვნის გახსნა</translation>
+        <source>Open a monacoin: URI or payment request</source>
+        <translation>monacoin: URI-ის ან გადახდის მოთხოვნის გახსნა</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
@@ -574,12 +594,6 @@
     </message>
 </context>
 <context>
-    <name>CreateWalletActivity</name>
-    </context>
-<context>
-    <name>CreateWalletDialog</name>
-    </context>
-<context>
     <name>EditAddressDialog</name>
     <message>
         <source>Edit Address</source>
@@ -663,8 +677,8 @@
         <translation>მითითებული კატალოგის გამოყენება:</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -718,13 +732,6 @@
     </message>
     </context>
 <context>
-    <name>OpenWalletActivity</name>
-    <message>
-        <source>default wallet</source>
-        <translation>ნაგულისხმევი საფულე</translation>
-    </message>
-    </context>
-<context>
     <name>OptionsDialog</name>
     <message>
         <source>Options</source>
@@ -771,8 +778,8 @@
         <translation>დაუდასტურებელი ხურდის გამოყენების აკრძალვის შემდეგ მათი გამოყენება შეუძლებელი იქნება, სანამ ტრანსაქციას არ ექნება ერთი დასტური მაინც. ეს აისახება თქვენი ნაშთის დათვლაზეც.</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>როუტერში Bitcoin-კლიენტის პორტის ავტომატური გახსნა. მუშაობს, თუ თქვენს როუტერს ჩართული აქვს UPnP.</translation>
+        <source>Automatically open the Monacoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>როუტერში Monacoin-კლიენტის პორტის ავტომატური გახსნა. მუშაობს, თუ თქვენს როუტერს ჩართული აქვს UPnP.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -882,8 +889,8 @@
         <translation>ფორმა</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>ნაჩვენები ინფორმაცია შეიძლება მოძველებული იყოს. თქვენი საფულე ავტომატურად სინქრონიზდება Bitcoin-ის ქსელთან კავშირის დამყარების შემდეგ, ეს პროცესი ჯერ არ არის დასრულებული.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>ნაჩვენები ინფორმაცია შეიძლება მოძველებული იყოს. თქვენი საფულე ავტომატურად სინქრონიზდება Monacoin-ის ქსელთან კავშირის დამყარების შემდეგ, ეს პროცესი ჯერ არ არის დასრულებული.</translation>
     </message>
     <message>
         <source>Available:</source>
@@ -963,28 +970,15 @@
         <translation>%1 GB</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" does not exist.</source>
-        <translation>შეცდომა: მითითებული მონაცემთა კატალოგი "%1" არ არსებობს.</translation>
-    </message>
-    <message>
         <source>unknown</source>
         <translation>უცნობია</translation>
     </message>
 </context>
 <context>
+    <name>QObject::QObject</name>
+    </context>
+<context>
     <name>QRImageWidget</name>
-    <message>
-        <source>&amp;Save Image...</source>
-        <translation>გამო&amp;სახულების შენახვა...</translation>
-    </message>
-    <message>
-        <source>Resulting URI too long, try to reduce the text for label / message.</source>
-        <translation>URI ძალიან გრძელი გამოდის, შეამოკლეთ ნიშნულის/მესიჯის ტექსტი.</translation>
-    </message>
-    <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>შედომა URI-ის QR-კოდში გადაყვანისას.</translation>
-    </message>
     </context>
 <context>
     <name>RPCConsole</name>
@@ -1084,7 +1078,7 @@
         <translation>&amp;მესიჯი:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Monacoin network.</source>
         <translation>არააუცილებელი მესიჯი, რომელიც ერთვის გადახდის მოთხოვნას და ნაჩვენები იქნება მოთხოვნის გახსნისას. შენიშვნა: მესიჯი არ გაყვება გადახდას ბითქოინის ქსელში.</translation>
     </message>
     <message>
@@ -1110,6 +1104,10 @@
     <message>
         <source>Requested payments history</source>
         <translation>მოთხოვნილი გადახდების ისტორია</translation>
+    </message>
+    <message>
+        <source>&amp;Request payment</source>
+        <translation>&amp;გადახდის მოთხოვნა</translation>
     </message>
     <message>
         <source>Show the selected request (does the same as double clicking an entry)</source>
@@ -1159,10 +1157,6 @@
         <translation>მისამართი</translation>
     </message>
     <message>
-        <source>Amount</source>
-        <translation>თანხა</translation>
-    </message>
-    <message>
         <source>Label</source>
         <translation>ნიშნული</translation>
     </message>
@@ -1170,13 +1164,9 @@
         <source>Wallet</source>
         <translation>საფულე</translation>
     </message>
-</context>
+    </context>
 <context>
     <name>RecentRequestsTableModel</name>
-    <message>
-        <source>Date</source>
-        <translation>თარიღი</translation>
-    </message>
     <message>
         <source>Label</source>
         <translation>ნიშნული</translation>
@@ -1340,7 +1330,7 @@
         <translation>შეიყვანეთ ამ მისამართის ნიშნული გამოყენებული მისამართების სიაში დასამატებლად</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
+        <source>A message that was attached to the monacoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Monacoin network.</source>
         <translation>მესიჯი, რომელიც თან ერთვის მონეტებს:  URI, რომელიც შეინახება ტრანსაქციასთან ერთად თქვენთვის. შენიშვნა: მესიჯი არ გაყვება გადახდას ბითქოინის ქსელში.</translation>
     </message>
     <message>
@@ -1401,7 +1391,7 @@
         <translation>მიმდინარე ხელმოწერის კოპირება კლიპბორდში</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
+        <source>Sign the message to prove you own this Monacoin address</source>
         <translation>მოაწერეთ ხელი იმის დასადასტურებლად, რომ ეს მისამართი თქვენია</translation>
     </message>
     <message>
@@ -1421,8 +1411,8 @@
         <translation>მესიჯის &amp;ვერიფიკაცია</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>შეამოწმეთ, რომ მესიჯი ხელმოწერილია მითითებული Bitcoin-მისამართით</translation>
+        <source>Verify the message to ensure it was signed with the specified Monacoin address</source>
+        <translation>შეამოწმეთ, რომ მესიჯი ხელმოწერილია მითითებული Monacoin-მისამართით</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -1434,6 +1424,13 @@
     </message>
     </context>
 <context>
+    <name>SplashScreen</name>
+    <message>
+        <source>[testnet]</source>
+        <translation>[testnet]</translation>
+    </message>
+</context>
+<context>
     <name>TrafficGraphWidget</name>
     <message>
         <source>KB/s</source>
@@ -1442,22 +1439,6 @@
 </context>
 <context>
     <name>TransactionDesc</name>
-    <message>
-        <source>Date</source>
-        <translation>თარიღი</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>უცნობია</translation>
-    </message>
-    <message>
-        <source>Transaction fee</source>
-        <translation>ტრანსაქციის საფასური - საკომისიო</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation>თანხა</translation>
-    </message>
     </context>
 <context>
     <name>TransactionDescDialog</name>
@@ -1468,10 +1449,6 @@
     </context>
 <context>
     <name>TransactionTableModel</name>
-    <message>
-        <source>Date</source>
-        <translation>თარიღი</translation>
-    </message>
     <message>
         <source>Label</source>
         <translation>ნიშნული</translation>
@@ -1500,14 +1477,6 @@
         <translation>CSV ფორმატის ფაილი (*.csv)</translation>
     </message>
     <message>
-        <source>Confirmed</source>
-        <translation>დადასტურებულია</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>თარიღი</translation>
-    </message>
-    <message>
         <source>Label</source>
         <translation>ნიშნული</translation>
     </message>
@@ -1532,27 +1501,19 @@
 <context>
     <name>WalletModel</name>
     <message>
-        <source>Send Coins</source>
-        <translation>მონეტების გაგზავნა</translation>
-    </message>
-    <message>
         <source>default wallet</source>
         <translation>ნაგულისხმევი საფულე</translation>
     </message>
 </context>
 <context>
     <name>WalletView</name>
-    <message>
-        <source>&amp;Export</source>
-        <translation>&amp;ექსპორტი</translation>
-    </message>
-    <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation>ამ ბარათიდან მონაცემების ექსპორტი ფაილში</translation>
-    </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
+    <message>
+        <source>Monacoin Core</source>
+        <translation>Monacoin Core</translation>
+    </message>
     <message>
         <source>Corrupted block database detected</source>
         <translation>შენიშნულია ბლოკთა ბაზის დაზიანება</translation>
@@ -1578,6 +1539,10 @@
         <translation>ბლოკთა ბაზის შექმნა ვერ მოხერხდა</translation>
     </message>
     <message>
+        <source>Error: Disk space is low!</source>
+        <translation>შეცდომა: დისზე არ არის ადგილი!</translation>
+    </message>
+    <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
         <translation>ვერ ხერხდება პორტების მიყურადება. თუ გსურთ, გამოიყენეთ -listen=0.</translation>
     </message>
@@ -1594,6 +1559,10 @@
         <translation>ბლოკების ვერიფიკაცია...</translation>
     </message>
     <message>
+        <source>Information</source>
+        <translation>ინფორმაცია</translation>
+    </message>
+    <message>
         <source>Signing transaction failed</source>
         <translation>ტრანსაქციების ხელმოწერა ვერ მოხერხდა</translation>
     </message>
@@ -1604,6 +1573,10 @@
     <message>
         <source>Transaction too large</source>
         <translation>ტრანსაქცია ძალიან დიდია</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>გაფრთხილება</translation>
     </message>
     <message>
         <source>Zapping all transactions from wallet...</source>
@@ -1636,6 +1609,10 @@
     <message>
         <source>Done loading</source>
         <translation>ჩატვირთვა დასრულებულია</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>შეცდომა</translation>
     </message>
 </context>
 </TS>

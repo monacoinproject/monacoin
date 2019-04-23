@@ -3,11 +3,11 @@
     <name>AddressBookPage</name>
     <message>
         <source>Right-click to edit address or label</source>
-        <translation>Høyreklikk for å redigere adresse, eller beskrivelse</translation>
+        <translation>Høyreklikk for å redigere adressen eller merkelappen</translation>
     </message>
     <message>
         <source>Create a new address</source>
-        <translation>Opprett en ny adresse</translation>
+        <translation>Opprett en ny addresse</translation>
     </message>
     <message>
         <source>&amp;New</source>
@@ -15,7 +15,7 @@
     </message>
     <message>
         <source>Copy the currently selected address to the system clipboard</source>
-        <translation>Kopier den valgte adressen til utklippstavlen</translation>
+        <translation>Kopier den valgte adressen til systemets utklippstavle</translation>
     </message>
     <message>
         <source>&amp;Copy</source>
@@ -27,19 +27,19 @@
     </message>
     <message>
         <source>Delete the currently selected address from the list</source>
-        <translation>Slett den valgte adressen fra listen</translation>
+        <translation>Slett den valgte adressen fra listen.</translation>
     </message>
     <message>
         <source>Enter address or label to search</source>
-        <translation>Oppgi adresse, eller stikkord, for å søke</translation>
+        <translation>Skriv inn adresse eller merkelapp for å søke</translation>
     </message>
     <message>
         <source>Export the data in the current tab to a file</source>
-        <translation>Eksporter data i den valgte fliken til en fil</translation>
+        <translation>Eksporter data fra nåværende fane til fil</translation>
     </message>
     <message>
         <source>&amp;Export</source>
-        <translation>&amp;Eksport</translation>
+        <translation>&amp;Eksporter</translation>
     </message>
     <message>
         <source>&amp;Delete</source>
@@ -47,66 +47,66 @@
     </message>
     <message>
         <source>Choose the address to send coins to</source>
-        <translation>Velg en adresse å sende mynter til</translation>
+        <translation>Velg adressen å sende mynter til</translation>
     </message>
     <message>
         <source>Choose the address to receive coins with</source>
-        <translation>Velg adressen som skal motta myntene</translation>
+        <translation>Velg adressen til å motta mynter med</translation>
     </message>
     <message>
         <source>C&amp;hoose</source>
-        <translation>&amp;Velg</translation>
+        <translation>V&amp;elg</translation>
     </message>
     <message>
         <source>Sending addresses</source>
-        <translation>Avsender adresser</translation>
+        <translation>Utsendingsadresser</translation>
     </message>
     <message>
         <source>Receiving addresses</source>
-        <translation>Mottager adresser</translation>
+        <translation>Mottaksadresser</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation>Dette er dine Bitcoin adresser for å sende  å sende betalinger. Husk å sjekke beløp og mottager adresser før du sender mynter.</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation>Dette er dine Monacoin-adresser for sending av betalinger. Sjekk alltid beløpet og mottakeradressen før sending av mynter.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.</source>
-        <translation>Dette er dine Bitcoin adresse for å betalinger. Det er anbefalt å bruke en my mottager adresse for hver transakjon.</translation>
+        <source>These are your Monacoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <translation>Dette er dine Monacoin-adresser for å sende betalinger med. Det er anbefalt å bruke en ny mottaksadresse for hver transaksjon.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
-        <translation>&amp;Kopier adresse</translation>
+        <translation>&amp;Kopier Adresse</translation>
     </message>
     <message>
         <source>Copy &amp;Label</source>
-        <translation>Kopier &amp;beskrivelse</translation>
+        <translation>Kopier &amp;Merkelapp</translation>
     </message>
     <message>
         <source>&amp;Edit</source>
-        <translation>R&amp;ediger</translation>
+        <translation>&amp;Rediger</translation>
     </message>
     <message>
         <source>Export Address List</source>
-        <translation>Eksporter adresse listen</translation>
+        <translation>Eksporter adresseliste</translation>
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>
-        <translation>Komma separert fil (*.csv)</translation>
+        <translation>Kommaseparert fil (*.csv)</translation>
     </message>
     <message>
         <source>Exporting Failed</source>
-        <translation>Eksporten feilet</translation>
+        <translation>Eksportering feilet</translation>
     </message>
     <message>
         <source>There was an error trying to save the address list to %1. Please try again.</source>
-        <translation>Fet oppstod en feil ved lagring av adresselisten til %1. Vennligst prøv igjen.</translation>
+        <translation>Det oppstod en feil under lagring av adresselisten til %1. Vennligst prøv på nytt.</translation>
     </message>
 </context>
 <context>
     <name>AddressTableModel</name>
     <message>
         <source>Label</source>
-        <translation>Beskrivelse</translation>
+        <translation>Merkelapp</translation>
     </message>
     <message>
         <source>Address</source>
@@ -114,62 +114,70 @@
     </message>
     <message>
         <source>(no label)</source>
-        <translation>(ingen beskrivelse)</translation>
+        <translation>(ingen merkelapp)</translation>
     </message>
 </context>
 <context>
     <name>AskPassphraseDialog</name>
     <message>
         <source>Passphrase Dialog</source>
-        <translation>Passord dialog</translation>
+        <translation>Dialog for Adgangsfrase</translation>
     </message>
     <message>
         <source>Enter passphrase</source>
-        <translation>Oppgi passord setning</translation>
+        <translation>Angi adgangsfrase</translation>
     </message>
     <message>
         <source>New passphrase</source>
-        <translation>Ny passord setning</translation>
+        <translation>Ny adgangsfrase</translation>
     </message>
     <message>
         <source>Repeat new passphrase</source>
-        <translation>Repeter passorsetningen</translation>
+        <translation>Gjenta ny adgangsfrase</translation>
     </message>
     <message>
-        <source>Show passphrase</source>
-        <translation>Vis adgangsfrase</translation>
+        <source>Show password</source>
+        <translation>Vis passord</translation>
+    </message>
+    <message>
+        <source>Enter the new passphrase to the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
+        <translation>Oppgi adgangsfrasen til lommeboken.&lt;br/&gt;Vennligst bruk en adgangsfrase med &lt;b&gt;ti eller flere tilfeldige tegn&lt;/b&gt;, eller &lt;b&gt;åtte eller flere ord&lt;/b&gt;.</translation>
     </message>
     <message>
         <source>Encrypt wallet</source>
-        <translation>Krypter lommeboken</translation>
+        <translation>Krypter lommebok</translation>
     </message>
     <message>
         <source>This operation needs your wallet passphrase to unlock the wallet.</source>
-        <translation>Denne operasjonen krever passordsetningen for å låse opp lommeboken.</translation>
+        <translation>Denne operasjonen krever adgangsfrasen til lommeboken for å låse den opp.</translation>
     </message>
     <message>
         <source>Unlock wallet</source>
-        <translation>Lås opp lommeboken</translation>
+        <translation>Lås opp lommebok</translation>
     </message>
     <message>
         <source>This operation needs your wallet passphrase to decrypt the wallet.</source>
-        <translation>Denne operasjonen krever passordsetningen for å dekryptere lommeboken.</translation>
+        <translation>Denne operasjonen krever adgangsfrasen til lommeboken for å dekryptere den.</translation>
     </message>
     <message>
         <source>Decrypt wallet</source>
-        <translation>Dekrypter lommeboken</translation>
+        <translation>Dekrypter lommebok</translation>
     </message>
     <message>
         <source>Change passphrase</source>
-        <translation>Endre passordsetningen</translation>
+        <translation>Endre adgangsfrase</translation>
+    </message>
+    <message>
+        <source>Enter the old passphrase and new passphrase to the wallet.</source>
+        <translation>Angi den gamle og en ny adgangsfrase til lommeboken.</translation>
     </message>
     <message>
         <source>Confirm wallet encryption</source>
-        <translation>Bekreft kryptering av lommeboken</translation>
+        <translation>Bekreft kryptering av lommebok</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation>Advarsel: Dersom du krypterer lommeboken og mister passordsetningen vil du &lt;b&gt;MISTE ALLE DINE BITCOIN&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MONACOINS&lt;/b&gt;!</source>
+        <translation>Advarsel: Hvis du krypterer lommeboken og mister adgangsfrasen, så vil du &lt;b&gt;MISTE ALLE DINE MONACOINS&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -177,63 +185,39 @@
     </message>
     <message>
         <source>Wallet encrypted</source>
-        <translation>Lommeboken er kryptert</translation>
-    </message>
-    <message>
-        <source>Enter the new passphrase for the wallet.&lt;br/&gt;Please use a passphrase of &lt;b&gt;ten or more random characters&lt;/b&gt;, or &lt;b&gt;eight or more words&lt;/b&gt;.</source>
-        <translation>Angi den nye passordfrasen for lommeboken.&lt;br/&gt; Vennglist du bruker en passordfrase &lt;b&gt; ti eller tilfeldige tegn &lt;/b&gt;, eller &lt;b&gt; åtte eller flere ord.</translation>
-    </message>
-    <message>
-        <source>Enter the old passphrase and new passphrase for the wallet.</source>
-        <translation>Svriv inn den gamle passfrasen og den nye passordfrasen for lommeboken.</translation>
-    </message>
-    <message>
-        <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation>Husk at å kryptere lommeboken ikke vil beskytte dine bitcoins fullstendig fra å bli stjålet av skadevare som infiserer datamaskinen din.</translation>
-    </message>
-    <message>
-        <source>Wallet to be encrypted</source>
-        <translation>Lommebok som skal bli kryptert</translation>
-    </message>
-    <message>
-        <source>Your wallet is about to be encrypted. </source>
-        <translation>Din lommebok er i ferd med å bli kryptert.</translation>
-    </message>
-    <message>
-        <source>Your wallet is now encrypted. </source>
-        <translation>Din lommebok er nå kryptert.</translation>
+        <translation>Lommebok kryptert</translation>
     </message>
     <message>
         <source>IMPORTANT: Any previous backups you have made of your wallet file should be replaced with the newly generated, encrypted wallet file. For security reasons, previous backups of the unencrypted wallet file will become useless as soon as you start using the new, encrypted wallet.</source>
-        <translation>VIKTIG: Alle tidligere sikkerhetskopier du har tatt av lommebokfilen bør erstattes med den nye krypterte lommebokfilen. Av sikkerhetsgrunner vil tidligere sikkerhetskopier av lommebokfilen bli ubrukelige når du begynner å bruke den ny kypterte lommeboken.</translation>
+        <translation>VIKTIG: Tidligere sikkerhetskopier av din lommebokfil bør erstattes med den nylig genererte og krypterte filen, da de blir ugyldiggjort av sikkerhetshensyn så snart du begynner å bruke den nye krypterte lommeboken.</translation>
     </message>
     <message>
         <source>Wallet encryption failed</source>
-        <translation>Kryptering av lommeboken feilet</translation>
+        <translation>Kryptering av lommebok feilet</translation>
     </message>
     <message>
         <source>Wallet encryption failed due to an internal error. Your wallet was not encrypted.</source>
-        <translation>Lommebokkrypteringen feilet pga. en intern feil. Lommeboken din ble ikke kryptert.</translation>
+        <translation>Kryptering av lommebok feilet på grunn av en intern feil. Din lommebok ble ikke kryptert.</translation>
     </message>
     <message>
         <source>The supplied passphrases do not match.</source>
-        <translation>De oppgitte passordsetningene er forskjellige.</translation>
+        <translation>De angitte adgangsfrasene er ulike.</translation>
     </message>
     <message>
         <source>Wallet unlock failed</source>
-        <translation>Opplåsing av lommeboken feilet</translation>
+        <translation>Opplåsing av lommebok feilet</translation>
     </message>
     <message>
         <source>The passphrase entered for the wallet decryption was incorrect.</source>
-        <translation>Passordsetningen som ble oppgitt for å dekryptere lommeboken var feil.</translation>
+        <translation>Adgangsfrasen angitt for dekryptering av lommeboken var feil.</translation>
     </message>
     <message>
         <source>Wallet decryption failed</source>
-        <translation>Dekryptering av lommeboken feilet</translation>
+        <translation>Dekryptering av lommebok feilet</translation>
     </message>
     <message>
         <source>Wallet passphrase was successfully changed.</source>
-        <translation>Passordsetningen for lommeboken ble endret</translation>
+        <translation>Adgangsfrase for lommebok er endret.</translation>
     </message>
     <message>
         <source>Warning: The Caps Lock key is on!</source>
@@ -248,18 +232,18 @@
     </message>
     <message>
         <source>Banned Until</source>
-        <translation>Utestengt Til</translation>
+        <translation>Utestengt til</translation>
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
-        <translation>Signer &amp;melding</translation>
+        <translation>Signer &amp;melding...</translation>
     </message>
     <message>
         <source>Synchronizing with network...</source>
-        <translation>Synkroniserer med nettverket</translation>
+        <translation>Synkroniserer med nettverk...</translation>
     </message>
     <message>
         <source>&amp;Overview</source>
@@ -275,7 +259,7 @@
     </message>
     <message>
         <source>Browse transaction history</source>
-        <translation>Bla gjennom transaksjoner</translation>
+        <translation>Vis transaksjonshistorikk</translation>
     </message>
     <message>
         <source>E&amp;xit</source>
@@ -283,11 +267,11 @@
     </message>
     <message>
         <source>Quit application</source>
-        <translation>Avslutt program</translation>
+        <translation>Avslutt applikasjonen</translation>
     </message>
     <message>
         <source>&amp;About %1</source>
-        <translation>&amp;Om %1</translation>
+        <translation> &amp;Om %1</translation>
     </message>
     <message>
         <source>Show information about %1</source>
@@ -303,35 +287,27 @@
     </message>
     <message>
         <source>&amp;Options...</source>
-        <translation>&amp;Alternativer</translation>
+        <translation>&amp;Innstillinger...</translation>
     </message>
     <message>
         <source>Modify configuration options for %1</source>
-        <translation>Endre konfigurasjonsalternativer for %1</translation>
+        <translation>Endre innstilinger for %1</translation>
     </message>
     <message>
         <source>&amp;Encrypt Wallet...</source>
-        <translation>&amp;Krypter lommebok...</translation>
+        <translation>&amp;Krypter Lommebok...</translation>
     </message>
     <message>
         <source>&amp;Backup Wallet...</source>
-        <translation>&amp;Sikkerhetskopier lommebok</translation>
+        <translation>Lag &amp;Sikkerhetskopi av Lommebok...</translation>
     </message>
     <message>
         <source>&amp;Change Passphrase...</source>
-        <translation>&amp;Endre passordsetning</translation>
+        <translation>&amp;Endre Adgangsfrase...</translation>
     </message>
     <message>
         <source>Open &amp;URI...</source>
-        <translation>Åpne &amp;URI</translation>
-    </message>
-    <message>
-        <source>Create Wallet...</source>
-        <translation>Lag lommebok...</translation>
-    </message>
-    <message>
-        <source>Create a new wallet</source>
-        <translation>Lag en ny lommebok</translation>
+        <translation>Åpne &amp;URI...</translation>
     </message>
     <message>
         <source>Wallet:</source>
@@ -339,39 +315,35 @@
     </message>
     <message>
         <source>Click to disable network activity.</source>
-        <translation>Klikk for å slå av nettverksaktivitet.</translation>
+        <translation>Klikk for å deaktivere nettverksaktivitet.</translation>
     </message>
     <message>
         <source>Network activity disabled.</source>
-        <translation>Nettverksaktivitet er slått av</translation>
+        <translation>Nettverksaktivitet deaktivert.</translation>
     </message>
     <message>
         <source>Click to enable network activity again.</source>
-        <translation>Klikk for å slå på nettverksaktivitet igjen.</translation>
+        <translation>Klikk for å aktivere nettverksaktivitet igjen.</translation>
     </message>
     <message>
         <source>Syncing Headers (%1%)...</source>
-        <translation>Synkroniserer Headers (%1%)...</translation>
+        <translation>Synkroniserer blokkhoder (%1%)...</translation>
     </message>
     <message>
         <source>Reindexing blocks on disk...</source>
-        <translation>Reindekserer blokker på disken</translation>
+        <translation>Reindekserer blokker på harddisk...</translation>
     </message>
     <message>
-        <source>Proxy is &lt;b&gt;enabled&lt;/b&gt;: %1</source>
-        <translation>Proxy er &lt;b&gt;slått på&lt;/b&gt;: %1</translation>
-    </message>
-    <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation>Send mynter til en Bitcoin adresse</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation>Send til en Monacoin-adresse</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
-        <translation>Sikkerhetskopier lommeboken til en annen lokasjon</translation>
+        <translation>Sikkerhetskopier lommebok til annet sted</translation>
     </message>
     <message>
         <source>Change the passphrase used for wallet encryption</source>
-        <translation>Endre passordsetningen for kryptering av lommeboken</translation>
+        <translation>Endre adgangsfrasen brukt for kryptering av lommebok</translation>
     </message>
     <message>
         <source>&amp;Debug window</source>
@@ -379,15 +351,19 @@
     </message>
     <message>
         <source>Open debugging and diagnostic console</source>
-        <translation>Åpne konsoll for feilsøking og diagnostisering</translation>
+        <translation>Åpne konsoll for feilsøk og diagnostikk</translation>
     </message>
     <message>
         <source>&amp;Verify message...</source>
-        <translation>&amp;Verifiser meldingen...</translation>
+        <translation>&amp;Verifiser melding...</translation>
+    </message>
+    <message>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>&amp;Send</source>
-        <translation>&amp;Sende</translation>
+        <translation>&amp;Send</translation>
     </message>
     <message>
         <source>&amp;Receive</source>
@@ -395,23 +371,23 @@
     </message>
     <message>
         <source>&amp;Show / Hide</source>
-        <translation>Vi&amp;s / Skjul</translation>
+        <translation>&amp;Vis / Skjul</translation>
     </message>
     <message>
         <source>Show or hide the main Window</source>
-        <translation>Vis, eller skjul, hovedvinduet</translation>
+        <translation>Vis eller skjul hovedvinduet</translation>
     </message>
     <message>
         <source>Encrypt the private keys that belong to your wallet</source>
         <translation>Krypter de private nøklene som tilhører lommeboken din</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation>Signer meldingene med Bitcoin adresse for å bevise at diu eier dem</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation>Signer en melding med Monacoin-adressene dine for å bevise at du eier dem</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation>Verifiser meldinger for å sikre at de ble signert med en angitt Bitcoin adresse</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation>Bekreft meldinger for å være sikker på at de ble signert av en angitt Monacoin-adresse</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -419,7 +395,7 @@
     </message>
     <message>
         <source>&amp;Settings</source>
-        <translation>Inn&amp;stillinger</translation>
+        <translation>&amp;Innstillinger</translation>
     </message>
     <message>
         <source>&amp;Help</source>
@@ -427,43 +403,43 @@
     </message>
     <message>
         <source>Tabs toolbar</source>
-        <translation>Hjelpelinje for fliker</translation>
+        <translation>Verktøylinje for faner</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation>Be om betalinger (genererer QR-koder og bitcoin-URIer)</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation>Forespør betalinger (genererer QR-koder og monacoin: URIer)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
-        <translation>Vis lista over brukte sendeadresser og merkelapper</translation>
+        <translation>Vis listen av brukte utsendingsadresser og merkelapper</translation>
     </message>
     <message>
         <source>Show the list of used receiving addresses and labels</source>
-        <translation>Vis lista over brukte mottakeradresser og merkelapper</translation>
+        <translation>Vis listen over bruke mottaksadresser og merkelapper</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI or payment request</source>
-        <translation>Åpne en bitcoin: URI eller betalingsforespørsel</translation>
+        <source>Open a monacoin: URI or payment request</source>
+        <translation>Åpne en Monacoin: URI eller betalingsetterspørring</translation>
     </message>
     <message>
         <source>&amp;Command-line options</source>
-        <translation>&amp;Kommandolinjealternativer</translation>
+        <translation>&amp;Kommandolinjevalg</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network</source>
-        <translation><numerusform>%n aktiv tilkobling til Bitcoin nettverket</numerusform><numerusform>%n aktive tilkoblinger til Bitcoin nettverket</numerusform></translation>
+        <source>%n active connection(s) to Monacoin network</source>
+        <translation><numerusform>%n aktiv forbindelse til Monacoin-nettverket</numerusform><numerusform>%n aktive forbindelser til Monacoin-nettverket</numerusform></translation>
     </message>
     <message>
         <source>Indexing blocks on disk...</source>
-        <translation>Indekserer blokker på disken...</translation>
+        <translation>Indekserer blokker på disk...</translation>
     </message>
     <message>
         <source>Processing blocks on disk...</source>
-        <translation>Behandler blokker på disken…</translation>
+        <translation>Prosesserer blokker på disk...</translation>
     </message>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
-        <translation><numerusform>Har prosessert %n blokk av transaksjonshistorien</numerusform><numerusform>Har prosessert %n blokker av transaksjonshistorien</numerusform></translation>
+        <translation><numerusform>Lastet %n blokk med transaksjonshistorikk.</numerusform><numerusform>Lastet %n blokker med transaksjonshistorikk.</numerusform></translation>
     </message>
     <message>
         <source>%1 behind</source>
@@ -475,11 +451,11 @@
     </message>
     <message>
         <source>Transactions after this will not yet be visible.</source>
-        <translation>Transaksjoner etter dette vil ikke være synlige ennå.</translation>
+        <translation>Transaksjoner etter dette vil ikke være synlige enda.</translation>
     </message>
     <message>
         <source>Error</source>
-        <translation>Feilmelding</translation>
+        <translation>Feil</translation>
     </message>
     <message>
         <source>Warning</source>
@@ -495,11 +471,11 @@
     </message>
     <message>
         <source>&amp;Sending addresses</source>
-        <translation>&amp;Avsender adresser</translation>
+        <translation>&amp;Utsendingsadresser</translation>
     </message>
     <message>
         <source>&amp;Receiving addresses</source>
-        <translation>&amp;Mottaker adresser</translation>
+        <translation>&amp;Mottaksadresser</translation>
     </message>
     <message>
         <source>Open Wallet</source>
@@ -518,16 +494,20 @@
         <translation>Lukk lommebok</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation>Vis %1-hjelpemeldingen for å få en liste over mulige Bitcoin-kommandolinjealternativer</translation>
+        <source>Show the %1 help message to get a list with possible Monacoin command-line options</source>
+        <translation>Vis %1 hjelpemeldingen for å få en liste med mulige Monacoin kommandolinjevalg.</translation>
     </message>
     <message>
         <source>default wallet</source>
         <translation>standard lommebok</translation>
     </message>
     <message>
-        <source>No wallets available</source>
-        <translation>Ingen lommebøker tilgjengelig</translation>
+        <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
+        <translation>Åpner Lommebok &lt;b&gt;%1&lt;/b&gt;...</translation>
+    </message>
+    <message>
+        <source>Open Wallet Failed</source>
+        <translation>Åpning av Lommebok Feilet</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -542,28 +522,24 @@
         <translation>Zoom</translation>
     </message>
     <message>
+        <source>Restore</source>
+        <translation>Gjenopprett</translation>
+    </message>
+    <message>
         <source>Main Window</source>
         <translation>Hovedvindu</translation>
     </message>
     <message>
         <source>%1 client</source>
-        <translation>%1-klient</translation>
+        <translation>%1 klient</translation>
     </message>
     <message>
         <source>Connecting to peers...</source>
-        <translation>Kobler til peers...</translation>
+        <translation>Kobler til likemannsnettverket...</translation>
     </message>
     <message>
         <source>Catching up...</source>
-        <translation>Tar igjen…</translation>
-    </message>
-    <message>
-        <source>Error: %1</source>
-        <translation>Feil: %1</translation>
-    </message>
-    <message>
-        <source>Warning: %1</source>
-        <translation>Advarsel: %1</translation>
+        <translation>Laster ned...</translation>
     </message>
     <message>
         <source>Date: %1
@@ -574,13 +550,13 @@
     <message>
         <source>Amount: %1
 </source>
-        <translation>Mengde: %1
+        <translation>Beløp: %1:
 </translation>
     </message>
     <message>
         <source>Wallet: %1
 </source>
-        <translation>Lommeboik: %1
+        <translation>Lommebok: %1
 </translation>
     </message>
     <message>
@@ -611,11 +587,11 @@
     </message>
     <message>
         <source>HD key generation is &lt;b&gt;enabled&lt;/b&gt;</source>
-        <translation>HD nøkkel generering er &lt;b&gt;slått på&lt;/b&gt;</translation>
+        <translation>HD nøkkelgenerering er &lt;b&gt;aktivert&lt;/b&gt;</translation>
     </message>
     <message>
         <source>HD key generation is &lt;b&gt;disabled&lt;/b&gt;</source>
-        <translation>HD nøkkel generering er &lt;b&gt;slått av&lt;/b&gt;</translation>
+        <translation>HD nøkkelgenerering er&lt;b&gt;deaktivert&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Private key &lt;b&gt;disabled&lt;/b&gt;</source>
@@ -630,8 +606,8 @@
         <translation>Lommeboken er &lt;b&gt;kryptert&lt;/b&gt; og for tiden &lt;b&gt;låst&lt;/b&gt;</translation>
     </message>
     <message>
-        <source>A fatal error occurred. Bitcoin can no longer continue safely and will quit.</source>
-        <translation>En fatal feil har inntruffet. Bitcoin kan ikke lenger trygt fortsette, og må derfor avslutte.</translation>
+        <source>A fatal error occurred. Monacoin can no longer continue safely and will quit.</source>
+        <translation>En fatal feil har inntruffet. Monacoin kan ikke lenger trygt fortsette, og må derfor avslutte.</translation>
     </message>
 </context>
 <context>
@@ -774,7 +750,7 @@
     </message>
     <message>
         <source>(no label)</source>
-        <translation>(ingen beskrivelse)</translation>
+        <translation>(ingen merkelapp)</translation>
     </message>
     <message>
         <source>change from %1 (%2)</source>
@@ -783,60 +759,6 @@
     <message>
         <source>(change)</source>
         <translation>(veksel)</translation>
-    </message>
-</context>
-<context>
-    <name>CreateWalletActivity</name>
-    <message>
-        <source>Creating Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
-        <translation>Lager lommebok &lt;b&gt;%1&lt;b&gt;...</translation>
-    </message>
-    <message>
-        <source>Create wallet failed</source>
-        <translation>Lage lommebok feilet</translation>
-    </message>
-    <message>
-        <source>Create wallet warning</source>
-        <translation>Lag lommebokvarsel</translation>
-    </message>
-</context>
-<context>
-    <name>CreateWalletDialog</name>
-    <message>
-        <source>Create Wallet</source>
-        <translation>Lag lommebok</translation>
-    </message>
-    <message>
-        <source>Wallet Name</source>
-        <translation>Lommeboknavn</translation>
-    </message>
-    <message>
-        <source>Encrypt the wallet. The wallet will be encrypted with a passphrase of your choice.</source>
-        <translation>Krypter lommeboken. Lommeboken blir kryptert med en passordfrase du velger.</translation>
-    </message>
-    <message>
-        <source>Encrypt Wallet</source>
-        <translation>Krypter Lommebok</translation>
-    </message>
-    <message>
-        <source>Disable private keys for this wallet. Wallets with private keys disabled will have no private keys and cannot have an HD seed or imported private keys. This is ideal for watch-only wallets.</source>
-        <translation>Deaktiver private nøkler for denne lommeboken. Lommebøker med private nøkler er deaktivert vil ikke ha noen private nøkler og kan ikke ha en HD seed eller importerte private nøkler. Dette er ideelt for loomebøker som kun er klokker.</translation>
-    </message>
-    <message>
-        <source>Disable Private Keys</source>
-        <translation>Deaktiver Private Nøkler</translation>
-    </message>
-    <message>
-        <source>Make a blank wallet. Blank wallets do not initially have private keys or scripts. Private keys and addresses can be imported, or an HD seed can be set, at a later time.</source>
-        <translation>Lag en tom lommebok. Tomme lommebøker har i utgangspunktet ikke private nøkler eller skript. Private nøkler og adresser kan importeres, eller et HD- frø kan angis på et senere tidspunkt.</translation>
-    </message>
-    <message>
-        <source>Make Blank Wallet</source>
-        <translation>Lag Tom Lommebok</translation>
-    </message>
-    <message>
-        <source>Create</source>
-        <translation>Opprett</translation>
     </message>
 </context>
 <context>
@@ -874,16 +796,8 @@
         <translation>Rediger utsendingsadresse</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation>Den angitte adressen "%1" er ikke en gyldig Bitcoin-adresse.</translation>
-    </message>
-    <message>
-        <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
-        <translation>Adresse "%1" eksisterer allerede som en mottaksadresse merket "%2" og kan derfor ikke bli lagt til som en sendingsadresse.</translation>
-    </message>
-    <message>
-        <source>The entered address "%1" is already in the address book with label "%2".</source>
-        <translation>Den oppgitte adressen ''%1'' er allerede i adresseboken med etiketten ''%2''.</translation>
+        <source>The entered address "%1" is not a valid Monacoin address.</source>
+        <translation>Den angitte adressen "%1" er ikke en gyldig Monacoin-adresse.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -925,7 +839,7 @@
     </message>
     <message>
         <source>(%1-bit)</source>
-        <translation>(%1-bit)</translation>
+        <translation> (%1-bit)</translation>
     </message>
     <message>
         <source>About %1</source>
@@ -955,16 +869,12 @@
         <translation>Når du klikker OK, vil %1 starte nedlasting og behandle hele den %4 blokkjeden (%2GB) fra de eldste transaksjonene i %3 når %4 først startet.</translation>
     </message>
     <message>
-        <source>Reverting this setting requires re-downloading the entire blockchain. It is faster to download the full chain first and prune it later. Disables some advanced features.</source>
-        <translation>Gjenoppretting av denne innstillingen krever at du laster ned hele blockchain på nytt. Det er raskere å laste ned hele kjeden først og beskjære den senere Deaktiver noen avanserte funksjoner.</translation>
-    </message>
-    <message>
         <source>This initial synchronisation is very demanding, and may expose hardware problems with your computer that had previously gone unnoticed. Each time you run %1, it will continue downloading where it left off.</source>
-        <translation>Den initielle synkroniseringen er svært krevende, og kan forårsake problemer med maskinvaren i datamaskinen din som du tidligere ikke merket. Hver gang du kjører %1 vil den fortsette nedlastingen der den sluttet.</translation>
+        <translation>Den initielle synkroniseringen er svært krevende, og kan forårsake problemer med maskinvaren i datamaskinen din som du tidligere ikke merket. Hver gang du kjører %1 vil den fortsette nedlastingen der den sluttet. </translation>
     </message>
     <message>
         <source>If you have chosen to limit block chain storage (pruning), the historical data must still be downloaded and processed, but will be deleted afterward to keep your disk usage low.</source>
-        <translation>Hvis du har valgt å begrense blokkjedelagring (beskjæring), må historiske data fortsatt lastes ned og behandles, men de vil bli slettet etterpå for å holde bruken av lagringsplass lav.</translation>
+        <translation>Hvis du har valgt å begrense blokkjedelagring (beskjæring), må historiske data fortsatt lastes ned og behandles, men de vil bli slettet etterpå for å holde bruken av lagringsplass lav. </translation>
     </message>
     <message>
         <source>Use the default data directory</source>
@@ -975,12 +885,8 @@
         <translation>Bruk en egendefinert datamappe:</translation>
     </message>
     <message>
-        <source>Bitcoin</source>
-        <translation>Bitcoin</translation>
-    </message>
-    <message>
-        <source>Discard blocks after verification, except most recent %1 GB (prune)</source>
-        <translation>Kast blokker etter bekreftelse, bortsett fra de siste %1 GB (sviske)</translation>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>At least %1 GB of data will be stored in this directory, and it will grow over time.</source>
@@ -991,8 +897,8 @@
         <translation>Omtrent %1GB data vil bli lagret i denne mappen.</translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin block chain.</source>
-        <translation>%1 vil laste ned og lagre en kopi av Bitcoin blokkjeden.</translation>
+        <source>%1 will download and store a copy of the Monacoin block chain.</source>
+        <translation>%1 vil laste ned og lagre en kopi av Monacoin blokkjeden.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -1004,7 +910,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Feilmelding</translation>
+        <translation>Feil</translation>
     </message>
     <message numerus="yes">
         <source>%n GB of free space available</source>
@@ -1014,7 +920,7 @@
         <source>(of %n GB needed)</source>
         <translation><numerusform>(av %n GB som trengs)</numerusform><numerusform>(av %n GB som trengs)</numerusform></translation>
     </message>
-    </context>
+</context>
 <context>
     <name>ModalOverlay</name>
     <message>
@@ -1022,12 +928,12 @@
         <translation>Skjema</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation>Det kan hende nylige transaksjoner ikke vises enda, og at lommeboksaldoen dermed blir uriktig. Denne informasjonen vil rette seg når synkronisering av lommeboka mot bitcoin-nettverket er fullført, som anvist nedenfor.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the monacoin network, as detailed below.</source>
+        <translation>Det kan hende nylige transaksjoner ikke vises enda, og at lommeboksaldoen dermed blir uriktig. Denne informasjonen vil rette seg når synkronisering av lommeboka mot monacoin-nettverket er fullført, som anvist nedenfor.</translation>
     </message>
     <message>
-        <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation>Forsøk på å bruke bitcoin som er påvirket av transaksjoner som ikke er vist enda godtas ikke av nettverket.</translation>
+        <source>Attempting to spend monacoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation>Forsøk på å bruke monacoin som er påvirket av transaksjoner som ikke er vist enda godtas ikke av nettverket.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1061,11 +967,7 @@
         <source>Hide</source>
         <translation>Skjul</translation>
     </message>
-    <message>
-        <source>Unknown. Syncing Headers (%1, %2%)...</source>
-        <translation>Ukjent.Synkroniser overskrifter (%1,%2%)...</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>OpenURIDialog</name>
     <message>
@@ -1087,25 +989,6 @@
     <message>
         <source>Select payment request file to open</source>
         <translation>Velg betalingsforespørselsfil å åpne</translation>
-    </message>
-</context>
-<context>
-    <name>OpenWalletActivity</name>
-    <message>
-        <source>Open wallet failed</source>
-        <translation>Åpne lommebok feilet</translation>
-    </message>
-    <message>
-        <source>Open wallet warning</source>
-        <translation>Advasel om åpen lommebok.</translation>
-    </message>
-    <message>
-        <source>default wallet</source>
-        <translation>standard lommebok</translation>
-    </message>
-    <message>
-        <source>Opening Wallet &lt;b&gt;%1&lt;/b&gt;...</source>
-        <translation>Åpner Lommebok &lt;b&gt;%1&lt;/b&gt;...</translation>
     </message>
 </context>
 <context>
@@ -1183,20 +1066,8 @@
         <translation>&amp;Nettverk</translation>
     </message>
     <message>
-        <source>Disables some advanced features but all blocks will still be fully validated. Reverting this setting requires re-downloading the entire blockchain. Actual disk usage may be somewhat higher.</source>
-        <translation>Deaktiver noen avanserte funksjoner, men alle blokker vil fortsatt være fullglyldig. Gjenoppretting av denne innstillingen krever at du laster ned hele blockchain på nytt. Faktisk diskbruk kan være noe høvere.</translation>
-    </message>
-    <message>
-        <source>Prune &amp;block storage to</source>
-        <translation>Beskjær og blokker lagring til</translation>
-    </message>
-    <message>
         <source>GB</source>
         <translation>GB</translation>
-    </message>
-    <message>
-        <source>Reverting this setting requires re-downloading the entire blockchain.</source>
-        <translation>Gjenoppretting av denne innstillingen krever at du laster ned hele blockchain på nytt</translation>
     </message>
     <message>
         <source>MiB</source>
@@ -1227,8 +1098,8 @@
         <translation>&amp;Bruk ubekreftet veksel</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation>Åpne automatisk Bitcoin klientporten på ruteren. Dette virker kun om din ruter støtter UPnP og dette er påslått.</translation>
+        <source>Automatically open the Monacoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation>Åpne automatisk Monacoin klientporten på ruteren. Dette virker kun om din ruter støtter UPnP og dette er påslått.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1243,8 +1114,8 @@
         <translation>Tillatt innkommend&amp;e tilkoblinger</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation>Koble til Bitcoin-nettverket gjennom en SOCKS5 proxy.</translation>
+        <source>Connect to the Monacoin network through a SOCKS5 proxy.</source>
+        <translation>Koble til Monacoin-nettverket gjennom en SOCKS5 proxy.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1279,8 +1150,8 @@
         <translation>Tor</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
-        <translation>Koble til Bitcoin-nettverket gjennom en separat SOCKS5 mellomtjener for Tor skjulte tjenester.</translation>
+        <source>Connect to the Monacoin network through a separate SOCKS5 proxy for Tor hidden services.</source>
+        <translation>Koble til Monacoin-nettverket gjennom en separat SOCKS5 mellomtjener for Tor skjulte tjenester.</translation>
     </message>
     <message>
         <source>&amp;Window</source>
@@ -1316,7 +1187,7 @@
     </message>
     <message>
         <source>Choose the default subdivision unit to show in the interface and when sending coins.</source>
-        <translation>Velg standard delt enhet for visning i grensesnittet og for sending av bitcoins.</translation>
+        <translation>Velg standard delt enhet for visning i grensesnittet og for sending av monacoins.</translation>
     </message>
     <message>
         <source>Whether to show coin control features or not.</source>
@@ -1325,10 +1196,6 @@
     <message>
         <source>&amp;Third party transaction URLs</source>
         <translation>Tredjepart transaksjon URLer</translation>
-    </message>
-    <message>
-        <source>Options set in this dialog are overridden by the command line or in the configuration file:</source>
-        <translation>Alternativer som er satt i denne dialogboksen overstyres av kommandolinjen eller i konfigurasjonsfilen:</translation>
     </message>
     <message>
         <source>&amp;OK</source>
@@ -1368,7 +1235,7 @@
     </message>
     <message>
         <source>Error</source>
-        <translation>Feilmelding</translation>
+        <translation>Feil</translation>
     </message>
     <message>
         <source>The configuration file could not be opened.</source>
@@ -1390,8 +1257,8 @@
         <translation>Skjema</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation>Informasjonen som vises kan være foreldet. Din lommebok synkroniseres automatisk med Bitcoin-nettverket etter at tilkobling er opprettet, men denne prosessen er ikke ferdig enda.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
+        <translation>Informasjonen som vises kan være foreldet. Din lommebok synkroniseres automatisk med Monacoin-nettverket etter at tilkobling er opprettet, men denne prosessen er ikke ferdig enda.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1465,44 +1332,24 @@
         <translation>Feil ved betalingsforespørsel</translation>
     </message>
     <message>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation>Kan ikke starte bitcoin: Klikk-og-betal håndterer</translation>
+        <source>Cannot start monacoin: click-to-pay handler</source>
+        <translation>Kan ikke starte monacoin: Klikk-og-betal håndterer</translation>
     </message>
     <message>
         <source>URI handling</source>
         <translation>URI-håndtering</translation>
     </message>
     <message>
-        <source>'bitcoin://' is not a valid URI. Use 'bitcoin:' instead.</source>
-        <translation>'bitcoin: //' er ikke en gyldig URI. Bruk 'bitcoin:' i stedet.</translation>
-    </message>
-    <message>
-        <source>You are using a BIP70 URL which will be unsupported in the future.</source>
-        <translation>Du bruker en BIP70 URL som ikke støttes i fremtiden.</translation>
-    </message>
-    <message>
         <source>Payment request fetch URL is invalid: %1</source>
         <translation>Nettadressen for betalingsforespørselshenting er ugyldig: %1</translation>
-    </message>
-    <message>
-        <source>Cannot process payment request because BIP70 support was not compiled in.</source>
-        <translation>Kan ikke behandle betalingsforespørsel fordi BIP70-støtte ikke ble samlet inn.</translation>
-    </message>
-    <message>
-        <source>Due to widespread security flaws in BIP70 it's strongly recommended that any merchant instructions to switch wallets be ignored.</source>
-        <translation>På grunn av utbredte sikkerhetsfeil i BIP70 anbefales det på det sterkeste at alle selgerinstruksjoner for å bytte lommebok ignoreres.</translation>
-    </message>
-    <message>
-        <source>If you are receiving this error you should request the merchant provide a BIP21 compatible URI.</source>
-        <translation>Hvis du mottar denne feilen, bør du be selgeren gi en BIP21-kompatibel URI.</translation>
     </message>
     <message>
         <source>Invalid payment address %1</source>
         <translation>Ugyldig betalingsadresse %1</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation>URI kan ikke fortolkes! Dette kan være forårsaket av en ugyldig bitcoin-adresse eller feilformede URI-parametre.</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Monacoin address or malformed URI parameters.</source>
+        <translation>URI kan ikke fortolkes! Dette kan være forårsaket av en ugyldig monacoin-adresse eller feilformede URI-parametre.</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -1603,8 +1450,8 @@
         <translation>Beløp</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation>Oppgi en Bitcoin-adresse (f.eks. %1)</translation>
+        <source>Enter a Monacoin address (e.g. %1)</source>
+        <translation>Oppgi en Monacoin-adresse (f.eks. %1)</translation>
     </message>
     <message>
         <source>%1 d</source>
@@ -1679,20 +1526,23 @@
         <translation>%1 GB</translation>
     </message>
     <message>
-        <source>Error: Specified data directory "%1" does not exist.</source>
-        <translation>Feil: Den spesifiserte datamappen "%1" finnes ikke.</translation>
-    </message>
-    <message>
-        <source>Error: %1</source>
-        <translation>Feil: %1</translation>
-    </message>
-    <message>
         <source>%1 didn't yet exit safely...</source>
         <translation>%1 har ikke avsluttet trygt enda…</translation>
     </message>
     <message>
         <source>unknown</source>
         <translation>ukjent</translation>
+    </message>
+</context>
+<context>
+    <name>QObject::QObject</name>
+    <message>
+        <source>Error: Specified data directory "%1" does not exist.</source>
+        <translation>Feil: Den spesifiserte datamappen "%1" finnes ikke.</translation>
+    </message>
+    <message>
+        <source>Error: %1</source>
+        <translation>Feil: %1</translation>
     </message>
 </context>
 <context>
@@ -1704,18 +1554,6 @@
     <message>
         <source>&amp;Copy Image</source>
         <translation>&amp;Kopier bilde</translation>
-    </message>
-    <message>
-        <source>Resulting URI too long, try to reduce the text for label / message.</source>
-        <translation>Resulterende URI er for lang, prøv å redusere teksten for merkelapp / melding.</translation>
-    </message>
-    <message>
-        <source>Error encoding URI into QR Code.</source>
-        <translation>Feil ved koding av URI til QR-kode.</translation>
-    </message>
-    <message>
-        <source>QR code support not available.</source>
-        <translation>Støtte for QR kode ikke tilgjengelig.</translation>
     </message>
     <message>
         <source>Save QR Code</source>
@@ -1755,10 +1593,6 @@
     <message>
         <source>Datadir</source>
         <translation>Datamappe</translation>
-    </message>
-    <message>
-        <source>Blocksdir</source>
-        <translation>Blocksdir</translation>
     </message>
     <message>
         <source>Startup time</source>
@@ -1997,14 +1831,6 @@
         <translation>Nettverksaktivitet avskrudd</translation>
     </message>
     <message>
-        <source>Executing command without any wallet</source>
-        <translation>Utfør kommando uten noen lommebok</translation>
-    </message>
-    <message>
-        <source>Executing command using "%1" wallet</source>
-        <translation>Utfør kommando med lommebok "%1"</translation>
-    </message>
-    <message>
         <source>(node id: %1)</source>
         <translation>(node id: %1)</translation>
     </message>
@@ -2052,8 +1878,8 @@
         <translation>&amp;Melding:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation>En valgfri melding å tilknytte betalingsetterspørringen, som vil bli vist når forespørselen er åpnet. Meldingen vil ikke bli sendt med betalingen over Bitcoin-nettverket.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Monacoin network.</source>
+        <translation>En valgfri melding å tilknytte betalingsetterspørringen, som vil bli vist når forespørselen er åpnet. Meldingen vil ikke bli sendt med betalingen over Monacoin-nettverket.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2068,10 +1894,6 @@
         <translation>Et valgfritt beløp å etterspørre. La stå tomt eller null for ikke å etterspørre et spesifikt beløp.</translation>
     </message>
     <message>
-        <source>&amp;Create new receiving address</source>
-        <translation>&amp;Lag ny mottakeradresse</translation>
-    </message>
-    <message>
         <source>Clear all fields of the form.</source>
         <translation>Fjern alle felter fra skjemaet.</translation>
     </message>
@@ -2080,16 +1902,12 @@
         <translation>Fjern</translation>
     </message>
     <message>
-        <source>Native segwit addresses (aka Bech32 or BIP-173) reduce your transaction fees later on and offer better protection against typos, but old wallets don't support them. When unchecked, an address compatible with older wallets will be created instead.</source>
-        <translation>Innfødte segwit-adresser (også kalt Bech32 eller BIP-173) reduserer transaksjonsgebyrene senere og gir bedre beskyttelse mot skrivefeil, men gamle lommebøker støtter dem ikke. Når du ikke har merket av, opprettes en adresse som er kompatibel med eldre lommebøker.</translation>
-    </message>
-    <message>
-        <source>Generate native segwit (Bech32) address</source>
-        <translation>Generer nativ segwit (Bech32) adresse</translation>
-    </message>
-    <message>
         <source>Requested payments history</source>
         <translation>Etterspurt betalingshistorikk</translation>
+    </message>
+    <message>
+        <source>&amp;Request payment</source>
+        <translation>&amp;Etterspør betaling</translation>
     </message>
     <message>
         <source>Show the selected request (does the same as double clicking an entry)</source>
@@ -2164,7 +1982,7 @@
     </message>
     <message>
         <source>Label</source>
-        <translation>Beskrivelse</translation>
+        <translation>Merkelapp</translation>
     </message>
     <message>
         <source>Message</source>
@@ -2173,6 +1991,14 @@
     <message>
         <source>Wallet</source>
         <translation>Lommebok</translation>
+    </message>
+    <message>
+        <source>Resulting URI too long, try to reduce the text for label / message.</source>
+        <translation>Resulterende URI er for lang, prøv å redusere teksten for merkelapp / melding.</translation>
+    </message>
+    <message>
+        <source>Error encoding URI into QR Code.</source>
+        <translation>Feil ved koding av URI til QR-kode.</translation>
     </message>
 </context>
 <context>
@@ -2183,7 +2009,7 @@
     </message>
     <message>
         <source>Label</source>
-        <translation>Beskrivelse</translation>
+        <translation>Merkelapp</translation>
     </message>
     <message>
         <source>Message</source>
@@ -2191,7 +2017,7 @@
     </message>
     <message>
         <source>(no label)</source>
-        <translation>(ingen beskrivelse)</translation>
+        <translation>(ingen merkelapp)</translation>
     </message>
     <message>
         <source>(no message)</source>
@@ -2210,7 +2036,7 @@
     <name>SendCoinsDialog</name>
     <message>
         <source>Send Coins</source>
-        <translation>Send Bitcoins</translation>
+        <translation>Send Monacoins</translation>
     </message>
     <message>
         <source>Coin Control Features</source>
@@ -2281,15 +2107,6 @@
         <translation>Legg ned gebyrinnstillinger</translation>
     </message>
     <message>
-        <source>Specify a custom fee per kB (1,000 bytes) of the transaction's virtual size.
-
-Note:  Since the fee is calculated on a per-byte basis, a fee of "100 satoshis per kB" for a transaction size of 500 bytes (half of 1 kB) would ultimately yield a fee of only 50 satoshis.</source>
-        <translation>
-Spesifiser en tilpasset avgift per kB (1000 byte) av transaksjonens virtuelle størrelse.
-
-Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis per kB" for en transaksjonsstørrelse på 500 byte (halvparten av 1 kB) til slutt gi et gebyr på bare 50 satoshis.</translation>
-    </message>
-    <message>
         <source>per kilobyte</source>
         <translation>per kilobyte</translation>
     </message>
@@ -2326,14 +2143,6 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Støv:</translation>
     </message>
     <message>
-        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
-        <translation>Når det er mindre transaksjonsvolum enn plass i blokkene, kan gruvearbeidere så vel som videresende noder håndheve et minimumsgebyr. Å betale bare denne minsteavgiften er helt greit, men vær klar over at dette kan resultere i en aldri bekreftende transaksjon når det er større etterspørsel etter bitcoin-transaksjoner enn nettverket kan behandle.</translation>
-    </message>
-    <message>
-        <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
-        <translation>For lavt gebyr kan føre til en transaksjon som aldri bekreftes (les verktøytips)</translation>
-    </message>
-    <message>
         <source>Confirmation time target:</source>
         <translation>Bekreftelsestidsmål:</translation>
     </message>
@@ -2343,7 +2152,7 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     </message>
     <message>
         <source>With Replace-By-Fee (BIP-125) you can increase a transaction's fee after it is sent. Without this, a higher fee may be recommended to compensate for increased transaction delay risk.</source>
-        <translation>Med Replace-By-Fee (BIP-125) kan du øke transaksjonens gebyr etter at den er sendt. Uten dette aktivert anbefales et høyere gebyr for å kompensere for risikoen for at transaksjonen blir forsinket.</translation>
+        <translation>Med Replace-By-Fee (BIP-125) kan du øke transaksjonens gebyr etter at den er sendt. Uten dette aktivert anbefales et høyere gebyr for å kompensere for risikoen for at transaksjonen blir forsinket. </translation>
     </message>
     <message>
         <source>Clear &amp;All</source>
@@ -2410,6 +2219,10 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Du kan øke gebyret senere (signaliserer Replace-By-Fee, BIP-125).</translation>
     </message>
     <message>
+        <source>from wallet %1</source>
+        <translation>fra lommebok %1</translation>
+    </message>
+    <message>
         <source>Please, review your transaction.</source>
         <translation>Vennligst se over transaksjonen din.</translation>
     </message>
@@ -2424,10 +2237,6 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     <message>
         <source>Total Amount</source>
         <translation>Totalbeløp</translation>
-    </message>
-    <message>
-        <source>To review recipient list click "Show Details..."</source>
-        <translation>For å se gjennom mottakerlisten, klikk "Vis detaljer ..."</translation>
     </message>
     <message>
         <source>Confirm send coins</source>
@@ -2474,8 +2283,8 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation><numerusform>Antatt bekreftelsesbegynnelse innen %n blokk.</numerusform><numerusform>Antatt bekreftelsesbegynnelse innen %n blokker.</numerusform></translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation>Advarsel Ugyldig bitcoin-adresse</translation>
+        <source>Warning: Invalid Monacoin address</source>
+        <translation>Advarsel Ugyldig monacoin-adresse</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2491,7 +2300,7 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     </message>
     <message>
         <source>(no label)</source>
-        <translation>(ingen beskrivelse)</translation>
+        <translation>(ingen merkelapp)</translation>
     </message>
 </context>
 <context>
@@ -2517,8 +2326,8 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Dette er en normal betaling.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to send the payment to</source>
-        <translation>Bitcoin-adressen betalingen skal sendes til</translation>
+        <source>The Monacoin address to send the payment to</source>
+        <translation>Monacoin-adressen betalingen skal sendes til</translation>
     </message>
     <message>
         <source>Alt+A</source>
@@ -2537,8 +2346,8 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Fjern denne oppføringen</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation>Gebyret vil bli trukket fra beløpet som blir sendt. Mottakeren vil motta mindre bitcoins enn det du skriver inn i beløpsfeltet. Hvis det er valgt flere mottakere, deles gebyret likt.</translation>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less monacoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <translation>Gebyret vil bli trukket fra beløpet som blir sendt. Mottakeren vil motta mindre monacoins enn det du skriver inn i beløpsfeltet. Hvis det er valgt flere mottakere, deles gebyret likt.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
@@ -2565,8 +2374,8 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Skriv inn en merkelapp for denne adressen for å legge den til listen av brukte adresser</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation>En melding som var tilknyttet bitcoinen: URI vil bli lagret med transaksjonen for din oversikt. Denne meldingen vil ikke bli sendt over Bitcoin-nettverket.</translation>
+        <source>A message that was attached to the monacoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Monacoin network.</source>
+        <translation>En melding som var tilknyttet monacoinen: URI vil bli lagret med transaksjonen for din oversikt. Denne meldingen vil ikke bli sendt over Monacoin-nettverket.</translation>
     </message>
     <message>
         <source>Pay To:</source>
@@ -2610,12 +2419,12 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>&amp;Signer Melding</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation>Du kan signere meldinger/avtaler med adresser for å bevise at du kan motta bitcoins sendt til dem. Vær forsiktig med å signere noe vagt eller tilfeldig, siden phishing-angrep kan prøve å lure deg til å signere din identitet over til dem. Bare signer fullt detaljerte utsagn som du er enig i.</translation>
+        <source>You can sign messages/agreements with your addresses to prove you can receive monacoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <translation>Du kan signere meldinger/avtaler med adresser for å bevise at du kan motta monacoins sendt til dem. Vær forsiktig med å signere noe vagt eller tilfeldig, siden phishing-angrep kan prøve å lure deg til å signere din identitet over til dem. Bare signer fullt detaljerte utsagn som du er enig i.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to sign the message with</source>
-        <translation>Bitcoin-adressen meldingen skal signeres med</translation>
+        <source>The Monacoin address to sign the message with</source>
+        <translation>Monacoin-adressen meldingen skal signeres med</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2646,8 +2455,8 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Kopier valgt signatur til utklippstavle</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
-        <translation>Signer meldingen for å bevise at du eier denne Bitcoin-adressen</translation>
+        <source>Sign the message to prove you own this Monacoin address</source>
+        <translation>Signer meldingen for å bevise at du eier denne Monacoin-adressen</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2670,12 +2479,12 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Skriv inn mottakerens adresse, melding (forsikre deg om at du kopier linjeskift, mellomrom, faner osv. nøyaktig) og underskrift nedenfor for å bekrefte meldingen. Vær forsiktig så du ikke leser mer ut av signaturen enn hva som er i den signerte meldingen i seg selv, for å unngå å bli lurt av et man-in-the-middle-angrep. Merk at dette bare beviser at den som signerer kan motta med adressen, dette beviser ikke hvem som har sendt transaksjoner!</translation>
     </message>
     <message>
-        <source>The Bitcoin address the message was signed with</source>
-        <translation>Bitcoin-adressen meldingen ble signert med</translation>
+        <source>The Monacoin address the message was signed with</source>
+        <translation>Monacoin-adressen meldingen ble signert med</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation>Verifiser meldingen for å være sikker på at den ble signert av den angitte Bitcoin-adressen</translation>
+        <source>Verify the message to ensure it was signed with the specified Monacoin address</source>
+        <translation>Verifiser meldingen for å være sikker på at den ble signert av den angitte Monacoin-adressen</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>
@@ -2736,6 +2545,13 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     <message>
         <source>Message verified.</source>
         <translation>Melding bekreftet.</translation>
+    </message>
+</context>
+<context>
+    <name>SplashScreen</name>
+    <message>
+        <source>[testnet]</source>
+        <translation>[testnett]</translation>
     </message>
 </context>
 <context>
@@ -2880,16 +2696,12 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Utdatainndeks</translation>
     </message>
     <message>
-        <source> (Certificate was not verified)</source>
-        <translation>sertifikatet ble ikke bekreftet</translation>
-    </message>
-    <message>
         <source>Merchant</source>
         <translation>Forretningsdrivende</translation>
     </message>
     <message>
         <source>Generated coins must mature %1 blocks before they can be spent. When you generated this block, it was broadcast to the network to be added to the block chain. If it fails to get into the chain, its state will change to "not accepted" and it won't be spendable. This may occasionally happen if another node generates a block within a few seconds of yours.</source>
-        <translation>Genererte bitcoins må modne %1 blokker før de kan brukes. Da du genererte denne blokken ble den kringkastet på nettverket for å bli lagt til i kjeden av blokker. Hvis den ikke kommer med i kjeden vil den endre seg til "ikke akseptert", og vil ikke kunne brukes. Dette vil noen ganger skje hvis en annen node genererer en blokk innen noen sekunder av din.</translation>
+        <translation>Genererte monacoins må modne %1 blokker før de kan brukes. Da du genererte denne blokken ble den kringkastet på nettverket for å bli lagt til i kjeden av blokker. Hvis den ikke kommer med i kjeden vil den endre seg til "ikke akseptert", og vil ikke kunne brukes. Dette vil noen ganger skje hvis en annen node genererer en blokk innen noen sekunder av din.</translation>
     </message>
     <message>
         <source>Debug information</source>
@@ -2939,7 +2751,7 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     </message>
     <message>
         <source>Label</source>
-        <translation>Beskrivelse</translation>
+        <translation>Merkelapp</translation>
     </message>
     <message numerus="yes">
         <source>Open for %n more block(s)</source>
@@ -3007,7 +2819,7 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     </message>
     <message>
         <source>(no label)</source>
-        <translation>(ingen beskrivelse)</translation>
+        <translation>(ingen merkelapp)</translation>
     </message>
     <message>
         <source>Transaction status. Hover over this field to show number of confirmations.</source>
@@ -3138,7 +2950,7 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     </message>
     <message>
         <source>Comma separated file (*.csv)</source>
-        <translation>Komma separert fil (*.csv)</translation>
+        <translation>Kommaseparert fil (*.csv)</translation>
     </message>
     <message>
         <source>Confirmed</source>
@@ -3158,7 +2970,7 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     </message>
     <message>
         <source>Label</source>
-        <translation>Beskrivelse</translation>
+        <translation>Merkelapp</translation>
     </message>
     <message>
         <source>Address</source>
@@ -3170,7 +2982,7 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     </message>
     <message>
         <source>Exporting Failed</source>
-        <translation>Eksporten feilet</translation>
+        <translation>Eksportering feilet</translation>
     </message>
     <message>
         <source>There was an error trying to save the transaction history to %1.</source>
@@ -3206,11 +3018,7 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <source>Close wallet</source>
         <translation>Lukk lommebok</translation>
     </message>
-    <message>
-        <source>Closing the wallet for too long can result in having to resync the entire chain if pruning is enabled.</source>
-        <translation>Å lukke lommeboken for lenge kan føre til at du må synkronisere hele kjeden hvis beskjæring er aktivert.</translation>
-    </message>
-</context>
+    </context>
 <context>
     <name>WalletFrame</name>
     <message>
@@ -3269,11 +3077,11 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     <name>WalletView</name>
     <message>
         <source>&amp;Export</source>
-        <translation>&amp;Eksport</translation>
+        <translation>&amp;Eksporter</translation>
     </message>
     <message>
         <source>Export the data in the current tab to a file</source>
-        <translation>Eksporter data i den valgte fliken til en fil</translation>
+        <translation>Eksporter data fra nåværende fane til fil</translation>
     </message>
     <message>
         <source>Backup Wallet</source>
@@ -3305,7 +3113,7 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     </message>
 </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Distributed under the MIT software license, see the accompanying file %s or %s</source>
         <translation>Lisensiert MIT. Se tilhørende fil %s eller %s</translation>
@@ -3335,12 +3143,12 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Kunne ikke starte HTTP-tjener. Se feilrettingslogg for detaljer.</translation>
     </message>
     <message>
-        <source>The %s developers</source>
-        <translation>%s-utviklerne</translation>
+        <source>Monacoin Core</source>
+        <translation>Monacoin Core</translation>
     </message>
     <message>
-        <source>Can't generate a change-address key. No keys in the internal keypool and can't generate any keys.</source>
-        <translation>Kan ikke generere en endringsadresse-nøkkel. Ingen taster i den interne tasten og kan ikke generere noen nøkler.</translation>
+        <source>The %s developers</source>
+        <translation>%s-utviklerne</translation>
     </message>
     <message>
         <source>Cannot obtain a lock on data directory %s. %s is probably already running.</source>
@@ -3348,7 +3156,7 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     </message>
     <message>
         <source>Cannot provide specific connections and have addrman find outgoing connections at the same.</source>
-        <translation>Kan ikke angi spesifikke tilkoblinger og ha addrman til å finne utgående tilkoblinger samtidig.</translation>
+        <translation>Kan ikke angi spesifikke tilkoblinger og ha addrman til å finne utgående tilkoblinger samtidig. </translation>
     </message>
     <message>
         <source>Error reading %s! All keys read correctly, but transaction data or address book entries might be missing or incorrect.</source>
@@ -3451,6 +3259,10 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Feil under åpning av blokkdatabase</translation>
     </message>
     <message>
+        <source>Error: Disk space is low!</source>
+        <translation>Feil: Lite ledig lagringsplass!</translation>
+    </message>
+    <message>
         <source>Failed to listen on any port. Use -listen=0 if you want this.</source>
         <translation>Kunne ikke lytte på noen port. Bruk -listen=0 hvis det er dette du vil.</translation>
     </message>
@@ -3489,10 +3301,6 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     <message>
         <source>Loading P2P addresses...</source>
         <translation>Laster maskin-til-maskin -adresser…</translation>
-    </message>
-    <message>
-        <source>Error: Disk space is too low!</source>
-        <translation>Feil: Diskplass er for liten!</translation>
     </message>
     <message>
         <source>Loading banlist...</source>
@@ -3583,6 +3391,10 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Feil: Ikke nok ledig diskplass for %s</translation>
     </message>
     <message>
+        <source>Information</source>
+        <translation>Informasjon</translation>
+    </message>
+    <message>
         <source>Invalid -onion address or hostname: '%s'</source>
         <translation>Ugyldig -onion adresse eller vertsnavn: "%s"</translation>
     </message>
@@ -3601,10 +3413,6 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     <message>
         <source>Need to specify a port with -whitebind: '%s'</source>
         <translation>Må oppgi en port med -whitebind: '%s'</translation>
-    </message>
-    <message>
-        <source>Prune mode is incompatible with -blockfilterindex.</source>
-        <translation>Beskjæringsmodus er inkompatibel med -blokkfilterindex.</translation>
     </message>
     <message>
         <source>Reducing -maxconnections from %d to %d, because of system limitations.</source>
@@ -3645,6 +3453,10 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Transaksjonen er for liten</translation>
     </message>
     <message>
+        <source>Transaction too large for fee policy</source>
+        <translation>Transaksjon for stor for gebyrpolitikken</translation>
+    </message>
+    <message>
         <source>Transaction too large</source>
         <translation>Transaksjonen er for stor</translation>
     </message>
@@ -3659,6 +3471,14 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     <message>
         <source>Verifying wallet(s)...</source>
         <translation>Lommebokbekreftelse pågår…</translation>
+    </message>
+    <message>
+        <source>Wallet %s resides outside wallet directory %s</source>
+        <translation>Lommebok %s befinner seg utenfor lommebokkatalog %s</translation>
+    </message>
+    <message>
+        <source>Warning</source>
+        <translation>Advarsel</translation>
     </message>
     <message>
         <source>Warning: unknown new rules activated (versionbit %i)</source>
@@ -3697,6 +3517,10 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Feil ved innlasting av lommeboka %s. Duplisert -wallet -filnavn angitt.</translation>
     </message>
     <message>
+        <source>Keypool ran out, please call keypoolrefill first</source>
+        <translation>Nøkkelpuljen gikk tom, kall keypoolrefill først</translation>
+    </message>
+    <message>
         <source>Starting network threads...</source>
         <translation>Starter nettverkstråder…</translation>
     </message>
@@ -3733,14 +3557,6 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
         <translation>Utilstrekkelige midler</translation>
     </message>
     <message>
-        <source>Cannot upgrade a non HD split wallet without upgrading to support pre split keypool. Please use -upgradewallet=169900 or -upgradewallet with no version specified.</source>
-        <translation>Kan ikke oppgradere en delt lommebok uten HD uten å oppgradere til støtte for forhåndsdelt tastatur. Bruk -upgradewallet = 169900 eller -upgradewallet uten versjon spesifisert.</translation>
-    </message>
-    <message>
-        <source>Fee estimation failed. Fallbackfee is disabled. Wait a few blocks or enable -fallbackfee.</source>
-        <translation>Avgiftsberegning mislyktes. Fallbackfee er deaktivert. Vent et par blokker eller aktiver -fallbackfee.</translation>
-    </message>
-    <message>
         <source>Loading block index...</source>
         <translation>Laster blokkindeks...</translation>
     </message>
@@ -3759,6 +3575,10 @@ Merk: Siden avgiften er beregnet per byte-basis, vil et gebyr på "100 satoshis 
     <message>
         <source>Done loading</source>
         <translation>Ferdig med lasting</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Feil</translation>
     </message>
 </context>
 </TS>

@@ -64,7 +64,7 @@
     <name>BanTableModel</name>
     </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>Sign &amp;message...</source>
         <translation>&amp;Зурвас хавсаргах...</translation>
@@ -120,6 +120,10 @@
     <message>
         <source>Open debugging and diagnostic console</source>
         <translation>Оношилгоо ба засварын консолыг онгойлго</translation>
+    </message>
+    <message>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>&amp;Show / Hide</source>
@@ -190,12 +194,6 @@
     </message>
     </context>
 <context>
-    <name>CreateWalletActivity</name>
-    </context>
-<context>
-    <name>CreateWalletDialog</name>
-    </context>
-<context>
     <name>EditAddressDialog</name>
     <message>
         <source>Edit Address</source>
@@ -223,8 +221,8 @@
 <context>
     <name>Intro</name>
     <message>
-        <source>Bitcoin</source>
-        <translation>Биткойн</translation>
+        <source>Monacoin</source>
+        <translation>Monacoin</translation>
     </message>
     <message>
         <source>Error</source>
@@ -240,9 +238,6 @@
     </context>
 <context>
     <name>OpenURIDialog</name>
-    </context>
-<context>
-    <name>OpenWalletActivity</name>
     </context>
 <context>
     <name>OptionsDialog</name>
@@ -303,6 +298,9 @@
         <translation>үл мэдэгдэх</translation>
     </message>
 </context>
+<context>
+    <name>QObject::QObject</name>
+    </context>
 <context>
     <name>QRImageWidget</name>
     </context>
@@ -395,20 +393,12 @@
         <translation>Хаягийг &amp;Хуулбарлах</translation>
     </message>
     <message>
-        <source>Amount</source>
-        <translation>Хэмжээ</translation>
-    </message>
-    <message>
         <source>Wallet</source>
         <translation>Түрүйвч</translation>
     </message>
-</context>
+    </context>
 <context>
     <name>RecentRequestsTableModel</name>
-    <message>
-        <source>Date</source>
-        <translation>Огноо</translation>
-    </message>
     </context>
 <context>
     <name>SendCoinsDialog</name>
@@ -522,22 +512,13 @@
     </message>
     </context>
 <context>
+    <name>SplashScreen</name>
+    </context>
+<context>
     <name>TrafficGraphWidget</name>
     </context>
 <context>
     <name>TransactionDesc</name>
-    <message>
-        <source>Date</source>
-        <translation>Огноо</translation>
-    </message>
-    <message>
-        <source>unknown</source>
-        <translation>үл мэдэгдэх</translation>
-    </message>
-    <message>
-        <source>Amount</source>
-        <translation>Хэмжээ</translation>
-    </message>
     </context>
 <context>
     <name>TransactionDescDialog</name>
@@ -548,21 +529,9 @@
     </context>
 <context>
     <name>TransactionTableModel</name>
-    <message>
-        <source>Date</source>
-        <translation>Огноо</translation>
-    </message>
     </context>
 <context>
     <name>TransactionView</name>
-    <message>
-        <source>Confirmed</source>
-        <translation>Баталгаажлаа</translation>
-    </message>
-    <message>
-        <source>Date</source>
-        <translation>Огноо</translation>
-    </message>
     </context>
 <context>
     <name>UnitDisplayStatusBarControl</name>
@@ -575,24 +544,16 @@
     </context>
 <context>
     <name>WalletModel</name>
-    <message>
-        <source>Send Coins</source>
-        <translation>Зоос явуулах</translation>
-    </message>
     </context>
 <context>
     <name>WalletView</name>
-    <message>
-        <source>&amp;Export</source>
-        <translation>&amp;Экспортдлох</translation>
-    </message>
-    <message>
-        <source>Export the data in the current tab to a file</source>
-        <translation>Сонгогдсон таб дээрхи дата-г экспортлох</translation>
-    </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
+    <message>
+        <source>Information</source>
+        <translation>Мэдээллэл</translation>
+    </message>
     <message>
         <source>Insufficient funds</source>
         <translation>Таны дансны үлдэгдэл хүрэлцэхгүй байна</translation>
@@ -612,6 +573,10 @@
     <message>
         <source>Done loading</source>
         <translation>Ачааллаж дууслаа</translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation>Алдаа</translation>
     </message>
 </context>
 </TS>
