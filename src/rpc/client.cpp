@@ -140,6 +140,7 @@ static const CRPCConvertParam vRPCConvertParams[] =
     { "getblockstats", 0, "hash_or_height" },
     { "getblockstats", 1, "stats" },
     { "checkpoint", 1, "height" },
+    { "volatilecheckpoint", 1, "height" },
     { "pruneblockchain", 0, "height" },
     { "keypoolrefill", 0, "newsize" },
     { "getrawmempool", 0, "verbose" },

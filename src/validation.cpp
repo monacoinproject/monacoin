@@ -40,6 +40,7 @@
 #include <utilmoneystr.h>
 #include <utilstrencodings.h>
 #include <validationinterface.h>
+#include <volatilecheckpoint.h>
 #include <warnings.h>
 
 #include <future>
@@ -3252,6 +3253,16 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
         pcheckpoint = CUserCheckpoint::GetInstance().GetLastCheckpoint();
         if (pcheckpoint && nHeight < pcheckpoint->nHeight)
             return state.DoS(100, error("%s: forked chain older than last user-checkpoint (height %d)", __func__, nHeight), REJECT_CHECKPOINT, "bad-fork-prior-to-checkpoint");
+
+        CVolatileCheckpoint *pVcp = &CVolatileCheckpoint::GetInstance();
+        if(pVcp->IsValid())
+        {
+            BlockMap::const_iterator t = mapBlockIndex.find(pVcp->GetHash());
+            if (t != mapBlockIndex.end() && nHeight < t->second->nHeight)
+            {
+               return state.DoS(100, error("%s: block at height %d does not match volatile-checkpoint hash", __func__, nHeight), REJECT_CHECKPOINT, "bad-fork-prior-to-checkpoint");
+            }
+        }
     }
 
     // Check timestamp against prev
