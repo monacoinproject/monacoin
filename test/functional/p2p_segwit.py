@@ -537,7 +537,7 @@ class SegWitTest(BitcoinTestFramework):
             # 'non-mandatory-script-verify-flag (Witness program was passed an
             # empty witness)' (otherwise).
             # TODO: support multiple acceptable reject reasons.
-            # Litecoin: SCRIPT_VERIFY_WITNESS is enforced when segwit is activated
+            # Monacoin: SCRIPT_VERIFY_WITNESS is enforced when segwit is activated
             test_witness_block(self.nodes[0], self.test_node, block, accepted=True, with_witness=False)
 
         connect_nodes(self.nodes[0], 2)

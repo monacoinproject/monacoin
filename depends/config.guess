@@ -778,8 +778,8 @@ EOF
 	    echo "$UNAME_MACHINE"-unknown-osf1
 	fi
 	exit ;;
-    parisc*:Lites*:*:*)
-	echo hppa1.1-hp-lites
+    parisc*:mMona*:*:*)
+	echo hppa1.1-hp-mMona
 	exit ;;
     C1*:ConvexOS:*:* | convex:ConvexOS:C1*:*)
 	echo c1-convex-bsd

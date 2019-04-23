@@ -26,7 +26,7 @@ env:
     - SDK_URL=https://bitcoincore.org/depends-sources/sdks
     - WINEDEBUG=fixme-all
     - DOCKER_PACKAGES="build-essential libtool autotools-dev automake pkg-config bsdmainutils curl git ca-certificates ccache"
-    - LITECOIN_SCRYPT=0
+    - MONACOIN_SCRYPT=0
 before_install:
     - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
     - BEGIN_FOLD () { echo ""; CURRENT_FOLD_NAME=$1; echo "travis_fold:start:${CURRENT_FOLD_NAME}"; }
@@ -40,9 +40,9 @@ install:
     - if [ -n "$DPKG_ADD_ARCH" ]; then DOCKER_EXEC dpkg --add-architecture "$DPKG_ADD_ARCH" ; fi
     - travis_retry DOCKER_EXEC apt-get update
     - travis_retry DOCKER_EXEC apt-get install --no-install-recommends --no-upgrade -qq $PACKAGES $DOCKER_PACKAGES
-    - if [ "$LITECOIN_SCRYPT" = 1 ]; then travis_retry DOCKER_EXEC pip3 install litecoin_scrypt --allow-external litecoin_scrypt; fi
+    - if [ "$MONACOIN_SCRYPT" = 1 ]; then travis_retry DOCKER_EXEC pip3 install monacoin_scrypt --allow-external monacoin_scrypt; fi
 before_script:
-    - DOCKER_EXEC echo \> \$HOME/.litecoin  # Make sure default datadir does not exist and is never read by creating a dummy file
+    - DOCKER_EXEC echo \> \$HOME/.monacoin  # Make sure default datadir does not exist and is never read by creating a dummy file
     - mkdir -p depends/SDKs depends/sdk-sources
     - if [ -n "$OSX_SDK" -a ! -f depends/sdk-sources/MacOSX${OSX_SDK}.sdk.tar.gz ]; then curl --location --fail $SDK_URL/MacOSX${OSX_SDK}.sdk.tar.gz -o depends/sdk-sources/MacOSX${OSX_SDK}.sdk.tar.gz; fi
     - if [ -n "$OSX_SDK" -a -f depends/sdk-sources/MacOSX${OSX_SDK}.sdk.tar.gz ]; then tar -C depends/SDKs -xf depends/sdk-sources/MacOSX${OSX_SDK}.sdk.tar.gz; fi
@@ -57,11 +57,11 @@ script:
     - mkdir build && cd build
     - BEGIN_FOLD configure; DOCKER_EXEC ../configure --cache-file=config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false); END_FOLD
     - BEGIN_FOLD distdir; DOCKER_EXEC make distdir VERSION=$HOST; END_FOLD
-    - cd litecoin-$HOST
+    - cd monacoin-$HOST
     - BEGIN_FOLD configure; DOCKER_EXEC ./configure --cache-file=../config.cache $BITCOIN_CONFIG_ALL $BITCOIN_CONFIG || ( cat config.log && false); END_FOLD
     - BEGIN_FOLD build; DOCKER_EXEC make $MAKEJOBS $GOAL || ( echo "Build failure. Verbose build follows." && DOCKER_EXEC make $GOAL V=1 ; false ); END_FOLD
     - if [ "$RUN_TESTS" = "true" ]; then BEGIN_FOLD unit-tests; DOCKER_EXEC LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/depends/$HOST/lib make $MAKEJOBS check VERBOSE=1; END_FOLD; fi
-    - if [ "$RUN_BENCH" = "true" ]; then BEGIN_FOLD bench; DOCKER_EXEC LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/depends/$HOST/lib $OUTDIR/bin/bench_litecoin -scaling=0.001 ; END_FOLD; fi
+    - if [ "$RUN_BENCH" = "true" ]; then BEGIN_FOLD bench; DOCKER_EXEC LD_LIBRARY_PATH=$TRAVIS_BUILD_DIR/depends/$HOST/lib $OUTDIR/bin/bench_monacoin -scaling=0.001 ; END_FOLD; fi
     - if [ "$TRAVIS_EVENT_TYPE" = "cron" ]; then extended="--extended --exclude feature_pruning,feature_dbcrash"; fi
     - if [ "$RUN_TESTS" = "true" ]; then BEGIN_FOLD functional-tests; DOCKER_EXEC test/functional/test_runner.py --combinedlogslen=4000 --coverage --quiet --failfast ${extended}; END_FOLD; fi
 after_script:
@@ -87,7 +87,7 @@ jobs:
         RUN_TESTS=true
         GOAL="install"
         BITCOIN_CONFIG="--enable-reduce-exports"
-        LITECOIN_SCRYPT=1
+        MONACOIN_SCRYPT=1
 # Win64
     - stage: test
       env: >-
@@ -97,7 +97,7 @@ jobs:
         RUN_TESTS=true
         GOAL="install"
         BITCOIN_CONFIG="--enable-reduce-exports"
-        LITECOIN_SCRYPT=1
+        MONACOIN_SCRYPT=1
 # 32-bit + dash
     - stage: test
       env: >-
@@ -108,7 +108,7 @@ jobs:
         GOAL="install"
         BITCOIN_CONFIG="--enable-zmq --enable-glibc-back-compat --enable-reduce-exports LDFLAGS=-static-libstdc++"
         CONFIG_SHELL="/bin/dash"
-        LITECOIN_SCRYPT=1
+        MONACOIN_SCRYPT=1
 # x86_64 Linux (uses qt5 dev package instead of depends Qt to speed up build and avoid timeout)
     - stage: test
       env: >-
@@ -119,7 +119,7 @@ jobs:
         RUN_BENCH=true
         GOAL="install"
         BITCOIN_CONFIG="--enable-zmq --with-gui=qt5 --enable-glibc-back-compat --enable-reduce-exports --enable-debug CXXFLAGS=\"-g0 -O2\""
-        LITECOIN_SCRYPT=1
+        MONACOIN_SCRYPT=1
 # x86_64 Linux (Qt5 & system libs)
     - stage: test
       env: >-
@@ -129,7 +129,7 @@ jobs:
         RUN_TESTS=true
         GOAL="install"
         BITCOIN_CONFIG="--enable-zmq --with-incompatible-bdb --enable-glibc-back-compat --enable-reduce-exports --with-gui=qt5 CPPFLAGS=-DDEBUG_LOCKORDER"
-        LITECOIN_SCRYPT=1
+        MONACOIN_SCRYPT=1
 # x86_64 Linux, No wallet
     - stage: test
       env: >-
@@ -139,7 +139,7 @@ jobs:
         RUN_TESTS=true
         GOAL="install"
         BITCOIN_CONFIG="--enable-glibc-back-compat --enable-reduce-exports"
-        LITECOIN_SCRYPT=1
+        MONACOIN_SCRYPT=1
 # Cross-Mac
     - stage: test
       env: >-
@@ -166,7 +166,7 @@ jobs:
         - test/lint/check-doc.py
         - test/lint/check-rpc-mappings.py .
         - test/lint/lint-all.sh
-#        - if [ "$TRAVIS_REPO_SLUG" = "litecoin-project/litecoin" -a "$TRAVIS_EVENT_TYPE" = "cron" ]; then
+#        - if [ "$TRAVIS_REPO_SLUG" = "monacoinproject/monacoin" -a "$TRAVIS_EVENT_TYPE" = "cron" ]; then
 #              while read LINE; do travis_retry gpg --keyserver hkp://subset.pool.sks-keyservers.net --recv-keys $LINE; done < contrib/verify-commits/trusted-keys &&
 #              travis_wait 50 contrib/verify-commits/verify-commits.py;
 #          fi
