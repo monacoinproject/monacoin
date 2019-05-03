@@ -22,7 +22,7 @@ BTCVER=($($BITCOINCLI --version | head -n1 | awk -F'[ -]' '{ print $6, $7 }'))
 # This gets autodetected fine for bitcoind if --version-string is not set,
 # but has different outcomes for bitcoin-qt and bitcoin-cli.
 echo "[COPYRIGHT]" > footer.h2m
-$LITECOIND --version | sed -n '1!p' >> footer.h2m
+$BITCOIND --version | sed -n '1!p' >> footer.h2m
 
 for cmd in $BITCOIND $BITCOINCLI $BITCOINTX $WALLET_TOOL $BITCOINQT; do
   cmdname="${cmd##*/}"
