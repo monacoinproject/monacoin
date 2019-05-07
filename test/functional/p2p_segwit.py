@@ -1924,11 +1924,11 @@ class SegWitTest(BitcoinTestFramework):
     def test_upgrade_after_activation(self):
         """Test the behavior of starting up a segwit-aware node after the softfork has activated."""
 
-        print ("\tTesting rejection of block.nVersion < BIP9_TOP_BITS blocks")
+        self.log.info("Testing rejection of block.nVersion < BIP9_TOP_BITS blocks")
         block = self.build_next_block(version=4)
         block.solve()
         resp = self.nodes[0].submitblock(bytes_to_hex_str(block.serialize(True)))
-        assert_equal(resp, 'invalid')
+        assert_equal(resp, 'bad-version(0x00000004)')
 
         # Restart with the new binary
         self.stop_node(2)
