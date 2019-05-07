@@ -36,3 +36,7 @@ fi
 travis_retry DOCKER_EXEC apt-get update
 travis_retry DOCKER_EXEC apt-get install --no-install-recommends --no-upgrade -qq $PACKAGES $DOCKER_PACKAGES
 
+if [ "$LITECOIN_SCRYPT" = 1 ]; then 
+  travis_retry DOCKER_EXEC pip3 install litecoin_scrypt
+fi
+
