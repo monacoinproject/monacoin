@@ -52,7 +52,7 @@ class ResendWalletTransactionsTest(BitcoinTestFramework):
         block_time = int(time.time()) + 6 * 60
         node.setmocktime(block_time)
         block = create_block(int(node.getbestblockhash(), 16), create_coinbase(node.getblockchaininfo()['blocks']), block_time)
-        block.nVersion = 3
+        block.nVersion = 0x20000000
         block.rehash()
         block.solve()
         node.submitblock(ToHex(block))

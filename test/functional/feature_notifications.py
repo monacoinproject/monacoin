@@ -27,7 +27,7 @@ class NotificationsTest(BitcoinTestFramework):
         self.extra_args = [[
                             "-alertnotify=echo > {}".format(os.path.join(self.alertnotify_dir, '%s')),
                             "-blocknotify=echo > {}".format(os.path.join(self.blocknotify_dir, '%s'))],
-                           ["-blockversion=211",
+                           ["-blockversion=536870917",
                             "-rescan",
                             "-walletnotify=echo > {}".format(os.path.join(self.walletnotify_dir, '%s'))]]
         super().setup_network()
