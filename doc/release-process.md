@@ -274,38 +274,6 @@ Note: check that SHA256SUMS itself doesn't end up in SHA256SUMS, which is a spur
 
 - Update other repositories and websites for new version
 
-  - bitcoincore.org blog post
-
-  - bitcoincore.org RPC documentation update
-
-  - Update packaging repo
-
-      - Notify BlueMatt so that he can start building [the PPAs](https://launchpad.net/~bitcoin/+archive/ubuntu/bitcoin)
-
-      - Create a new branch for the major release "0.xx" (used to build the snap package)
-
-      - Notify MarcoFalke so that he can start building the snap package
-
-        - https://code.launchpad.net/~bitcoin-core/bitcoin-core-snap/+git/packaging (Click "Import Now" to fetch the branch)
-        - https://code.launchpad.net/~bitcoin-core/bitcoin-core-snap/+git/packaging/+ref/0.xx (Click "Create snap package")
-        - Name it "bitcoin-core-snap-0.xx"
-        - Leave owner and series as-is
-        - Select architectures that are compiled via gitian
-        - Leave "automatically build when branch changes" unticked
-        - Tick "automatically upload to store"
-        - Put "bitcoin-core" in the registered store package name field
-        - Tick the "edge" box
-        - Put "0.xx" in the track field
-        - Click "create snap package"
-        - Click "Request builds" for every new release on this branch (after updating the snapcraft.yml in the branch to reflect the latest gitian results)
-        - Promote release on https://snapcraft.io/bitcoin-core/releases if it passes sanity checks
-
-  - This repo
-
-      - Archive release notes for the new version to `doc/release-notes/` (branch `master` and branch of the release)
-
-      - Create a [new GitHub release](https://github.com/bitcoin/bitcoin/releases/new) with a link to the archived release notes.
-
 - Announce the release:
 
   - litecoin-dev mailing list

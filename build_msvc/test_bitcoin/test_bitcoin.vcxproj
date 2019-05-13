@@ -67,7 +67,7 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{A56B73DB-D46D-4882-8374-1FE3FFA08F07}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>test_bitcoin</RootNamespace>
+    <RootNamespace>test_litecoin</RootNamespace>
     <VcpkgTriplet Condition="'$(Platform)'=='Win32'">x86-windows-static</VcpkgTriplet>
     <VcpkgTriplet Condition="'$(Platform)'=='x64'">x64-windows-static</VcpkgTriplet>
   </PropertyGroup>
