@@ -58,11 +58,11 @@
         <translation>पता प्राप्त क़िया जा रहा है </translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Litecoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation>ये बिटकॉइन भुगतान करने के लिए आपके पते हैं | हमेशा कॉइन भेजने से पहले राशि और प्राप्ति करने वाले का पता अवश्य जांच लें </translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
+        <source>These are your Litecoin addresses for receiving payments. It is recommended to use a new receiving address for each transaction.</source>
         <translation>ये बिटकॉइन प्राप्त करने के लिए आपके पते हैं | प्रत्येक प्राप्ति के लिए नवीन पता प्रयोग करने की सिफारिश की जाती है </translation>
     </message>
     <message>
