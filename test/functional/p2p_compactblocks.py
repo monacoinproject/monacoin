@@ -100,7 +100,7 @@ class CompactBlocksTest(BitcoinTestFramework):
         self.num_nodes = 2
         # This test was written assuming SegWit is activated using BIP9 at height 432 (3x confirmation window).
         # TODO: Rewrite this test to support SegWit being always active.
-        self.extra_args = [["-vbparams=segwit:0:0"], ["-vbparams=segwit:0:999999999999", "-txindex"]]
+        self.extra_args = [["-vbparams=segwit:0:0", "-maxtxfee=1.0"], ["-vbparams=segwit:0:999999999999", "-txindex", "-maxtxfee=1.0"]]
         self.utxos = []
 
     def skip_test_if_missing_module(self):
@@ -268,12 +268,12 @@ class CompactBlocksTest(BitcoinTestFramework):
             # a witness address.
             address = node.getnewaddress(address_type='bech32')
             value_to_send = node.getbalance()
-            node.sendtoaddress(address, satoshi_round(value_to_send - Decimal(0.1)))
+            node.sendtoaddress(address, satoshi_round(value_to_send - Decimal(0.17)))
             node.generate(1)
 
         segwit_tx_generated = False
         for i in range(num_transactions):
-            txid = node.sendtoaddress(address, 0.1)
+            txid = node.sendtoaddress(address, 0.01)
             hex_tx = node.gettransaction(txid)["hex"]
             tx = FromHex(CTransaction(), hex_tx)
             if not tx.wit.is_null():
