@@ -129,7 +129,7 @@ When looking at other's pull requests, it may make sense to add the following se
 ```
 [remote "upstream-pull"]
         fetch = +refs/pull/*:refs/remotes/upstream-pull/*
-        url = git@github.com:bitcoin/bitcoin.git
+        url = git@github.com:litecoin-project/litecoin.git
 ```
 
 This will add an `upstream-pull` remote to your git repository, which can be fetched using `git fetch --all` or `git fetch upstream-pull`. Afterwards, you can use `upstream-pull/NUMBER/head` in arguments to `git show`, `git checkout` and anywhere a commit id would be acceptable to see the changes from pull request NUMBER.

@@ -50,8 +50,8 @@ before_test:
 - ps:  '[IO.File]::WriteAllLines([IO.Path]::Combine(${env:APPVEYOR_BUILD_FOLDER}, "test", "config.ini"), ${conf_ini}, ${utf8})'
 - ps:  move "build_msvc\${env:PLATFORM}\${env:CONFIGURATION}\*.exe" src
 test_script:
-- cmd: src\test_bitcoin.exe -k stdout -e stdout 2> NUL
-- cmd: src\bench_bitcoin.exe -evals=1 -scaling=0 > NUL
+- cmd: src\test_litecoin.exe -k stdout -e stdout 2> NUL
+- cmd: src\bench_litecoin.exe -evals=1 -scaling=0 > NUL
 - ps:  python test\util\bitcoin-util-test.py
 - cmd: python test\util\rpcauth-test.py
 - cmd: python test\functional\test_runner.py --ci --quiet --combinedlogslen=4000 --failfast

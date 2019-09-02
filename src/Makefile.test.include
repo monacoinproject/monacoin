@@ -566,7 +566,7 @@ endif
 if TARGET_WINDOWS
 else
 if ENABLE_BENCH
-	@echo "Running bench/bench_bitcoin -evals=1 -scaling=0..."
+	@echo "Running bench/bench_litecoin -evals=1 -scaling=0..."
 	$(BENCH_BINARY) -evals=1 -scaling=0 > /dev/null
 endif
 endif
