@@ -143,6 +143,7 @@ public:
         bool m_use_addrman_outgoing = true;
         std::vector<std::string> m_specified_outgoing;
         std::vector<std::string> m_added_nodes;
+        std::vector<bool> m_asmap;
     };
 
     void Init(const Options& connOptions) {
@@ -318,6 +319,8 @@ public:
         Variable intervals will result in privacy decrease.
     */
     int64_t PoissonNextSendInbound(int64_t now, int average_interval_seconds);
+
+    void SetAsmap(std::vector<bool> asmap) { addrman.m_asmap = asmap; }
 
 private:
     struct ListenSocket {
