@@ -82,6 +82,17 @@ class CNetAddr
         uint64_t GetHash() const;
         bool GetInAddr(struct in_addr* pipv4Addr) const;
         uint32_t GetNetClass() const;
+
+        //! For IPv4, mapped IPv4, SIIT translated IPv4, Teredo, 6to4 tunneled addresses, return the relevant IPv4 address as a uint32.
+        uint32_t GetLinkedIPv4() const;
+        //! Whether this address has a linked IPv4 address (see GetLinkedIPv4()).
+        bool HasLinkedIPv4() const;
+
+        // The AS on the BGP path to the node we use to diversify
+        // peers in AddrMan bucketing based on the AS infrastructure.
+        // The ip->AS mapping depends on how asmap is constructed.
+        uint32_t GetMappedAS(const std::vector<bool> &asmap) const;
+
         std::vector<unsigned char> GetGroup(const std::vector<bool> &asmap) const;
 
         int GetReachabilityFrom(const CNetAddr *paddrPartner = nullptr) const;
@@ -92,7 +103,6 @@ class CNetAddr
         // The AS on the BGP path to the node we use to diversify
         // peers in AddrMan bucketing based on the AS infrastructure.
         // The ip->AS mapping depends on how asmap is constructed.
-        uint32_t GetMappedAS(const std::vector<bool> &asmap) const;
 
         friend bool operator==(const CNetAddr& a, const CNetAddr& b);
         friend bool operator!=(const CNetAddr& a, const CNetAddr& b) { return !(a == b); }
