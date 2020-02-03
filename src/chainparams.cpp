@@ -139,6 +139,7 @@ public:
         // release ASAP to avoid it where possible.
         vSeeds.emplace_back("dnsseed.monacoin.org");
         vSeeds.emplace_back("dnsseed.tamami-foundation.org");
+        vSeeds.emplace_back("mona.seed.fujishan.jp");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,50);  // M
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
