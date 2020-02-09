@@ -415,29 +415,6 @@ std::vector<unsigned char> CNetAddr::GetGroup(const std::vector<bool> &asmap) co
     else
         nBits = 32;
 
-    // If asmap is supplied and the address is IPv4/IPv6,
-    // ignore nBits and use 32/128 bits to obtain ASN from asmap.
-    // ASN is then returned to be used for bucketing.
-    if (asmap.size() != 0 && (nClass == NET_IPV4 || nClass == NET_IPV6)) {
-        nClass = NET_IPV6;
-        std::vector<bool> ip_bits(128);
-        for (int8_t byte_i = 0; byte_i < 16; ++byte_i) {
-            uint8_t cur_byte = GetByte(15 - byte_i);
-            for (uint8_t bit_i = 0; bit_i < 8; ++bit_i) {
-                ip_bits[byte_i * 8 + bit_i] = (cur_byte >> (7 - bit_i)) & 1;
-            }
-        }
-
-        uint32_t asn = Interpret(asmap, ip_bits);
-        vchRet.push_back(nClass);
-        for (int i = 0; i < 4; i++) {
-            vchRet.push_back((asn >> (8 * i)) & 0xFF);
-        }
-        return vchRet;
-    }
-
-    vchRet.push_back(nClass);
-
     // push our ip onto vchRet byte by byte...
     while (nBits >= 8)
     {

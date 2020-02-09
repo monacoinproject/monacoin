@@ -688,11 +688,9 @@ void CNode::copyStats(CNodeStats &stats, std::vector<bool> &m_asmap)
     X(addr);
     X(addrBind);
     stats.m_mapped_as = addr.GetMappedAS(m_asmap);
-    if (m_tx_relay != nullptr) {
-        LOCK(m_tx_relay->cs_filter);
-        stats.fRelayTxes = m_tx_relay->fRelayTxes;
-    } else {
-        stats.fRelayTxes = false;
+    {
+        LOCK(cs_filter);
+        X(fRelayTxes);
     }
     X(nLastSend);
     X(nLastRecv);
@@ -1813,11 +1811,7 @@ void CConnman::ThreadOpenConnections(const std::vector<std::string> connect)
                     // also have the added issue that they're attacker controlled and could be used
                     // to prevent us from connecting to particular hosts if we used them here.
                     setConnected.insert(pnode->addr.GetGroup(addrman.m_asmap));
-                    if (pnode->m_tx_relay == nullptr) {
-                        nOutboundBlockRelay++;
-                    } else if (!pnode->fFeeler) {
-                        nOutboundFullRelay++;
-                    }
+                    nOutbound++;
                 }
             }
         }
@@ -1862,6 +1856,7 @@ void CConnman::ThreadOpenConnections(const std::vector<std::string> connect)
             // Require outbound connections, other than feelers, to be to distinct network groups
             if (!fFeeler && setConnected.count(addr.GetGroup(addrman.m_asmap))) {
                 break;
+            }
 
             // If we didn't find an appropriate destination after trying 100 addresses fetched from addrman,
             // stop this loop, and let the outer loop run again (which sleeps, adds seed nodes, recalculates
