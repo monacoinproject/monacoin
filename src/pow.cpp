@@ -10,7 +10,6 @@
 #include <pow.h>
 
 #include <arith_uint256.h>
-#include <bignum.h>
 #include <chain.h>
 #include <primitives/block.h>
 #include <uint256.h>
@@ -20,7 +19,6 @@
 
 #include <stdexcept>
 #include <vector>
-#include <openssl/bn.h>
 #include <cmath>
 
 unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBlockHeader *pblock, uint64_t TargetBlocksSpacingSeconds, uint64_t PastBlocksMin, uint64_t PastBlocksMax, const Consensus::Params& params) {
@@ -33,8 +31,8 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
     int64_t             PastRateActualSeconds       = 0;
     int64_t             PastRateTargetSeconds       = 0;
     double              PastRateAdjustmentRatio     = double(1);
-    CBigNum             PastDifficultyAverage;
-    CBigNum             PastDifficultyAveragePrev;
+    arith_uint256       PastDifficultyAverage;
+    arith_uint256       PastDifficultyAveragePrev;
     double              EventHorizonDeviation;
     double              EventHorizonDeviationFast;
     double              EventHorizonDeviationSlow;
@@ -45,8 +43,13 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
         if (PastBlocksMax > 0 && i > PastBlocksMax) { break; }
         PastBlocksMass++;
 
-        if (i == 1) { PastDifficultyAverage.SetCompact(BlockReading->nBits); }
-        else        { PastDifficultyAverage = ((CBigNum().SetCompact(BlockReading->nBits) - PastDifficultyAveragePrev) / i) + PastDifficultyAveragePrev; }
+        if (i == 1) {
+            PastDifficultyAverage.SetCompact(BlockReading->nBits);
+        } else if (arith_uint256().SetCompact(BlockReading->nBits) > PastDifficultyAveragePrev) {
+            PastDifficultyAverage = PastDifficultyAveragePrev + ((arith_uint256().SetCompact(BlockReading->nBits) - PastDifficultyAveragePrev) / i);
+        } else {
+            PastDifficultyAverage = PastDifficultyAveragePrev - ((PastDifficultyAveragePrev - arith_uint256().SetCompact(BlockReading->nBits)) / i);
+        }
         PastDifficultyAveragePrev = PastDifficultyAverage;
 
         PastRateActualSeconds           = BlockLastSolved->GetBlockTime() - BlockReading->GetBlockTime();
@@ -67,12 +70,12 @@ unsigned int static KimotoGravityWell(const CBlockIndex* pindexLast, const CBloc
         BlockReading = BlockReading->pprev;
     }
 
-    CBigNum bnNew(PastDifficultyAverage);
+    arith_uint256 bnNew(PastDifficultyAverage);
     if (PastRateActualSeconds != 0 && PastRateTargetSeconds != 0) {
         bnNew *= PastRateActualSeconds;
         bnNew /= PastRateTargetSeconds;
     }
-    if (bnNew > CBigNum(params.powLimit)) { bnNew = CBigNum(params.powLimit); }
+    if (bnNew > UintToArith256(params.powLimit)) { bnNew = UintToArith256(params.powLimit); }
 
     return bnNew.GetCompact();
 }
@@ -87,8 +90,8 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
     int64_t PastBlocksMin = 24;
     int64_t PastBlocksMax = 24;
     int64_t CountBlocks = 0;
-    CBigNum PastDifficultyAverage;
-    CBigNum PastDifficultyAveragePrev;
+    arith_uint256 PastDifficultyAverage;
+    arith_uint256 PastDifficultyAveragePrev;
 
     if (BlockLastSolved == NULL || BlockLastSolved->nHeight < Params().SwitchLyra2REv2_DGWblock() + PastBlocksMin) {
         return UintToArith256(params.powLimit).GetCompact();
@@ -100,7 +103,7 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
 
         if(CountBlocks <= PastBlocksMin) {
             if (CountBlocks == 1) { PastDifficultyAverage.SetCompact(BlockReading->nBits); }
-            else { PastDifficultyAverage = ((PastDifficultyAveragePrev * CountBlocks)+(CBigNum().SetCompact(BlockReading->nBits))) / (CountBlocks+1); }
+            else { PastDifficultyAverage = ((PastDifficultyAveragePrev * CountBlocks)+(arith_uint256().SetCompact(BlockReading->nBits))) / (CountBlocks+1); }
             PastDifficultyAveragePrev = PastDifficultyAverage;
         }
 
@@ -114,7 +117,7 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
         BlockReading = BlockReading->pprev;
     }
 
-    CBigNum bnNew(PastDifficultyAverage);
+    arith_uint256 bnNew(PastDifficultyAverage);
 
     int64_t _nTargetTimespan = CountBlocks*params.nPowTargetSpacing;
 
@@ -127,8 +130,8 @@ unsigned int static DarkGravityWave(const CBlockIndex* pindexLast, const CBlockH
     bnNew *= nActualTimespan;
     bnNew /= _nTargetTimespan;
 
-    if (bnNew > CBigNum(params.powLimit)){
-        bnNew = CBigNum(params.powLimit);
+    if (bnNew > UintToArith256(params.powLimit)){
+        bnNew = UintToArith256(params.powLimit);
     }
 
     return bnNew.GetCompact();
