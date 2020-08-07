@@ -107,7 +107,6 @@ BITCOIN_CORE_H = \
   alert.h \
   base58.h \
   bech32.h \
-  bignum.h \
   bloom.h \
   blockencodings.h \
   blockfilter.h \
