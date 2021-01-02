@@ -1,5 +1,6 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
 // Copyright (c) 2009-2018 The Bitcoin Core developers
+// Copyright (c) 2014-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -14,10 +15,13 @@ CFeeRate::CFeeRate(const CAmount& nFeePaid, size_t nBytes_)
     assert(nBytes_ <= uint64_t(std::numeric_limits<int64_t>::max()));
     int64_t nSize = int64_t(nBytes_);
 
-    if (nSize > 0)
-        nSatoshisPerK = nFeePaid * 1000 / nSize;
-    else
+    if (nSize > 0) {
+        __int128_t n = (__int128_t)nFeePaid * 1000 / nSize;
+        assert(n <= INT64_MAX);
+        nSatoshisPerK = (CAmount)n;
+    } else {
         nSatoshisPerK = 0;
+    }
 }
 
 CAmount CFeeRate::GetFee(size_t nBytes_) const
