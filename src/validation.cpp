@@ -1836,8 +1836,15 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex* pindex, const Consens
 
     unsigned int flags = SCRIPT_VERIFY_NONE;
     
-    // Start enforcing P2SH (BIP16)
-    if (pindex->nHeight >= consensusparams.BIP16Height) {
+    // BIP16 didn't become active until Apr 1 2012 (on mainnet, and
+    // retroactively applied to testnet)
+    // However, only one historical block violated the P2SH rules (on both
+    // mainnet and testnet), so for simplicity, always leave P2SH
+    // on except for the one violating block.
+    if (consensusparams.BIP16Exception.IsNull() || // no bip16 exception on this chain
+        pindex->phashBlock == nullptr || // this is a new candidate block, eg from TestBlockValidity()
+        *pindex->phashBlock != consensusparams.BIP16Exception) // this block isn't the historical exception
+    {
         flags |= SCRIPT_VERIFY_P2SH;
     }
 
@@ -3236,11 +3243,10 @@ static bool FindUndoPos(CValidationState &state, int nFile, FlatFilePos &pos, un
 static bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW = true)
 {
     // Get prev block index
-    CBlockIndex* pindexPrev = NULL;
     int nHeight = 0;
-    BlockMap::iterator mi = ::BlockIndex().find(block.hashPrevBlock);
-    if (mi != ::BlockIndex().end()) {
-        pindexPrev = (*mi).second;
+    LOCK(cs_main);
+    CBlockIndex* pindexPrev = LookupBlockIndex(block.hashPrevBlock);
+    if (pindexPrev != NULL) {
         nHeight = pindexPrev->nHeight + 1;
     }
 
@@ -4700,7 +4706,8 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, FlatFi
                         std::multimap<uint256, FlatFilePos>::iterator it = range.first;
                         std::shared_ptr<CBlock> pblockrecursive = std::make_shared<CBlock>();
                         uint256 hash = block.GetHash();
-                        int nHeight = ::BlockIndex()[hash]->nHeight;
+                        LOCK(cs_main);
+                        int nHeight = LookupBlockIndex(hash)->nHeight;
                         if (ReadBlockFromDisk(*pblockrecursive, it->second, nHeight, chainparams.GetConsensus()))
                         {
                             LogPrint(BCLog::REINDEX, "%s: Processing out of order child %s of %s\n", __func__, pblockrecursive->GetHash().ToString(),

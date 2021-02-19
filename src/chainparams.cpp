@@ -64,12 +64,13 @@ public:
     CMainParams() {
         strNetworkID = "main";
         consensus.nSubsidyHalvingInterval = 1051200;
-        consensus.BIP16Height = 0;
+        consensus.BIP16Exception = uint256S("ff9f1c0116d19de7c9963845e129f9ed1bfc0b376eb54fd7afa42e0d418c8bb6");
         consensus.BIP34Height = 0;
         consensus.BIP34Hash = uint256S("ff9f1c0116d19de7c9963845e129f9ed1bfc0b376eb54fd7afa42e0d418c8bb6");
-        consensus.BIP65Height = 977760;
-        consensus.BIP66Height = 977760;
-        consensus.SegwitHeight = 977760;
+        consensus.BIP65Height = 977759;
+        consensus.BIP66Height = 977759;
+        consensus.CSVHeight = 977760; // 00cdaf76200737d9a7f94cc058fb132868c18c50c0342c77fc5a5bf0ee78be0c
+        consensus.SegwitHeight = 977760; // 00cdaf76200737d9a7f94cc058fb132868c18c50c0342c77fc5a5bf0ee78be0c
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); 
         consensus.nPowTargetTimespan = 1.1 * 24 * 60 * 60; // 1.1 days
         consensus.nPowTargetSpacing = 1.5 * 60; // 1.5 minutes
@@ -172,11 +173,13 @@ public:
     CTestNetParams() {
         strNetworkID = "test";
         consensus.nSubsidyHalvingInterval = 1051200;
-        consensus.BIP16Height = 0; // always enforce P2SH BIP16 on regtest
+        consensus.BIP16Exception = uint256S("a2b106ceba3be0c6d097b2a6a6aacf9d638ba8258ae478158f449c321061e0b2"); // always enforce P2SH BIP16 on regtest
         consensus.BIP34Height = 0;
         consensus.BIP34Hash = uint256S("a2b106ceba3be0c6d097b2a6a6aacf9d638ba8258ae478158f449c321061e0b2");
         consensus.BIP65Height = -1;
         consensus.BIP66Height = -1;
+        consensus.CSVHeight = 300; // 746481baefad145d7309a8b44dca1acce5d6442988afbae2595796cae9ae1eb2
+        consensus.SegwitHeight = 300; // 746481baefad145d7309a8b44dca1acce5d6442988afbae2595796cae9ae1eb2
         consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 1.1 * 24 * 60 * 60; // 1.1 days
         consensus.nPowTargetSpacing = 1.5 * 60; // 1.5 minutes
@@ -185,7 +188,10 @@ public:
         consensus.fPowNoRetargeting = false;
         consensus.nRuleChangeActivationThreshold = 75; // 75% for testchains
         consensus.nMinerConfirmationWindow = 100; // nPowTargetTimespan / nPowTargetSpacing
-
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].bit = 28;
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nStartTime = 1199145601; // January 1, 2008
+        consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
+ 
         // The best chain should have at least this much work.
         consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000000000000535d5fc3c9d2");
 
@@ -262,7 +268,7 @@ public:
     explicit CRegTestParams(const ArgsManager& args) {
         strNetworkID = "regtest";
         consensus.nSubsidyHalvingInterval = 150;
-        consensus.BIP16Height = 0;
+        consensus.BIP16Exception = uint256();
         consensus.BIP34Height = -1; // BIP34 has not activated on regtest (Used in functional tests)
         consensus.BIP34Hash = uint256();
         consensus.BIP65Height = -1; // BIP65 activated on regtest (Used in functional tests)
