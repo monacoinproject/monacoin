@@ -1146,7 +1146,7 @@ static bool WriteBlockToDisk(const CBlock& block, FlatFilePos& pos, const CMessa
     return true;
 }
 
-bool ReadBlockFromDisk(CBlock& block, const FlatFilePos& pos, const Consensus::Params& consensusParams)
+bool ReadBlockFromDisk(CBlock& block, const FlatFilePos& pos, int nHeight, const Consensus::Params& consensusParams)
 {
     block.SetNull();
 
@@ -1856,13 +1856,8 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex* pindex, const Consens
         flags |= SCRIPT_VERIFY_CHECKSEQUENCEVERIFY;
     }
 
-    // Start enforcing WITNESS rules using versionbits logic.
+    // Start enforcing BIP147 NULLDUMMY (activated simultaneously with segwit)
     if (IsWitnessEnabled(pindex->pprev, consensusparams)) {
-        flags |= SCRIPT_VERIFY_WITNESS;
-    }
-
-    // Start enforcing NULLDUMMY rules using versionbits logic.
-    if (IsNullDummyEnabled(pindex->pprev, consensusparams)) {
         flags |= SCRIPT_VERIFY_NULLDUMMY;
     }
 
@@ -2031,7 +2026,7 @@ bool CChainState::ConnectBlock(const CBlock& block, CValidationState& state, CBl
     // edge case when manipulating the UTXO and it would be simpler not to have
     // another edge case to deal with.
 
-    // testnet3 has no blocks before the BIP34 height with indicated heights
+    // testnet4 has no blocks before the BIP34 height with indicated heights
     // post BIP34 before approximately height 486,000,000 and presumably will
     // be reset before it reaches block 1,983,702 and starts doing unnecessary
     // BIP30 checking again.
@@ -3243,8 +3238,8 @@ static bool CheckBlockHeader(const CBlockHeader& block, CValidationState& state,
     // Get prev block index
     CBlockIndex* pindexPrev = NULL;
     int nHeight = 0;
-    BlockMap::iterator mi = mapBlockIndex.find(block.hashPrevBlock);
-    if (mi != mapBlockIndex.end()) {
+    BlockMap::iterator mi = ::BlockIndex().find(block.hashPrevBlock);
+    if (mi != ::BlockIndex().end()) {
         pindexPrev = (*mi).second;
         nHeight = pindexPrev->nHeight + 1;
     }
@@ -3462,7 +3457,7 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, CValidationSta
                                  strprintf("rejected nVersion=0x%08x block", block.nVersion));
 
     if (block.nVersion < VERSIONBITS_TOP_BITS && IsWitnessEnabled(pindexPrev, consensusParams))
-        return state.Invalid(false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
+        return state.Invalid(ValidationInvalidReason::BLOCK_INVALID_HEADER, false, REJECT_OBSOLETE, strprintf("bad-version(0x%08x)", block.nVersion),
                                  strprintf("rejected nVersion=0x%08x block", block.nVersion));
 
     return true;
@@ -4705,7 +4700,7 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, FlatFi
                         std::multimap<uint256, FlatFilePos>::iterator it = range.first;
                         std::shared_ptr<CBlock> pblockrecursive = std::make_shared<CBlock>();
                         uint256 hash = block.GetHash();
-                        int nHeight = mapBlockIndex[hash]->nHeight;
+                        int nHeight = ::BlockIndex()[hash]->nHeight;
                         if (ReadBlockFromDisk(*pblockrecursive, it->second, nHeight, chainparams.GetConsensus()))
                         {
                             LogPrint(BCLog::REINDEX, "%s: Processing out of order child %s of %s\n", __func__, pblockrecursive->GetHash().ToString(),
