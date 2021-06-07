@@ -22,6 +22,7 @@ packages:
 - "zip"
 - "ca-certificates"
 - "python3"
+- "rename"
 remotes:
 - "url": "https://github.com/monacoinproject/monacoin.git"
   "dir": "monacoin"
