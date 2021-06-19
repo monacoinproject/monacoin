@@ -1,0 +1,5 @@
+Some files are not licensed under MIT license.
+
+Please see each license notice in each file for more information.
+
+- src/crypto/scrypt.cpp
