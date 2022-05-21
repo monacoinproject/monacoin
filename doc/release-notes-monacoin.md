@@ -82,7 +82,7 @@ new scrypt.c from Verge
 -----------------------
 
 scrypt.c is replaced from Litecoin's to Verge's.
-New scrypt.c is OPenSSL free. And it is enough stable.
+New scrypt.c is OpenSSL free. And it is enough stable.
 Note that it is not lisensed under MITL. Please see the license
 header in `src/crypto/scrypt.cpp`.
 
@@ -94,6 +94,13 @@ should be de-centralized. That system wasn't.
 Some people think risks of rewind attacks by crackers.
 But no worry. The recent Monacoin chain has enough hash power.
 Thanks miners for keeping work.
+
+0.20.3 change log
+=================
+
+### Miscellaneous
+
+- #101 Fix the invalid value in MESSAGE_MAGIC
 
 Credits
 =======
