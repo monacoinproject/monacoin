@@ -1,4 +1,4 @@
-// Copyright (c) 2012-2021 The Monacoin Core developers
+// Copyright (c) 2012-2021 The Bitcoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -84,7 +84,7 @@ std::string CopyrightHolders(const std::string& strPrefix)
 
     // Make sure Monacoin Core copyright is not removed by accident
     if (copyright_devs.find("Monacoin Core") == std::string::npos) {
-        strCopyrightHolders += "\n" + strPrefix + "The Monacoin Core developers";
+        strCopyrightHolders += "\n" + strPrefix + "The Bitcoin Core developers";
     }
     return strCopyrightHolders;
 }
