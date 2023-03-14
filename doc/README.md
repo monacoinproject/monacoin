@@ -5,7 +5,7 @@ Setup
 ---------------------
 Monacoin Core is the original Monacoin client and it builds the backbone of the network. It downloads and, by default, stores the entire history of Monacoin transactions, which requires a few hundred gigabytes of disk space. Depending on the speed of your computer and network connection, the synchronization process can take anywhere from a few hours to a day or more.
 
-To download Monacoin Core, visit [monacoincore.org](https://monacoincore.org/en/download/).
+To download Monacoin Core, visit [monacoincore.org](https://bitcoincore.org/en/download/).
 
 Running
 ---------------------
@@ -28,11 +28,11 @@ Drag Monacoin Core to your applications folder, and then run Monacoin Core.
 
 ### Need Help?
 
-* See the documentation at the [Monacoin Wiki](https://en.monacoin.it/wiki/Main_Page)
+* See the documentation at the [Monacoin Wiki](https://en.bitcoin.it/wiki/Main_Page)
 for help and more information.
-* Ask for help on [Monacoin StackExchange](https://monacoin.stackexchange.com).
-* Ask for help on #monacoin on Libera Chat. If you don't have an IRC client, you can use [web.libera.chat](https://web.libera.chat/#monacoin).
-* Ask for help on the [MonacoinTalk](https://monacointalk.org/) forums, in the [Technical Support board](https://monacointalk.org/index.php?board=4.0).
+* Ask for help on [Monacoin StackExchange](https://bitcoin.stackexchange.com).
+* Ask for help on #monacoin on Libera Chat. If you don't have an IRC client, you can use [web.libera.chat](https://web.libera.chat/#bitcoin).
+* Ask for help on the [MonacoinTalk](https://bitcointalk.org/) forums, in the [Technical Support board](https://bitcointalk.org/index.php?board=4.0).
 
 Building
 ---------------------
@@ -54,7 +54,7 @@ The Monacoin repo's [root README](/README.md) contains relevant information on t
 - [Developer Notes](developer-notes.md)
 - [Productivity Notes](productivity.md)
 - [Release Process](release-process.md)
-- [Source Code Documentation (External Link)](https://doxygen.monacoincore.org/)
+- [Source Code Documentation (External Link)](https://doxygen.bitcoincore.org/)
 - [Translation Process](translation_process.md)
 - [Translation Strings Policy](translation_strings_policy.md)
 - [JSON-RPC Interface](JSON-RPC-interface.md)
@@ -66,8 +66,8 @@ The Monacoin repo's [root README](/README.md) contains relevant information on t
 - [Internal Design Docs](design/)
 
 ### Resources
-* Discuss on the [MonacoinTalk](https://monacointalk.org/) forums, in the [Development & Technical Discussion board](https://monacointalk.org/index.php?board=6.0).
-* Discuss project-specific development on #monacoin-core-dev on Libera Chat. If you don't have an IRC client, you can use [web.libera.chat](https://web.libera.chat/#monacoin-core-dev).
+* Discuss on the [MonacoinTalk](https://bitcointalk.org/) forums, in the [Development & Technical Discussion board](https://bitcointalk.org/index.php?board=6.0).
+* Discuss project-specific development on #monacoin-core-dev on Libera Chat. If you don't have an IRC client, you can use [web.libera.chat](https://web.libera.chat/#bitcoin-core-dev).
 
 ### Miscellaneous
 - [Assets Attribution](assets-attribution.md)

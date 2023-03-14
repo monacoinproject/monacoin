@@ -28,12 +28,12 @@ The interface is defined in the C header `monacoinconsensus.h` located in `src/s
 
 ##### Script Flags
 - `monacoinconsensus_SCRIPT_FLAGS_VERIFY_NONE`
-- `monacoinconsensus_SCRIPT_FLAGS_VERIFY_P2SH` - Evaluate P2SH ([BIP16](https://github.com/monacoin/bips/blob/master/bip-0016.mediawiki)) subscripts
-- `monacoinconsensus_SCRIPT_FLAGS_VERIFY_DERSIG` - Enforce strict DER ([BIP66](https://github.com/monacoin/bips/blob/master/bip-0066.mediawiki)) compliance
-- `monacoinconsensus_SCRIPT_FLAGS_VERIFY_NULLDUMMY` - Enforce NULLDUMMY ([BIP147](https://github.com/monacoin/bips/blob/master/bip-0147.mediawiki))
-- `monacoinconsensus_SCRIPT_FLAGS_VERIFY_CHECKLOCKTIMEVERIFY` - Enable CHECKLOCKTIMEVERIFY ([BIP65](https://github.com/monacoin/bips/blob/master/bip-0065.mediawiki))
-- `monacoinconsensus_SCRIPT_FLAGS_VERIFY_CHECKSEQUENCEVERIFY` - Enable CHECKSEQUENCEVERIFY ([BIP112](https://github.com/monacoin/bips/blob/master/bip-0112.mediawiki))
-- `monacoinconsensus_SCRIPT_FLAGS_VERIFY_WITNESS` - Enable WITNESS ([BIP141](https://github.com/monacoin/bips/blob/master/bip-0141.mediawiki))
+- `monacoinconsensus_SCRIPT_FLAGS_VERIFY_P2SH` - Evaluate P2SH ([BIP16](https://github.com/bitcoin/bips/blob/master/bip-0016.mediawiki)) subscripts
+- `monacoinconsensus_SCRIPT_FLAGS_VERIFY_DERSIG` - Enforce strict DER ([BIP66](https://github.com/bitcoin/bips/blob/master/bip-0066.mediawiki)) compliance
+- `monacoinconsensus_SCRIPT_FLAGS_VERIFY_NULLDUMMY` - Enforce NULLDUMMY ([BIP147](https://github.com/bitcoin/bips/blob/master/bip-0147.mediawiki))
+- `monacoinconsensus_SCRIPT_FLAGS_VERIFY_CHECKLOCKTIMEVERIFY` - Enable CHECKLOCKTIMEVERIFY ([BIP65](https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki))
+- `monacoinconsensus_SCRIPT_FLAGS_VERIFY_CHECKSEQUENCEVERIFY` - Enable CHECKSEQUENCEVERIFY ([BIP112](https://github.com/bitcoin/bips/blob/master/bip-0112.mediawiki))
+- `monacoinconsensus_SCRIPT_FLAGS_VERIFY_WITNESS` - Enable WITNESS ([BIP141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki))
 
 ##### Errors
 - `monacoinconsensus_ERR_OK` - No errors with input parameters *(see the return value of `monacoinconsensus_verify_script` for the verification status)*
@@ -44,7 +44,7 @@ The interface is defined in the C header `monacoinconsensus.h` located in `src/s
 - `monacoinconsensus_ERR_INVALID_FLAGS` - Script verification `flags` are invalid (i.e. not part of the libconsensus interface)
 
 ### Example Implementations
-- [NMonacoin](https://github.com/MetacoSA/NMonacoin/blob/5e1055cd7c4186dee4227c344af8892aea54faec/NMonacoin/Script.cs#L979-#L1031) (.NET Bindings)
-- [node-libmonacoinconsensus](https://github.com/bitpay/node-libmonacoinconsensus) (Node.js Bindings)
-- [java-libmonacoinconsensus](https://github.com/dexX7/java-libmonacoinconsensus) (Java Bindings)
-- [monacoinconsensus-php](https://github.com/Bit-Wasp/monacoinconsensus-php) (PHP Bindings)
+- [NMonacoin](https://github.com/MetacoSA/NBitcoin/blob/5e1055cd7c4186dee4227c344af8892aea54faec/NBitcoin/Script.cs#L979-#L1031) (.NET Bindings)
+- [node-libmonacoinconsensus](https://github.com/bitpay/node-libbitcoinconsensus) (Node.js Bindings)
+- [java-libmonacoinconsensus](https://github.com/dexX7/java-libbitcoinconsensus) (Java Bindings)
+- [monacoinconsensus-php](https://github.com/Bit-Wasp/bitcoinconsensus-php) (PHP Bindings)

@@ -1,6 +1,6 @@
 Monacoin Core version 0.9.1 is now available from:
 
-  https://monacoin.org/bin/0.9.1/
+  https://bitcoin.org/bin/0.9.1/
 
 This is a security update. It is recommended to upgrade to this release
 as soon as possible.
@@ -13,7 +13,7 @@ hostile hosts.
 
 Please report bugs using the issue tracker at github:
 
-  https://github.com/monacoin/monacoin/issues
+  https://github.com/bitcoin/bitcoin/issues
 
 How to Upgrade
 --------------

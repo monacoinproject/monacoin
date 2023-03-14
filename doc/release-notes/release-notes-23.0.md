@@ -3,18 +3,18 @@
 
 Monacoin Core version 23.0 is now available from:
 
-  <https://monacoincore.org/bin/monacoin-core-23.0/>
+  <https://bitcoincore.org/bin/bitcoin-core-23.0/>
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/monacoin/monacoin/issues>
+  <https://github.com/bitcoin/bitcoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://monacoincore.org/en/list/announcements/join/>
+  <https://bitcoincore.org/en/list/announcements/join/>
 
 How to Upgrade
 ==============
@@ -49,7 +49,7 @@ P2P and network changes
 
 - Before this release, Monacoin Core had a strong preference to try to connect only to peers that listen on port 8333. As a result of that, Monacoin nodes listening on non-standard ports would likely not get any Monacoin Core peers connecting to them. This preference has been removed. (#23542)
 
-- Full support has been added for the CJDNS network. See the new option `-cjdnsreachable` and [doc/cjdns.md](https://github.com/monacoin/monacoin/tree/23.x/doc/cjdns.md) (#23077)
+- Full support has been added for the CJDNS network. See the new option `-cjdnsreachable` and [doc/cjdns.md](https://github.com/bitcoin/bitcoin/tree/23.x/doc/cjdns.md) (#23077)
 
 Fee estimation changes
 ----------------------
@@ -72,8 +72,8 @@ act as an interface for process-internal events. These can be used for review,
 debugging, monitoring, and more. The tracepoint API is semi-stable. While the API
 is tested, process internals might change between releases requiring changes to the
 tracepoints. Information about the existing tracepoints can be found under
-[doc/tracing.md](https://github.com/monacoin/monacoin/blob/23.x/doc/tracing.md) and
-usage examples are provided in [contrib/tracing/](https://github.com/monacoin/monacoin/tree/23.x/contrib/tracing).
+[doc/tracing.md](https://github.com/bitcoin/bitcoin/blob/23.x/doc/tracing.md) and
+usage examples are provided in [contrib/tracing/](https://github.com/bitcoin/bitcoin/tree/23.x/contrib/tracing).
 
 Updated RPCs
 ------------
@@ -370,4 +370,4 @@ Thanks to everyone who directly contributed to this release:
 - Zero-1729
 
 As well as to everyone that helped with translations on
-[Transifex](https://www.transifex.com/monacoin/monacoin/).
+[Transifex](https://www.transifex.com/bitcoin/bitcoin/).

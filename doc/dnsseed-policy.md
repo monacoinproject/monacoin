@@ -44,11 +44,11 @@ related to the DNS seed operation.
 If these expectations cannot be satisfied the operator should
 discontinue providing services and contact the active Monacoin
 Core development team as well as posting on
-[monacoin-dev](https://lists.linuxfoundation.org/mailman/listinfo/monacoin-dev).
+[monacoin-dev](https://lists.linuxfoundation.org/mailman/listinfo/bitcoin-dev).
 
 Behavior outside of these expectations may be reasonable in some
 situations but should be discussed in public in advance.
 
 See also
 ----------
-- [monacoin-seeder](https://github.com/sipa/monacoin-seeder) is a reference implementation of a DNS seed.
+- [monacoin-seeder](https://github.com/sipa/bitcoin-seeder) is a reference implementation of a DNS seed.

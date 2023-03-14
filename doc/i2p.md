@@ -89,7 +89,7 @@ to allow multiple networks, e.g. onlynet=onion, onlynet=i2p.
 I2P support was added to Monacoin Core in version 22.0 and there may be fewer I2P
 peers than Tor or IP ones. Therefore, using I2P alone without other networks may
 make a node more susceptible to [Sybil
-attacks](https://en.monacoin.it/wiki/Weaknesses#Sybil_attack). You can use
+attacks](https://en.bitcoin.it/wiki/Weaknesses#Sybil_attack). You can use
 `monacoin-cli -addrinfo` to see the number of I2P addresses known to your node.
 
 Another consideration with `onlynet=i2p` is that the initial blocks download

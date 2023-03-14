@@ -1,17 +1,17 @@
 Monacoin Core version 0.13.0 is now available from:
 
-  <https://monacoin.org/bin/monacoin-core-0.13.0/>
+  <https://bitcoin.org/bin/bitcoin-core-0.13.0/>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/monacoin/monacoin/issues>
+  <https://github.com/bitcoin/bitcoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://monacoincore.org/en/list/announcements/join/>
+  <https://bitcoincore.org/en/list/announcements/join/>
 
 Compatibility
 ==============
@@ -22,7 +22,7 @@ updates will be released anymore. Without security updates, using a monacoin
 wallet on a XP machine is irresponsible at least.
 
 In addition to that, with 0.12.x there have been varied reports of Monacoin Core
-randomly crashing on Windows XP. It is [not clear](https://github.com/monacoin/monacoin/issues/7681#issuecomment-217439891)
+randomly crashing on Windows XP. It is [not clear](https://github.com/bitcoin/bitcoin/issues/7681#issuecomment-217439891)
 what the source of these crashes is, but it is likely that upstream
 libraries such as Qt are no longer being tested on XP.
 
@@ -122,7 +122,7 @@ in PR 8068.
 The primary goal is reducing the bandwidth spikes at relay time, though in many
 cases it also reduces propagation delay. It is automatically enabled between
 compatible peers.
-[BIP 152](https://github.com/monacoin/bips/blob/master/bip-0152.mediawiki)
+[BIP 152](https://github.com/bitcoin/bips/blob/master/bip-0152.mediawiki)
 
 As a side-effect, ordinary non-mining nodes will download and upload blocks
 faster if those blocks were produced by miners using similar transaction
@@ -158,17 +158,17 @@ There is no distinction between internal (change) and external keys.
 
 HD wallets are incompatible with older versions of Monacoin Core.
 
-[Pull request](https://github.com/monacoin/monacoin/pull/8035/files), [BIP 32](https://github.com/monacoin/bips/blob/master/bip-0032.mediawiki)
+[Pull request](https://github.com/bitcoin/bitcoin/pull/8035/files), [BIP 32](https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki)
 
 
 Segregated Witness
 ------------------
 
 The code preparations for Segregated Witness ("segwit"), as described in [BIP
-141](https://github.com/monacoin/bips/blob/master/bip-0141.mediawiki), [BIP
-143](https://github.com/monacoin/bips/blob/master/bip-0143.mediawiki), [BIP
-144](https://github.com/monacoin/bips/blob/master/bip-0144.mediawiki), and [BIP
-145](https://github.com/monacoin/bips/blob/master/bip-0145.mediawiki) are
+141](https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki), [BIP
+143](https://github.com/bitcoin/bips/blob/master/bip-0143.mediawiki), [BIP
+144](https://github.com/bitcoin/bips/blob/master/bip-0144.mediawiki), and [BIP
+145](https://github.com/bitcoin/bips/blob/master/bip-0145.mediawiki) are
 finished and included in this release.  However, BIP 141 does not yet specify
 activation parameters on mainnet, and so this release does not support segwit
 use on mainnet.  Testnet use is supported, and after BIP 141 is updated with
@@ -199,7 +199,7 @@ The command line option `-blockmaxsize` remains an option to specify the
 maximum number of serialized bytes in a generated block.  In addition, the new
 command line option `-blockmaxweight` has been added, which specifies the
 maximum "block weight" of a generated block, as defined by [BIP 141 (Segregated
-Witness)] (https://github.com/monacoin/bips/blob/master/bip-0141.mediawiki).
+Witness)] (https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki).
 
 In preparation for Segregated Witness, the mining algorithm has been modified
 to optimize transaction selection for a given block weight, rather than a given
@@ -216,7 +216,7 @@ support `-blockmaxsize` performs additional computation to ensure that
 constraint is met.  (Note that for mainnet, in this release, the equivalent
 parameter for `-blockmaxweight` would be four times the desired
 `-blockmaxsize`.  See [BIP 141]
-(https://github.com/monacoin/bips/blob/master/bip-0141.mediawiki) for additional
+(https://github.com/bitcoin/bips/blob/master/bip-0141.mediawiki) for additional
 details.)
 
 In the future, the `-blockmaxsize` option may be removed, as block creation is
@@ -277,7 +277,7 @@ Low-level P2P changes
 - The optional new p2p message "feefilter" is implemented and the protocol
   version is bumped to 70013. Upon receiving a feefilter message from a peer,
   a node will not send invs for any transactions which do not meet the filter
-  feerate. [BIP 133](https://github.com/monacoin/bips/blob/master/bip-0133.mediawiki)
+  feerate. [BIP 133](https://github.com/bitcoin/bips/blob/master/bip-0133.mediawiki)
 
 - The P2P alert system has been removed in PR #7692 and the `alert` P2P message
   is no longer supported.
@@ -326,10 +326,10 @@ Low-level RPC changes
 - Asm script outputs replacements for OP_NOP2 and OP_NOP3
 
   - OP_NOP2 has been renamed to OP_CHECKLOCKTIMEVERIFY by [BIP 
-65](https://github.com/monacoin/bips/blob/master/bip-0065.mediawiki)
+65](https://github.com/bitcoin/bips/blob/master/bip-0065.mediawiki)
 
   - OP_NOP3 has been renamed to OP_CHECKSEQUENCEVERIFY by [BIP 
-112](https://github.com/monacoin/bips/blob/master/bip-0112.mediawiki)
+112](https://github.com/bitcoin/bips/blob/master/bip-0112.mediawiki)
 
   - The following outputs are affected by this change:
 
@@ -358,7 +358,7 @@ Low-level ZMQ changes
   listeners to detect lost notifications.
   The sequence number is always the last element in a multi-part ZMQ notification and
   therefore backward compatible. Each message type has its own counter.
-  PR [#7762](https://github.com/monacoin/monacoin/pull/7762).
+  PR [#7762](https://github.com/bitcoin/bitcoin/pull/7762).
 
 
 0.13.0 Change log
@@ -865,4 +865,4 @@ Thanks to everyone who directly contributed to this release:
 - Wladimir J. van der Laan
 - Yuri Zhykin
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/monacoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).

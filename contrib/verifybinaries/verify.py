@@ -21,8 +21,8 @@ from textwrap import indent
 
 WORKINGDIR = "/tmp/monacoin_verify_binaries"
 HASHFILE = "hashes.tmp"
-HOST1 = "https://monacoincore.org"
-HOST2 = "https://monacoin.org"
+HOST1 = "https://bitcoincore.org"
+HOST2 = "https://bitcoin.org"
 VERSIONPREFIX = "monacoin-core-"
 SIGNATUREFILENAME = "SHA256SUMS.asc"
 

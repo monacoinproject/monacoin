@@ -20,7 +20,7 @@ See [dependencies.md](dependencies.md) for a complete overview.
 ### 2. Clone Monacoin Repo
 Clone the Monacoin Core repository to a directory. All build scripts and commands will run from this directory.
 ``` bash
-git clone https://github.com/monacoin/monacoin.git
+git clone https://github.com/bitcoin/bitcoin.git
 ```
 
 ### 3. Install Optional Dependencies
@@ -120,7 +120,7 @@ data(kbytes)         1572864
 ```
 
 This is, unfortunately, in some cases not enough to compile some `.cpp` files in the project,
-(see issue [#6658](https://github.com/monacoin/monacoin/issues/6658)).
+(see issue [#6658](https://github.com/bitcoin/bitcoin/issues/6658)).
 If your user is in the `staff` group the limit can be raised with:
 ```bash
 ulimit -d 3000000

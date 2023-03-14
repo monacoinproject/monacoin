@@ -2,16 +2,16 @@
 
 On unix systems, the `--enable-multiprocess` build option can be passed to `./configure` to build new `monacoin-node`, `monacoin-wallet`, and `monacoin-gui` executables alongside existing `monacoind` and `monacoin-qt` executables.
 
-`monacoin-node` is a drop-in replacement for `monacoind`, and `monacoin-gui` is a drop-in replacement for `monacoin-qt`, and there are no differences in use or external behavior between the new and old executables. But internally (after [#10102](https://github.com/monacoin/monacoin/pull/10102)), `monacoin-gui` will spawn a `monacoin-node` process to run P2P and RPC code, communicating with it across a socket pair, and `monacoin-node` will spawn `monacoin-wallet` to run wallet code, also communicating over a socket pair. This will let node, wallet, and GUI code run in separate address spaces for better isolation, and allow future improvements like being able to start and stop components independently on different machines and environments.
+`monacoin-node` is a drop-in replacement for `monacoind`, and `monacoin-gui` is a drop-in replacement for `monacoin-qt`, and there are no differences in use or external behavior between the new and old executables. But internally (after [#10102](https://github.com/bitcoin/bitcoin/pull/10102)), `bitcoin-gui` will spawn a `bitcoin-node` process to run P2P and RPC code, communicating with it across a socket pair, and `bitcoin-node` will spawn `bitcoin-wallet` to run wallet code, also communicating over a socket pair. This will let node, wallet, and GUI code run in separate address spaces for better isolation, and allow future improvements like being able to start and stop components independently on different machines and environments.
 
 ## Next steps
 
-Specific next steps after [#10102](https://github.com/monacoin/monacoin/pull/10102) will be:
+Specific next steps after [#10102](https://github.com/bitcoin/bitcoin/pull/10102) will be:
 
 - [ ] Adding `-ipcbind` and `-ipcconnect` options to `monacoin-node`, `monacoin-wallet`, and `monacoin-gui` executables so they can listen and connect to TCP ports and unix socket paths. This will allow separate processes to be started and stopped any time and connect to each other.
 - [ ] Adding `-server` and `-rpcbind` options to the `monacoin-wallet` executable so wallet processes can handle RPC requests directly without going through the node.
 - [ ] Supporting windows, not just unix systems. The existing socket code is already cross-platform, so the only windows-specific code that needs to be written is code spawning a process and passing a socket descriptor. This can be implemented with `CreateProcess` and `WSADuplicateSocket`. Example: https://memset.wordpress.com/2010/10/13/win32-api-passing-socket-with-ipc-method/.
-- [ ] Adding sandbox features, restricting subprocess access to resources and data. See [https://eklitzke.org/multiprocess-monacoin](https://eklitzke.org/multiprocess-monacoin).
+- [ ] Adding sandbox features, restricting subprocess access to resources and data. See [https://eklitzke.org/multiprocess-bitcoin](https://eklitzke.org/multiprocess-bitcoin).
 
 ## Debugging
 

@@ -103,9 +103,9 @@ incoming connections.
 
 For further information see:
 
-[pull/23306](https://github.com/monacoin/monacoin/pull/23306#issuecomment-947516736)
+[pull/23306](https://github.com/bitcoin/bitcoin/pull/23306#issuecomment-947516736)
 
-[pull/23542](https://github.com/monacoin/monacoin/pull/23542)
+[pull/23542](https://github.com/bitcoin/bitcoin/pull/23542)
 
 [fetch.spec.whatwg.org](https://fetch.spec.whatwg.org/#port-blocking)
 

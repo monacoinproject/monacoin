@@ -1,17 +1,17 @@
 Monacoin Core version 0.18.0 is now available from:
 
-  <https://monacoincore.org/bin/monacoin-core-0.18.0/>
+  <https://bitcoincore.org/bin/bitcoin-core-0.18.0/>
 
 This is a new major version release, including new features, various bug
 fixes and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/monacoin/monacoin/issues>
+  <https://github.com/bitcoin/bitcoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://monacoincore.org/en/list/announcements/join/>
+  <https://bitcoincore.org/en/list/announcements/join/>
 
 How to Upgrade
 ==============
@@ -95,7 +95,7 @@ Configuration option changes
   messages that ZMQ will queue in memory (the "high water mark") before
   dropping additional messages.  The default value is 1,000, the same as
   was used for previous releases.  See the [ZMQ
-  documentation](https://github.com/monacoin/monacoin/blob/master/doc/zmq.md#usage)
+  documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/zmq.md#usage)
   for details.
 
 - The `rpcallowip` option can no longer be used to automatically listen
@@ -119,7 +119,7 @@ Configuration option changes
   disconnect/ban behavior will not cause a node that is whitelisting
   another to be dropped by peers.  Users can still explicitly enable
   this behavior with the command line option (and may want to consider
-  [contacting](https://monacoincore.org/en/contact/) the Monacoin Core
+  [contacting](https://bitcoincore.org/en/contact/) the Bitcoin Core
   project to let us know about their use-case, as this feature could be
   deprecated in the future).
 
@@ -147,24 +147,24 @@ take precedence over the options specified in
 Documentation
 -------------
 
-- A new short [document](https://github.com/monacoin/monacoin/blob/master/doc/JSON-RPC-interface.md)
+- A new short [document](https://github.com/bitcoin/bitcoin/blob/master/doc/JSON-RPC-interface.md)
   about the JSON-RPC interface describes cases where the results of an
   RPC might contain inconsistencies between data sourced from different
   subsystems, such as wallet state and mempool state.  A note is added
-  to the [REST interface documentation](https://github.com/monacoin/monacoin/blob/master/doc/REST-interface.md)
+  to the [REST interface documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/REST-interface.md)
   indicating that the same rules apply.
 
 - Further information is added to the [JSON-RPC
-  documentation](https://github.com/monacoin/monacoin/blob/master/doc/JSON-RPC-interface.md)
+  documentation](https://github.com/bitcoin/bitcoin/blob/master/doc/JSON-RPC-interface.md)
   about how to secure this interface.
 
-- A new [document](https://github.com/monacoin/monacoin/blob/master/doc/monacoin-conf.md)
+- A new [document](https://github.com/bitcoin/bitcoin/blob/master/doc/bitcoin-conf.md)
   about the `monacoin.conf` file describes how to use it to configure
   Monacoin Core.
 
 - A new document introduces Monacoin Core's BIP174 [Partially-Signed
   Monacoin Transactions
-  (PSBT)](https://github.com/monacoin/monacoin/blob/master/doc/psbt.md)
+  (PSBT)](https://github.com/bitcoin/bitcoin/blob/master/doc/psbt.md)
   interface, which is used to allow multiple programs to collaboratively
   work to create, sign, and broadcast new transactions.  This is useful
   for offline (cold storage) wallets, multisig wallets, coinjoin
@@ -172,7 +172,7 @@ Documentation
   to interact to generate a complete transaction.
 
 - The [output script
-  descriptor](https://github.com/monacoin/monacoin/blob/master/doc/descriptors.md)
+  descriptor](https://github.com/bitcoin/bitcoin/blob/master/doc/descriptors.md)
   documentation has been updated with information about new features in
   this still-developing language for describing the output scripts that
   a wallet or other program wants to receive notifications for, such as
@@ -193,7 +193,7 @@ Build system changes
 
 - The minimum required version of Qt (when building the GUI) has been
   increased from 5.2 to 5.5.1 (the [depends
-  system](https://github.com/monacoin/monacoin/blob/master/depends/README.md)
+  system](https://github.com/bitcoin/bitcoin/blob/master/depends/README.md)
   provides 5.9.7)
 
 New RPCs
@@ -211,7 +211,7 @@ New RPCs
   they've been running.
 
 - `deriveaddresses` returns one or more addresses corresponding to an
-  [output descriptor](https://github.com/monacoin/monacoin/blob/master/doc/descriptors.md).
+  [output descriptor](https://github.com/bitcoin/bitcoin/blob/master/doc/descriptors.md).
 
 - `getdescriptorinfo` accepts a descriptor and returns information about
   it, including its computed checksum.
@@ -320,7 +320,7 @@ in the Low-level Changes section below.
   origin information imported through `importmulti` will have their key
   origin information stored in the wallet for use with creating PSBTs.
   More information about descriptors can be found
-  [here](https://github.com/monacoin/monacoin/blob/master/doc/descriptors.md).
+  [here](https://github.com/bitcoin/bitcoin/blob/master/doc/descriptors.md).
 
 - `listunspent` has been modified so that it also returns
   `witnessScript`, the witness script in the case of a P2WSH or
@@ -343,7 +343,7 @@ Deprecated or removed RPCs
 - The 'account' API is removed after being deprecated in v0.17.  The
   'label' API was introduced in v0.17 as a replacement for accounts.
   See the [release notes from
-  v0.17](https://github.com/monacoin/monacoin/blob/master/doc/release-notes/release-notes-0.17.0.md#label-and-account-apis-for-wallet)
+  v0.17](https://github.com/bitcoin/bitcoin/blob/master/doc/release-notes/release-notes-0.17.0.md#label-and-account-apis-for-wallet)
   for a full description of the changes from the 'account' API to the
   'label' API.
 
@@ -517,7 +517,7 @@ Wallet
 - A sub-project of Monacoin Core now provides Hardware Wallet Interaction
   (HWI) scripts that allow command-line users to use several popular
   hardware key management devices with Monacoin Core.  See their [project
-  page](https://github.com/monacoin-core/HWI#readme) for details.
+  page](https://github.com/bitcoin-core/HWI#readme) for details.
 
 Security
 --------
@@ -1221,4 +1221,4 @@ Thanks to everyone who directly contributed to this release:
 - Wladimir J. van der Laan
 - Zain Iqbal Allarakhia
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/monacoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).

@@ -10,7 +10,7 @@ extern "C" {
 
 /** This module implements a variant of Schnorr signatures compliant with
  *  Monacoin Improvement Proposal 340 "Schnorr Signatures for secp256k1"
- *  (https://github.com/monacoin/bips/blob/master/bip-0340.mediawiki).
+ *  (https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki).
  */
 
 /** A pointer to a function to deterministically generate a nonce.
@@ -51,7 +51,7 @@ typedef int (*secp256k1_nonce_function_hardened)(
 
 /** An implementation of the nonce generation function as defined in Monacoin
  *  Improvement Proposal 340 "Schnorr Signatures for secp256k1"
- *  (https://github.com/monacoin/bips/blob/master/bip-0340.mediawiki).
+ *  (https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki).
  *
  *  If a data pointer is passed, it is assumed to be a pointer to 32 bytes of
  *  auxiliary random data as defined in BIP-340. If the data pointer is NULL,

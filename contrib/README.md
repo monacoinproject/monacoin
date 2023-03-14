@@ -3,7 +3,7 @@ Repository Tools
 
 ### [Developer tools](/contrib/devtools) ###
 Specific tools for developers working on this repository.
-Additional tools, including the `github-merge.py` script, are available in the [maintainer-tools](https://github.com/monacoin-core/monacoin-maintainer-tools) repository.
+Additional tools, including the `github-merge.py` script, are available in the [maintainer-tools](https://github.com/bitcoin-core/bitcoin-maintainer-tools) repository.
 
 ### [Verify-Commits](/contrib/verify-commits) ###
 Tool to verify that every merge commit was signed by a developer using the `github-merge.py` script.
@@ -24,7 +24,7 @@ Build Tools and Keys
 ### Packaging ###
 The [Debian](/contrib/debian) subfolder contains the copyright file.
 
-All other packaging related files can be found in the [monacoin-core/packaging](https://github.com/monacoin-core/packaging) repository.
+All other packaging related files can be found in the [monacoin-core/packaging](https://github.com/bitcoin-core/packaging) repository.
 
 ### [Builder keys](/contrib/builder-keys)
 PGP keys used for signing Monacoin Core [release](/doc/release-process.md) results.

@@ -263,7 +263,7 @@ class BackwardsCompatibilityTest(MonacoinTestFramework):
                 os.path.join(node_master_wallets_dir, "u1_v16")
             )
             load_res = node_master.loadwallet("u1_v16")
-            # Make sure this wallet opens without warnings. See https://github.com/monacoin/monacoin/pull/19054
+            # Make sure this wallet opens without warnings. See https://github.com/bitcoin/bitcoin/pull/19054
             assert_equal(load_res['warning'], '')
             wallet = node_master.get_wallet_rpc("u1_v16")
             info = wallet.getaddressinfo(v16_addr)

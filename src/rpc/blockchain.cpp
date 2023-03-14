@@ -2348,7 +2348,7 @@ UniValue CreateUTXOSnapshot(
         // use below this block.
         //
         // See discussion here:
-        //   https://github.com/monacoin/monacoin/pull/15606#discussion_r274479369
+        //   https://github.com/bitcoin/bitcoin/pull/15606#discussion_r274479369
         //
         LOCK(::cs_main);
 

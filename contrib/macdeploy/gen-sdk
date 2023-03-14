@@ -9,7 +9,7 @@ import os
 import contextlib
 
 # monkey-patch Python 3.8 and older to fix wrong TAR header handling
-# see https://github.com/monacoin/monacoin/pull/24534
+# see https://github.com/bitcoin/bitcoin/pull/24534
 # and https://github.com/python/cpython/pull/18080 for more info
 if sys.version_info < (3, 9):
     _old_create_header = tarfile.TarInfo._create_header

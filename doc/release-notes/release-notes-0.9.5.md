@@ -1,6 +1,6 @@
 Monacoin Core version 0.9.5 is now available from:
 
-  https://monacoin.org/bin/0.9.5/
+  https://bitcoin.org/bin/0.9.5/
 
 This is a new minor version release, with the goal of backporting BIP66. There
 are also a few bug fixes and updated translations. Upgrading to this release is
@@ -8,7 +8,7 @@ recommended.
 
 Please report bugs using the issue tracker at github:
 
-  https://github.com/monacoin/monacoin/issues
+  https://github.com/bitcoin/bitcoin/issues
 
 How to Upgrade
 ===============
@@ -57,4 +57,4 @@ Thanks to who contributed to this release, at least:
 - Pieter Wuille
 - Wladimir J. van der Laan
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/monacoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).

@@ -1,17 +1,17 @@
 Monacoin Core version 0.17.0 is now available from:
 
-  <https://monacoincore.org/bin/monacoin-core-0.17.0/>
+  <https://bitcoincore.org/bin/bitcoin-core-0.17.0/>
 
 This is a new major version release, including new features, various bugfixes
 and performance improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/monacoin/monacoin/issues>
+  <https://github.com/bitcoin/bitcoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://monacoincore.org/en/list/announcements/join/>
+  <https://bitcoincore.org/en/list/announcements/join/>
 
 How to Upgrade
 ==============
@@ -187,11 +187,11 @@ Here are the changes to RPC methods:
 BIP 174 Partially Signed Monacoin Transactions support
 -----------------------------------------------------
 
-[BIP 174 PSBT](https://github.com/monacoin/bips/blob/master/bip-0174.mediawiki) is an interchange format for Monacoin transactions that are not fully signed
+[BIP 174 PSBT](https://github.com/bitcoin/bips/blob/master/bip-0174.mediawiki) is an interchange format for Bitcoin transactions that are not fully signed
 yet, together with relevant metadata to help entities work towards signing it.
 It is intended to simplify workflows where multiple parties need to cooperate to
 produce a transaction. Examples include hardware wallets, multisig setups, and
-[CoinJoin](https://monacointalk.org/?topic=279249) transactions.
+[CoinJoin](https://bitcointalk.org/?topic=279249) transactions.
 
 ### Overall workflow
 
@@ -1102,4 +1102,4 @@ And to those that reported security issues:
 
 - awemany (for CVE-2018-17144, previously credited as "anonymous reporter")
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/monacoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).

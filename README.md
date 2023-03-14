@@ -1,10 +1,10 @@
 Monacoin Core integration/staging tree
 =====================================
 
-https://monacoincore.org
+https://bitcoincore.org
 
 For an immediately usable, binary version of the Monacoin Core software, see
-https://monacoincore.org/en/download/.
+https://bitcoincore.org/en/download/.
 
 What is Monacoin Core?
 ---------------------
@@ -25,10 +25,10 @@ Development Process
 -------------------
 
 The `master` branch is regularly built (see `doc/build-*.md` for instructions) and tested, but it is not guaranteed to be
-completely stable. [Tags](https://github.com/monacoin/monacoin/tags) are created
+completely stable. [Tags](https://github.com/bitcoin/bitcoin/tags) are created
 regularly from release branches to indicate new official, stable release versions of Monacoin Core.
 
-The https://github.com/monacoin-core/gui repository is used exclusively for the
+The https://github.com/bitcoin-core/gui repository is used exclusively for the
 development of the GUI. Its master branch is identical in all monotree
 repositories. Release branches and tags do not exist, so please do not fork
 that repository unless it is for development reasons.
@@ -69,7 +69,7 @@ Translations
 ------------
 
 Changes to translations as well as new translations can be submitted to
-[Monacoin Core's Transifex page](https://www.transifex.com/monacoin/monacoin/).
+[Monacoin Core's Transifex page](https://www.transifex.com/bitcoin/bitcoin/).
 
 Translations are periodically pulled from Transifex and merged into the git repository. See the
 [translation process](doc/translation_process.md) for details on how this works.

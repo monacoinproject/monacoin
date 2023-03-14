@@ -381,7 +381,7 @@ void BaseIndex::Interrupt()
 bool BaseIndex::Start()
 {
     // m_chainstate member gives indexing code access to node internals. It is
-    // removed in followup https://github.com/monacoin/monacoin/pull/24230
+    // removed in followup https://github.com/bitcoin/bitcoin/pull/24230
     m_chainstate = &m_chain->context()->chainman->ActiveChainstate();
     // Need to register this ValidationInterface before running Init(), so that
     // callbacks are not missed if Init sets m_synced to true.

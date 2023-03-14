@@ -1,6 +1,6 @@
 Monacoin Core version 0.9.2.1 is now available from:
 
-  https://monacoin.org/bin/0.9.2.1/
+  https://bitcoin.org/bin/0.9.2.1/
 
 This is a new minor version release, bringing mostly bug fixes and some minor
 improvements. OpenSSL has been updated because of a security issue (CVE-2014-0224).
@@ -8,7 +8,7 @@ Upgrading to this release is recommended.
 
 Please report bugs using the issue tracker at github:
 
-  https://github.com/monacoin/monacoin/issues
+  https://github.com/bitcoin/bitcoin/issues
 
 How to Upgrade
 --------------

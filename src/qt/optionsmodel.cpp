@@ -70,7 +70,7 @@ static void UpdateRwSetting(interfaces::Node& node, OptionsModel::OptionID optio
         // because Monacoin 22.x releases try to read these specific settings as
         // strings in addOverriddenOption() calls at startup, triggering
         // uncaught exceptions in UniValue::get_str(). These errors were fixed
-        // in later releases by https://github.com/monacoin/monacoin/pull/24498.
+        // in later releases by https://github.com/bitcoin/bitcoin/pull/24498.
         // If new numeric settings are added, they can be written as numbers
         // instead of strings, because monacoin 22.x will not try to read these.
         node.updateRwSetting(SettingName(option), value.getValStr());
@@ -650,7 +650,7 @@ void OptionsModel::checkAndMigrate()
     if (settingsVersion < CLIENT_VERSION)
     {
         // -dbcache was bumped from 100 to 300 in 0.13
-        // see https://github.com/monacoin/monacoin/pull/8273
+        // see https://github.com/bitcoin/bitcoin/pull/8273
         // force people to upgrade to the new value if they are using 100MB
         if (settingsVersion < 130000 && settings.contains("nDatabaseCache") && settings.value("nDatabaseCache").toLongLong() == 100)
             settings.setValue("nDatabaseCache", (qint64)nDefaultDbCache);
@@ -712,6 +712,6 @@ void OptionsModel::checkAndMigrate()
     // parameter interaction code to update other settings. This is particularly
     // important for the -listen setting, which should cause -listenonion, -upnp,
     // and other settings to default to false if it was set to false.
-    // (https://github.com/monacoin-core/gui/issues/567).
+    // (https://github.com/bitcoin-core/gui/issues/567).
     node().initParameterInteraction();
 }

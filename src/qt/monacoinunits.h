@@ -37,7 +37,7 @@ public:
     explicit MonacoinUnits(QObject *parent);
 
     /** Monacoin units.
-      @note Source: https://en.monacoin.it/wiki/Units . Please add only sensible ones
+      @note Source: https://en.bitcoin.it/wiki/Units . Please add only sensible ones
      */
     enum class Unit {
         MONA,

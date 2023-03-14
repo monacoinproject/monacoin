@@ -4,16 +4,16 @@ http://sourceforge.net/projects/monacoin/files/Monacoin/monacoin-0.6.0/test/
 This release includes more than 20 language localizations.
 More translations are welcome; join the
 project at Transifex to help:
-https://www.transifex.net/projects/p/monacoin/
+https://www.transifex.net/projects/p/bitcoin/
 
 Please report bugs using the issue tracker at github:
-https://github.com/monacoin/monacoin/issues
+https://github.com/bitcoin/bitcoin/issues
 
 Project source code is hosted at github; we are no longer
 distributing .tar.gz files here, you can get them
 directly from github:
-https://github.com/monacoin/monacoin/tarball/v0.6.0  # .tar.gz
-https://github.com/monacoin/monacoin/zipball/v0.6.0  # .zip
+https://github.com/bitcoin/bitcoin/tarball/v0.6.0  # .tar.gz
+https://github.com/bitcoin/bitcoin/zipball/v0.6.0  # .zip
 
 For Ubuntu users, there is a ppa maintained by Matt Corallo which
 you can add to your system so that it will automatically keep

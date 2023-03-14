@@ -1,13 +1,13 @@
 Monacoin Core version 0.10.3 is now available from:
 
-  <https://monacoin.org/bin/monacoin-core-0.10.3/>
+  <https://bitcoin.org/bin/bitcoin-core-0.10.3/>
 
 This is a new minor version release, bringing security fixes and translation 
 updates. It is recommended to upgrade to this version as soon as possible.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/monacoin/monacoin/issues>
+  <https://github.com/bitcoin/bitcoin/issues>
 
 Upgrading and downgrading
 =========================
@@ -60,7 +60,7 @@ using distribution provided packages.
 Additionally, upnp has been disabled by default. This may result in a lower
 number of reachable nodes on IPv4, however this prevents future libupnpc
 vulnerabilities from being a structural risk to the network
-(see https://github.com/monacoin/monacoin/pull/6795).
+(see https://github.com/bitcoin/bitcoin/pull/6795).
 
 Test for LowS signatures before relaying
 -----------------------------------------
@@ -107,7 +107,7 @@ outrageous memory usage on nodes due to the mempool ballooning. This is a
 temporary measure, bridging the time until a dynamic method for determining
 this fee is merged (which will be in 0.12).
 
-(see https://github.com/monacoin/monacoin/pull/6793, as well as the 0.11.0
+(see https://github.com/bitcoin/bitcoin/pull/6793, as well as the 0.11.0
 release notes, in which this value was suggested)
 
 0.10.3 Change log
@@ -162,4 +162,4 @@ And all those who contributed additional code review and/or security research:
 - timothy on IRC for reporting the issue
 - Vulnerability in miniupnp discovered by Aleksandar Nikolic of Cisco Talos
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/monacoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).

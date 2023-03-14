@@ -5,7 +5,7 @@ This is a bugfix-only release based on 0.5.1.
 It also includes a few protocol updates.
 
 Please report bugs using the issue tracker at github:
-https://github.com/monacoin/monacoin/issues
+https://github.com/bitcoin/bitcoin/issues
 
 Stable source code is hosted at Gitorious:
 http://gitorious.org/monacoin/monacoind-stable/archive-tarball/v0.5.3#.tar.gz

@@ -89,7 +89,7 @@ Refer to the `getblockchaininfo` RPC help for details.
 
 The getutxo command allows querying of the UTXO set given a set of outpoints.
 See BIP64 for input and output serialisation:
-https://github.com/monacoin/bips/blob/master/bip-0064.mediawiki
+https://github.com/bitcoin/bips/blob/master/bip-0064.mediawiki
 
 Example:
 ```

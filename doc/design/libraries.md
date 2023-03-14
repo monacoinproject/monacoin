@@ -100,5 +100,5 @@ class monacoin-qt,monacoind,monacoin-cli,monacoin-wallet bold
 
 ## Work in progress
 
-- Validation code is moving from *libmonacoin_node* to *libmonacoin_kernel* as part of [The libmonacoinkernel Project #24303](https://github.com/monacoin/monacoin/issues/24303)
-- Source code organization is discussed in general in [Library source code organization #15732](https://github.com/monacoin/monacoin/issues/15732)
+- Validation code is moving from *libmonacoin_node* to *libmonacoin_kernel* as part of [The libmonacoinkernel Project #24303](https://github.com/bitcoin/bitcoin/issues/24303)
+- Source code organization is discussed in general in [Library source code organization #15732](https://github.com/bitcoin/bitcoin/issues/15732)

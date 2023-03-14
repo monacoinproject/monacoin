@@ -1,7 +1,7 @@
 libsecp256k1
 ============
 
-[![Build Status](https://api.cirrus-ci.com/github/monacoin-core/secp256k1.svg?branch=master)](https://cirrus-ci.com/github/monacoin-core/secp256k1)
+[![Build Status](https://api.cirrus-ci.com/github/bitcoin-core/secp256k1.svg?branch=master)](https://cirrus-ci.com/github/bitcoin-core/secp256k1)
 
 Optimized C library for ECDSA signatures and secret/public key operations on curve secp256k1.
 
@@ -17,7 +17,7 @@ Features:
 * Suitable for embedded systems.
 * Optional module for public key recovery.
 * Optional module for ECDH key exchange.
-* Optional module for Schnorr signatures according to [BIP-340](https://github.com/monacoin/bips/blob/master/bip-0340.mediawiki).
+* Optional module for Schnorr signatures according to [BIP-340](https://github.com/bitcoin/bips/blob/master/bip-0340.mediawiki).
 
 Implementation details
 ----------------------

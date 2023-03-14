@@ -1,13 +1,13 @@
 Monacoin Core version 0.11.0 is now available from:
 
-  <https://monacoin.org/bin/monacoin-core-0.11.0/>
+  <https://bitcoin.org/bin/bitcoin-core-0.11.0/>
 
 This is a new major version release, bringing both new features and
 bug fixes.
 
 Please report bugs using the issue tracker at github:
 
-  <https://github.com/monacoin/monacoin/issues>
+  <https://github.com/bitcoin/bitcoin/issues>
 
 Upgrading and downgrading
 =========================
@@ -192,7 +192,7 @@ transaction (re)broadcast:
 One such application is selective Tor usage, where the node runs on the normal
 internet but transactions are broadcasted over Tor.
 
-For an example script see [monacoin-submittx](https://github.com/laanwj/monacoin-submittx).
+For an example script see [monacoin-submittx](https://github.com/laanwj/bitcoin-submittx).
 
 Privacy: Stream isolation for Tor
 ----------------------------------
@@ -501,5 +501,5 @@ And all those who contributed additional code review and/or security research:
 
 - Sergio Demian Lerner
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/monacoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).
 

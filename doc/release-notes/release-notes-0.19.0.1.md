@@ -1,17 +1,17 @@
 Monacoin Core version 0.19.0.1 is now available from:
 
-  <https://monacoincore.org/bin/monacoin-core-0.19.0.1/>
+  <https://bitcoincore.org/bin/bitcoin-core-0.19.0.1/>
 
 This release includes new features, various bug fixes and performance
 improvements, as well as updated translations.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/monacoin/monacoin/issues>
+  <https://github.com/bitcoin/bitcoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://monacoincore.org/en/list/announcements/join/>
+  <https://bitcoincore.org/en/list/announcements/join/>
 
 How to Upgrade
 ==============
@@ -50,7 +50,7 @@ Notable changes
 New user documentation
 ----------------------
 
-- [Reduce memory](https://github.com/monacoin/monacoin/blob/master/doc/reduce-memory.md)
+- [Reduce memory](https://github.com/bitcoin/bitcoin/blob/master/doc/reduce-memory.md)
   suggests configuration tweaks for running Monacoin Core on systems with
   limited memory. (#16339)
 
@@ -1086,4 +1086,4 @@ Thanks to everyone who directly contributed to this release:
 - Wladimir J. van der Laan
 - zenosage
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/monacoin/monacoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/bitcoin/bitcoin/).

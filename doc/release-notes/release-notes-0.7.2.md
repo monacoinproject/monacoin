@@ -4,7 +4,7 @@ Monacoin version 0.7.2 is now available from:
 This is a bug-fix minor release.
 
 Please report bugs using the issue tracker at github:
-  https://github.com/monacoin/monacoin/issues
+  https://github.com/bitcoin/bitcoin/issues
 
 How to Upgrade
 --------------

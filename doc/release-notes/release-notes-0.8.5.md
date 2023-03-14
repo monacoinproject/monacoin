@@ -5,7 +5,7 @@ This is a maintenance release to fix a critical bug;
 we urge all users to upgrade.
 
 Please report bugs using the issue tracker at github:
-  https://github.com/monacoin/monacoin/issues
+  https://github.com/bitcoin/bitcoin/issues
 
 
 How to Upgrade

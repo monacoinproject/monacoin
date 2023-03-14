@@ -136,7 +136,7 @@ using Mutex = AnnotatedMixin<std::mutex>;
  * eventually move all the mutexes into classes so they are not globally
  * visible.
  *
- * See: https://github.com/monacoin/monacoin/pull/20272#issuecomment-720755781
+ * See: https://github.com/bitcoin/bitcoin/pull/20272#issuecomment-720755781
  */
 class GlobalMutex : public Mutex { };
 

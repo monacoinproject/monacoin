@@ -1,20 +1,20 @@
 Monacoin Core version *0.15.0.1* is now available from:
 
-  <https://monacoin.org/bin/monacoin-core-0.15.0.1/>
+  <https://bitcoin.org/bin/bitcoin-core-0.15.0.1/>
 
 and
 
-  <https://monacoincore.org/bin/monacoin-core-0.15.0.1/>
+  <https://bitcoincore.org/bin/bitcoin-core-0.15.0.1/>
 
 This is a minor bug fix for 0.15.0.
 
 Please report bugs using the issue tracker at GitHub:
 
-  <https://github.com/monacoin/monacoin/issues>
+  <https://github.com/bitcoin/bitcoin/issues>
 
 To receive security and update notifications, please subscribe to:
 
-  <https://monacoincore.org/en/list/announcements/join/>
+  <https://bitcoincore.org/en/list/announcements/join/>
 
 How to Upgrade
 ==============
@@ -84,4 +84,4 @@ Thanks to everyone who directly contributed to this release:
 - Jonas Schnelli
 - Wladimir J. van der Laan
 
-As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/monacoin/).
+As well as everyone that helped translating on [Transifex](https://www.transifex.com/projects/p/bitcoin/).

@@ -33,7 +33,7 @@ approach (tested on Debian Buster) is outlined below:
 ```bash
 # Install/clone tools needed for extracting Xcode.app
 apt install cpio
-git clone https://github.com/monacoin-core/apple-sdk-tools.git
+git clone https://github.com/bitcoin-core/apple-sdk-tools.git
 
 # Unpack Xcode_12.2.xip and place the resulting Xcode.app in your current
 # working directory
@@ -107,6 +107,6 @@ deterministic. Here's how it works:
   of a tarball, which also contains all of the tools that have been previously (deterministically)
   built in order to create a final DMG.
 - The Apple keyholder uses this unsigned app to create a detached signature, using the
-  script that is also included there. Detached signatures are available from this [repository](https://github.com/monacoin-core/monacoin-detached-sigs).
+  script that is also included there. Detached signatures are available from this [repository](https://github.com/bitcoin-core/bitcoin-detached-sigs).
 - Builders feed the unsigned app + detached signature back into Guix. It uses the
   pre-built tools to recombine the pieces into a deterministic DMG.

@@ -2,7 +2,7 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Monacoin
 Upstream-Contact: Satoshi Nakamoto <satoshin@gmx.com>
  irc://#monacoin-core-dev@libera.chat
-Source: https://github.com/monacoin/monacoin
+Source: https://github.com/bitcoin/bitcoin
 
 Files: *
 Copyright: 2009-2022, Monacoin Core Developers
@@ -80,7 +80,7 @@ Files: src/qt/res/icons/monacoin.*
        src/qt/res/src/monacoin.svg
 Copyright: Bitboy, Jonas Schnelli
 License: public-domain
-Comment: Site: https://monacointalk.org/?topic=1756.0
+Comment: Site: https://bitcointalk.org/?topic=1756.0
 
 Files: src/qt/res/icons/proxy.png
        src/qt/res/src/proxy.svg
