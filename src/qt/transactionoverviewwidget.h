@@ -1,9 +1,9 @@
-// Copyright (c) 2021 The Bitcoin Core developers
+// Copyright (c) 2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_TRANSACTIONOVERVIEWWIDGET_H
-#define BITCOIN_QT_TRANSACTIONOVERVIEWWIDGET_H
+#ifndef MONACOIN_QT_TRANSACTIONOVERVIEWWIDGET_H
+#define MONACOIN_QT_TRANSACTIONOVERVIEWWIDGET_H
 
 #include <QListView>
 #include <QSize>
@@ -25,4 +25,4 @@ protected:
     void showEvent(QShowEvent* event) override;
 };
 
-#endif // BITCOIN_QT_TRANSACTIONOVERVIEWWIDGET_H
+#endif // MONACOIN_QT_TRANSACTIONOVERVIEWWIDGET_H

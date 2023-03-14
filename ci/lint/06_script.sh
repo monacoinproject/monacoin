@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (c) 2018-2021 The Bitcoin Core developers
+# Copyright (c) 2018-2021 The Monacoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -28,7 +28,7 @@ test/lint/git-subtree-check.sh src/crc32c
 test/lint/check-doc.py
 test/lint/all-lint.py
 
-if [ "$CIRRUS_REPO_FULL_NAME" = "bitcoin/bitcoin" ] && [ "$CIRRUS_PR" = "" ] ; then
+if [ "$CIRRUS_REPO_FULL_NAME" = "monacoin/monacoin" ] && [ "$CIRRUS_PR" = "" ] ; then
     # Sanity check only the last few commits to get notified of missing sigs,
     # missing keys, or expired keys. Usually there is only one new merge commit
     # per push on the master branch and a few commits on release branches, so

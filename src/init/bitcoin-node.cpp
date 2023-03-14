@@ -1,4 +1,4 @@
-// Copyright (c) 2021 The Bitcoin Core developers
+// Copyright (c) 2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,12 +16,12 @@
 
 namespace init {
 namespace {
-const char* EXE_NAME = "bitcoin-node";
+const char* EXE_NAME = "monacoin-node";
 
-class BitcoinNodeInit : public interfaces::Init
+class MonacoinNodeInit : public interfaces::Init
 {
 public:
-    BitcoinNodeInit(node::NodeContext& node, const char* arg0)
+    MonacoinNodeInit(node::NodeContext& node, const char* arg0)
         : m_node(node),
           m_ipc(interfaces::MakeIpc(EXE_NAME, arg0, *this))
     {
@@ -45,8 +45,8 @@ public:
 namespace interfaces {
 std::unique_ptr<Init> MakeNodeInit(node::NodeContext& node, int argc, char* argv[], int& exit_status)
 {
-    auto init = std::make_unique<init::BitcoinNodeInit>(node, argc > 0 ? argv[0] : "");
-    // Check if bitcoin-node is being invoked as an IPC server. If so, then
+    auto init = std::make_unique<init::MonacoinNodeInit>(node, argc > 0 ? argv[0] : "");
+    // Check if monacoin-node is being invoked as an IPC server. If so, then
     // bypass normal execution and just respond to requests over the IPC
     // channel and return null.
     if (init->m_ipc->startSpawnedProcess(argc, argv, exit_status)) {

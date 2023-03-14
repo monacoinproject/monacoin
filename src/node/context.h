@@ -1,9 +1,9 @@
-// Copyright (c) 2019-2021 The Bitcoin Core developers
+// Copyright (c) 2019-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_NODE_CONTEXT_H
-#define BITCOIN_NODE_CONTEXT_H
+#ifndef MONACOIN_NODE_CONTEXT_H
+#define MONACOIN_NODE_CONTEXT_H
 
 #include <kernel/context.h>
 
@@ -41,7 +41,7 @@ namespace node {
 //! any member functions. It should just be a collection of references that can
 //! be used without pulling in unwanted dependencies or functionality.
 struct NodeContext {
-    //! libbitcoin_kernel context
+    //! libmonacoin_kernel context
     std::unique_ptr<kernel::Context> kernel;
     //! Init interface for initializing current process and connecting to other processes.
     interfaces::Init* init{nullptr};
@@ -71,4 +71,4 @@ struct NodeContext {
 };
 } // namespace node
 
-#endif // BITCOIN_NODE_CONTEXT_H
+#endif // MONACOIN_NODE_CONTEXT_H

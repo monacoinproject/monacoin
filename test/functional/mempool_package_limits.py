@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2021 The Bitcoin Core developers
+# Copyright (c) 2021 The Monacoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test logic for limiting mempool and package ancestors/descendants."""
@@ -7,7 +7,7 @@
 from decimal import Decimal
 
 from test_framework.blocktools import COINBASE_MATURITY
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import MonacoinTestFramework
 from test_framework.messages import (
     COIN,
     WITNESS_SCALE_FACTOR,
@@ -17,7 +17,7 @@ from test_framework.util import (
 )
 from test_framework.wallet import MiniWallet
 
-class MempoolPackageLimitsTest(BitcoinTestFramework):
+class MempoolPackageLimitsTest(MonacoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.setup_clean_chain = True

@@ -66,7 +66,7 @@
         <translation type="unfinished">प्राप्त गर्ने ठेगानाहरू...</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
         <translation type="unfinished">यी भुक्तानी गर्नका लागि तपाइका बिट्कोइन ठेगानाहरू हुन्। सिक्काहरू पठाउनुअघि रकम र प्राप्त गर्ने ठेगाना जाँच गर्नुहोस।</translation>
     </message>
     <message>
@@ -172,7 +172,7 @@
         <translation type="unfinished">रकम</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
+        <source>Enter a Monacoin address (e.g. %1)</source>
         <translation type="unfinished">कृपया बिटकोइन ठेगाना प्रवेश गर्नुहोस् (उदाहरण %1)</translation>
     </message>
     <message numerus="yes">
@@ -219,7 +219,7 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Invalid amount for -maxtxfee=&lt;amount&gt;: '%s' (must be at least the minrelay fee of %s to prevent stuck transactions)</source>
         <translation type="unfinished">maxtxfee=&amp;lt;रकम&amp;gt;: का लागि अमान्य रकम &amp;apos;%s&amp;apos; (कारोबारलाई अड्कन नदिन अनिवार्य रूपमा कम्तिमा %s को न्यूनतम रिले शुल्क हुनु पर्छ)</translation>
@@ -278,7 +278,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation type="unfinished">शारांश</translation>
@@ -324,7 +324,7 @@
         <translation type="unfinished">%1 का लागि कन्फिगुरेसनको विकल्प परिमार्जन गर्नुहोस</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
+        <source>Send coins to a Monacoin address</source>
         <translation type="unfinished">बिटकोइन ठेगानामा सिक्का पठाउनुहोस्</translation>
     </message>
     <message>
@@ -343,7 +343,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network.</source>
+        <source>%n active connection(s) to Monacoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />
@@ -400,7 +400,7 @@
 <context>
     <name>OverviewPage</name>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
         <translation type="unfinished">देखाइएको सूचना पूरानो हुन सक्छ । कनेक्सन स्थापित भएपछि, तपाईंको वालेट बिटकोइन नेटवर्कमा स्वचालित रूपमा समिकरण हुन्छ , तर यो प्रक्रिया अहिले सम्म पूरा भएको छैन ।</translation>
     </message>
     <message>
@@ -492,7 +492,7 @@
         <translation type="unfinished">पहिला प्रयोग गरिएको ठेगाना प्रयोग गर्नुहोस्</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less monacoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
         <translation type="unfinished">पठाइँदै गरेको रकमबाट शुल्क कटौती गरिनेछ । प्राप्तकर्ताले तपाईंले रकम क्षेत्रमा प्रवेष गरेको भन्दा थोरै बिटकोइन प्राप्त गर्ने छन् । धेरै प्राप्तकर्ता चयन गरिएको छ भने समान रूपमा शुल्क विभाजित गरिनेछ ।</translation>
     </message>
     <message>
@@ -500,14 +500,14 @@
         <translation type="unfinished">यो ठेगानालाई प्रयोग गरिएको ठेगानाको सूचीमा थप्न एउटा लेबल प्रविष्ट गर्नुहोस्</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
+        <source>A message that was attached to the monacoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Monacoin network.</source>
         <translation type="unfinished">बिटकोइनमा संलग्न गरिएको सन्देश: तपाईंको मध्यस्थको लागि कारोबारको साथमा भण्डारण गरिने URI । नोट: यो सन्देश बिटकोइन नेटवर्क मार्फत पठाइने छैन ।</translation>
     </message>
 </context>
 <context>
     <name>SignVerifyMessageDialog</name>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <source>You can sign messages/agreements with your addresses to prove you can receive monacoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
         <translation type="unfinished">आफ्नो ठेगानामा पठाइएको बिटकोइन प्राप्त गर्न सकिन्छ भनेर प्रमाणित गर्न तपाईंले ती ठेगानाले सन्देश/सम्झौताहरूमा हस्ताक्षर गर्न सक्नुहुन्छ । फिसिङ आक्रमणले तपाईंलाई छक्याएर अरूका लागि तपाईंको परिचयमा हस्ताक्षर गराउने प्रयास गर्न सक्ने भएकाले अस्पष्ट वा जथाभावीमा हस्ताक्षर गर्दा ध्यान दिनुहोस् । आफू सहमत भएको पूर्ण विस्तृत-कथनमा मात्र हस्ताक्षर गर्नुहोस् ।</translation>
     </message>
     <message>

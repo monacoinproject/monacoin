@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2021 The Bitcoin Core developers
+// Copyright (c) 2017-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -533,12 +533,12 @@ BOOST_AUTO_TEST_CASE(knapsack_solver_test)
         add_coin(available_coins, *wallet,  4*COIN); // now we have 5+6+7+8+18+20+30+100+200+300+400 = 1094 cents
         const auto result14 = KnapsackSolver(KnapsackGroupOutputs(available_coins.All(), *wallet, filter_confirmed), 95 * CENT, CENT);
         BOOST_CHECK(result14);
-        BOOST_CHECK_EQUAL(result14->GetSelectedValue(), 1 * COIN);  // we should get 1 BTC in 1 coin
+        BOOST_CHECK_EQUAL(result14->GetSelectedValue(), 1 * COIN);  // we should get 1 MONA in 1 coin
         BOOST_CHECK_EQUAL(result14->GetInputSet().size(), 1U);
 
         const auto result15 = KnapsackSolver(KnapsackGroupOutputs(available_coins.All(), *wallet, filter_confirmed), 195 * CENT, CENT);
         BOOST_CHECK(result15);
-        BOOST_CHECK_EQUAL(result15->GetSelectedValue(), 2 * COIN);  // we should get 2 BTC in 1 coin
+        BOOST_CHECK_EQUAL(result15->GetSelectedValue(), 2 * COIN);  // we should get 2 MONA in 1 coin
         BOOST_CHECK_EQUAL(result15->GetInputSet().size(), 1U);
 
         // empty the wallet and start again, now with fractions of a cent, to test small change avoidance
@@ -942,10 +942,10 @@ BOOST_AUTO_TEST_CASE(SelectCoins_effective_value_test)
         dummyWallet->SetWalletFlag(WALLET_FLAG_DESCRIPTORS);
         dummyWallet->SetupDescriptorScriptPubKeyMans();
 
-        add_coin(available_coins, *dummyWallet, 100000); // 0.001 BTC
+        add_coin(available_coins, *dummyWallet, 100000); // 0.001 MONA
     }
 
-    CAmount target{99900}; // 0.000999 BTC
+    CAmount target{99900}; // 0.000999 MONA
 
     FastRandomContext rand;
     CoinSelectionParams cs_params{

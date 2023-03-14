@@ -1,5 +1,5 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2021 The Bitcoin Core developers
+// Copyright (c) 2009-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -80,8 +80,8 @@
 // Application startup time (used for uptime calculation)
 const int64_t nStartupTime = GetTime();
 
-const char * const BITCOIN_CONF_FILENAME = "bitcoin.conf";
-const char * const BITCOIN_SETTINGS_FILENAME = "settings.json";
+const char * const MONACOIN_CONF_FILENAME = "monacoin.conf";
+const char * const MONACOIN_SETTINGS_FILENAME = "settings.json";
 
 ArgsManager gArgs;
 
@@ -313,7 +313,7 @@ bool ArgsManager::ParseParameters(int argc, const char* const argv[], std::strin
         if (key.substr(0, 5) == "-psn_") continue;
 #endif
 
-        if (key == "-") break; //bitcoin-tx using stdin
+        if (key == "-") break; //monacoin-tx using stdin
         std::optional<std::string> val;
         size_t is_index = key.find('=');
         if (is_index != std::string::npos) {
@@ -522,7 +522,7 @@ bool ArgsManager::InitSettings(std::string& error)
 
 bool ArgsManager::GetSettingsPath(fs::path* filepath, bool temp, bool backup) const
 {
-    fs::path settings = GetPathArg("-settings", BITCOIN_SETTINGS_FILENAME);
+    fs::path settings = GetPathArg("-settings", MONACOIN_SETTINGS_FILENAME);
     if (settings.empty()) {
         return false;
     }
@@ -837,7 +837,7 @@ static std::string FormatException(const std::exception* pex, std::string_view t
     char pszModule[MAX_PATH] = "";
     GetModuleFileNameA(nullptr, pszModule, sizeof(pszModule));
 #else
-    const char* pszModule = "bitcoin";
+    const char* pszModule = "monacoin";
 #endif
     if (pex)
         return strprintf(
@@ -856,12 +856,12 @@ void PrintExceptionContinue(const std::exception* pex, std::string_view thread_n
 
 fs::path GetDefaultDataDir()
 {
-    // Windows: C:\Users\Username\AppData\Roaming\Bitcoin
-    // macOS: ~/Library/Application Support/Bitcoin
-    // Unix-like: ~/.bitcoin
+    // Windows: C:\Users\Username\AppData\Roaming\Monacoin
+    // macOS: ~/Library/Application Support/Monacoin
+    // Unix-like: ~/.monacoin
 #ifdef WIN32
     // Windows
-    return GetSpecialFolderPath(CSIDL_APPDATA) / "Bitcoin";
+    return GetSpecialFolderPath(CSIDL_APPDATA) / "Monacoin";
 #else
     fs::path pathRet;
     char* pszHome = getenv("HOME");
@@ -871,10 +871,10 @@ fs::path GetDefaultDataDir()
         pathRet = fs::path(pszHome);
 #ifdef MAC_OSX
     // macOS
-    return pathRet / "Library/Application Support/Bitcoin";
+    return pathRet / "Library/Application Support/Monacoin";
 #else
     // Unix-like
-    return pathRet / ".bitcoin";
+    return pathRet / ".monacoin";
 #endif
 #endif
 }
@@ -971,7 +971,7 @@ bool ArgsManager::ReadConfigFiles(std::string& error, bool ignore_invalid_keys)
         m_config_sections.clear();
     }
 
-    const fs::path conf_path = GetPathArg("-conf", BITCOIN_CONF_FILENAME);
+    const fs::path conf_path = GetPathArg("-conf", MONACOIN_CONF_FILENAME);
     std::ifstream stream{GetConfigFile(conf_path)};
 
     // not ok to have a config file specified that cannot be opened

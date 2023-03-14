@@ -108,8 +108,8 @@
         <translation type="unfinished">Xác nhận mã hóa ví</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Cảnh báo: Nếu bạn mã hóa ví và mất cụm mật khẩu, bạn sẽ &lt;b&gt;MẤT TẤT CẢ CÁC BITCOIN&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MONACOINS&lt;/b&gt;!</source>
+        <translation type="unfinished">Cảnh báo: Nếu bạn mã hóa ví và mất cụm mật khẩu, bạn sẽ &lt;b&gt;MẤT TẤT CẢ CÁC MONACOIN&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -128,8 +128,8 @@
         <translation type="unfinished">Nhập mật khẩu cũ và mật khẩu mới cho ví.</translation>
     </message>
     <message>
-        <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation type="unfinished">Xin lưu ý rằng mã hoá ví của bạn không thể bảo về hoàn toàn Bitcoin của bạn khỏi việc bị đánh cắp mới các phần mềm gián điệp nhiễm vào máy tính của bạn.</translation>
+        <source>Remember that encrypting your wallet cannot fully protect your monacoins from being stolen by malware infecting your computer.</source>
+        <translation type="unfinished">Xin lưu ý rằng mã hoá ví của bạn không thể bảo về hoàn toàn Monacoin của bạn khỏi việc bị đánh cắp mới các phần mềm gián điệp nhiễm vào máy tính của bạn.</translation>
     </message>
     <message>
         <source>Wallet to be encrypted</source>
@@ -157,7 +157,7 @@
     </message>
     </context>
 <context>
-    <name>BitcoinApplication</name>
+    <name>MonacoinApplication</name>
     <message>
         <source>Settings file %1 might be corrupt or invalid.</source>
         <translation type="unfinished">Tệp cài đặt %1 có thể bị hư hại hoặc không hợp lệ.</translation>
@@ -229,7 +229,7 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Settings file could not be read</source>
         <translation type="unfinished">Không thể đọc tệp cài đặt</translation>
@@ -275,8 +275,8 @@
         <translation type="unfinished">Không thể hoàn tất nâng cấp -txindex được bắt đầu bởi phiên bản trước. Khởi động lại với phiên bản trước đó hoặc chạy -reindex đầy đủ.</translation>
     </message>
     <message>
-        <source>%s request to listen on port %u. This port is considered "bad" and thus it is unlikely that any Bitcoin Core peers connect to it. See doc/p2p-bad-ports.md for details and a full list.</source>
-        <translation type="unfinished">%s yêu cầu lắng nghe trên cổng %u. Cổng này được coi là "xấu" và do đó không có khả năng bất kỳ ngang hàng Bitcoin Core nào kết nối với nó. Xem doc/p2p-bad-ports.md để biết chi tiết và danh sách đầy đủ.</translation>
+        <source>%s request to listen on port %u. This port is considered "bad" and thus it is unlikely that any Monacoin Core peers connect to it. See doc/p2p-bad-ports.md for details and a full list.</source>
+        <translation type="unfinished">%s yêu cầu lắng nghe trên cổng %u. Cổng này được coi là "xấu" và do đó không có khả năng bất kỳ ngang hàng Monacoin Core nào kết nối với nó. Xem doc/p2p-bad-ports.md để biết chi tiết và danh sách đầy đủ.</translation>
     </message>
     <message>
         <source>-reindex-chainstate option is not compatible with -blockfilterindex. Please temporarily disable blockfilterindex while using -reindex-chainstate, or replace -reindex-chainstate with -reindex to fully rebuild all indexes.</source>
@@ -344,7 +344,7 @@
     </message>
     </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>&amp;Minimize</source>
         <translation type="unfinished">&amp;Thu nhỏ</translation>
@@ -362,16 +362,16 @@
         <translation type="unfinished">&amp;Thay dổi Passphrase…</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation type="unfinished">Đăng ký lời nhắn với địa chỉ Bitcoin của bạn để chứng minh quyền sở hữu chúng</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation type="unfinished">Đăng ký lời nhắn với địa chỉ Monacoin của bạn để chứng minh quyền sở hữu chúng</translation>
     </message>
     <message>
         <source>&amp;Verify message…</source>
         <translation type="unfinished">&amp;Xác minh tin nhắn…</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation type="unfinished">Xác minh lời nhắn để chắc chắn đã được đăng ký với địa chỉ Bitcoin xác định</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation type="unfinished">Xác minh lời nhắn để chắc chắn đã được đăng ký với địa chỉ Monacoin xác định</translation>
     </message>
     <message>
         <source>Close Wallet…</source>
@@ -432,16 +432,16 @@
         <translation type="unfinished">Đang bắt kịp...</translation>
     </message>
     <message>
-        <source>Load Partially Signed Bitcoin Transaction</source>
-        <translation type="unfinished">Kết nối với mạng Bitcoin thông qua một proxy SOCKS5 riêng cho các dịch vụ Tor hành.</translation>
+        <source>Load Partially Signed Monacoin Transaction</source>
+        <translation type="unfinished">Kết nối với mạng Monacoin thông qua một proxy SOCKS5 riêng cho các dịch vụ Tor hành.</translation>
     </message>
     <message>
         <source>Load PSBT from &amp;clipboard…</source>
         <translation type="unfinished">Tải PSBT từ &amp;khay nhớ tạm…</translation>
     </message>
     <message>
-        <source>Load Partially Signed Bitcoin Transaction from clipboard</source>
-        <translation type="unfinished">Tải một phần giao dịch Bitcoin đã ký từ khay nhớ tạm</translation>
+        <source>Load Partially Signed Monacoin Transaction from clipboard</source>
+        <translation type="unfinished">Tải một phần giao dịch Monacoin đã ký từ khay nhớ tạm</translation>
     </message>
     <message>
         <source>Node window</source>
@@ -460,8 +460,8 @@
         <translation type="unfinished">&amp;Các địa chỉ đang nhận</translation>
     </message>
     <message>
-        <source>Open a bitcoin: URI</source>
-        <translation type="unfinished">Mở một bitcoin: URI</translation>
+        <source>Open a monacoin: URI</source>
+        <translation type="unfinished">Mở một monacoin: URI</translation>
     </message>
     <message>
         <source>Open Wallet</source>
@@ -516,10 +516,10 @@
         <translation type="unfinished">Trìn&amp;h diễn</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network.</source>
+        <source>%n active connection(s) to Monacoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
-            <numerusform>%nkết nối đang hoạt động với mạng lưới Bitcoin</numerusform>
+            <numerusform>%nkết nối đang hoạt động với mạng lưới Monacoin</numerusform>
         </translation>
     </message>
     <message>
@@ -1001,9 +1001,9 @@
         <translation type="unfinished">Bạn có muốn tạo giao dịch này không?</translation>
     </message>
     <message>
-        <source>Please, review your transaction. You can create and send this transaction or create a Partially Signed Bitcoin Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
+        <source>Please, review your transaction. You can create and send this transaction or create a Partially Signed Monacoin Transaction (PSBT), which you can save or copy and then sign with, e.g., an offline %1 wallet, or a PSBT-compatible hardware wallet.</source>
         <extracomment>Text to inform a user attempting to create a transaction of their current options. At this stage, a user can send their transaction or create a PSBT. This string is displayed when both private keys and PSBT controls are enabled.</extracomment>
-        <translation type="unfinished">Vui lòng xem lại giao dịch của bạn. Bạn có thể tạo và gửi giao dịch này hoặc tạo Giao dịch Bitcoin được ký một phần (PSBT), bạn có thể lưu hoặc sao chép và sau đó ký bằng, ví dụ: ví %1 ngoại tuyến hoặc ví phần cứng tương thích với PSBT.</translation>
+        <translation type="unfinished">Vui lòng xem lại giao dịch của bạn. Bạn có thể tạo và gửi giao dịch này hoặc tạo Giao dịch Monacoin được ký một phần (PSBT), bạn có thể lưu hoặc sao chép và sau đó ký bằng, ví dụ: ví %1 ngoại tuyến hoặc ví phần cứng tương thích với PSBT.</translation>
     </message>
     <message numerus="yes">
         <source>Estimated to begin confirmation within %n block(s).</source>

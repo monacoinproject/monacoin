@@ -1,9 +1,9 @@
-// Copyright (c) 2019 The Bitcoin Core developers
+// Copyright (c) 2019 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_SCRIPT_MINISCRIPT_H
-#define BITCOIN_SCRIPT_MINISCRIPT_H
+#ifndef MONACOIN_SCRIPT_MINISCRIPT_H
+#define MONACOIN_SCRIPT_MINISCRIPT_H
 
 #include <algorithm>
 #include <functional>
@@ -1464,7 +1464,7 @@ enum class DecodeContext {
     ENDIF_ELSE,
 };
 
-//! Parse a miniscript from a bitcoin script
+//! Parse a miniscript from a monacoin script
 template<typename Key, typename Ctx, typename I>
 inline NodeRef<Key> DecodeScript(I& in, I last, const Ctx& ctx)
 {
@@ -1844,4 +1844,4 @@ inline NodeRef<typename Ctx::Key> FromScript(const CScript& script, const Ctx& c
 
 } // namespace miniscript
 
-#endif // BITCOIN_SCRIPT_MINISCRIPT_H
+#endif // MONACOIN_SCRIPT_MINISCRIPT_H

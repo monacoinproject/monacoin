@@ -1,4 +1,4 @@
-// Copyright (c) 2021 The Bitcoin Core developers
+// Copyright (c) 2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -15,10 +15,10 @@
 
 namespace init {
 namespace {
-class BitcoinQtInit : public interfaces::Init
+class MonacoinQtInit : public interfaces::Init
 {
 public:
-    BitcoinQtInit()
+    MonacoinQtInit()
     {
         m_node.args = &gArgs;
         m_node.init = this;
@@ -38,6 +38,6 @@ public:
 namespace interfaces {
 std::unique_ptr<Init> MakeGuiInit(int argc, char* argv[])
 {
-    return std::make_unique<init::BitcoinQtInit>();
+    return std::make_unique<init::MonacoinQtInit>();
 }
 } // namespace interfaces

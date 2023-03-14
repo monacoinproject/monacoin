@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (c) 2019-2021 The Bitcoin Core developers
+# Copyright (c) 2019-2021 The Monacoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -16,4 +16,4 @@ export PACKAGES="systemtap-sdt-dev bpfcc-tools clang llvm python3-zmq qtbase5-de
 export DOCKER_NAME_TAG=ubuntu:22.04  # May not run in docker unless --enable-usdt is dropped
 export NO_DEPENDS=1
 export GOAL="install"
-export BITCOIN_CONFIG="--enable-usdt --enable-zmq --with-incompatible-bdb --with-gui=qt5 CPPFLAGS='-DARENA_DEBUG -DDEBUG_LOCKORDER' --with-sanitizers=address,integer,undefined CC=clang CXX=clang++"
+export MONACOIN_CONFIG="--enable-usdt --enable-zmq --with-incompatible-bdb --with-gui=qt5 CPPFLAGS='-DARENA_DEBUG -DDEBUG_LOCKORDER' --with-sanitizers=address,integer,undefined CC=clang CXX=clang++"

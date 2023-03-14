@@ -1,9 +1,9 @@
-// Copyright (c) 2020-2021 The Bitcoin Core developers
+// Copyright (c) 2020-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_I2P_H
-#define BITCOIN_I2P_H
+#ifndef MONACOIN_I2P_H
+#define MONACOIN_I2P_H
 
 #include <compat/compat.h>
 #include <fs.h>
@@ -286,4 +286,4 @@ private:
 } // namespace sam
 } // namespace i2p
 
-#endif // BITCOIN_I2P_H
+#endif // MONACOIN_I2P_H

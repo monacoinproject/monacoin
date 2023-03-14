@@ -1,9 +1,9 @@
-// Copyright (c) 2018-2021 The Bitcoin Core developers
+// Copyright (c) 2018-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_SCRIPT_DESCRIPTOR_H
-#define BITCOIN_SCRIPT_DESCRIPTOR_H
+#ifndef MONACOIN_SCRIPT_DESCRIPTOR_H
+#define MONACOIN_SCRIPT_DESCRIPTOR_H
 
 #include <outputtype.h>
 #include <script/script.h>
@@ -182,4 +182,4 @@ std::string GetDescriptorChecksum(const std::string& descriptor);
  */
 std::unique_ptr<Descriptor> InferDescriptor(const CScript& script, const SigningProvider& provider);
 
-#endif // BITCOIN_SCRIPT_DESCRIPTOR_H
+#endif // MONACOIN_SCRIPT_DESCRIPTOR_H

@@ -1,12 +1,12 @@
-// Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2011-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_QT_BITCOINAMOUNTFIELD_H
-#define BITCOIN_QT_BITCOINAMOUNTFIELD_H
+#ifndef MONACOIN_QT_MONACOINAMOUNTFIELD_H
+#define MONACOIN_QT_MONACOINAMOUNTFIELD_H
 
 #include <consensus/amount.h>
-#include <qt/bitcoinunits.h>
+#include <qt/monacoinunits.h>
 
 #include <QWidget>
 
@@ -16,18 +16,18 @@ QT_BEGIN_NAMESPACE
 class QValueComboBox;
 QT_END_NAMESPACE
 
-/** Widget for entering bitcoin amounts.
+/** Widget for entering monacoin amounts.
   */
-class BitcoinAmountField: public QWidget
+class MonacoinAmountField: public QWidget
 {
     Q_OBJECT
 
     // ugly hack: for some unknown reason CAmount (instead of qint64) does not work here as expected
-    // discussion: https://github.com/bitcoin/bitcoin/pull/5117
+    // discussion: https://github.com/monacoin/monacoin/pull/5117
     Q_PROPERTY(qint64 value READ value WRITE setValue NOTIFY valueChanged USER true)
 
 public:
-    explicit BitcoinAmountField(QWidget *parent = nullptr);
+    explicit MonacoinAmountField(QWidget *parent = nullptr);
 
     CAmount value(bool *value=nullptr) const;
     void setValue(const CAmount& value);
@@ -53,7 +53,7 @@ public:
     bool validate();
 
     /** Change unit used to display amount. */
-    void setDisplayUnit(BitcoinUnit new_unit);
+    void setDisplayUnit(MonacoinUnit new_unit);
 
     /** Make field empty and ready for new input. */
     void clear();
@@ -82,4 +82,4 @@ private Q_SLOTS:
 
 };
 
-#endif // BITCOIN_QT_BITCOINAMOUNTFIELD_H
+#endif // MONACOIN_QT_MONACOINAMOUNTFIELD_H

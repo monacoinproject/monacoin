@@ -1,9 +1,9 @@
-// Copyright (c) 2022 The Bitcoin Core developers
+// Copyright (c) 2022 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_KERNEL_CONTEXT_H
-#define BITCOIN_KERNEL_CONTEXT_H
+#ifndef MONACOIN_KERNEL_CONTEXT_H
+#define MONACOIN_KERNEL_CONTEXT_H
 
 #include <memory>
 
@@ -11,7 +11,7 @@ class ECCVerifyHandle;
 
 namespace kernel {
 //! Context struct holding the kernel library's logically global state, and
-//! passed to external libbitcoin_kernel functions which need access to this
+//! passed to external libmonacoin_kernel functions which need access to this
 //! state. The kernel library API is a work in progress, so state organization
 //! and member list will evolve over time.
 //!
@@ -28,4 +28,4 @@ struct Context {
 };
 } // namespace kernel
 
-#endif // BITCOIN_KERNEL_CONTEXT_H
+#endif // MONACOIN_KERNEL_CONTEXT_H

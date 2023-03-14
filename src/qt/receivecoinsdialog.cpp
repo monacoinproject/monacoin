@@ -1,4 +1,4 @@
-// Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2011-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -280,7 +280,7 @@ void ReceiveCoinsDialog::copyURI()
     }
 
     const RecentRequestsTableModel * const submodel = model->getRecentRequestsTableModel();
-    const QString uri = GUIUtil::formatBitcoinURI(submodel->entry(sel.row()).recipient);
+    const QString uri = GUIUtil::formatMonacoinURI(submodel->entry(sel.row()).recipient);
     GUIUtil::setClipboard(uri);
 }
 

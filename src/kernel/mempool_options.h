@@ -1,8 +1,8 @@
-// Copyright (c) 2022 The Bitcoin Core developers
+// Copyright (c) 2022 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
-#ifndef BITCOIN_KERNEL_MEMPOOL_OPTIONS_H
-#define BITCOIN_KERNEL_MEMPOOL_OPTIONS_H
+#ifndef MONACOIN_KERNEL_MEMPOOL_OPTIONS_H
+#define MONACOIN_KERNEL_MEMPOOL_OPTIONS_H
 
 #include <kernel/mempool_limits.h>
 
@@ -57,4 +57,4 @@ struct MemPoolOptions {
 };
 } // namespace kernel
 
-#endif // BITCOIN_KERNEL_MEMPOOL_OPTIONS_H
+#endif // MONACOIN_KERNEL_MEMPOOL_OPTIONS_H

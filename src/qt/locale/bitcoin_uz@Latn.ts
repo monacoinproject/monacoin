@@ -66,8 +66,8 @@
         <translation type="unfinished">Qabul qilish manzillari</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Quyida to'lovlarni jo'natish uchun Bitcoin manzillaringiz. Coinlarni yuborishdan oldin har doim miqdor va qabul qilish manzilini tekshiring.</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">Quyida to'lovlarni jo'natish uchun Monacoin manzillaringiz. Coinlarni yuborishdan oldin har doim miqdor va qabul qilish manzilini tekshiring.</translation>
     </message>
     <message>
         <source>&amp;Copy Address</source>
@@ -142,7 +142,7 @@
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Unable to start HTTP server. See debug log for details.</source>
         <translation type="unfinished">HTTP serverni ishga tushirib bo'lmadi. Tafsilotlar uchun disk raskadrovka jurnaliga qarang.</translation>
@@ -161,7 +161,7 @@
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message numerus="yes">
         <source>Processed %n block(s) of transaction history.</source>
         <translation type="unfinished">
@@ -170,7 +170,7 @@
         </translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network.</source>
+        <source>%n active connection(s) to Monacoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2020-2021 The Bitcoin Core developers
+# Copyright (c) 2020-2021 The Monacoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Tests that a mempool transaction expires after a given timeout and that its
@@ -14,7 +14,7 @@ from datetime import timedelta
 
 from test_framework.blocktools import COINBASE_MATURITY
 from test_framework.messages import DEFAULT_MEMPOOL_EXPIRY_HOURS
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import MonacoinTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -24,7 +24,7 @@ from test_framework.wallet import MiniWallet
 CUSTOM_MEMPOOL_EXPIRY = 10  # hours
 
 
-class MempoolExpiryTest(BitcoinTestFramework):
+class MempoolExpiryTest(MonacoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 1
         self.setup_clean_chain = True

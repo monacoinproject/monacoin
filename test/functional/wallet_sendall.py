@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-# Copyright (c) 2022 The Bitcoin Core developers
+# Copyright (c) 2022 The Monacoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test the sendall RPC command."""
 
 from decimal import Decimal, getcontext
 
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import MonacoinTestFramework
 from test_framework.util import (
     assert_equal,
     assert_greater_than,
@@ -24,7 +24,7 @@ def cleanup(func):
             assert_equal(0, self.wallet.getbalances()["mine"]["trusted"]) # wallet is empty
     return wrapper
 
-class SendallTest(BitcoinTestFramework):
+class SendallTest(MonacoinTestFramework):
     # Setup and helpers
     def skip_test_if_missing_module(self):
         self.skip_if_no_wallet()

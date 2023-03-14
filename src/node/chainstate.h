@@ -1,9 +1,9 @@
-// Copyright (c) 2021 The Bitcoin Core developers
+// Copyright (c) 2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_NODE_CHAINSTATE_H
-#define BITCOIN_NODE_CHAINSTATE_H
+#ifndef MONACOIN_NODE_CHAINSTATE_H
+#define MONACOIN_NODE_CHAINSTATE_H
 
 #include <util/translation.h>
 #include <validation.h>
@@ -58,4 +58,4 @@ ChainstateLoadResult LoadChainstate(ChainstateManager& chainman, const CacheSize
 ChainstateLoadResult VerifyLoadedChainstate(ChainstateManager& chainman, const ChainstateLoadOptions& options);
 } // namespace node
 
-#endif // BITCOIN_NODE_CHAINSTATE_H
+#endif // MONACOIN_NODE_CHAINSTATE_H

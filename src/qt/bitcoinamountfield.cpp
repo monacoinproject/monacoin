@@ -1,10 +1,10 @@
-// Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2011-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#include <qt/bitcoinamountfield.h>
+#include <qt/monacoinamountfield.h>
 
-#include <qt/bitcoinunits.h>
+#include <qt/monacoinunits.h>
 #include <qt/guiconstants.h>
 #include <qt/guiutil.h>
 #include <qt/qvaluecombobox.h>
@@ -59,7 +59,7 @@ public:
 
         if (valid) {
             val = qBound(m_min_amount, val, m_max_amount);
-            input = BitcoinUnits::format(currentUnit, val, false, BitcoinUnits::SeparatorStyle::ALWAYS);
+            input = MonacoinUnits::format(currentUnit, val, false, MonacoinUnits::SeparatorStyle::ALWAYS);
             lineEdit()->setText(input);
         }
     }
@@ -71,7 +71,7 @@ public:
 
     void setValue(const CAmount& value)
     {
-        lineEdit()->setText(BitcoinUnits::format(currentUnit, value, false, BitcoinUnits::SeparatorStyle::ALWAYS));
+        lineEdit()->setText(MonacoinUnits::format(currentUnit, value, false, MonacoinUnits::SeparatorStyle::ALWAYS));
         Q_EMIT valueChanged();
     }
 
@@ -99,13 +99,13 @@ public:
         setValue(val);
     }
 
-    void setDisplayUnit(BitcoinUnit unit)
+    void setDisplayUnit(MonacoinUnit unit)
     {
         bool valid = false;
         CAmount val = value(&valid);
 
         currentUnit = unit;
-        lineEdit()->setPlaceholderText(BitcoinUnits::format(currentUnit, m_min_amount, false, BitcoinUnits::SeparatorStyle::ALWAYS));
+        lineEdit()->setPlaceholderText(MonacoinUnits::format(currentUnit, m_min_amount, false, MonacoinUnits::SeparatorStyle::ALWAYS));
         if(valid)
             setValue(val);
         else
@@ -125,7 +125,7 @@ public:
 
             const QFontMetrics fm(fontMetrics());
             int h = lineEdit()->minimumSizeHint().height();
-            int w = GUIUtil::TextWidth(fm, BitcoinUnits::format(BitcoinUnit::BTC, BitcoinUnits::maxMoney(), false, BitcoinUnits::SeparatorStyle::ALWAYS));
+            int w = GUIUtil::TextWidth(fm, MonacoinUnits::format(MonacoinUnit::MONA, MonacoinUnits::maxMoney(), false, MonacoinUnits::SeparatorStyle::ALWAYS));
             w += 2; // cursor blinking space
 
             QStyleOptionSpinBox opt;
@@ -150,12 +150,12 @@ public:
     }
 
 private:
-    BitcoinUnit currentUnit{BitcoinUnit::BTC};
+    MonacoinUnit currentUnit{MonacoinUnit::MONA};
     CAmount singleStep{CAmount(100000)}; // satoshis
     mutable QSize cachedMinimumSizeHint;
     bool m_allow_empty{true};
     CAmount m_min_amount{CAmount(0)};
-    CAmount m_max_amount{BitcoinUnits::maxMoney()};
+    CAmount m_max_amount{MonacoinUnits::maxMoney()};
 
     /**
      * Parse a string into a number of base monetary units and
@@ -165,10 +165,10 @@ private:
     CAmount parse(const QString &text, bool *valid_out=nullptr) const
     {
         CAmount val = 0;
-        bool valid = BitcoinUnits::parse(currentUnit, text, &val);
+        bool valid = MonacoinUnits::parse(currentUnit, text, &val);
         if(valid)
         {
-            if(val < 0 || val > BitcoinUnits::maxMoney())
+            if(val < 0 || val > MonacoinUnits::maxMoney())
                 valid = false;
         }
         if(valid_out)
@@ -215,9 +215,9 @@ Q_SIGNALS:
     void valueChanged();
 };
 
-#include <qt/bitcoinamountfield.moc>
+#include <qt/monacoinamountfield.moc>
 
-BitcoinAmountField::BitcoinAmountField(QWidget *parent) :
+MonacoinAmountField::MonacoinAmountField(QWidget *parent) :
     QWidget(parent),
     amount(nullptr)
 {
@@ -229,7 +229,7 @@ BitcoinAmountField::BitcoinAmountField(QWidget *parent) :
     QHBoxLayout *layout = new QHBoxLayout(this);
     layout->addWidget(amount);
     unit = new QValueComboBox(this);
-    unit->setModel(new BitcoinUnits(this));
+    unit->setModel(new MonacoinUnits(this));
     layout->addWidget(unit);
     layout->addStretch(1);
     layout->setContentsMargins(0,0,0,0);
@@ -240,26 +240,26 @@ BitcoinAmountField::BitcoinAmountField(QWidget *parent) :
     setFocusProxy(amount);
 
     // If one if the widgets changes, the combined content changes as well
-    connect(amount, &AmountSpinBox::valueChanged, this, &BitcoinAmountField::valueChanged);
-    connect(unit, qOverload<int>(&QComboBox::currentIndexChanged), this, &BitcoinAmountField::unitChanged);
+    connect(amount, &AmountSpinBox::valueChanged, this, &MonacoinAmountField::valueChanged);
+    connect(unit, qOverload<int>(&QComboBox::currentIndexChanged), this, &MonacoinAmountField::unitChanged);
 
     // Set default based on configuration
     unitChanged(unit->currentIndex());
 }
 
-void BitcoinAmountField::clear()
+void MonacoinAmountField::clear()
 {
     amount->clear();
     unit->setCurrentIndex(0);
 }
 
-void BitcoinAmountField::setEnabled(bool fEnabled)
+void MonacoinAmountField::setEnabled(bool fEnabled)
 {
     amount->setEnabled(fEnabled);
     unit->setEnabled(fEnabled);
 }
 
-bool BitcoinAmountField::validate()
+bool MonacoinAmountField::validate()
 {
     bool valid = false;
     value(&valid);
@@ -267,7 +267,7 @@ bool BitcoinAmountField::validate()
     return valid;
 }
 
-void BitcoinAmountField::setValid(bool valid)
+void MonacoinAmountField::setValid(bool valid)
 {
     if (valid)
         amount->setStyleSheet("");
@@ -275,7 +275,7 @@ void BitcoinAmountField::setValid(bool valid)
         amount->setStyleSheet(STYLE_INVALID);
 }
 
-bool BitcoinAmountField::eventFilter(QObject *object, QEvent *event)
+bool MonacoinAmountField::eventFilter(QObject *object, QEvent *event)
 {
     if (event->type() == QEvent::FocusIn)
     {
@@ -285,60 +285,60 @@ bool BitcoinAmountField::eventFilter(QObject *object, QEvent *event)
     return QWidget::eventFilter(object, event);
 }
 
-QWidget *BitcoinAmountField::setupTabChain(QWidget *prev)
+QWidget *MonacoinAmountField::setupTabChain(QWidget *prev)
 {
     QWidget::setTabOrder(prev, amount);
     QWidget::setTabOrder(amount, unit);
     return unit;
 }
 
-CAmount BitcoinAmountField::value(bool *valid_out) const
+CAmount MonacoinAmountField::value(bool *valid_out) const
 {
     return amount->value(valid_out);
 }
 
-void BitcoinAmountField::setValue(const CAmount& value)
+void MonacoinAmountField::setValue(const CAmount& value)
 {
     amount->setValue(value);
 }
 
-void BitcoinAmountField::SetAllowEmpty(bool allow)
+void MonacoinAmountField::SetAllowEmpty(bool allow)
 {
     amount->SetAllowEmpty(allow);
 }
 
-void BitcoinAmountField::SetMinValue(const CAmount& value)
+void MonacoinAmountField::SetMinValue(const CAmount& value)
 {
     amount->SetMinValue(value);
 }
 
-void BitcoinAmountField::SetMaxValue(const CAmount& value)
+void MonacoinAmountField::SetMaxValue(const CAmount& value)
 {
     amount->SetMaxValue(value);
 }
 
-void BitcoinAmountField::setReadOnly(bool fReadOnly)
+void MonacoinAmountField::setReadOnly(bool fReadOnly)
 {
     amount->setReadOnly(fReadOnly);
 }
 
-void BitcoinAmountField::unitChanged(int idx)
+void MonacoinAmountField::unitChanged(int idx)
 {
     // Use description tooltip for current unit for the combobox
     unit->setToolTip(unit->itemData(idx, Qt::ToolTipRole).toString());
 
     // Determine new unit ID
-    QVariant new_unit = unit->currentData(BitcoinUnits::UnitRole);
+    QVariant new_unit = unit->currentData(MonacoinUnits::UnitRole);
     assert(new_unit.isValid());
-    amount->setDisplayUnit(new_unit.value<BitcoinUnit>());
+    amount->setDisplayUnit(new_unit.value<MonacoinUnit>());
 }
 
-void BitcoinAmountField::setDisplayUnit(BitcoinUnit new_unit)
+void MonacoinAmountField::setDisplayUnit(MonacoinUnit new_unit)
 {
     unit->setValue(QVariant::fromValue(new_unit));
 }
 
-void BitcoinAmountField::setSingleStep(const CAmount& step)
+void MonacoinAmountField::setSingleStep(const CAmount& step)
 {
     amount->setSingleStep(step);
 }

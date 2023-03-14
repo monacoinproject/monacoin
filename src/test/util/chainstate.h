@@ -1,9 +1,9 @@
-// Copyright (c) 2021 The Bitcoin Core developers
+// Copyright (c) 2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 //
-#ifndef BITCOIN_TEST_UTIL_CHAINSTATE_H
-#define BITCOIN_TEST_UTIL_CHAINSTATE_H
+#ifndef MONACOIN_TEST_UTIL_CHAINSTATE_H
+#define MONACOIN_TEST_UTIL_CHAINSTATE_H
 
 #include <clientversion.h>
 #include <fs.h>
@@ -51,4 +51,4 @@ CreateAndActivateUTXOSnapshot(node::NodeContext& node, const fs::path root, F ma
 }
 
 
-#endif // BITCOIN_TEST_UTIL_CHAINSTATE_H
+#endif // MONACOIN_TEST_UTIL_CHAINSTATE_H

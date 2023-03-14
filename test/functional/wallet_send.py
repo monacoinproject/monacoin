@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2020-2021 The Bitcoin Core developers
+# Copyright (c) 2020-2021 The Monacoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test the send RPC command."""
@@ -14,7 +14,7 @@ from test_framework.messages import (
     ser_compact_size,
     WITNESS_SCALE_FACTOR,
 )
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import MonacoinTestFramework
 from test_framework.util import (
     assert_equal,
     assert_fee_amount,
@@ -24,7 +24,7 @@ from test_framework.util import (
 )
 from test_framework.wallet_util import bytes_to_wif
 
-class WalletSendTest(BitcoinTestFramework):
+class WalletSendTest(MonacoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         # whitelist all peers to speed up tx relay / mempool sync
@@ -418,7 +418,7 @@ class WalletSendTest(BitcoinTestFramework):
 
         self.log.info("Manual change address and position...")
         self.test_send(from_wallet=w0, to_wallet=w1, amount=1, change_address="not an address",
-                       expect_error=(-5, "Change address must be a valid bitcoin address"))
+                       expect_error=(-5, "Change address must be a valid monacoin address"))
         change_address = w0.getnewaddress()
         self.test_send(from_wallet=w0, to_wallet=w1, amount=1, add_to_wallet=False, change_address=change_address)
         assert res["complete"]

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2015-2021 The Bitcoin Core developers
+# Copyright (c) 2015-2021 The Monacoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test p2p permission message.
@@ -18,14 +18,14 @@ from test_framework.script import (
     OP_TRUE,
 )
 from test_framework.test_node import ErrorMatch
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import MonacoinTestFramework
 from test_framework.util import (
     assert_equal,
     p2p_port,
 )
 
 
-class P2PPermissionsTests(BitcoinTestFramework):
+class P2PPermissionsTests(MonacoinTestFramework):
     def set_test_params(self):
         self.num_nodes = 2
         self.setup_clean_chain = True
@@ -156,9 +156,9 @@ class P2PPermissionsTests(BitcoinTestFramework):
                 raise AssertionError("Expected permissions %r is not granted." % p)
 
     def replaceinconfig(self, nodeid, old, new):
-        with open(self.nodes[nodeid].bitcoinconf, encoding="utf8") as f:
+        with open(self.nodes[nodeid].monacoinconf, encoding="utf8") as f:
             newText = f.read().replace(old, new)
-        with open(self.nodes[nodeid].bitcoinconf, 'w', encoding="utf8") as f:
+        with open(self.nodes[nodeid].monacoinconf, 'w', encoding="utf8") as f:
             f.write(newText)
 
 

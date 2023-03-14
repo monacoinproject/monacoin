@@ -1,9 +1,9 @@
-// Copyright (c) 2022 The Bitcoin Core developers
+// Copyright (c) 2022 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or https://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_UTIL_RESULT_H
-#define BITCOIN_UTIL_RESULT_H
+#ifndef MONACOIN_UTIL_RESULT_H
+#define MONACOIN_UTIL_RESULT_H
 
 #include <attributes.h>
 #include <util/translation.h>
@@ -81,4 +81,4 @@ bilingual_str ErrorString(const Result<T>& result)
 }
 } // namespace util
 
-#endif // BITCOIN_UTIL_RESULT_H
+#endif // MONACOIN_UTIL_RESULT_H

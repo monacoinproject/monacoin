@@ -1,9 +1,9 @@
-// Copyright (c) 2016-2021 The Bitcoin Core developers
+// Copyright (c) 2016-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_VERSIONBITS_H
-#define BITCOIN_VERSIONBITS_H
+#ifndef MONACOIN_VERSIONBITS_H
+#define MONACOIN_VERSIONBITS_H
 
 #include <chain.h>
 #include <sync.h>
@@ -104,4 +104,4 @@ public:
     void Clear() EXCLUSIVE_LOCKS_REQUIRED(!m_mutex);
 };
 
-#endif // BITCOIN_VERSIONBITS_H
+#endif // MONACOIN_VERSIONBITS_H

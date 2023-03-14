@@ -1,10 +1,10 @@
 // Copyright (c) 2009-2010 Satoshi Nakamoto
-// Copyright (c) 2009-2020 The Bitcoin Core developers
+// Copyright (c) 2009-2020 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_SCRIPT_SCRIPT_ERROR_H
-#define BITCOIN_SCRIPT_SCRIPT_ERROR_H
+#ifndef MONACOIN_SCRIPT_SCRIPT_ERROR_H
+#define MONACOIN_SCRIPT_SCRIPT_ERROR_H
 
 #include <string>
 
@@ -89,4 +89,4 @@ typedef enum ScriptError_t
 
 std::string ScriptErrorString(const ScriptError error);
 
-#endif // BITCOIN_SCRIPT_SCRIPT_ERROR_H
+#endif // MONACOIN_SCRIPT_SCRIPT_ERROR_H

@@ -66,13 +66,13 @@
         <translation type="unfinished">Қабул қилинадиган манзиллар</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Улар тўловларни жўнатиш учун сизнинг Bitcoin манзилларингиз. Доимо тангаларни жўнатишдан олдин сумма ва қабул қилувчи манзилни текшириб кўринг. </translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">Улар тўловларни жўнатиш учун сизнинг Monacoin манзилларингиз. Доимо тангаларни жўнатишдан олдин сумма ва қабул қилувчи манзилни текшириб кўринг. </translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+        <source>These are your Monacoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Улар тўловларни қабул қилиш учун сизнинг Bitcoin манзилларингиз. Янги манзилларни яратиш учун қабул қилиш варағидаги "Янги қабул қилиш манзилини яратиш" устига босинг. 
+        <translation type="unfinished">Улар тўловларни қабул қилиш учун сизнинг Monacoin манзилларингиз. Янги манзилларни яратиш учун қабул қилиш варағидаги "Янги қабул қилиш манзилини яратиш" устига босинг. 
 Фақат 'legacy' туридаги манзиллар билан ҳисобга кириш мумкин.</translation>
     </message>
     <message>
@@ -164,8 +164,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ҳамённи кодлашни тасдиқлаш</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Диққат: Агар сиз ҳамёнингизни кодласангиз ва махфий сўзингизни унутсангиз, сиз &lt;b&gt;БАРЧА BITCOIN ПУЛЛАРИНГИЗНИ ЙЎҚОТАСИЗ&lt;/b&gt;!</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MONACOINS&lt;/b&gt;!</source>
+        <translation type="unfinished">Диққат: Агар сиз ҳамёнингизни кодласангиз ва махфий сўзингизни унутсангиз, сиз &lt;b&gt;БАРЧА MONACOIN ПУЛЛАРИНГИЗНИ ЙЎҚОТАСИЗ&lt;/b&gt;!</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -231,8 +231,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Миқдори</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation type="unfinished">Bitcoin манзилини киритинг (масалан.  %1)</translation>
+        <source>Enter a Monacoin address (e.g. %1)</source>
+        <translation type="unfinished">Monacoin манзилини киритинг (масалан.  %1)</translation>
     </message>
     <message>
         <source>Inbound</source>
@@ -324,7 +324,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
 </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>Done loading</source>
         <translation type="unfinished">Юклаш тайёр</translation>
@@ -335,7 +335,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation type="unfinished">&amp;Кўриб чиқиш</translation>
@@ -369,8 +369,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Qt ҳақидаги маълумотларни кўрсатиш</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation type="unfinished">Тангаларни Bitcoin манзилига жўнатиш</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation type="unfinished">Тангаларни Monacoin манзилига жўнатиш</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -393,12 +393,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ҳамёнингизга тегишли махфий калитларни кодлаш</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation type="unfinished">Bitcoin манзилидан унинг эгаси эканлигингизни исботлаш учун хабарлар ёзинг</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation type="unfinished">Monacoin манзилидан унинг эгаси эканлигингизни исботлаш учун хабарлар ёзинг</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation type="unfinished">Хабарларни махсус Bitcoin манзилларингиз билан ёзилганлигига ишонч ҳосил қилиш учун уларни тасдиқланг</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation type="unfinished">Хабарларни махсус Monacoin манзилларингиз билан ёзилганлигига ишонч ҳосил қилиш учун уларни тасдиқланг</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -417,8 +417,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ички ойналар асбоблар панели</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation type="unfinished">Тўловлар (QR кодлари ва bitcoin ёрдамида яратишлар: URI’лар) сўраш</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation type="unfinished">Тўловлар (QR кодлари ва monacoin ёрдамида яратишлар: URI’лар) сўраш</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -472,7 +472,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">&amp;Ойна</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network.</source>
+        <source>%n active connection(s) to Monacoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />
@@ -653,8 +653,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Жунатилувчи манзилни тахрирлаш</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation type="unfinished">Киритилган "%1" манзили тўғри Bitcoin манзили эмас.</translation>
+        <source>The entered address "%1" is not a valid Monacoin address.</source>
+        <translation type="unfinished">Киритилган "%1" манзили тўғри Monacoin манзили эмас.</translation>
     </message>
     <message>
         <source>Could not unlock wallet.</source>
@@ -882,8 +882,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Шакл</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation type="unfinished">Кўрсатилган маълумот эскирган бўлиши мумкин. Ҳамёнингиз алоқа ўрнатилгандан сўнг Bitcoin тармоқ билан автоматик тарзда синхронланади, аммо жараён ҳалигача тугалланмади.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
+        <translation type="unfinished">Кўрсатилган маълумот эскирган бўлиши мумкин. Ҳамёнингиз алоқа ўрнатилгандан сўнг Monacoin тармоқ билан автоматик тарзда синхронланади, аммо жараён ҳалигача тугалланмади.</translation>
     </message>
     <message>
         <source>Watch-only:</source>
@@ -1391,8 +1391,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         </translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation type="unfinished">Диққат: Нотўғр Bitcoin манзили</translation>
+        <source>Warning: Invalid Monacoin address</source>
+        <translation type="unfinished">Диққат: Нотўғр Monacoin манзили</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>

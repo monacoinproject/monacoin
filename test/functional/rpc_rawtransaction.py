@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2014-2021 The Bitcoin Core developers
+# Copyright (c) 2014-2021 The Monacoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Test the rawtransaction RPCs.
@@ -21,7 +21,7 @@ from test_framework.messages import (
     CTransaction,
     tx_from_hex,
 )
-from test_framework.test_framework import BitcoinTestFramework
+from test_framework.test_framework import MonacoinTestFramework
 from test_framework.util import (
     assert_equal,
     assert_raises_rpc_error,
@@ -53,7 +53,7 @@ class multidict(dict):
         return self.x
 
 
-class RawTransactionsTest(BitcoinTestFramework):
+class RawTransactionsTest(MonacoinTestFramework):
     def set_test_params(self):
         self.setup_clean_chain = True
         self.num_nodes = 3
@@ -211,7 +211,7 @@ class RawTransactionsTest(BitcoinTestFramework):
         self.nodes[0].createrawtransaction(inputs=[], outputs={})  # Should not throw for backwards compatibility
         self.nodes[0].createrawtransaction(inputs=[], outputs=[])
         assert_raises_rpc_error(-8, "Data must be hexadecimal string", self.nodes[0].createrawtransaction, [], {'data': 'foo'})
-        assert_raises_rpc_error(-5, "Invalid Bitcoin address", self.nodes[0].createrawtransaction, [], {'foo': 0})
+        assert_raises_rpc_error(-5, "Invalid Monacoin address", self.nodes[0].createrawtransaction, [], {'foo': 0})
         assert_raises_rpc_error(-3, "Invalid amount", self.nodes[0].createrawtransaction, [], {address: 'foo'})
         assert_raises_rpc_error(-3, "Amount out of range", self.nodes[0].createrawtransaction, [], {address: -1})
         assert_raises_rpc_error(-8, "Invalid parameter, duplicated address: %s" % address, self.nodes[0].createrawtransaction, [], multidict([(address, 1), (address, 1)]))
@@ -270,7 +270,7 @@ class RawTransactionsTest(BitcoinTestFramework):
         fee_exceeds_max = "Fee exceeds maximum configured by user (e.g. -maxtxfee, maxfeerate)"
 
         # Test a transaction with a small fee.
-        # Fee rate is 0.00100000 BTC/kvB
+        # Fee rate is 0.00100000 MONA/kvB
         tx = self.wallet.create_self_transfer(fee_rate=Decimal('0.00100000'))
         # Thus, testmempoolaccept should reject
         testres = self.nodes[2].testmempoolaccept([tx['hex']], 0.00001000)[0]
@@ -284,7 +284,7 @@ class RawTransactionsTest(BitcoinTestFramework):
         self.nodes[2].sendrawtransaction(hexstring=tx['hex'])
 
         # Test a transaction with a large fee.
-        # Fee rate is 0.20000000 BTC/kvB
+        # Fee rate is 0.20000000 MONA/kvB
         tx = self.wallet.create_self_transfer(fee_rate=Decimal("0.20000000"))
         # Thus, testmempoolaccept should reject
         testres = self.nodes[2].testmempoolaccept([tx['hex']])[0]
@@ -316,7 +316,7 @@ class RawTransactionsTest(BitcoinTestFramework):
         encrawtx = "01000000010000000000000072c1a6a246ae63f74f931e8365e15a089c68d61900000000000000000000ffffffff0100e1f505000000000000000000"
         decrawtx = self.nodes[0].decoderawtransaction(encrawtx, False)  # decode as non-witness transaction
         assert_equal(decrawtx['vout'][0]['value'], Decimal('1.00000000'))
-        # known ambiguous transaction in the chain (see https://github.com/bitcoin/bitcoin/issues/20579)
+        # known ambiguous transaction in the chain (see https://github.com/monacoin/monacoin/issues/20579)
         coinbase = "03c68708046ff8415c622f4254432e434f4d2ffabe6d6de1965d02c68f928e5b244ab1965115a36f56eb997633c7f690124bbf43644e23080000000ca3d3af6d005a65ff0200fd00000000"
         encrawtx = f"020000000001010000000000000000000000000000000000000000000000000000000000000000ffffffff4b{coinbase}" \
                    "ffffffff03f4c1fb4b0000000016001497cfc76442fe717f2a3f0cc9c175f7561b6619970000000000000000266a24aa21a9ed957d1036a80343e0d1b659497e1b48a38ebe876a056d45965fac4a85cda84e1900000000000000002952534b424c4f434b3a8e092581ab01986cbadc84f4b43f4fa4bb9e7a2e2a0caf9b7cf64d939028e22c0120000000000000000000000000000000000000000000000000000000000000000000000000"
@@ -368,7 +368,7 @@ class RawTransactionsTest(BitcoinTestFramework):
         # use balance deltas instead of absolute values
         bal = self.nodes[2].getbalance()
 
-        # send 1.2 BTC to msig adr
+        # send 1.2 MONA to msig adr
         txId = self.nodes[0].sendtoaddress(mSigObj, 1.2)
         self.sync_all()
         self.generate(self.nodes[0], 1)

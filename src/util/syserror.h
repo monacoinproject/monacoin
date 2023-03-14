@@ -1,9 +1,9 @@
-// Copyright (c) 2010-2022 The Bitcoin Core developers
+// Copyright (c) 2010-2022 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_UTIL_SYSERROR_H
-#define BITCOIN_UTIL_SYSERROR_H
+#ifndef MONACOIN_UTIL_SYSERROR_H
+#define MONACOIN_UTIL_SYSERROR_H
 
 #include <string>
 
@@ -13,4 +13,4 @@
  */
 std::string SysErrorString(int err);
 
-#endif // BITCOIN_UTIL_SYSERROR_H
+#endif // MONACOIN_UTIL_SYSERROR_H

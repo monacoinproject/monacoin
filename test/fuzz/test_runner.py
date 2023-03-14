@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Copyright (c) 2019-2021 The Bitcoin Core developers
+# Copyright (c) 2019-2021 The Monacoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 """Run fuzz test targets.
@@ -131,7 +131,7 @@ def main():
                     " ".join(test_list_missing_corpus)
                 )
             )
-            logging.info("Please consider adding a fuzz corpus at https://github.com/bitcoin-core/qa-assets")
+            logging.info("Please consider adding a fuzz corpus at https://github.com/monacoin-core/qa-assets")
 
     try:
         help_output = subprocess.run(

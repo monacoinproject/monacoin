@@ -1,12 +1,12 @@
-// Copyright (c) 2011-2021 The Bitcoin Core developers
+// Copyright (c) 2011-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
 #if defined(HAVE_CONFIG_H)
-#include <config/bitcoin-config.h>
+#include <config/monacoin-config.h>
 #endif
 
-#include <qt/bitcoin.h>
+#include <qt/monacoin.h>
 
 #include <chainparams.h>
 #include <init.h>
@@ -15,7 +15,7 @@
 #include <interfaces/node.h>
 #include <node/interface_ui.h>
 #include <noui.h>
-#include <qt/bitcoingui.h>
+#include <qt/monacoingui.h>
 #include <qt/clientmodel.h>
 #include <qt/guiconstants.h>
 #include <qt/guiutil.h>
@@ -97,9 +97,9 @@ static void RegisterMetaTypes()
     qRegisterMetaType<interfaces::BlockAndHeaderTipInfo>("interfaces::BlockAndHeaderTipInfo");
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
-    qRegisterMetaTypeStreamOperators<BitcoinUnit>("BitcoinUnit");
+    qRegisterMetaTypeStreamOperators<MonacoinUnit>("MonacoinUnit");
 #else
-    qRegisterMetaType<BitcoinUnit>("BitcoinUnit");
+    qRegisterMetaType<MonacoinUnit>("MonacoinUnit");
 #endif
 }
 
@@ -154,12 +154,12 @@ static void initTranslations(QTranslator &qtTranslatorBase, QTranslator &qtTrans
         QApplication::installTranslator(&qtTranslator);
     }
 
-    // Load e.g. bitcoin_de.qm (shortcut "de" needs to be defined in bitcoin.qrc)
+    // Load e.g. monacoin_de.qm (shortcut "de" needs to be defined in monacoin.qrc)
     if (translatorBase.load(lang, ":/translations/")) {
         QApplication::installTranslator(&translatorBase);
     }
 
-    // Load e.g. bitcoin_de_DE.qm (shortcut "de_DE" needs to be defined in bitcoin.qrc)
+    // Load e.g. monacoin_de_DE.qm (shortcut "de_DE" needs to be defined in monacoin.qrc)
     if (translator.load(lang_territory, ":/translations/")) {
         QApplication::installTranslator(&translator);
     }
@@ -173,8 +173,8 @@ static bool InitSettings()
 
     std::vector<std::string> errors;
     if (!gArgs.ReadSettingsFile(&errors)) {
-        std::string error = QT_TRANSLATE_NOOP("bitcoin-core", "Settings file could not be read");
-        std::string error_translated = QCoreApplication::translate("bitcoin-core", error.c_str()).toStdString();
+        std::string error = QT_TRANSLATE_NOOP("monacoin-core", "Settings file could not be read");
+        std::string error_translated = QCoreApplication::translate("monacoin-core", error.c_str()).toStdString();
         InitError(Untranslated(strprintf("%s:\n%s\n", error, MakeUnorderedList(errors))));
 
         QMessageBox messagebox(QMessageBox::Critical, PACKAGE_NAME, QString::fromStdString(strprintf("%s.", error_translated)), QMessageBox::Reset | QMessageBox::Abort);
@@ -196,8 +196,8 @@ static bool InitSettings()
 
     errors.clear();
     if (!gArgs.WriteSettingsFile(&errors)) {
-        std::string error = QT_TRANSLATE_NOOP("bitcoin-core", "Settings file could not be written");
-        std::string error_translated = QCoreApplication::translate("bitcoin-core", error.c_str()).toStdString();
+        std::string error = QT_TRANSLATE_NOOP("monacoin-core", "Settings file could not be written");
+        std::string error_translated = QCoreApplication::translate("monacoin-core", error.c_str()).toStdString();
         InitError(Untranslated(strprintf("%s:\n%s\n", error, MakeUnorderedList(errors))));
 
         QMessageBox messagebox(QMessageBox::Critical, PACKAGE_NAME, QString::fromStdString(strprintf("%s.", error_translated)), QMessageBox::Ok);
@@ -226,9 +226,9 @@ void DebugMessageHandler(QtMsgType type, const QMessageLogContext& context, cons
 }
 
 static int qt_argc = 1;
-static const char* qt_argv = "bitcoin-qt";
+static const char* qt_argv = "monacoin-qt";
 
-BitcoinApplication::BitcoinApplication():
+MonacoinApplication::MonacoinApplication():
     QApplication(qt_argc, const_cast<char **>(&qt_argv)),
     optionsModel(nullptr),
     clientModel(nullptr),
@@ -242,20 +242,20 @@ BitcoinApplication::BitcoinApplication():
     setQuitOnLastWindowClosed(false);
 }
 
-void BitcoinApplication::setupPlatformStyle()
+void MonacoinApplication::setupPlatformStyle()
 {
     // UI per-platform customization
-    // This must be done inside the BitcoinApplication constructor, or after it, because
+    // This must be done inside the MonacoinApplication constructor, or after it, because
     // PlatformStyle::instantiate requires a QApplication
     std::string platformName;
-    platformName = gArgs.GetArg("-uiplatform", BitcoinGUI::DEFAULT_UIPLATFORM);
+    platformName = gArgs.GetArg("-uiplatform", MonacoinGUI::DEFAULT_UIPLATFORM);
     platformStyle = PlatformStyle::instantiate(QString::fromStdString(platformName));
     if (!platformStyle) // Fall back to "other" if specified name not found
         platformStyle = PlatformStyle::instantiate("other");
     assert(platformStyle);
 }
 
-BitcoinApplication::~BitcoinApplication()
+MonacoinApplication::~MonacoinApplication()
 {
     m_executor.reset();
 
@@ -266,13 +266,13 @@ BitcoinApplication::~BitcoinApplication()
 }
 
 #ifdef ENABLE_WALLET
-void BitcoinApplication::createPaymentServer()
+void MonacoinApplication::createPaymentServer()
 {
     paymentServer = new PaymentServer(this);
 }
 #endif
 
-bool BitcoinApplication::createOptionsModel(bool resetSettings)
+bool MonacoinApplication::createOptionsModel(bool resetSettings)
 {
     optionsModel = new OptionsModel(node(), this);
     if (resetSettings) {
@@ -294,10 +294,10 @@ bool BitcoinApplication::createOptionsModel(bool resetSettings)
     return true;
 }
 
-void BitcoinApplication::createWindow(const NetworkStyle *networkStyle)
+void MonacoinApplication::createWindow(const NetworkStyle *networkStyle)
 {
-    window = new BitcoinGUI(node(), platformStyle, networkStyle, nullptr);
-    connect(window, &BitcoinGUI::quitRequested, this, &BitcoinApplication::requestShutdown);
+    window = new MonacoinGUI(node(), platformStyle, networkStyle, nullptr);
+    connect(window, &MonacoinGUI::quitRequested, this, &MonacoinApplication::requestShutdown);
 
     pollShutdownTimer = new QTimer(window);
     connect(pollShutdownTimer, &QTimer::timeout, [this]{
@@ -307,45 +307,45 @@ void BitcoinApplication::createWindow(const NetworkStyle *networkStyle)
     });
 }
 
-void BitcoinApplication::createSplashScreen(const NetworkStyle *networkStyle)
+void MonacoinApplication::createSplashScreen(const NetworkStyle *networkStyle)
 {
     assert(!m_splash);
     m_splash = new SplashScreen(networkStyle);
     // We don't hold a direct pointer to the splash screen after creation, but the splash
     // screen will take care of deleting itself when finish() happens.
     m_splash->show();
-    connect(this, &BitcoinApplication::splashFinished, m_splash, &SplashScreen::finish);
-    connect(this, &BitcoinApplication::requestedShutdown, m_splash, &QWidget::close);
+    connect(this, &MonacoinApplication::splashFinished, m_splash, &SplashScreen::finish);
+    connect(this, &MonacoinApplication::requestedShutdown, m_splash, &QWidget::close);
 }
 
-void BitcoinApplication::createNode(interfaces::Init& init)
+void MonacoinApplication::createNode(interfaces::Init& init)
 {
     assert(!m_node);
     m_node = init.makeNode();
     if (m_splash) m_splash->setNode(*m_node);
 }
 
-bool BitcoinApplication::baseInitialize()
+bool MonacoinApplication::baseInitialize()
 {
     return node().baseInitialize();
 }
 
-void BitcoinApplication::startThread()
+void MonacoinApplication::startThread()
 {
     assert(!m_executor);
     m_executor.emplace(node());
 
     /*  communication to and from thread */
-    connect(&m_executor.value(), &InitExecutor::initializeResult, this, &BitcoinApplication::initializeResult);
+    connect(&m_executor.value(), &InitExecutor::initializeResult, this, &MonacoinApplication::initializeResult);
     connect(&m_executor.value(), &InitExecutor::shutdownResult, this, [] {
         QCoreApplication::exit(0);
     });
-    connect(&m_executor.value(), &InitExecutor::runawayException, this, &BitcoinApplication::handleRunawayException);
-    connect(this, &BitcoinApplication::requestedInitialize, &m_executor.value(), &InitExecutor::initialize);
-    connect(this, &BitcoinApplication::requestedShutdown, &m_executor.value(), &InitExecutor::shutdown);
+    connect(&m_executor.value(), &InitExecutor::runawayException, this, &MonacoinApplication::handleRunawayException);
+    connect(this, &MonacoinApplication::requestedInitialize, &m_executor.value(), &InitExecutor::initialize);
+    connect(this, &MonacoinApplication::requestedShutdown, &m_executor.value(), &InitExecutor::shutdown);
 }
 
-void BitcoinApplication::parameterSetup()
+void MonacoinApplication::parameterSetup()
 {
     // Default printtoconsole to false for the GUI. GUI programs should not
     // print to the console unnecessarily.
@@ -355,19 +355,19 @@ void BitcoinApplication::parameterSetup()
     InitParameterInteraction(gArgs);
 }
 
-void BitcoinApplication::InitPruneSetting(int64_t prune_MiB)
+void MonacoinApplication::InitPruneSetting(int64_t prune_MiB)
 {
     optionsModel->SetPruneTargetGB(PruneMiBtoGB(prune_MiB));
 }
 
-void BitcoinApplication::requestInitialize()
+void MonacoinApplication::requestInitialize()
 {
     qDebug() << __func__ << ": Requesting initialize";
     startThread();
     Q_EMIT requestedInitialize();
 }
 
-void BitcoinApplication::requestShutdown()
+void MonacoinApplication::requestShutdown()
 {
     for (const auto w : QGuiApplication::topLevelWindows()) {
         w->hide();
@@ -409,7 +409,7 @@ void BitcoinApplication::requestShutdown()
     Q_EMIT requestedShutdown();
 }
 
-void BitcoinApplication::initializeResult(bool success, interfaces::BlockAndHeaderTipInfo tip_info)
+void MonacoinApplication::initializeResult(bool success, interfaces::BlockAndHeaderTipInfo tip_info)
 {
     qDebug() << __func__ << ": Initialization result: " << success;
     // Set exit result.
@@ -443,10 +443,10 @@ void BitcoinApplication::initializeResult(bool success, interfaces::BlockAndHead
 
 #ifdef ENABLE_WALLET
         // Now that initialization/startup is done, process any command-line
-        // bitcoin: URIs or payment requests:
+        // monacoin: URIs or payment requests:
         if (paymentServer) {
-            connect(paymentServer, &PaymentServer::receivedPaymentRequest, window, &BitcoinGUI::handlePaymentRequest);
-            connect(window, &BitcoinGUI::receivedURI, paymentServer, &PaymentServer::handleURIOrFile);
+            connect(paymentServer, &PaymentServer::receivedPaymentRequest, window, &MonacoinGUI::handlePaymentRequest);
+            connect(window, &MonacoinGUI::receivedURI, paymentServer, &PaymentServer::handleURIOrFile);
             connect(paymentServer, &PaymentServer::message, [this](const QString& title, const QString& message, unsigned int style) {
                 window->message(title, message, style);
             });
@@ -460,7 +460,7 @@ void BitcoinApplication::initializeResult(bool success, interfaces::BlockAndHead
     }
 }
 
-void BitcoinApplication::handleRunawayException(const QString &message)
+void MonacoinApplication::handleRunawayException(const QString &message)
 {
     QMessageBox::critical(
         nullptr, tr("Runaway exception"),
@@ -469,7 +469,7 @@ void BitcoinApplication::handleRunawayException(const QString &message)
     ::exit(EXIT_FAILURE);
 }
 
-void BitcoinApplication::handleNonFatalException(const QString& message)
+void MonacoinApplication::handleNonFatalException(const QString& message)
 {
     assert(QThread::currentThread() == thread());
     QMessageBox::warning(
@@ -479,7 +479,7 @@ void BitcoinApplication::handleNonFatalException(const QString& message)
         QLatin1String("<br><br>") + GUIUtil::MakeHtmlLink(message, PACKAGE_BUGREPORT));
 }
 
-WId BitcoinApplication::getMainWinId() const
+WId MonacoinApplication::getMainWinId() const
 {
     if (!window)
         return 0;
@@ -487,7 +487,7 @@ WId BitcoinApplication::getMainWinId() const
     return window->winId();
 }
 
-bool BitcoinApplication::event(QEvent* e)
+bool MonacoinApplication::event(QEvent* e)
 {
     if (e->type() == QEvent::Quit) {
         requestShutdown();
@@ -504,7 +504,7 @@ static void SetupUIArgs(ArgsManager& argsman)
     argsman.AddArg("-min", "Start minimized", ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
     argsman.AddArg("-resetguisettings", "Reset all settings changed in the GUI", ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
     argsman.AddArg("-splash", strprintf("Show splash screen on startup (default: %u)", DEFAULT_SPLASHSCREEN), ArgsManager::ALLOW_ANY, OptionsCategory::GUI);
-    argsman.AddArg("-uiplatform", strprintf("Select platform to customize UI for (one of windows, macosx, other; default: %s)", BitcoinGUI::DEFAULT_UIPLATFORM), ArgsManager::ALLOW_ANY | ArgsManager::DEBUG_ONLY, OptionsCategory::GUI);
+    argsman.AddArg("-uiplatform", strprintf("Select platform to customize UI for (one of windows, macosx, other; default: %s)", MonacoinGUI::DEFAULT_UIPLATFORM), ArgsManager::ALLOW_ANY | ArgsManager::DEBUG_ONLY, OptionsCategory::GUI);
 }
 
 int GuiMain(int argc, char* argv[])
@@ -527,8 +527,8 @@ int GuiMain(int argc, char* argv[])
     // Do not refer to data directory yet, this can be overridden by Intro::pickDataDirectory
 
     /// 1. Basic Qt initialization (not dependent on parameters or configuration)
-    Q_INIT_RESOURCE(bitcoin);
-    Q_INIT_RESOURCE(bitcoin_locale);
+    Q_INIT_RESOURCE(monacoin);
+    Q_INIT_RESOURCE(monacoin_locale);
 
 #if (QT_VERSION < QT_VERSION_CHECK(6, 0, 0))
     // Generate high-dpi pixmaps
@@ -542,7 +542,7 @@ int GuiMain(int argc, char* argv[])
     QApplication::setAttribute(Qt::AA_DontUseNativeDialogs);
 #endif
 
-    BitcoinApplication app;
+    MonacoinApplication app;
     GUIUtil::LoadFont(QStringLiteral(":/fonts/monospace"));
 
     /// 2. Parse command-line options. We do this after qt in order to show an error if there are problems parsing these
@@ -592,7 +592,7 @@ int GuiMain(int argc, char* argv[])
     // Gracefully exit if the user cancels
     if (!Intro::showIfNeeded(did_show_intro, prune_MiB)) return EXIT_SUCCESS;
 
-    /// 6. Determine availability of data directory and parse bitcoin.conf
+    /// 6. Determine availability of data directory and parse monacoin.conf
     /// - Do not call gArgs.GetDataDirNet() before this step finishes
     if (!CheckDataDirOption()) {
         InitError(strprintf(Untranslated("Specified data directory \"%s\" does not exist.\n"), gArgs.GetArg("-datadir", "")));
@@ -648,7 +648,7 @@ int GuiMain(int argc, char* argv[])
         exit(EXIT_SUCCESS);
 
     // Start up the payment server early, too, so impatient users that click on
-    // bitcoin: links repeatedly have their payment requests routed to this process:
+    // monacoin: links repeatedly have their payment requests routed to this process:
     if (WalletModel::isWalletEnabled()) {
         app.createPaymentServer();
     }

@@ -1,13 +1,13 @@
 Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Upstream-Name: Bitcoin
+Upstream-Name: Monacoin
 Upstream-Contact: Satoshi Nakamoto <satoshin@gmx.com>
- irc://#bitcoin-core-dev@libera.chat
-Source: https://github.com/bitcoin/bitcoin
+ irc://#monacoin-core-dev@libera.chat
+Source: https://github.com/monacoin/monacoin
 
 Files: *
-Copyright: 2009-2022, Bitcoin Core Developers
+Copyright: 2009-2022, Monacoin Core Developers
 License: Expat
-Comment: The Bitcoin Core Developers encompasses the current developers listed on bitcoin.org,
+Comment: The Monacoin Core Developers encompasses the current developers listed on monacoin.org,
          as well as the numerous contributors to the project.
 
 Files: debian/*
@@ -75,12 +75,12 @@ Copyright: Stephen Hutchings, Jonas Schnelli
 License: Expat
 Comment: Modifications of Stephen Hutchings' Typicons
 
-Files: src/qt/res/icons/bitcoin.*
-       share/pixmaps/bitcoin*
-       src/qt/res/src/bitcoin.svg
+Files: src/qt/res/icons/monacoin.*
+       share/pixmaps/monacoin*
+       src/qt/res/src/monacoin.svg
 Copyright: Bitboy, Jonas Schnelli
 License: public-domain
-Comment: Site: https://bitcointalk.org/?topic=1756.0
+Comment: Site: https://monacointalk.org/?topic=1756.0
 
 Files: src/qt/res/icons/proxy.png
        src/qt/res/src/proxy.svg

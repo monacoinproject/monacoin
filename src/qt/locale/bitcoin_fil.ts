@@ -58,13 +58,13 @@
         <translation type="unfinished">Mga address na tatanggap</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
-        <translation type="unfinished">Ito ang iyong mga Bitcoin address para sa pagpapadala ng bayad. Laging suriin ang halaga at ang address na tatanggap bago magpadala ng coins.</translation>
+        <source>These are your Monacoin addresses for sending payments. Always check the amount and the receiving address before sending coins.</source>
+        <translation type="unfinished">Ito ang iyong mga Monacoin address para sa pagpapadala ng bayad. Laging suriin ang halaga at ang address na tatanggap bago magpadala ng coins.</translation>
     </message>
     <message>
-        <source>These are your Bitcoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
+        <source>These are your Monacoin addresses for receiving payments. Use the 'Create new receiving address' button in the receive tab to create new addresses.
 Signing is only possible with addresses of the type 'legacy'.</source>
-        <translation type="unfinished">Ito ang iyong Bitcoin addresses upang makatanggap ng salapi. Gamitin ang 'Create new receiving address' button sa receive tab upang lumikha ng bagong address. Ang signing ay posible lamang sa mga addresses na nasa anyong 'legacy'.
+        <translation type="unfinished">Ito ang iyong Monacoin addresses upang makatanggap ng salapi. Gamitin ang 'Create new receiving address' button sa receive tab upang lumikha ng bagong address. Ang signing ay posible lamang sa mga addresses na nasa anyong 'legacy'.
 </translation>
     </message>
     <message>
@@ -139,8 +139,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Kumpirmahin ang pag-encrypt ng walet.</translation>
     </message>
     <message>
-        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR BITCOINS&lt;/b&gt;!</source>
-        <translation type="unfinished">Babala: Kung na-encrypt mo ang iyong walet at nawala ang iyong passphrase, &lt;b&gt;MAWAWALA MO ANG LAHAT NG IYONG MGA BITCOIN!&lt;/b&gt;</translation>
+        <source>Warning: If you encrypt your wallet and lose your passphrase, you will &lt;b&gt;LOSE ALL OF YOUR MONACOINS&lt;/b&gt;!</source>
+        <translation type="unfinished">Babala: Kung na-encrypt mo ang iyong walet at nawala ang iyong passphrase, &lt;b&gt;MAWAWALA MO ANG LAHAT NG IYONG MGA MONACOIN!&lt;/b&gt;</translation>
     </message>
     <message>
         <source>Are you sure you wish to encrypt your wallet?</source>
@@ -159,8 +159,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ipasok ang lumang passphrase at bagong passphrase para sa pitaka.</translation>
     </message>
     <message>
-        <source>Remember that encrypting your wallet cannot fully protect your bitcoins from being stolen by malware infecting your computer.</source>
-        <translation type="unfinished">Tandaan na ang pag-encrypt ng iyong pitaka ay hindi maaaring ganap na maprotektahan ang iyong mga bitcoin mula sa pagnanakaw ng malware na nahahawa sa iyong computer.</translation>
+        <source>Remember that encrypting your wallet cannot fully protect your monacoins from being stolen by malware infecting your computer.</source>
+        <translation type="unfinished">Tandaan na ang pag-encrypt ng iyong pitaka ay hindi maaaring ganap na maprotektahan ang iyong mga monacoin mula sa pagnanakaw ng malware na nahahawa sa iyong computer.</translation>
     </message>
     <message>
         <source>Wallet to be encrypted</source>
@@ -237,8 +237,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Halaga</translation>
     </message>
     <message>
-        <source>Enter a Bitcoin address (e.g. %1)</source>
-        <translation type="unfinished">I-enter ang Bitcoin address (e.g. %1)</translation>
+        <source>Enter a Monacoin address (e.g. %1)</source>
+        <translation type="unfinished">I-enter ang Monacoin address (e.g. %1)</translation>
     </message>
     <message>
         <source>Inbound</source>
@@ -302,7 +302,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
     </context>
 <context>
-    <name>bitcoin-core</name>
+    <name>monacoin-core</name>
     <message>
         <source>The %s developers</source>
         <translation type="unfinished">Ang mga %s developers</translation>
@@ -637,7 +637,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
     </message>
 </context>
 <context>
-    <name>BitcoinGUI</name>
+    <name>MonacoinGUI</name>
     <message>
         <source>&amp;Overview</source>
         <translation type="unfinished">Pangkalahatang-ideya</translation>
@@ -704,8 +704,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ang proxy ay &lt;b&gt;pinagana&lt;/b&gt;: %1</translation>
     </message>
     <message>
-        <source>Send coins to a Bitcoin address</source>
-        <translation type="unfinished">Magpadala ng coins sa Bitcoin address</translation>
+        <source>Send coins to a Monacoin address</source>
+        <translation type="unfinished">Magpadala ng coins sa Monacoin address</translation>
     </message>
     <message>
         <source>Backup wallet to another location</source>
@@ -732,12 +732,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">I-encrypt ang private keys na kabilang sa iyong walet</translation>
     </message>
     <message>
-        <source>Sign messages with your Bitcoin addresses to prove you own them</source>
-        <translation type="unfinished">Pumirma ng mga mensahe gamit ang iyong mga Bitcoin address upang mapatunayan na pagmamay-ari mo ang mga ito</translation>
+        <source>Sign messages with your Monacoin addresses to prove you own them</source>
+        <translation type="unfinished">Pumirma ng mga mensahe gamit ang iyong mga Monacoin address upang mapatunayan na pagmamay-ari mo ang mga ito</translation>
     </message>
     <message>
-        <source>Verify messages to ensure they were signed with specified Bitcoin addresses</source>
-        <translation type="unfinished">I-verify ang mga mensahe upang matiyak na sila ay napirmahan ng tinukoy na mga Bitcoin address.</translation>
+        <source>Verify messages to ensure they were signed with specified Monacoin addresses</source>
+        <translation type="unfinished">I-verify ang mga mensahe upang matiyak na sila ay napirmahan ng tinukoy na mga Monacoin address.</translation>
     </message>
     <message>
         <source>&amp;File</source>
@@ -752,8 +752,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Tulong</translation>
     </message>
     <message>
-        <source>Request payments (generates QR codes and bitcoin: URIs)</source>
-        <translation type="unfinished">Humiling ng bayad (lumilikha ng QR codes at bitcoin: URIs)</translation>
+        <source>Request payments (generates QR codes and monacoin: URIs)</source>
+        <translation type="unfinished">Humiling ng bayad (lumilikha ng QR codes at monacoin: URIs)</translation>
     </message>
     <message>
         <source>Show the list of used sending addresses and labels</source>
@@ -831,8 +831,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Isarado ang lahat ng wallets</translation>
     </message>
     <message>
-        <source>Show the %1 help message to get a list with possible Bitcoin command-line options</source>
-        <translation type="unfinished">Ipakita sa %1 ang tulong na mensahe upang makuha ang talaan ng mga posibleng opsyon ng Bitcoin command-line</translation>
+        <source>Show the %1 help message to get a list with possible Monacoin command-line options</source>
+        <translation type="unfinished">Ipakita sa %1 ang tulong na mensahe upang makuha ang talaan ng mga posibleng opsyon ng Monacoin command-line</translation>
     </message>
     <message>
         <source>default wallet</source>
@@ -864,7 +864,7 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">%1 kliyente</translation>
     </message>
     <message numerus="yes">
-        <source>%n active connection(s) to Bitcoin network.</source>
+        <source>%n active connection(s) to Monacoin network.</source>
         <extracomment>A substring of the tooltip.</extracomment>
         <translation type="unfinished">
             <numerusform />
@@ -1187,8 +1187,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Baguhin ang address para sa pagpapadala</translation>
     </message>
     <message>
-        <source>The entered address "%1" is not a valid Bitcoin address.</source>
-        <translation type="unfinished">Ang address na in-enter "%1" ay hindi isang wastong Bitcoin address.</translation>
+        <source>The entered address "%1" is not a valid Monacoin address.</source>
+        <translation type="unfinished">Ang address na in-enter "%1" ay hindi isang wastong Monacoin address.</translation>
     </message>
     <message>
         <source>Address "%1" already exists as a receiving address with label "%2" and so cannot be added as a sending address.</source>
@@ -1270,8 +1270,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         </translation>
     </message>
     <message>
-        <source>%1 will download and store a copy of the Bitcoin block chain.</source>
-        <translation type="unfinished">%1 ay mag-do-download at magiimbak ng kopya ng Bitcoin blockchain.</translation>
+        <source>%1 will download and store a copy of the Monacoin block chain.</source>
+        <translation type="unfinished">%1 ay mag-do-download at magiimbak ng kopya ng Monacoin blockchain.</translation>
     </message>
     <message>
         <source>The wallet will also be stored in this directory.</source>
@@ -1343,12 +1343,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Anyo</translation>
     </message>
     <message>
-        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the bitcoin network, as detailed below.</source>
-        <translation type="unfinished">Ang mga bagong transaksyon ay hindi pa makikita kaya ang balanse ng iyong walet ay maaaring hindi tama. Ang impormasyong ito ay maiitama pagkatapos ma-synchronize ng iyong walet sa bitcoin network, ayon sa ibaba.</translation>
+        <source>Recent transactions may not yet be visible, and therefore your wallet's balance might be incorrect. This information will be correct once your wallet has finished synchronizing with the monacoin network, as detailed below.</source>
+        <translation type="unfinished">Ang mga bagong transaksyon ay hindi pa makikita kaya ang balanse ng iyong walet ay maaaring hindi tama. Ang impormasyong ito ay maiitama pagkatapos ma-synchronize ng iyong walet sa monacoin network, ayon sa ibaba.</translation>
     </message>
     <message>
-        <source>Attempting to spend bitcoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
-        <translation type="unfinished">Ang pagtangkang gastusin ang mga bitcoin na apektado ng mga transaksyon na hindi pa naipapakita ay hindi tatanggapin ng network.</translation>
+        <source>Attempting to spend monacoins that are affected by not-yet-displayed transactions will not be accepted by the network.</source>
+        <translation type="unfinished">Ang pagtangkang gastusin ang mga monacoin na apektado ng mga transaksyon na hindi pa naipapakita ay hindi tatanggapin ng network.</translation>
     </message>
     <message>
         <source>Number of blocks left</source>
@@ -1470,8 +1470,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Gastusin ang sukli na hindi pa nakumpirma</translation>
     </message>
     <message>
-        <source>Automatically open the Bitcoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
-        <translation type="unfinished">Kusang buksan ang Bitcoin client port sa router. Gumagana lamang ito kapag ang iyong router ay sumusuporta ng UPnP at ito ay pinagana.</translation>
+        <source>Automatically open the Monacoin client port on the router. This only works when your router supports UPnP and it is enabled.</source>
+        <translation type="unfinished">Kusang buksan ang Monacoin client port sa router. Gumagana lamang ito kapag ang iyong router ay sumusuporta ng UPnP at ito ay pinagana.</translation>
     </message>
     <message>
         <source>Map port using &amp;UPnP</source>
@@ -1486,8 +1486,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ipahintulot ang mga papasok na koneksyon</translation>
     </message>
     <message>
-        <source>Connect to the Bitcoin network through a SOCKS5 proxy.</source>
-        <translation type="unfinished">Kumunekta sa Bitcoin network sa pamamagitan ng SOCKS5 proxy.</translation>
+        <source>Connect to the Monacoin network through a SOCKS5 proxy.</source>
+        <translation type="unfinished">Kumunekta sa Monacoin network sa pamamagitan ng SOCKS5 proxy.</translation>
     </message>
     <message>
         <source>&amp;Connect through SOCKS5 proxy (default proxy):</source>
@@ -1614,8 +1614,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Anyo</translation>
     </message>
     <message>
-        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Bitcoin network after a connection is established, but this process has not completed yet.</source>
-        <translation type="unfinished">Ang ipinapakitang impormasyon ay maaaring luma na. Kusang mag-sy-synchronize ang iyong walet sa Bitcoin network pagkatapos maitatag ang koneksyon, ngunit hindi pa nakukumpleto ang prosesong ito.</translation>
+        <source>The displayed information may be out of date. Your wallet automatically synchronizes with the Monacoin network after a connection is established, but this process has not completed yet.</source>
+        <translation type="unfinished">Ang ipinapakitang impormasyon ay maaaring luma na. Kusang mag-sy-synchronize ang iyong walet sa Monacoin network pagkatapos maitatag ang koneksyon, ngunit hindi pa nakukumpleto ang prosesong ito.</translation>
     </message>
     <message>
         <source>Available:</source>
@@ -1744,16 +1744,16 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Kamalian sa paghiling ng bayad</translation>
     </message>
     <message>
-        <source>Cannot start bitcoin: click-to-pay handler</source>
-        <translation type="unfinished">Hindi masimulan ang bitcoin: click-to-pay handler</translation>
+        <source>Cannot start monacoin: click-to-pay handler</source>
+        <translation type="unfinished">Hindi masimulan ang monacoin: click-to-pay handler</translation>
     </message>
     <message>
-        <source>'bitcoin://' is not a valid URI. Use 'bitcoin:' instead.</source>
-        <translation type="unfinished">Ang 'bitcoin://' ay hindi wastong URI. Sa halip, gamitin ang 'bitcoin:'.</translation>
+        <source>'monacoin://' is not a valid URI. Use 'monacoin:' instead.</source>
+        <translation type="unfinished">Ang 'monacoin://' ay hindi wastong URI. Sa halip, gamitin ang 'monacoin:'.</translation>
     </message>
     <message>
-        <source>URI cannot be parsed! This can be caused by an invalid Bitcoin address or malformed URI parameters.</source>
-        <translation type="unfinished">Hindi ma-parse ang URI! Marahil ito ay dahil sa hindi wastong Bitcoin address o maling URI parameters</translation>
+        <source>URI cannot be parsed! This can be caused by an invalid Monacoin address or malformed URI parameters.</source>
+        <translation type="unfinished">Hindi ma-parse ang URI! Marahil ito ay dahil sa hindi wastong Monacoin address o maling URI parameters</translation>
     </message>
     <message>
         <source>Payment request file handling</source>
@@ -2085,8 +2085,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Mensahe:</translation>
     </message>
     <message>
-        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Bitcoin network.</source>
-        <translation type="unfinished">Opsyonal na mensahe na ilakip sa hiling ng bayad, na ipapakita pagbukas ng hiling. Tandaan: Ang mensahe ay hindi ipapadala kasama ng bayad sa Bitcoin network.</translation>
+        <source>An optional message to attach to the payment request, which will be displayed when the request is opened. Note: The message will not be sent with the payment over the Monacoin network.</source>
+        <translation type="unfinished">Opsyonal na mensahe na ilakip sa hiling ng bayad, na ipapakita pagbukas ng hiling. Tandaan: Ang mensahe ay hindi ipapadala kasama ng bayad sa Monacoin network.</translation>
     </message>
     <message>
         <source>An optional label to associate with the new receiving address.</source>
@@ -2306,8 +2306,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Itago ang mga Setting ng bayad sa Transaksyon</translation>
     </message>
     <message>
-        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for bitcoin transactions than the network can process.</source>
-        <translation type="unfinished">Kapag mas kaunti ang dami ng transaksyon kaysa sa puwang sa mga blocks, ang mga minero pati na rin ang mga relaying node ay maaaring magpatupad ng minimum na bayad. Ang pagbabayad lamang ng minimum na bayad na ito ay maayos, ngunit malaman na maaari itong magresulta sa hindi kailanmang nagkukumpirmang transaksyon sa sandaling magkaroon ng higit na pangangailangan para sa mga transaksyon ng bitcoin kaysa sa kayang i-proseso ng network.</translation>
+        <source>When there is less transaction volume than space in the blocks, miners as well as relaying nodes may enforce a minimum fee. Paying only this minimum fee is just fine, but be aware that this can result in a never confirming transaction once there is more demand for monacoin transactions than the network can process.</source>
+        <translation type="unfinished">Kapag mas kaunti ang dami ng transaksyon kaysa sa puwang sa mga blocks, ang mga minero pati na rin ang mga relaying node ay maaaring magpatupad ng minimum na bayad. Ang pagbabayad lamang ng minimum na bayad na ito ay maayos, ngunit malaman na maaari itong magresulta sa hindi kailanmang nagkukumpirmang transaksyon sa sandaling magkaroon ng higit na pangangailangan para sa mga transaksyon ng monacoin kaysa sa kayang i-proseso ng network.</translation>
     </message>
     <message>
         <source>A too low fee might result in a never confirming transaction (read the tooltip)</source>
@@ -2450,8 +2450,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         </translation>
     </message>
     <message>
-        <source>Warning: Invalid Bitcoin address</source>
-        <translation type="unfinished">Babala: Hindi wastong Bitcoin address</translation>
+        <source>Warning: Invalid Monacoin address</source>
+        <translation type="unfinished">Babala: Hindi wastong Monacoin address</translation>
     </message>
     <message>
         <source>Warning: Unknown change address</source>
@@ -2489,8 +2489,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Piliin ang dating ginamit na address</translation>
     </message>
     <message>
-        <source>The Bitcoin address to send the payment to</source>
-        <translation type="unfinished">Ang Bitcoin address kung saan ipapadala and bayad</translation>
+        <source>The Monacoin address to send the payment to</source>
+        <translation type="unfinished">Ang Monacoin address kung saan ipapadala and bayad</translation>
     </message>
     <message>
         <source>Paste address from clipboard</source>
@@ -2501,8 +2501,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Alisin ang entry na ito</translation>
     </message>
     <message>
-        <source>The fee will be deducted from the amount being sent. The recipient will receive less bitcoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
-        <translation type="unfinished">Ibabawas ang bayad mula sa halagang ipapadala. Ang tatanggap ay makakatanggap ng mas kaunting mga bitcoin kaysa sa pinasok mo sa patlang ng halaga. Kung napili ang maraming tatanggap, ang bayad ay paghihiwalayin.</translation>
+        <source>The fee will be deducted from the amount being sent. The recipient will receive less monacoins than you enter in the amount field. If multiple recipients are selected, the fee is split equally.</source>
+        <translation type="unfinished">Ibabawas ang bayad mula sa halagang ipapadala. Ang tatanggap ay makakatanggap ng mas kaunting mga monacoin kaysa sa pinasok mo sa patlang ng halaga. Kung napili ang maraming tatanggap, ang bayad ay paghihiwalayin.</translation>
     </message>
     <message>
         <source>S&amp;ubtract fee from amount</source>
@@ -2521,8 +2521,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Mag-enter ng label para sa address na ito upang idagdag ito sa listahan ng mga gamit na address.</translation>
     </message>
     <message>
-        <source>A message that was attached to the bitcoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Bitcoin network.</source>
-        <translation type="unfinished">Mensahe na nakalakip sa bitcoin: URI na kung saan maiimbak kasama ang transaksyon para sa iyong sanggunian. Tandaan: Ang mensaheng ito ay hindi ipapadala sa network ng Bitcoin.</translation>
+        <source>A message that was attached to the monacoin: URI which will be stored with the transaction for your reference. Note: This message will not be sent over the Monacoin network.</source>
+        <translation type="unfinished">Mensahe na nakalakip sa monacoin: URI na kung saan maiimbak kasama ang transaksyon para sa iyong sanggunian. Tandaan: Ang mensaheng ito ay hindi ipapadala sa network ng Monacoin.</translation>
     </message>
 </context>
 <context>
@@ -2543,12 +2543,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Pirmahan ang Mensahe</translation>
     </message>
     <message>
-        <source>You can sign messages/agreements with your addresses to prove you can receive bitcoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
-        <translation type="unfinished">Maaari kang pumirma ng mga mensahe/kasunduan sa iyong mga address upang mapatunayan na maaari kang makatanggap ng mga bitcoin na ipinadala sa kanila. Mag-ingat na huwag pumirma ng anumang bagay na hindi malinaw o random, dahil ang mga phishing attack ay maaaring subukan na linlangin ka sa pagpirma ng iyong pagkakakilanlan sa kanila. Pumirma lamang ng kumpletong mga pahayag na sumasang-ayon ka.</translation>
+        <source>You can sign messages/agreements with your addresses to prove you can receive monacoins sent to them. Be careful not to sign anything vague or random, as phishing attacks may try to trick you into signing your identity over to them. Only sign fully-detailed statements you agree to.</source>
+        <translation type="unfinished">Maaari kang pumirma ng mga mensahe/kasunduan sa iyong mga address upang mapatunayan na maaari kang makatanggap ng mga monacoin na ipinadala sa kanila. Mag-ingat na huwag pumirma ng anumang bagay na hindi malinaw o random, dahil ang mga phishing attack ay maaaring subukan na linlangin ka sa pagpirma ng iyong pagkakakilanlan sa kanila. Pumirma lamang ng kumpletong mga pahayag na sumasang-ayon ka.</translation>
     </message>
     <message>
-        <source>The Bitcoin address to sign the message with</source>
-        <translation type="unfinished">Ang Bitcoin address kung anong ipipirma sa mensahe</translation>
+        <source>The Monacoin address to sign the message with</source>
+        <translation type="unfinished">Ang Monacoin address kung anong ipipirma sa mensahe</translation>
     </message>
     <message>
         <source>Choose previously used address</source>
@@ -2571,8 +2571,8 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Kopyahin ang kasalukuyang address sa system clipboard</translation>
     </message>
     <message>
-        <source>Sign the message to prove you own this Bitcoin address</source>
-        <translation type="unfinished">Pirmahan ang mensahe upang mapatunayan na pagmamay-ari mo ang Bitcoin address na ito</translation>
+        <source>Sign the message to prove you own this Monacoin address</source>
+        <translation type="unfinished">Pirmahan ang mensahe upang mapatunayan na pagmamay-ari mo ang Monacoin address na ito</translation>
     </message>
     <message>
         <source>Sign &amp;Message</source>
@@ -2595,12 +2595,12 @@ Signing is only possible with addresses of the type 'legacy'.</source>
         <translation type="unfinished">Ipasok ang address ng tatanggap, mensahe (tiyakin na kopyahin mo ang mga break ng linya, puwang, mga tab, atbp.) at pirma sa ibaba upang i-verify ang mensahe. Mag-ingat na huwag magbasa ng higit pa sa pirma kaysa sa kung ano ang nasa nakapirmang mensahe mismo, upang maiwasan na maloko ng man-in-the-middle attack. Tandaan na pinapatunayan lamang nito na nakakatanggap sa address na ito ang partido na pumirma, hindi nito napapatunayan ang pagpapadala ng anumang transaksyon!</translation>
     </message>
     <message>
-        <source>The Bitcoin address the message was signed with</source>
-        <translation type="unfinished">Ang Bitcoin address na pumirma sa mensahe</translation>
+        <source>The Monacoin address the message was signed with</source>
+        <translation type="unfinished">Ang Monacoin address na pumirma sa mensahe</translation>
     </message>
     <message>
-        <source>Verify the message to ensure it was signed with the specified Bitcoin address</source>
-        <translation type="unfinished">Tiyakin ang katotohanan ng mensahe upang siguruhin na ito'y napirmahan ng tinukoy na Bitcoin address</translation>
+        <source>Verify the message to ensure it was signed with the specified Monacoin address</source>
+        <translation type="unfinished">Tiyakin ang katotohanan ng mensahe upang siguruhin na ito'y napirmahan ng tinukoy na Monacoin address</translation>
     </message>
     <message>
         <source>Verify &amp;Message</source>

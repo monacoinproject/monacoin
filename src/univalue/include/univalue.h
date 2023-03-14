@@ -1,10 +1,10 @@
 // Copyright 2014 BitPay Inc.
-// Copyright 2015 Bitcoin Core Developers
+// Copyright 2015 Monacoin Core Developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or https://opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_UNIVALUE_INCLUDE_UNIVALUE_H
-#define BITCOIN_UNIVALUE_INCLUDE_UNIVALUE_H
+#ifndef MONACOIN_UNIVALUE_INCLUDE_UNIVALUE_H
+#define MONACOIN_UNIVALUE_INCLUDE_UNIVALUE_H
 
 #include <charconv>
 #include <cstdint>
@@ -203,4 +203,4 @@ extern const UniValue NullUniValue;
 
 const UniValue& find_value( const UniValue& obj, const std::string& name);
 
-#endif // BITCOIN_UNIVALUE_INCLUDE_UNIVALUE_H
+#endif // MONACOIN_UNIVALUE_INCLUDE_UNIVALUE_H

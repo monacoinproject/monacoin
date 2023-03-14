@@ -1,9 +1,9 @@
-// Copyright (c) 2021 The Bitcoin Core developers
+// Copyright (c) 2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_WALLET_TRANSACTION_H
-#define BITCOIN_WALLET_TRANSACTION_H
+#ifndef MONACOIN_WALLET_TRANSACTION_H
+#define MONACOIN_WALLET_TRANSACTION_H
 
 #include <consensus/amount.h>
 #include <primitives/transaction.h>
@@ -178,7 +178,7 @@ public:
     unsigned int nTimeSmart;
     /**
      * From me flag is set to 1 for transactions that were created by the wallet
-     * on this bitcoin node, and set to 0 for transactions that were created
+     * on this monacoin node, and set to 0 for transactions that were created
      * externally and came in through the network or sendrawtransaction RPC.
      */
     bool fFromMe;
@@ -314,4 +314,4 @@ struct WalletTxOrderComparator {
 };
 } // namespace wallet
 
-#endif // BITCOIN_WALLET_TRANSACTION_H
+#endif // MONACOIN_WALLET_TRANSACTION_H

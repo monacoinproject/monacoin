@@ -1,9 +1,9 @@
-// Copyright (c) 2021 The Bitcoin Core developers
+// Copyright (c) 2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_TEST_UTIL_SCRIPT_H
-#define BITCOIN_TEST_UTIL_SCRIPT_H
+#ifndef MONACOIN_TEST_UTIL_SCRIPT_H
+#define MONACOIN_TEST_UTIL_SCRIPT_H
 
 #include <crypto/sha256.h>
 #include <script/script.h>
@@ -21,4 +21,4 @@ static const CScript P2WSH_OP_TRUE{
 /** Flags that are not forbidden by an assert in script validation */
 bool IsValidFlagCombination(unsigned flags);
 
-#endif // BITCOIN_TEST_UTIL_SCRIPT_H
+#endif // MONACOIN_TEST_UTIL_SCRIPT_H

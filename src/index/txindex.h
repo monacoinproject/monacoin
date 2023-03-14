@@ -1,9 +1,9 @@
-// Copyright (c) 2017-2021 The Bitcoin Core developers
+// Copyright (c) 2017-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_INDEX_TXINDEX_H
-#define BITCOIN_INDEX_TXINDEX_H
+#ifndef MONACOIN_INDEX_TXINDEX_H
+#define MONACOIN_INDEX_TXINDEX_H
 
 #include <index/base.h>
 
@@ -46,4 +46,4 @@ public:
 /// The global transaction index, used in GetTransaction. May be null.
 extern std::unique_ptr<TxIndex> g_txindex;
 
-#endif // BITCOIN_INDEX_TXINDEX_H
+#endif // MONACOIN_INDEX_TXINDEX_H

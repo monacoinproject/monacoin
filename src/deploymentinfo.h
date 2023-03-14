@@ -1,9 +1,9 @@
-// Copyright (c) 2016-2021 The Bitcoin Core developers
+// Copyright (c) 2016-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_DEPLOYMENTINFO_H
-#define BITCOIN_DEPLOYMENTINFO_H
+#ifndef MONACOIN_DEPLOYMENTINFO_H
+#define MONACOIN_DEPLOYMENTINFO_H
 
 #include <consensus/params.h>
 
@@ -26,4 +26,4 @@ inline std::string DeploymentName(Consensus::DeploymentPos pos)
     return VersionBitsDeploymentInfo[pos].name;
 }
 
-#endif // BITCOIN_DEPLOYMENTINFO_H
+#endif // MONACOIN_DEPLOYMENTINFO_H

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (c) 2019-2021 The Bitcoin Core developers
+# Copyright (c) 2019-2021 The Monacoin Core developers
 # Distributed under the MIT software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
@@ -13,4 +13,4 @@ export DPKG_ADD_ARCH="i386"
 export PACKAGES="python3 nsis g++-mingw-w64-x86-64-posix wine-binfmt wine64 wine32 file"
 export RUN_FUNCTIONAL_TESTS=false
 export GOAL="deploy"
-export BITCOIN_CONFIG="--enable-reduce-exports --disable-external-signer --disable-gui-tests"
+export MONACOIN_CONFIG="--enable-reduce-exports --disable-external-signer --disable-gui-tests"

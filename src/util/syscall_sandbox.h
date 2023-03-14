@@ -1,9 +1,9 @@
-// Copyright (c) 2020-2021 The Bitcoin Core developers
+// Copyright (c) 2020-2021 The Monacoin Core developers
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#ifndef BITCOIN_UTIL_SYSCALL_SANDBOX_H
-#define BITCOIN_UTIL_SYSCALL_SANDBOX_H
+#ifndef MONACOIN_UTIL_SYSCALL_SANDBOX_H
+#define MONACOIN_UTIL_SYSCALL_SANDBOX_H
 
 enum class SyscallSandboxPolicy {
     // 1. Initialization
@@ -36,9 +36,9 @@ enum class SyscallSandboxPolicy {
 //!
 //! This function is a no-op unless SetupSyscallSandbox(...) has been called.
 //!
-//! SetupSyscallSandbox(...) is called during bitcoind initialization if Bitcoin Core was compiled
+//! SetupSyscallSandbox(...) is called during monacoind initialization if Monacoin Core was compiled
 //! with seccomp-bpf support (--with-seccomp) *and* the parameter -sandbox=<mode> was passed to
-//! bitcoind.
+//! monacoind.
 //!
 //! This experimental feature is available under Linux x86_64 only.
 void SetSyscallSandboxPolicy(SyscallSandboxPolicy syscall_policy);
@@ -51,4 +51,4 @@ void SetSyscallSandboxPolicy(SyscallSandboxPolicy syscall_policy);
 void TestDisallowedSandboxCall();
 #endif // defined(USE_SYSCALL_SANDBOX)
 
-#endif // BITCOIN_UTIL_SYSCALL_SANDBOX_H
+#endif // MONACOIN_UTIL_SYSCALL_SANDBOX_H

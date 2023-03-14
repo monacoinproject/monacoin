@@ -89,7 +89,7 @@ Refer to the `getblockchaininfo` RPC help for details.
 
 The getutxo command allows querying of the UTXO set given a set of outpoints.
 See BIP64 for input and output serialisation:
-https://github.com/bitcoin/bips/blob/master/bip-0064.mediawiki
+https://github.com/monacoin/bips/blob/master/bip-0064.mediawiki
 
 Example:
 ```
@@ -129,4 +129,4 @@ Refer to the `getrawmempool` RPC help for details.
 
 Risks
 -------------
-Running a web browser on the same node with a REST enabled bitcoind can be a risk. Accessing prepared XSS websites could read out tx/block data of your node by placing links like `<script src="http://127.0.0.1:8332/rest/tx/1234567890.json">` which might break the nodes privacy.
+Running a web browser on the same node with a REST enabled monacoind can be a risk. Accessing prepared XSS websites could read out tx/block data of your node by placing links like `<script src="http://127.0.0.1:8332/rest/tx/1234567890.json">` which might break the nodes privacy.
