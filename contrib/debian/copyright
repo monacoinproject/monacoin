@@ -2,7 +2,7 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: Monacoin
 Upstream-Contact: Satoshi Nakamoto <satoshin@gmx.com>
  irc://#monacoin-core-dev@libera.chat
-Source: https://github.com/bitcoin/bitcoin
+Source: https://github.com/monacoinproject/monacoin
 
 Files: *
 Copyright: 2009-2022, Monacoin Core Developers

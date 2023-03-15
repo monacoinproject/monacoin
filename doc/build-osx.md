@@ -58,7 +58,7 @@ Now that all the required dependencies are installed, let's clone the Monacoin C
 All build scripts and commands will run from this directory.
 
 ``` bash
-git clone https://github.com/bitcoin/bitcoin.git
+git clone https://github.com/monacoinproject/monacoin.git
 ```
 
 ### 5. Install Optional Dependencies

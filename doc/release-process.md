@@ -86,7 +86,7 @@ Check out the source code in the following directory hierarchy.
     cd /path/to/your/toplevel/build
     git clone https://github.com/bitcoin-core/guix.sigs.git
     git clone https://github.com/bitcoin-core/bitcoin-detached-sigs.git
-    git clone https://github.com/bitcoin/bitcoin.git
+    git clone https://github.com/monacoinproject/monacoin.git
 
 ### Write the release notes
 
