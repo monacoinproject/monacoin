@@ -7,6 +7,8 @@
 #define MONACOIN_PRIMITIVES_BLOCK_H
 
 #include <primitives/transaction.h>
+#include <crypto/scrypt.h>
+#include <crypto/Lyra2RE/Lyra2RE.h>
 #include <serialize.h>
 #include <uint256.h>
 #include <util/time.h>
@@ -52,6 +54,8 @@ public:
     }
 
     uint256 GetHash() const;
+
+    uint256 GetPoWHash(bool bLyra2REv2 = false) const;
 
     NodeSeconds Time() const
     {

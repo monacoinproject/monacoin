@@ -72,9 +72,12 @@ public:
     enum Base58Type {
         PUBKEY_ADDRESS,
         SCRIPT_ADDRESS,
+        SCRIPT_ADDRESS2,
         SECRET_KEY,
         EXT_PUBLIC_KEY,
         EXT_SECRET_KEY,
+
+        OLD_SECRET_KEY,
 
         MAX_BASE58_TYPES
     };
@@ -116,6 +119,11 @@ public:
     const std::string& Bech32HRP() const { return bech32_hrp; }
     const std::vector<uint8_t>& FixedSeeds() const { return vFixedSeeds; }
     const CCheckpointData& Checkpoints() const { return checkpointData; }
+    void UpdateVersionBitsParameters(Consensus::DeploymentPos d, int64_t nStartTime, int64_t nTimeout);
+
+    int SwitchKGWblock() const { return nSwitchKGWblock; }
+    int SwitchDIGIblock() const { return nSwitchDIGIblock; }
+    int SwitchLyra2REv2_DGWblock() const { return nSwitchLyra2REv2_DGW; }
 
     //! Get allowed assumeutxo configuration.
     //! @see ChainstateManager
@@ -144,6 +152,10 @@ protected:
     CCheckpointData checkpointData;
     MapAssumeutxo m_assumeutxo_data;
     ChainTxData chainTxData;
+
+    int nSwitchKGWblock;
+    int nSwitchDIGIblock;
+    int nSwitchLyra2REv2_DGW;
 };
 
 /**

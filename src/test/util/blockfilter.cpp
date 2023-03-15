@@ -14,9 +14,11 @@ using node::UndoReadFromDisk;
 bool ComputeFilter(BlockFilterType filter_type, const CBlockIndex* block_index, BlockFilter& filter)
 {
     LOCK(::cs_main);
+    
+    int nHeight = block_index->nHeight;
 
     CBlock block;
-    if (!ReadBlockFromDisk(block, block_index->GetBlockPos(), Params().GetConsensus())) {
+    if (!ReadBlockFromDisk(block, block_index->GetBlockPos(), nHeight, Params().GetConsensus())) {
         return false;
     }
 

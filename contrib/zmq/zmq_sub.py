@@ -8,11 +8,11 @@
 
     Monacoin should be started with the command line arguments:
         monacoind -testnet -daemon \
-                -zmqpubrawtx=tcp://127.0.0.1:28332 \
-                -zmqpubrawblock=tcp://127.0.0.1:28332 \
-                -zmqpubhashtx=tcp://127.0.0.1:28332 \
-                -zmqpubhashblock=tcp://127.0.0.1:28332 \
-                -zmqpubsequence=tcp://127.0.0.1:28332
+                -zmqpubrawtx=tcp://127.0.0.1:28402 \
+                -zmqpubrawblock=tcp://127.0.0.1:28402 \
+                -zmqpubhashtx=tcp://127.0.0.1:28402 \
+                -zmqpubhashblock=tcp://127.0.0.1:28402 \
+                -zmqpubsequence=tcp://127.0.0.1:28402
 
     We use the asyncio library here.  `self.handle()` installs itself as a
     future at the end of the function.  Since it never returns with the event
