@@ -218,9 +218,9 @@ public:
         consensus.defaultAssumeValid = uint256S("0x96cf1e01433486c480434a1384d897b9c395ad41dc33b0ea2c0e7fdcee34cfcf"); // 500000
 
         // Hardfork params
-        nSwitchKGWblock = -1;
-        nSwitchDIGIblock = -1;
-        nSwitchLyra2REv2_DGW = 1;
+        nSwitchKGWblock = 10;
+        nSwitchDIGIblock = 20;
+        nSwitchLyra2REv2_DGW = 30;
 
         pchMessageStart[0] = 0xfd;
         pchMessageStart[1] = 0xd2;
@@ -356,9 +356,9 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].min_activation_height = 0; // No activation delay
 
         // Hardfork params
-        nSwitchKGWblock = 10;
-        nSwitchDIGIblock = 20;
-        nSwitchLyra2REv2_DGW = 30;
+        nSwitchKGWblock = -1;
+        nSwitchDIGIblock = -1;
+        nSwitchLyra2REv2_DGW = 1;
 
         // message start is defined as the first 4 bytes of the sha256d of the block script
         HashWriter h{};
