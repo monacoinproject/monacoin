@@ -386,8 +386,8 @@ BOOST_AUTO_TEST_CASE(CreateNewBlock_validity)
     }
     BOOST_CHECK(pblocktemplate = AssemblerForTest(chainparams).CreateNewBlock(scriptPubKey));
     // Extend to a 210000-long block chain.
-    while (chainActive.Tip()->nHeight < 105120000) {
-        CBlockIndex* prev = chainActive.Tip();
+    while (::ChainActive().Tip()->nHeight < 105120000) {
+        CBlockIndex* prev = ::ChainActive().Tip();
         CBlockIndex* next = new CBlockIndex();
         next->phashBlock = new uint256(InsecureRand256());
         ::ChainstateActive().CoinsTip().SetBestBlock(next->GetBlockHash());
