@@ -609,6 +609,7 @@ static const sph_u32 final_s[16] = {
 static void
 bmw32_init(sph_bmw_small_context *sc, const sph_u32 *iv)
 {
+	memset(sc, 0, sizeof(sph_bmw_small_context));
 	memcpy(sc->H, iv, sizeof sc->H);
 	sc->ptr = 0;
 #if SPH_64
@@ -759,6 +760,7 @@ static const sph_u64 final_b[16] = {
 static void
 bmw64_init(sph_bmw_big_context *sc, const sph_u64 *iv)
 {
+	memset(sc, 0, sizeof(sph_bmw_big_context));
 	memcpy(sc->H, iv, sizeof sc->H);
 	sc->ptr = 0;
 	sc->bit_count = 0;
