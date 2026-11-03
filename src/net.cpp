@@ -1252,7 +1252,11 @@ void CConnman::SocketEvents(std::set<SOCKET> &recv_set, std::set<SOCKET> &send_s
 void CConnman::SocketEvents(std::set<SOCKET> &recv_set, std::set<SOCKET> &send_set, std::set<SOCKET> &error_set)
 {
     std::set<SOCKET> recv_select_set, send_select_set, error_select_set;
-    if (!GenerateSelectSet(recv_select_set, send_select_set, error_select_set)) {
+    GenerateSelectSet(recv_select_set, send_select_set, error_select_set);
+    // error_select_set is not checked: its sockets are only monitored below if they
+    // are also in recv_select_set. Calling select() with no sockets at all is an error
+    // on Windows.
+    if (recv_select_set.empty() && send_select_set.empty()) {
         interruptNet.sleep_for(std::chrono::milliseconds(SELECT_TIMEOUT_MILLISECONDS));
         return;
     }
@@ -1272,18 +1276,18 @@ void CConnman::SocketEvents(std::set<SOCKET> &recv_set, std::set<SOCKET> &send_s
     FD_ZERO(&fdsetError);
     SOCKET hSocketMax = 0;
 
+    // Only watch for exceptional conditions on sockets we want to read from. An exception
+    // event causes a read in SocketHandler(), and a peer can raise one at will by sending
+    // TCP urgent data. Watching paused sockets would let it bypass fPauseRecv and queue
+    // an unbounded amount of data.
     for (SOCKET hSocket : recv_select_set) {
         FD_SET(hSocket, &fdsetRecv);
+        FD_SET(hSocket, &fdsetError);
         hSocketMax = std::max(hSocketMax, hSocket);
     }
 
     for (SOCKET hSocket : send_select_set) {
         FD_SET(hSocket, &fdsetSend);
-        hSocketMax = std::max(hSocketMax, hSocket);
-    }
-
-    for (SOCKET hSocket : error_select_set) {
-        FD_SET(hSocket, &fdsetError);
         hSocketMax = std::max(hSocketMax, hSocket);
     }
 
