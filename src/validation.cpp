@@ -2063,6 +2063,12 @@ bool CChainState::ConnectBlock(const CBlock& block, BlockValidationState& state,
 
     CBlockUndo blockundo;
 
+    // txdata must be declared before control: script check threads hold pointers
+    // into it, and locals are destroyed in reverse order of construction. On an
+    // early return, ~CCheckQueueControl must wait for those threads before txdata
+    // is freed.
+    std::vector<PrecomputedTransactionData> txdata;
+    txdata.reserve(block.vtx.size()); // Required so that pointers to individual PrecomputedTransactionData don't get invalidated
     CCheckQueueControl<CScriptCheck> control(fScriptChecks && g_parallel_script_checks ? &scriptcheckqueue : nullptr);
 
     std::vector<int> prevheights;
@@ -2070,8 +2076,6 @@ bool CChainState::ConnectBlock(const CBlock& block, BlockValidationState& state,
     int nInputs = 0;
     int64_t nSigOpsCost = 0;
     blockundo.vtxundo.reserve(block.vtx.size() - 1);
-    std::vector<PrecomputedTransactionData> txdata;
-    txdata.reserve(block.vtx.size()); // Required so that pointers to individual PrecomputedTransactionData don't get invalidated
     for (unsigned int i = 0; i < block.vtx.size(); i++)
     {
         const CTransaction &tx = *(block.vtx[i]);
