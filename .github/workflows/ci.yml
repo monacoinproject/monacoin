@@ -98,7 +98,7 @@ jobs:
       - name: Build Boost
         if: steps.boost-cache.outputs.cache-hit != 'true'
         run: |
-          curl -fsSL -o boost.tar.bz2 \
+          curl -fsSL --retry 5 --retry-delay 15 --retry-all-errors -o boost.tar.bz2 \
             "https://archives.boost.io/release/$BOOST_VERSION/source/boost_${BOOST_VERSION//./_}.tar.bz2"
           echo "$BOOST_SHA256  boost.tar.bz2" | shasum -a 256 -c -
           mkdir boost-src
