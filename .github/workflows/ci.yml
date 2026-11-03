@@ -1,0 +1,212 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  CONFIGURE_FLAGS: >-
+    --enable-tests
+    --disable-bench
+    --disable-gui-tests
+    --without-gui
+    --without-miniupnpc
+    --disable-zmq
+  # This tree predates GCC 13's and newer libc++'s stricter transitive includes.
+  COMPAT_CXXFLAGS: >-
+    -include cstdint
+    -include stdexcept
+    -include limits
+    -include string
+    -include deque
+    -include array
+
+jobs:
+  linux:
+    name: Linux ${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: x86_64
+            runner: ubuntu-24.04
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            build-essential libtool autotools-dev automake pkgconf bsdmainutils python3 \
+            libssl-dev libevent-dev libboost-all-dev libdb5.3++-dev libsqlite3-dev
+      - name: Build
+        run: |
+          ./autogen.sh
+          ./configure $CONFIGURE_FLAGS --with-incompatible-bdb CXXFLAGS="-O2 $COMPAT_CXXFLAGS"
+          make -j"$(nproc)"
+      - name: Unit tests
+        run: ci/github/run_unit_tests.sh src/test/test_monacoin
+      - name: Regtest smoke test
+        timeout-minutes: 15
+        run: ci/github/smoke_test.sh src/monacoind src/monacoin-cli
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: logs-linux-${{ matrix.arch }}
+          path: |
+            config.log
+            ci-logs/
+          if-no-files-found: ignore
+
+  macos:
+    name: macOS ${{ matrix.arch }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 90
+    env:
+      BOOST_VERSION: 1.83.0
+      BOOST_SHA256: 6478edfe2f3305127cffe8caf73ea0176c53769f4bf1585be237eb30798c3b8e
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: arm64
+            runner: macos-latest
+          - arch: x86_64
+            runner: macos-15-intel
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install dependencies
+        run: |
+          brew install autoconf automake libtool pkgconf coreutils libevent berkeley-db@5
+      # Homebrew only offers a Boost without boost_system, which this tree needs.
+      - uses: actions/cache@v6
+        id: boost-cache
+        with:
+          path: ~/boost
+          key: boost-${{ env.BOOST_VERSION }}-${{ matrix.runner }}
+      - name: Build Boost
+        if: steps.boost-cache.outputs.cache-hit != 'true'
+        run: |
+          curl -fsSL -o boost.tar.bz2 \
+            "https://archives.boost.io/release/$BOOST_VERSION/source/boost_${BOOST_VERSION//./_}.tar.bz2"
+          echo "$BOOST_SHA256  boost.tar.bz2" | shasum -a 256 -c -
+          mkdir boost-src
+          tar -xf boost.tar.bz2 -C boost-src --strip-components=1
+          cd boost-src
+          ./bootstrap.sh --with-toolset=clang \
+            --with-libraries=filesystem,system,thread,test --prefix="$HOME/boost"
+          ./b2 -j"$(sysctl -n hw.ncpu)" -d0 variant=release threading=multi link=static \
+            cxxflags=-std=c++11 --layout=system install
+      - name: Build
+        run: |
+          ./autogen.sh
+          BDB="$(brew --prefix berkeley-db@5)"
+          # Not every library that uses libevent gets EVENT_CFLAGS, and Homebrew's
+          # arm64 prefix is not on the default search path.
+          EVENT="$(brew --prefix libevent)"
+          # The Boost checks declare exit() in a way that modern Clang rejects, so
+          # give configure their answers.
+          ./configure $CONFIGURE_FLAGS --with-incompatible-bdb --with-boost="$HOME/boost" \
+            ac_cv_lib_boost_system_exit=yes \
+            ac_cv_lib_boost_filesystem_exit=yes \
+            ac_cv_lib_boost_thread_exit=yes \
+            ac_cv_lib_boost_unit_test_framework_exit=yes \
+            BDB_CFLAGS="-I$BDB/include" BDB_LIBS="-L$BDB/lib -ldb_cxx" \
+            CPPFLAGS="-I$EVENT/include" LDFLAGS="-L$EVENT/lib" \
+            CXXFLAGS="-O2 $COMPAT_CXXFLAGS"
+          make -j"$(sysctl -n hw.ncpu)"
+      - name: Unit tests
+        run: ci/github/run_unit_tests.sh src/test/test_monacoin
+      - name: Regtest smoke test
+        timeout-minutes: 15
+        run: ci/github/smoke_test.sh src/monacoind src/monacoin-cli
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: logs-macos-${{ matrix.arch }}
+          path: |
+            config.log
+            ci-logs/
+          if-no-files-found: ignore
+
+  # Windows binaries are cross-compiled with depends, like the release builds,
+  # then run on a real Windows runner.
+  windows-build:
+    name: Windows x86_64 (cross-compile)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    env:
+      HOST: x86_64-w64-mingw32
+    steps:
+      - uses: actions/checkout@v7
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y \
+            build-essential libtool autotools-dev automake pkgconf bsdmainutils python3 curl \
+            g++-mingw-w64-x86-64-posix
+      - uses: actions/cache@v6
+        with:
+          path: |
+            depends/built
+            depends/sources
+          key: depends-${{ env.HOST }}-${{ hashFiles('depends/**') }}
+      - name: Build dependencies
+        run: make -C depends -j"$(nproc)" HOST="$HOST" NO_QT=1 NO_UPNP=1 NO_ZMQ=1 NO_QR=1
+      - name: Build
+        run: |
+          ./autogen.sh
+          CONFIG_SITE="$PWD/depends/$HOST/share/config.site" \
+            ./configure --prefix=/ $CONFIGURE_FLAGS CXXFLAGS="-O2 $COMPAT_CXXFLAGS"
+          make -j"$(nproc)"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: windows-binaries
+          retention-days: 7
+          path: |
+            src/monacoind.exe
+            src/monacoin-cli.exe
+            src/test/test_monacoin.exe
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: logs-windows-build
+          path: config.log
+          if-no-files-found: ignore
+
+  windows-test:
+    name: Windows x86_64 (test)
+    needs: windows-build
+    runs-on: windows-latest
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/download-artifact@v8
+        with:
+          name: windows-binaries
+          path: bin
+      - name: Unit tests
+        run: ci/github/run_unit_tests.sh bin/test/test_monacoin.exe
+      - name: Regtest smoke test
+        timeout-minutes: 15
+        run: ci/github/smoke_test.sh bin/monacoind.exe bin/monacoin-cli.exe
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: logs-windows-test
+          path: ci-logs/
+          if-no-files-found: ignore
