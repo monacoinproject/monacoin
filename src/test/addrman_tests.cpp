@@ -36,29 +36,35 @@ public:
         insecure_rand = FastRandomContext(true);
     }
 
-    CAddrInfo* Find(const CNetAddr& addr, int* pnId = nullptr)
+    CAddrInfo* Find(const CNetAddr& addr, nid_type* pnId = nullptr)
     {
         LOCK(cs);
         return CAddrMan::Find(addr, pnId);
     }
 
-    CAddrInfo* Create(const CAddress& addr, const CNetAddr& addrSource, int* pnId = nullptr)
+    CAddrInfo* Create(const CAddress& addr, const CNetAddr& addrSource, nid_type* pnId = nullptr)
     {
         LOCK(cs);
         return CAddrMan::Create(addr, addrSource, pnId);
     }
 
-    void Delete(int nId)
+    void Delete(nid_type nId)
     {
         LOCK(cs);
         CAddrMan::Delete(nId);
+    }
+
+    void SetIdCount(nid_type id_count)
+    {
+        LOCK(cs);
+        nIdCount = id_count;
     }
 
     // Used to test deserialization
     std::pair<int, int> GetBucketAndEntry(const CAddress& addr)
     {
         LOCK(cs);
-        int nId = mapAddr[addr];
+        nid_type nId = mapAddr[addr];
         for (int bucket = 0; bucket < ADDRMAN_NEW_BUCKET_COUNT; ++bucket) {
             for (int entry = 0; entry < ADDRMAN_BUCKET_SIZE; ++entry) {
                 if (nId == vvNew[bucket][entry]) {
@@ -120,6 +126,46 @@ static std::vector<bool> FromBytes(const unsigned char* source, int vector_size)
 
 
 BOOST_FIXTURE_TEST_SUITE(addrman_tests, BasicTestingSetup)
+
+BOOST_AUTO_TEST_CASE(addrman_id_no_overflow)
+{
+    CAddrManTest addrman;
+    CNetAddr source = ResolveIP("252.2.2.2");
+
+    // The id counter is incremented for each address that peers make us insert.
+    // Going past the 32-bit range must not wrap around.
+    const nid_type id_start{std::numeric_limits<int32_t>::max()};
+    addrman.SetIdCount(id_start);
+
+    CAddress addr1 = CAddress(ResolveService("250.1.1.1"), NODE_NONE);
+    CAddress addr2 = CAddress(ResolveService("250.1.1.2"), NODE_NONE);
+    nid_type id1{0};
+    nid_type id2{0};
+    BOOST_CHECK(addrman.Create(addr1, source, &id1) != nullptr);
+    BOOST_CHECK(addrman.Create(addr2, source, &id2) != nullptr);
+    BOOST_CHECK_EQUAL(id1, id_start);
+    BOOST_CHECK_EQUAL(id2, id_start + 1);
+
+    // Addresses above the 32-bit range can be found, placed in buckets, and promoted.
+    nid_type found_id{0};
+    BOOST_CHECK(addrman.Find(addr2, &found_id) != nullptr);
+    BOOST_CHECK_EQUAL(found_id, id2);
+
+    CAddrManTest addrman2;
+    addrman2.SetIdCount(id_start + 1);
+    BOOST_CHECK(addrman2.Add(addr1, source));
+    BOOST_CHECK_EQUAL(addrman2.size(), 1U);
+    addrman2.Good(CService(addr1));
+    BOOST_CHECK_EQUAL(addrman2.size(), 1U);
+    BOOST_CHECK(addrman2.Select() == addr1);
+
+    // Internal ids are not written to disk, so they don't affect the addrman format.
+    CDataStream ss(SER_DISK, CLIENT_VERSION);
+    ss << static_cast<const CAddrMan&>(addrman2);
+    CAddrManTest addrman3;
+    ss >> static_cast<CAddrMan&>(addrman3);
+    BOOST_CHECK_EQUAL(addrman3.size(), 1U);
+}
 
 BOOST_AUTO_TEST_CASE(addrman_simple)
 {
@@ -353,7 +399,7 @@ BOOST_AUTO_TEST_CASE(addrman_create)
     CAddress addr1 = CAddress(ResolveService("250.1.2.1", 9401), NODE_NONE);
     CNetAddr source1 = ResolveIP("250.1.2.1");
 
-    int nId;
+    nid_type nId;
     CAddrInfo* pinfo = addrman.Create(addr1, source1, &nId);
 
     // Test: The result should be the same as the input addr.
@@ -373,7 +419,7 @@ BOOST_AUTO_TEST_CASE(addrman_delete)
     CAddress addr1 = CAddress(ResolveService("250.1.2.1", 9401), NODE_NONE);
     CNetAddr source1 = ResolveIP("250.1.2.1");
 
-    int nId;
+    nid_type nId;
     addrman.Create(addr1, source1, &nId);
 
     // Test: Delete should actually delete the addr.
