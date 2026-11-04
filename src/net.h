@@ -796,6 +796,8 @@ public:
     // flood relay
     std::vector<CAddress> vAddrToSend;
     const std::unique_ptr<CRollingBloomFilter> m_addr_known;
+    // We requested high bandwidth compact block announcements from this peer
+    std::atomic<bool> m_bip152_highbandwidth_to{false};
     bool fGetAddr{false};
     /** Number of addresses that can be processed from this peer. Start at 1 to
      *  permit self-announcement. */
