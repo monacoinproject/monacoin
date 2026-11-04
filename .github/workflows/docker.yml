@@ -1,0 +1,68 @@
+name: Docker
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  IMAGE: ghcr.io/${{ github.repository }}
+
+jobs:
+  image:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: docker/setup-buildx-action@v4
+      - name: Build
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: contrib/docker/Dockerfile
+          load: true
+          tags: monacoin:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Regtest smoke test
+        run: |
+          docker run -d --name node monacoin:test -regtest -rpcuser=u -rpcpassword=p
+          cli() { docker exec node monacoin-cli -regtest -datadir=/data -rpcuser=u -rpcpassword=p "$@"; }
+          for _ in $(seq 1 120); do
+            cli getblockcount >/dev/null 2>&1 && break
+            sleep 1
+          done
+          address=$(cli getnewaddress)
+          cli generatetoaddress 70 "$address" >/dev/null
+          height=$(cli getblockcount)
+          test "$height" = 70
+          docker stop -t 60 node
+          test "$(docker inspect -f '{{.State.ExitCode}}' node)" = 0
+          docker rm node
+      - name: The sync test fails when not synced, and erases the chain
+        run: |
+          mkdir data && chmod 777 data
+          status=0
+          docker run --rm -v "$PWD/data:/data" -e SYNC_TIMEOUT=120 -e POLL_INTERVAL=10 \
+            --entrypoint monacoin-sync-test monacoin:test || status=$?
+          test "$status" = 1
+          test -z "$(ls -A data)"
+      - name: Publish
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master-0.20.4'
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          image=$(echo "$IMAGE" | tr '[:upper:]' '[:lower:]')
+          docker tag monacoin:test "$image:master-0.20.4"
+          docker tag monacoin:test "$image:${GITHUB_SHA::12}"
+          docker push "$image:master-0.20.4"
+          docker push "$image:${GITHUB_SHA::12}"

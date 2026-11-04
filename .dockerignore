@@ -1,0 +1,17 @@
+.git
+.github
+depends/built
+depends/sources
+depends/work
+**/*.o
+**/*.a
+**/*.lo
+**/*.la
+**/.deps
+**/.libs
+src/monacoind
+src/monacoin-cli
+src/monacoin-tx
+src/monacoin-wallet
+src/test/test_monacoin
+ci-logs
