@@ -197,7 +197,7 @@ void scrypt_1024_1_1_256_sp_generic(const char *input, char *output, char *scrat
 	PBKDF2_SHA256((const uint8_t *)input, 80, (const uint8_t *)input, 80, 1, B, 128);
 
 	for (k = 0; k < 32; k++)
-		X[k] = le32dec(&B[4 * k]);
+		X[k] = scrypt_le32dec(&B[4 * k]);
 
 	for (i = 0; i < 1024; i++) {
 		memcpy(&V[i * 32], X, 128);
@@ -213,7 +213,7 @@ void scrypt_1024_1_1_256_sp_generic(const char *input, char *output, char *scrat
 	}
 
 	for (k = 0; k < 32; k++)
-		le32enc(&B[4 * k], X[k]);
+		scrypt_le32enc(&B[4 * k], X[k]);
 
 	PBKDF2_SHA256((const uint8_t *)input, 80, B, 128, 1, (uint8_t *)output, 32);
 }

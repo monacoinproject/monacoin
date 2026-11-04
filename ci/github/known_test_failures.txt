@@ -1,0 +1,20 @@
+# Unit test suites that already fail on master-0.20.4. They do not fail CI, so
+# that CI can catch new failures. Remove a suite once it is fixed.
+amount_tests
+blockencodings_tests
+blockfilter_index_tests
+bloom_tests
+descriptor_tests
+key_io_tests
+key_tests
+miner_tests
+pow_tests
+psbt_wallet_tests
+rpc_tests
+txindex_tests
+txvalidationcache_tests
+util_tests
+validation_block_tests
+validation_tests
+wallet_tests
+init_tests # only with newer Boost: the -walletdir trailing separator cases fail with 1.83, pass with 1.70
