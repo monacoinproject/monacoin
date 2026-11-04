@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     jq libevent-2.1-7t64 libevent-pthreads-2.1-7t64 libboost-filesystem1.83.0 \
     libboost-thread1.83.0 libdb5.3++t64 \
     && rm -rf /var/lib/apt/lists/* \
-    && useradd --create-home --uid 1000 monacoin \
+    && useradd --create-home monacoin \
     && install -d -o monacoin -g monacoin /data
 COPY --from=build /out/bin/ /usr/local/bin/
 USER monacoin
