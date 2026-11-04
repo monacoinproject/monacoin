@@ -119,6 +119,34 @@ static void CheckSort(CTxMemPool &pool, std::vector<std::string> &sortedOrder) E
     }
 }
 
+BOOST_AUTO_TEST_CASE(MempoolCompareDepthAndScoreMissingTest)
+{
+    // Transactions that have left the mempool must sort first, so that they
+    // are dropped from a peer's inventory queue straight away.
+    CTxMemPool pool;
+    TestMemPoolEntryHelper entry;
+    LOCK2(cs_main, pool.cs);
+
+    CMutableTransaction tx;
+    tx.vin.resize(1);
+    tx.vin[0].scriptSig = CScript() << OP_11;
+    tx.vout.resize(1);
+    tx.vout[0].scriptPubKey = CScript() << OP_11 << OP_EQUAL;
+    tx.vout[0].nValue = 10 * COIN;
+    pool.addUnchecked(entry.Fee(10000LL).FromTx(tx));
+
+    const uint256 present = tx.GetHash();
+    const uint256 missing_a = uint256S("0x01");
+    const uint256 missing_b = uint256S("0x02");
+
+    BOOST_CHECK(pool.CompareDepthAndScore(missing_a, present));
+    BOOST_CHECK(!pool.CompareDepthAndScore(present, missing_a));
+    // A strict weak ordering: two missing transactions are equivalent.
+    BOOST_CHECK(!pool.CompareDepthAndScore(missing_a, missing_b));
+    BOOST_CHECK(!pool.CompareDepthAndScore(missing_b, missing_a));
+    BOOST_CHECK(!pool.CompareDepthAndScore(present, present));
+}
+
 BOOST_AUTO_TEST_CASE(MempoolIndexingTest)
 {
     CTxMemPool pool;
