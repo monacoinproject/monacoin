@@ -108,7 +108,10 @@ while :; do
     # Still warming up, which is not progress.
     echo "$((now - start))s waiting for RPC"
   fi
-  sleep "$POLL_INTERVAL"
+  # In the background, so that a signal is handled at once rather than after
+  # the sleep.
+  sleep "$POLL_INTERVAL" &
+  wait $!
 done
 
 if [ -n "$CHECK_BLOCK" ]; then

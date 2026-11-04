@@ -1,27 +1,24 @@
 name: Docker
 
+# Run by hand, for example before a release. The image job builds the image and
+# tests it on regtest. The sync job then syncs a real mainnet node from nothing,
+# on a runner that is thrown away afterwards, so nothing has to be kept anywhere.
+
 on:
-  push:
-  pull_request:
   workflow_dispatch:
+    inputs:
+      mainnet-sync:
+        description: Also sync mainnet from nothing (about 90 minutes)
+        type: boolean
+        default: true
 
 permissions:
   contents: read
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
-
-env:
-  IMAGE: ghcr.io/${{ github.repository }}
 
 jobs:
   image:
     runs-on: ubuntu-24.04
     timeout-minutes: 60
-    permissions:
-      contents: read
-      packages: write
     steps:
       - uses: actions/checkout@v7
       - uses: docker/setup-buildx-action@v4
@@ -53,16 +50,46 @@ jobs:
         run: |
           mkdir data && chmod 777 data
           status=0
-          docker run --rm -v "$PWD/data:/data" -e SYNC_TIMEOUT=120 -e POLL_INTERVAL=10 \
+          docker run --rm -v "$PWD/data:/data" -e EXTRA_ARGS=-regtest \
+            -e SYNC_TIMEOUT=60 -e POLL_INTERVAL=5 \
             --entrypoint monacoin-sync-test monacoin:test || status=$?
           test "$status" = 1
           test -z "$(ls -A data)"
-      - name: Publish
-        if: github.event_name == 'push' && github.ref == 'refs/heads/master-0.20.4'
+      - name: The sync test erases the chain when stopped
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
-          image=$(echo "$IMAGE" | tr '[:upper:]' '[:lower:]')
-          docker tag monacoin:test "$image:master-0.20.4"
-          docker tag monacoin:test "$image:${GITHUB_SHA::12}"
-          docker push "$image:master-0.20.4"
-          docker push "$image:${GITHUB_SHA::12}"
+          docker run -d --name stopped -v "$PWD/data:/data" -e EXTRA_ARGS=-regtest \
+            --entrypoint monacoin-sync-test monacoin:test
+          # Stop it during its first sleep between checks.
+          for _ in $(seq 1 60); do
+            docker logs stopped 2>&1 | grep -E '^[0-9]+s ' >/dev/null && break
+            sleep 1
+          done
+          docker stop -t 60 stopped
+          logs=$(docker logs stopped 2>&1)
+          tail -n 3 <<<"$logs"
+          test "$(docker inspect -f '{{.State.ExitCode}}' stopped)" = 143
+          grep -E '^[0-9]+s ' <<<"$logs"
+          grep '^chain erased$' <<<"$logs"
+          docker rm stopped
+          test -z "$(ls -A data)"
+
+  sync:
+    needs: image
+    if: inputs.mainnet-sync
+    runs-on: ubuntu-24.04
+    # GitHub stops jobs at 360 minutes. The sync test gives up at 300, which
+    # leaves time to build the image if the cache is empty.
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v7
+      - uses: docker/setup-buildx-action@v4
+      - name: Build
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: contrib/docker/Dockerfile
+          load: true
+          tags: monacoin:test
+          cache-from: type=gha
+      - name: Sync mainnet
+        run: docker run --rm -e SYNC_TIMEOUT=18000 --entrypoint monacoin-sync-test monacoin:test

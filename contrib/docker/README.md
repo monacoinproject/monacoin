@@ -20,7 +20,7 @@ This syncs from nothing, checks that the node left initial block download at the
 
 The chain goes in a new temporary directory, so an existing datadir is never used or erased, even if one is mounted on `/data`. See the top of `sync-test.sh` for the settings.
 
-The `Mainnet sync` GitHub Actions workflow runs this weekly and on demand, on a runner that is thrown away afterwards.
+The `Docker` GitHub Actions workflow runs only when started by hand, for example before a release. It builds the image, tests it on regtest, then runs this sync test on a runner that is thrown away afterwards. Untick "Also sync mainnet" to skip the sync.
 
 ## Run a node
 
