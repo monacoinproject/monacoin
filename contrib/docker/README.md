@@ -16,7 +16,7 @@ docker build -f contrib/docker/Dockerfile -t monacoin .
 docker run --rm --entrypoint monacoin-sync-test monacoin
 ```
 
-This syncs from nothing, checks that the node left initial block download at the tip, then erases the chain. The exit code is 0 only if the sync completed. It uses about 5 GB of disk at the end, and took a few hours in CI.
+This syncs from nothing, checks that the node left initial block download at the tip, then erases the chain. The exit code is 0 only if the sync completed. It used 5.3 GB of disk at the end, and took 90 minutes on a GitHub runner in November 2026.
 
 The chain goes in a new temporary directory, so an existing datadir is never used or erased, even if one is mounted on `/data`. See the top of `sync-test.sh` for the settings.
 
