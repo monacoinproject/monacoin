@@ -76,6 +76,13 @@ public:
 // https://github.com/bitcoin/bitcoin/pull/18551
 BOOST_AUTO_TEST_CASE(unregister_all_during_call)
 {
+    // TestingSetup queues notifications, such as UpdatedBlockTip for the
+    // genesis block, which the scheduler thread delivers to every registered
+    // interface. If one is still being delivered, that thread holds a
+    // reference to the interface below, which then isn't destroyed when this
+    // test expects. Deliver them all first.
+    SyncWithValidationInterfaceQueue();
+
     bool destroyed = false;
     RegisterSharedValidationInterface(std::make_shared<TestInterface>(
         [&] {
