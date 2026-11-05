@@ -1,10 +1,14 @@
 name: Docker
 
-# Run by hand, for example before a release. The image job builds the image and
-# tests it on regtest. The sync job then syncs a real mainnet node from nothing,
-# on a runner that is thrown away afterwards, so nothing has to be kept anywhere.
+# On every push and pull request, this only builds the image, without running
+# it. When started by hand, for example before a release, it also tests the
+# image on regtest, then syncs a real mainnet node from nothing, on a runner
+# that is thrown away afterwards, so nothing has to be kept anywhere.
 
 on:
+  push:
+    branches: [master-0.20.4]
+  pull_request:
   workflow_dispatch:
     inputs:
       mainnet-sync:
@@ -14,6 +18,10 @@ on:
 
 permissions:
   contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   image:
@@ -32,6 +40,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
       - name: Regtest smoke test
+        if: github.event_name == 'workflow_dispatch'
         run: |
           docker run -d --name node monacoin:test -regtest -rpcuser=u -rpcpassword=p
           cli() { docker exec node monacoin-cli -regtest -datadir=/data -rpcuser=u -rpcpassword=p "$@"; }
@@ -47,6 +56,7 @@ jobs:
           test "$(docker inspect -f '{{.State.ExitCode}}' node)" = 0
           docker rm node
       - name: The sync test fails when not synced, and erases the chain
+        if: github.event_name == 'workflow_dispatch'
         run: |
           mkdir data && chmod 777 data
           status=0
@@ -56,6 +66,7 @@ jobs:
           test "$status" = 1
           test -z "$(ls -A data)"
       - name: The sync test erases the chain when stopped
+        if: github.event_name == 'workflow_dispatch'
         run: |
           docker run -d --name stopped -v "$PWD/data:/data" -e EXTRA_ARGS=-regtest \
             --entrypoint monacoin-sync-test monacoin:test
@@ -75,7 +86,7 @@ jobs:
 
   sync:
     needs: image
-    if: inputs.mainnet-sync
+    if: github.event_name == 'workflow_dispatch' && inputs.mainnet-sync
     runs-on: ubuntu-24.04
     # GitHub stops jobs at 360 minutes. The sync test gives up at 300, which
     # leaves time to build the image if the cache is empty.
