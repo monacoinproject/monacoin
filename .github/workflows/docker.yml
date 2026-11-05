@@ -1,0 +1,106 @@
+name: Docker
+
+# On every push and pull request, this only builds the image, without running
+# it. When started by hand, for example before a release, it also tests the
+# image on regtest, then syncs a real mainnet node from nothing, on a runner
+# that is thrown away afterwards, so nothing has to be kept anywhere.
+
+on:
+  push:
+    branches: [master-0.20.4]
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      mainnet-sync:
+        description: Also sync mainnet from nothing (about 90 minutes)
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  image:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: docker/setup-buildx-action@v4
+      - name: Build
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: contrib/docker/Dockerfile
+          load: true
+          tags: monacoin:test
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Regtest smoke test
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          docker run -d --name node monacoin:test -regtest -rpcuser=u -rpcpassword=p
+          cli() { docker exec node monacoin-cli -regtest -datadir=/data -rpcuser=u -rpcpassword=p "$@"; }
+          for _ in $(seq 1 120); do
+            cli getblockcount >/dev/null 2>&1 && break
+            sleep 1
+          done
+          address=$(cli getnewaddress)
+          cli generatetoaddress 70 "$address" >/dev/null
+          height=$(cli getblockcount)
+          test "$height" = 70
+          docker stop -t 60 node
+          test "$(docker inspect -f '{{.State.ExitCode}}' node)" = 0
+          docker rm node
+      - name: The sync test fails when not synced, and erases the chain
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          mkdir data && chmod 777 data
+          status=0
+          docker run --rm -v "$PWD/data:/data" -e EXTRA_ARGS=-regtest \
+            -e SYNC_TIMEOUT=60 -e POLL_INTERVAL=5 \
+            --entrypoint monacoin-sync-test monacoin:test || status=$?
+          test "$status" = 1
+          test -z "$(ls -A data)"
+      - name: The sync test erases the chain when stopped
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          docker run -d --name stopped -v "$PWD/data:/data" -e EXTRA_ARGS=-regtest \
+            --entrypoint monacoin-sync-test monacoin:test
+          # Stop it during its first sleep between checks.
+          for _ in $(seq 1 60); do
+            docker logs stopped 2>&1 | grep -E '^[0-9]+s ' >/dev/null && break
+            sleep 1
+          done
+          docker stop -t 60 stopped
+          logs=$(docker logs stopped 2>&1)
+          tail -n 3 <<<"$logs"
+          test "$(docker inspect -f '{{.State.ExitCode}}' stopped)" = 143
+          grep -E '^[0-9]+s ' <<<"$logs"
+          grep '^chain erased$' <<<"$logs"
+          docker rm stopped
+          test -z "$(ls -A data)"
+
+  sync:
+    needs: image
+    if: github.event_name == 'workflow_dispatch' && inputs.mainnet-sync
+    runs-on: ubuntu-24.04
+    # GitHub stops jobs at 360 minutes. The sync test gives up at 300, which
+    # leaves time to build the image if the cache is empty.
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v7
+      - uses: docker/setup-buildx-action@v4
+      - name: Build
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: contrib/docker/Dockerfile
+          load: true
+          tags: monacoin:test
+          cache-from: type=gha
+      - name: Sync mainnet
+        run: docker run --rm -e SYNC_TIMEOUT=18000 --entrypoint monacoin-sync-test monacoin:test
