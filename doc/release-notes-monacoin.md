@@ -1,9 +1,10 @@
-Monacoin Core version 0.20.2 is now available from:
+Monacoin Core version 0.20.5 is now available from:
 
   <https://github.com/monacoinproject/monacoin/releases>
 
-This is a new major version release, including new features, various bugfixes
-and performance improvements, as well as updated translations.
+This is a new minor version release, including security fixes backported from
+Bitcoin Core, other bug fixes and build improvements. All users are
+recommended to upgrade.
 
 Please report bugs using the issue tracker at GitHub:
 
@@ -95,6 +96,47 @@ Some people think risks of rewind attacks by crackers.
 But no worry. The recent Monacoin chain has enough hash power.
 Thanks miners for keeping work.
 
+0.20.5 change log
+=================
+
+This release fixes several denial-of-service and remote crash
+vulnerabilities, backported from Bitcoin Core. CVE-2026-117350 affects only
+Windows and macOS; the other issues affect all platforms.
+
+### Vulnerability
+
+- #127 Fix a use-after-free in parallel script validation (CVE-2024-52911)
+- #128 Don't watch paused sockets for exceptions with `select()` (CVE-2026-117350)
+- #129 Use 64-bit internal ids in addrman to prevent overflow (CVE-2024-52919)
+- #130 Avoid prematurely clearing block download state for other peers (CVE-2024-52921)
+- #132 Rate limit the processing of incoming `addr` messages
+- #133 Speed up inv trickle when the queue is large
+- #134 Support up to 3 parallel compact block downloads (CVE-2024-52922)
+- #135 Add a checkpoint at height 4100000 (mitigates CVE-2019-25220)
+
+### Behavior changes
+
+- Incoming `addr` messages are now rate limited per peer. Each peer has a
+  budget of up to 1000 addresses, refilled at 0.1 addresses per second, plus
+  1000 more after we send it `getaddr`. Addresses beyond the budget are
+  ignored. Peers with the `noban` permission are not limited.
+- A checkpoint has been added at height 4100000, and `nMinimumChainWork` has
+  been raised to the chain work at that height. Chains that fork from the
+  main chain below height 4100000 are rejected, and a syncing node stays in
+  initial block download until its chain has at least that much work.
+
+### Bug fixes
+
+- #122 Zero BMW hash contexts on init and avoid strict aliasing violations (#121)
+- #123 Fix the build of the unit tests (#119, #120)
+
+### Build and CI
+
+- #131 Fix the build with Boost 1.77 and newer and with recent macOS SDKs, and
+  add GitHub Actions CI for Linux, macOS and Windows
+- #136 Add a Docker image and a mainnet sync test
+- #137 Fix an intermittent failure of the `unregister_all_during_call` unit test
+
 0.20.4 change log
 =================
 
@@ -115,6 +157,7 @@ Credits
 Thanks to everyone who directly contributed to this release:
 
 - Cryptcoin Junkey
+- Mark Karpeles
 - WakiayaP
 - Watanabe
 - yamada-guro-baru
