@@ -3515,7 +3515,9 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
     }
 
     // Enforce rule that the coinbase starts with serialized block height
-    if (nHeight >= consensusParams.BIP34Height)
+    // The genesis block predates BIP34. It goes through this check when the
+    // block files are reindexed, and BIP34Height does not exclude it here.
+    if (pindexPrev != nullptr && nHeight >= consensusParams.BIP34Height)
     {
         CScript expect = CScript() << nHeight;
         if (block.vtx[0]->vin[0].scriptSig.size() < expect.size() ||
