@@ -3662,6 +3662,16 @@ bool BlockManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationS
     return true;
 }
 
+arith_uint256 CalculateHeadersWork(const std::vector<CBlockHeader>& headers)
+{
+    arith_uint256 total_work{0};
+    for (const CBlockHeader& header : headers) {
+        CBlockIndex dummy(header);
+        total_work += GetBlockProof(dummy);
+    }
+    return total_work;
+}
+
 // Exposed wrapper for AcceptBlockHeader
 bool ProcessNewBlockHeaders(const std::vector<CBlockHeader>& headers, BlockValidationState& state, const CChainParams& chainparams, const CBlockIndex** ppindex)
 {
