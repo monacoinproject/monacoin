@@ -3260,16 +3260,28 @@ static bool FindUndoPos(BlockValidationState &state, int nFile, FlatFilePos &pos
 
 static bool CheckBlockHeader(const CBlockHeader& block, BlockValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW = true)
 {
-    // Get prev block index
-    int nHeight = 0;
-    LOCK(cs_main);
-    CBlockIndex* pindexPrev = LookupBlockIndex(block.hashPrevBlock);
-    if (pindexPrev != NULL) {
-        nHeight = pindexPrev->nHeight + 1;
+    if (!fCheckPOW) return true;
+
+    // The proof of work algorithm depends on the height, which is only known
+    // when the previous block is.
+    const CBlockIndex* pindexPrev = WITH_LOCK(cs_main, return LookupBlockIndex(block.hashPrevBlock));
+    const bool is_genesis = block.hashPrevBlock.IsNull();
+
+    bool pow_ok;
+    if (pindexPrev || is_genesis) {
+        const int nHeight = pindexPrev ? pindexPrev->nHeight + 1 : 0;
+        pow_ok = CheckProofOfWork(block.GetPoWHash(nHeight >= Params().SwitchLyra2REv2_DGWblock()), block.nBits, consensusParams);
+    } else {
+        // A block with an unknown parent is never accepted: AcceptBlockHeader()
+        // rejects it as prev-blk-not-found. Accept either algorithm here, so that
+        // it is rejected for that reason and not as high-hash, which would
+        // punish a peer for sending a valid block that we cannot connect yet.
+        pow_ok = CheckProofOfWork(block.GetPoWHash(true), block.nBits, consensusParams) ||
+                 CheckProofOfWork(block.GetPoWHash(false), block.nBits, consensusParams);
     }
 
     // Check proof of work matches claimed amount
-    if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(nHeight >= Params().SwitchLyra2REv2_DGWblock()), block.nBits, consensusParams))
+    if (!pow_ok)
         return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "high-hash", "proof of work failed");
 
     return true;
