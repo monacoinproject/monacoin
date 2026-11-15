@@ -56,6 +56,10 @@ static constexpr int64_t HEADERS_RESPONSE_TIME = 2 * 60; // 2 minutes
  *  of our chain is accepted without having to show more work than that block,
  *  if that block is also not older than ANTI_DOS_FORK_DEPTH block intervals. */
 static constexpr int ANTI_DOS_FORK_DEPTH = 24;
+/** While our tip is behind our best header, the best header is used for the
+ *  anti-DoS work threshold as well. That stops if no block has been connected
+ *  for this long, in seconds. */
+static constexpr int64_t ANTI_DOS_BEST_HEADER_STALL_TIME = 10 * 60;
 /** Protect at least this many outbound peers from disconnection due to slow/
  * behind headers chain.
  */
@@ -150,6 +154,9 @@ namespace {
     int64_t g_last_headers_sync_progress_time GUARDED_BY(g_headers_sync_mutex) = 0;
     /** When the progress of a headers presync was last logged, in seconds. */
     std::atomic<int64_t> g_last_presync_log_time{0};
+    /** When a block was last connected, in seconds. Before the first block is
+     *  connected, when BestHeaderForAntiDoS() was first called. */
+    std::atomic<int64_t> g_last_block_connected_time{0};
 
     /**
      * Sources of received blocks, saved to be able punish them when processing
@@ -1248,6 +1255,7 @@ void PeerLogicValidation::BlockConnected(const std::shared_ptr<const CBlock>& pb
         }
 
         g_last_tip_update = GetTime();
+        g_last_block_connected_time = GetTime();
     }
     {
         LOCK(g_cs_recent_confirmed_transactions);
@@ -1828,10 +1836,50 @@ static const CBlockIndex* AntiDoSForkLimit(const CBlockIndex* index, const Conse
 }
 
 /**
+ * Return our best header if it can be used for the anti-DoS work threshold,
+ * and nullptr otherwise.
+ *
+ * While we are behind (initial block download, or catching up after having
+ * been offline), the tip is old. A fork that starts just above it, from a
+ * block that is hours or months old, can lower its difficulty all the way to
+ * the minimum, and passes a threshold that only looks at the tip. But we
+ * usually know the headers of the chain we are syncing, and a fork from far
+ * below those with less work is of no more use to us than it is to a node that
+ * is in sync.
+ *
+ * The best header is only a header: its blocks may be invalid, or may never be
+ * given to us. So that such a chain can't keep us from accepting the headers
+ * of another chain, it is only used
+ * - if it builds on our tip: it is the chain we are connecting blocks of,
+ * - if the next block on it is not known to be invalid, and
+ * - if a block was connected in the last ANTI_DOS_BEST_HEADER_STALL_TIME
+ *   seconds: we are making progress on it. At worst, the headers of another
+ *   chain are accepted that much later.
+ */
+static const CBlockIndex* BestHeaderForAntiDoS(const CBlockIndex* tip) EXCLUSIVE_LOCKS_REQUIRED(cs_main)
+{
+    const CBlockIndex* best_header = pindexBestHeader;
+    if (best_header == nullptr || best_header->nHeight <= tip->nHeight) return nullptr;
+    if (best_header->GetAncestor(tip->nHeight) != tip) return nullptr;
+    if (best_header->GetAncestor(tip->nHeight + 1)->nStatus & BLOCK_FAILED_MASK) return nullptr;
+
+    const int64_t now = GetTime();
+    int64_t last_progress = g_last_block_connected_time.load();
+    if (last_progress == 0) {
+        g_last_block_connected_time = now;
+        last_progress = now;
+    }
+    if (now - last_progress > ANTI_DOS_BEST_HEADER_STALL_TIME) return nullptr;
+
+    return best_header;
+}
+
+/**
  * Calculate an anti-DoS work threshold for headers chains: the work a headers
  * chain must have before we store it. This is the work of our chain at the
- * oldest block that a fork may start from (see AntiDoSForkLimit), and at least
- * the minimum chain work.
+ * oldest block that a fork may start from (see AntiDoSForkLimit), measured
+ * from the tip, and from the best header if that can be used (see
+ * BestHeaderForAntiDoS), and at least the minimum chain work.
  */
 static arith_uint256 GetAntiDoSWorkThreshold(const Consensus::Params& consensusParams)
 {
@@ -1840,6 +1888,10 @@ static arith_uint256 GetAntiDoSWorkThreshold(const Consensus::Params& consensusP
     const CBlockIndex* tip = ::ChainActive().Tip();
     if (tip != nullptr) {
         near_chaintip_work = AntiDoSForkLimit(tip, consensusParams)->nChainWork;
+        const CBlockIndex* best_header = BestHeaderForAntiDoS(tip);
+        if (best_header != nullptr) {
+            near_chaintip_work = std::max(near_chaintip_work, AntiDoSForkLimit(best_header, consensusParams)->nChainWork);
+        }
     }
     return std::max(near_chaintip_work, nMinimumChainWork);
 }
