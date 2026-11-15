@@ -1121,6 +1121,9 @@ static bool MaybePunishNodeForBlock(NodeId nodeid, const BlockValidationState& s
     case BlockValidationResult::BLOCK_RECENT_CONSENSUS_CHANGE:
     case BlockValidationResult::BLOCK_TIME_FUTURE:
         break;
+    // The header was not stored because its chain may have too little work.
+    case BlockValidationResult::BLOCK_HEADER_LOW_WORK:
+        break;
     }
     if (message != "") {
         LogPrint(BCLog::NET, "peer=%d: %s\n", nodeid, message);
@@ -2161,7 +2164,7 @@ bool static ProcessHeadersMessage(CNode* pfrom, CConnman* connman, CTxMemPool& m
 
     // Now process all the headers.
     BlockValidationState state;
-    if (!ProcessNewBlockHeaders(headers, state, chainparams, &pindexLast)) {
+    if (!ProcessNewBlockHeaders(headers, /* min_pow_checked */ true, state, chainparams, &pindexLast)) {
         if (state.IsInvalid()) {
             MaybePunishNodeForBlock(pfrom->GetId(), state, via_compact_block, "invalid header received");
             return false;
@@ -3151,11 +3154,16 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
         {
         LOCK(cs_main);
 
-        if (!LookupBlockIndex(cmpctblock.header.hashPrevBlock)) {
+        const CBlockIndex* prev_block = LookupBlockIndex(cmpctblock.header.hashPrevBlock);
+        if (!prev_block) {
             // Doesn't connect (or is genesis), instead of DoSing in AcceptBlockHeader, request deeper headers
             if (!::ChainstateActive().IsInitialBlockDownload()) {
                 MaybeSendGetHeaders(pfrom, connman, ::ChainActive().GetLocator(pindexBestHeader));
             }
+            return true;
+        } else if (prev_block->nChainWork + CalculateHeadersWork({cmpctblock.header}) < GetAntiDoSWorkThreshold(chainparams.GetConsensus())) {
+            // If we get a low-work header in a compact block, we can ignore it.
+            LogPrint(BCLog::NET, "Ignoring low-work compact block from peer %d\n", pfrom->GetId());
             return true;
         }
 
@@ -3166,7 +3174,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
 
         const CBlockIndex *pindex = nullptr;
         BlockValidationState state;
-        if (!ProcessNewBlockHeaders({cmpctblock.header}, state, chainparams, &pindex)) {
+        if (!ProcessNewBlockHeaders({cmpctblock.header}, /* min_pow_checked */ true, state, chainparams, &pindex)) {
             if (state.IsInvalid()) {
                 MaybePunishNodeForBlock(pfrom->GetId(), state, /*via_compact_block*/ true, "invalid header via cmpctblock");
                 return true;
@@ -3370,7 +3378,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
             // we have a chain with at least nMinimumChainWork), and we ignore
             // compact blocks with less work than our tip, it is safe to treat
             // reconstructed compact blocks as having been requested.
-            ProcessNewBlock(chainparams, pblock, /*fForceProcessing=*/true, &fNewBlock);
+            ProcessNewBlock(chainparams, pblock, /*fForceProcessing=*/true, /*min_pow_checked=*/true, &fNewBlock);
             if (fNewBlock) {
                 pfrom->nLastBlockTime = GetTime();
             } else {
@@ -3479,7 +3487,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
             // disk-space attacks), but this should be safe due to the
             // protections in the compact block handler -- see related comment
             // in compact block optimistic reconstruction handling.
-            ProcessNewBlock(chainparams, pblock, /*fForceProcessing=*/true, &fNewBlock);
+            ProcessNewBlock(chainparams, pblock, /*fForceProcessing=*/true, /*min_pow_checked=*/true, &fNewBlock);
             if (fNewBlock) {
                 pfrom->nLastBlockTime = GetTime();
                 // The block is stored, so clear any parallel requests for it
@@ -3539,6 +3547,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
 
         bool forceProcessing = false;
         const uint256 hash(pblock->GetHash());
+        bool min_pow_checked = false;
         {
             LOCK(cs_main);
             // Also always process if we requested the block explicitly, as we may
@@ -3549,9 +3558,16 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
             // which peers send us compact blocks, so the race between here and
             // cs_main in ProcessNewBlock is fine.
             mapBlockSource.emplace(hash, std::make_pair(pfrom->GetId(), true));
+
+            // Check work on this block against our anti-dos thresholds. This
+            // only matters if we don't have the header of the block yet.
+            const CBlockIndex* prev_block = LookupBlockIndex(pblock->hashPrevBlock);
+            if (prev_block && prev_block->nChainWork + CalculateHeadersWork({pblock->GetBlockHeader()}) >= GetAntiDoSWorkThreshold(chainparams.GetConsensus())) {
+                min_pow_checked = true;
+            }
         }
         bool fNewBlock = false;
-        ProcessNewBlock(chainparams, pblock, forceProcessing, &fNewBlock);
+        ProcessNewBlock(chainparams, pblock, forceProcessing, min_pow_checked, &fNewBlock);
         if (fNewBlock) {
             pfrom->nLastBlockTime = GetTime();
             // In case this block came from a different peer than we requested

@@ -209,10 +209,15 @@ static const uint64_t MIN_DISK_SPACE_FOR_BLOCK_FILES = 550 * 1024 * 1024;
  *
  * @param[in]   pblock  The block we want to process.
  * @param[in]   fForceProcessing Process this block even if unrequested; used for non-network block sources and whitelisted peers.
+ * @param[in]   min_pow_checked  True if proof-of-work anti-DoS checks have
+ *                               been done by caller for headers chain
+ *                               (note: only affects headers acceptance; if
+ *                               block header is already present in block
+ *                               index then this parameter has no effect)
  * @param[out]  fNewBlock A boolean which is set to indicate if the block was first received via this call
  * @returns     If the block was processed, independently of block validity
  */
-bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool* fNewBlock) LOCKS_EXCLUDED(cs_main);
+bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool min_pow_checked, bool* fNewBlock) LOCKS_EXCLUDED(cs_main);
 
 /**
  * Process incoming block headers.
@@ -221,11 +226,12 @@ bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<cons
  * validationinterface callback.
  *
  * @param[in]  block The block headers themselves
+ * @param[in]  min_pow_checked  True if proof-of-work anti-DoS checks have been done by caller for headers chain
  * @param[out] state This may be set to an Error state if any error occurred processing them
  * @param[in]  chainparams The params for the chain we want to connect to
  * @param[out] ppindex If set, the pointer will be set to point to the last new block index object for the given headers
  */
-bool ProcessNewBlockHeaders(const std::vector<CBlockHeader>& block, BlockValidationState& state, const CChainParams& chainparams, const CBlockIndex** ppindex = nullptr) LOCKS_EXCLUDED(cs_main);
+bool ProcessNewBlockHeaders(const std::vector<CBlockHeader>& block, bool min_pow_checked, BlockValidationState& state, const CChainParams& chainparams, const CBlockIndex** ppindex = nullptr) LOCKS_EXCLUDED(cs_main);
 
 /** Open a block file (blk?????.dat) */
 FILE* OpenBlockFile(const FlatFilePos &pos, bool fReadOnly = false);
@@ -490,12 +496,15 @@ public:
     /**
      * If a block header hasn't already been seen, call CheckBlockHeader on it, ensure
      * that it doesn't descend from an invalid block, and then add it to m_block_index.
+     * A header that is not known yet is only added if the caller has checked
+     * that its chain has enough work (min_pow_checked).
      */
     bool AcceptBlockHeader(
         const CBlockHeader& block,
         BlockValidationState& state,
         const CChainParams& chainparams,
-        CBlockIndex** ppindex) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
+        CBlockIndex** ppindex,
+        bool min_pow_checked) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
 };
 
 /**
@@ -696,7 +705,7 @@ public:
         const CChainParams& chainparams,
         std::shared_ptr<const CBlock> pblock) LOCKS_EXCLUDED(cs_main);
 
-    bool AcceptBlock(const std::shared_ptr<const CBlock>& pblock, BlockValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex, bool fRequested, const FlatFilePos* dbp, bool* fNewBlock) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
+    bool AcceptBlock(const std::shared_ptr<const CBlock>& pblock, BlockValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex, bool fRequested, const FlatFilePos* dbp, bool* fNewBlock, bool min_pow_checked) EXCLUSIVE_LOCKS_REQUIRED(cs_main);
 
     // Block (dis)connection on a given view:
     DisconnectResult DisconnectBlock(const CBlock& block, const CBlockIndex* pindex, CCoinsViewCache& view);

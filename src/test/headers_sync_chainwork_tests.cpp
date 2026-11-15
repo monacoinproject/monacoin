@@ -6,10 +6,14 @@
 #include <chain.h>
 #include <chainparams.h>
 #include <consensus/params.h>
+#include <consensus/validation.h>
 #include <headerssync.h>
+#include <miner.h>
 #include <pow.h>
+#include <script/standard.h>
 #include <test/util/setup_common.h>
 #include <validation.h>
+#include <versionbits.h>
 
 #include <memory>
 #include <vector>
@@ -281,6 +285,100 @@ BOOST_AUTO_TEST_CASE(headers_sync_in_batches)
     for (size_t i = 0; i < chain.size(); ++i) {
         BOOST_REQUIRE(released[i].GetHash() == chain[i].GetHash());
     }
+}
+
+// A header that is not in the block index yet is only added to it if the
+// caller has checked that its chain has enough work.
+BOOST_AUTO_TEST_CASE(new_headers_need_min_pow_checked)
+{
+    const CBlockHeader& genesis = Params().GenesisBlock();
+
+    // These headers are validated, so they need a version that is accepted.
+    std::vector<CBlockHeader> chain;
+    GenerateHeaders(chain, 3, genesis.GetHash(), 0,
+            VERSIONBITS_TOP_BITS, genesis.nTime, ArithToUint256(4), genesis.nBits);
+    BOOST_CHECK(CalculateHeadersWork(chain) == arith_uint256(6));
+
+    const auto in_block_index = [](const CBlockHeader& header) {
+        LOCK(::cs_main);
+        return LookupBlockIndex(header.GetHash()) != nullptr;
+    };
+
+    // Not checked: nothing is stored, and the result says why.
+    {
+        BlockValidationState state;
+        const CBlockIndex* pindex = nullptr;
+        BOOST_CHECK(!ProcessNewBlockHeaders(chain, /* min_pow_checked */ false, state, Params(), &pindex));
+        BOOST_CHECK(state.IsInvalid());
+        BOOST_CHECK(state.GetResult() == BlockValidationResult::BLOCK_HEADER_LOW_WORK);
+        BOOST_CHECK_EQUAL(state.GetRejectReason(), "too-little-chainwork");
+        BOOST_CHECK(pindex == nullptr);
+        for (const CBlockHeader& header : chain) BOOST_CHECK(!in_block_index(header));
+    }
+
+    // An invalid header is reported as invalid, whether checked or not.
+    {
+        CBlockHeader bad = chain[0];
+        while (CheckHeaderProofOfWork(bad, 1, Params().GetConsensus())) ++bad.nNonce;
+        BlockValidationState state;
+        BOOST_CHECK(!ProcessNewBlockHeaders({bad}, /* min_pow_checked */ false, state, Params()));
+        BOOST_CHECK(state.GetResult() == BlockValidationResult::BLOCK_INVALID_HEADER);
+        BOOST_CHECK(!in_block_index(bad));
+    }
+
+    // Checked: the first two headers are stored.
+    {
+        BlockValidationState state;
+        const CBlockIndex* pindex = nullptr;
+        BOOST_CHECK(ProcessNewBlockHeaders({chain[0], chain[1]}, /* min_pow_checked */ true, state, Params(), &pindex));
+        BOOST_CHECK(state.IsValid());
+        BOOST_REQUIRE(pindex != nullptr);
+        BOOST_CHECK(pindex->GetBlockHash() == chain[1].GetHash());
+        BOOST_CHECK(in_block_index(chain[0]) && in_block_index(chain[1]) && !in_block_index(chain[2]));
+    }
+
+    // Headers that are already stored are accepted without the check, but the
+    // new header on top of them is not.
+    {
+        BlockValidationState state;
+        const CBlockIndex* pindex = nullptr;
+        BOOST_CHECK(ProcessNewBlockHeaders({chain[0], chain[1]}, /* min_pow_checked */ false, state, Params(), &pindex));
+        BOOST_REQUIRE(pindex != nullptr);
+        BOOST_CHECK(pindex->GetBlockHash() == chain[1].GetHash());
+    }
+    {
+        BlockValidationState state;
+        BOOST_CHECK(!ProcessNewBlockHeaders(chain, /* min_pow_checked */ false, state, Params()));
+        BOOST_CHECK(state.GetResult() == BlockValidationResult::BLOCK_HEADER_LOW_WORK);
+        BOOST_CHECK(!in_block_index(chain[2]));
+    }
+
+    // The same holds for a block whose header is not known yet.
+    std::unique_ptr<CBlockTemplate> block_template = BlockAssembler(*m_node.mempool, Params()).CreateNewBlock(CScript() << OP_TRUE);
+    CBlock& block = block_template->block;
+    {
+        LOCK(::cs_main);
+        unsigned int extra_nonce = 0;
+        IncrementExtraNonce(&block, ::ChainActive().Tip(), extra_nonce);
+    }
+    FindProofOfWork(block, 1);
+    const std::shared_ptr<const CBlock> shared_block = std::make_shared<const CBlock>(block);
+
+    bool new_block = true;
+    BOOST_CHECK(!ProcessNewBlock(Params(), shared_block, /* fForceProcessing */ true, /* min_pow_checked */ false, &new_block));
+    BOOST_CHECK(!new_block);
+    BOOST_CHECK(!in_block_index(block));
+    BOOST_CHECK_EQUAL(WITH_LOCK(::cs_main, return ::ChainActive().Height()), 0);
+
+    BOOST_CHECK(ProcessNewBlock(Params(), shared_block, /* fForceProcessing */ true, /* min_pow_checked */ true, &new_block));
+    BOOST_CHECK(new_block);
+    BOOST_CHECK(in_block_index(block));
+    BOOST_CHECK_EQUAL(WITH_LOCK(::cs_main, return ::ChainActive().Height()), 1);
+    BOOST_CHECK(WITH_LOCK(::cs_main, return ::ChainActive().Tip()->GetBlockHash()) == block.GetHash());
+
+    // Once the header is known, the block is processed again without the check.
+    BOOST_CHECK(ProcessNewBlock(Params(), shared_block, /* fForceProcessing */ true, /* min_pow_checked */ false, &new_block));
+    BOOST_CHECK(!new_block);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

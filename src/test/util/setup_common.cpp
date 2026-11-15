@@ -214,7 +214,7 @@ CBlock TestChain100Setup::CreateAndProcessBlock(const std::vector<CMutableTransa
     while (!CheckProofOfWork(block.GetPoWHash(lyra2rev2), block.nBits, chainparams.GetConsensus())) ++block.nNonce;
 
     std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(block);
-    ProcessNewBlock(chainparams, shared_pblock, true, nullptr);
+    ProcessNewBlock(chainparams, shared_pblock, true, true, nullptr);
 
     CBlock result = block;
     return result;

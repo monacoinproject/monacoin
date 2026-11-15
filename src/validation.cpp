@@ -1856,8 +1856,9 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex* pindex, const Consens
         flags |= SCRIPT_VERIFY_CHECKSEQUENCEVERIFY;
     }
 
-    // Start enforcing BIP147 NULLDUMMY (activated simultaneously with segwit)
+    // Start enforcing WITNESS rules using versionbits logic.
     if (IsWitnessEnabled(pindex->pprev, consensusparams)) {
+        flags |= SCRIPT_VERIFY_WITNESS;
         flags |= SCRIPT_VERIFY_NULLDUMMY;
     }
 
@@ -3576,7 +3577,7 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
     return true;
 }
 
-bool BlockManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex)
+bool BlockManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex, bool min_pow_checked)
 {
     AssertLockHeld(cs_main);
     // Check for duplicate
@@ -3653,8 +3654,16 @@ bool BlockManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationS
             }
         }
     }
-    if (pindex == nullptr)
+    if (pindex == nullptr) {
+        // Only the genesis block gets here with a header that is already
+        // known. Everything else is a new header, which is only stored if its
+        // chain is known to have enough work.
+        if (!min_pow_checked && hash != chainparams.GetConsensus().hashGenesisBlock) {
+            LogPrint(BCLog::VALIDATION, "%s: not adding new block header %s, missing anti-dos proof-of-work validation\n", __func__, hash.ToString());
+            return state.Invalid(BlockValidationResult::BLOCK_HEADER_LOW_WORK, "too-little-chainwork");
+        }
         pindex = AddToBlockIndex(block);
+    }
 
     if (ppindex)
         *ppindex = pindex;
@@ -3673,13 +3682,13 @@ arith_uint256 CalculateHeadersWork(const std::vector<CBlockHeader>& headers)
 }
 
 // Exposed wrapper for AcceptBlockHeader
-bool ProcessNewBlockHeaders(const std::vector<CBlockHeader>& headers, BlockValidationState& state, const CChainParams& chainparams, const CBlockIndex** ppindex)
+bool ProcessNewBlockHeaders(const std::vector<CBlockHeader>& headers, bool min_pow_checked, BlockValidationState& state, const CChainParams& chainparams, const CBlockIndex** ppindex)
 {
     {
         LOCK(cs_main);
         for (const CBlockHeader& header : headers) {
             CBlockIndex *pindex = nullptr; // Use a temp pindex instead of ppindex to avoid a const_cast
-            bool accepted = g_blockman.AcceptBlockHeader(header, state, chainparams, &pindex);
+            bool accepted = g_blockman.AcceptBlockHeader(header, state, chainparams, &pindex, min_pow_checked);
             ::ChainstateActive().CheckBlockIndex(chainparams.GetConsensus());
 
             if (!accepted) {
@@ -3718,7 +3727,7 @@ static FlatFilePos SaveBlockToDisk(const CBlock& block, int nHeight, const CChai
 }
 
 /** Store block on disk. If dbp is non-nullptr, the file is known to already reside on disk */
-bool CChainState::AcceptBlock(const std::shared_ptr<const CBlock>& pblock, BlockValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex, bool fRequested, const FlatFilePos* dbp, bool* fNewBlock)
+bool CChainState::AcceptBlock(const std::shared_ptr<const CBlock>& pblock, BlockValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex, bool fRequested, const FlatFilePos* dbp, bool* fNewBlock, bool min_pow_checked)
 {
     const CBlock& block = *pblock;
 
@@ -3728,7 +3737,7 @@ bool CChainState::AcceptBlock(const std::shared_ptr<const CBlock>& pblock, Block
     CBlockIndex *pindexDummy = nullptr;
     CBlockIndex *&pindex = ppindex ? *ppindex : pindexDummy;
 
-    bool accepted_header = m_blockman.AcceptBlockHeader(block, state, chainparams, &pindex);
+    bool accepted_header = m_blockman.AcceptBlockHeader(block, state, chainparams, &pindex, min_pow_checked);
     CheckBlockIndex(chainparams.GetConsensus());
 
     if (!accepted_header)
@@ -3800,7 +3809,7 @@ bool CChainState::AcceptBlock(const std::shared_ptr<const CBlock>& pblock, Block
     return true;
 }
 
-bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool *fNewBlock)
+bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool min_pow_checked, bool *fNewBlock)
 {
     AssertLockNotHeld(cs_main);
 
@@ -3818,7 +3827,7 @@ bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<cons
         bool ret = CheckBlock(*pblock, state, chainparams.GetConsensus());
         if (ret) {
             // Store to disk
-            ret = ::ChainstateActive().AcceptBlock(pblock, state, chainparams, &pindex, fForceProcessing, nullptr, fNewBlock);
+            ret = ::ChainstateActive().AcceptBlock(pblock, state, chainparams, &pindex, fForceProcessing, nullptr, fNewBlock, min_pow_checked);
         }
         if (!ret) {
             GetMainSignals().BlockChecked(*pblock, state);
@@ -4707,7 +4716,7 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, FlatFi
                     CBlockIndex* pindex = LookupBlockIndex(hash);
                     if (!pindex || (pindex->nStatus & BLOCK_HAVE_DATA) == 0) {
                       BlockValidationState state;
-                      if (::ChainstateActive().AcceptBlock(pblock, state, chainparams, nullptr, true, dbp, nullptr)) {
+                      if (::ChainstateActive().AcceptBlock(pblock, state, chainparams, nullptr, true, dbp, nullptr, /* min_pow_checked */ true)) {
                           nLoaded++;
                       }
                       if (state.IsError()) {
@@ -4748,7 +4757,7 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, FlatFi
                                     head.ToString());
                             LOCK(cs_main);
                             BlockValidationState dummy;
-                            if (::ChainstateActive().AcceptBlock(pblockrecursive, dummy, chainparams, nullptr, true, &it->second, nullptr))
+                            if (::ChainstateActive().AcceptBlock(pblockrecursive, dummy, chainparams, nullptr, true, &it->second, nullptr, /* min_pow_checked */ true))
                             {
                                 nLoaded++;
                                 queue.push_back(pblockrecursive->GetHash());

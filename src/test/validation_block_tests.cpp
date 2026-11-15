@@ -163,10 +163,10 @@ BOOST_AUTO_TEST_CASE(processnewblock_signals_ordering)
     std::transform(blocks.begin(), blocks.end(), std::back_inserter(headers), [](std::shared_ptr<const CBlock> b) { return b->GetBlockHeader(); });
 
     // Process all the headers so we understand the toplogy of the chain
-    BOOST_CHECK(ProcessNewBlockHeaders(headers, state, Params()));
+    BOOST_CHECK(ProcessNewBlockHeaders(headers, true, state, Params()));
 
     // Connect the genesis block and drain any outstanding events
-    BOOST_CHECK(ProcessNewBlock(Params(), std::make_shared<CBlock>(Params().GenesisBlock()), true, &ignored));
+    BOOST_CHECK(ProcessNewBlock(Params(), std::make_shared<CBlock>(Params().GenesisBlock()), true, true, &ignored));
     SyncWithValidationInterfaceQueue();
 
     // subscribe to events (this subscriber will validate event ordering)
@@ -188,13 +188,13 @@ BOOST_AUTO_TEST_CASE(processnewblock_signals_ordering)
             FastRandomContext insecure;
             for (int i = 0; i < 1000; i++) {
                 auto block = blocks[insecure.randrange(blocks.size() - 1)];
-                ProcessNewBlock(Params(), block, true, &ignored);
+                ProcessNewBlock(Params(), block, true, true, &ignored);
             }
 
             // to make sure that eventually we process the full chain - do it here
             for (auto block : blocks) {
                 if (block->vtx.size() == 1) {
-                    bool processed = ProcessNewBlock(Params(), block, true, &ignored);
+                    bool processed = ProcessNewBlock(Params(), block, true, true, &ignored);
                     assert(processed);
                 }
             }
@@ -235,7 +235,7 @@ BOOST_AUTO_TEST_CASE(mempool_locks_reorg)
 {
     bool ignored;
     auto ProcessBlock = [&ignored](std::shared_ptr<const CBlock> block) -> bool {
-        return ProcessNewBlock(Params(), block, /* fForceProcessing */ true, /* fNewBlock */ &ignored);
+        return ProcessNewBlock(Params(), block, /* fForceProcessing */ true, /* min_pow_checked */ true, /* fNewBlock */ &ignored);
     };
 
     // Process all mined blocks
