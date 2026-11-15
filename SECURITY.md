@@ -2,19 +2,20 @@
 
 ## Supported Versions
 
-See our website for versions of Bitcoin Core that are currently supported with
-security updates: https://bitcoincore.org/en/lifecycle/#schedule
+Security fixes are made for the latest release of Monacoin Core. Please
+upgrade to the latest release before reporting an issue, if you can.
 
 ## Reporting a Vulnerability
 
-To report security issues send an email to security@bitcoincore.org (not for support).
+Please do not report security issues in public issues or pull requests.
 
-The following keys may be used to communicate sensitive information to developers:
+To report a security issue in Monacoin Core, use GitHub's private vulnerability
+reporting: open the
+[Security tab](https://github.com/monacoinproject/monacoin/security) of this
+repository and choose "Report a vulnerability". The report is only visible to
+the maintainers.
 
-| Name | Fingerprint |
-|------|-------------|
-| Wladimir van der Laan | 71A3 B167 3540 5025 D447  E8F2 7481 0B01 2346 C9A6 |
-| Jonas Schnelli | 32EE 5C4C 3FA1 5CCA DB46  ABE5 29D4 BCB6 416F 53EC |
-| Pieter Wuille | 133E AC17 9436 F14A 5CF1  B794 860F EB80 4E66 9320 |
-
-You can import a key by running the following command with that individual’s fingerprint: `gpg --recv-keys "<fingerprint>"` Ensure that you put quotes around fingerprints containing spaces.
+If the issue also affects Bitcoin Core, please report it to the Bitcoin Core
+project as well, following the policy at
+<https://bitcoincore.org/en/security-advisories/>. Reports sent to Bitcoin Core
+about Monacoin-specific code do not reach the Monacoin maintainers.
