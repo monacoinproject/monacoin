@@ -4714,10 +4714,11 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, FlatFi
                     while (range.first != range.second) {
                         std::multimap<uint256, FlatFilePos>::iterator it = range.first;
                         std::shared_ptr<CBlock> pblockrecursive = std::make_shared<CBlock>();
-                        uint256 hash = block.GetHash();
-                        LOCK(cs_main);
-                        int nHeight = LookupBlockIndex(hash)->nHeight;
-                        if (ReadBlockFromDisk(*pblockrecursive, it->second, nHeight, chainparams.GetConsensus()))
+                        // The proof of work algorithm depends on the height of the block
+                        // being read, which is a child of head. head is not in the block
+                        // index if it was rejected; its children cannot be accepted then.
+                        const CBlockIndex* pindexHead = WITH_LOCK(cs_main, return LookupBlockIndex(head));
+                        if (pindexHead && ReadBlockFromDisk(*pblockrecursive, it->second, pindexHead->nHeight + 1, chainparams.GetConsensus()))
                         {
                             LogPrint(BCLog::REINDEX, "%s: Processing out of order child %s of %s\n", __func__, pblockrecursive->GetHash().ToString(),
                                     head.ToString());
