@@ -289,3 +289,8 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params&
 
     return true;
 }
+
+bool CheckHeaderProofOfWork(const CBlockHeader& header, int64_t height, const Consensus::Params& params)
+{
+    return CheckProofOfWork(header.GetPoWHash(height >= Params().SwitchLyra2REv2_DGWblock()), header.nBits, params);
+}

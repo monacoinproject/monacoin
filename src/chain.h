@@ -380,6 +380,10 @@ public:
     }
 };
 
+/** Construct a list of hash entries to put in a locator, without using the
+ *  active chain (so that cs_main is not needed). */
+std::vector<uint256> LocatorEntries(const CBlockIndex* index);
+
 /** An in-memory indexed chain of blocks. */
 class CChain {
 private:
