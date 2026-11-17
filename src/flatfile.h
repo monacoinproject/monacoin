@@ -6,6 +6,7 @@
 #ifndef BITCOIN_FLATFILE_H
 #define BITCOIN_FLATFILE_H
 
+#include <stdint.h>
 #include <string>
 
 #include <fs.h>
@@ -14,7 +15,7 @@
 struct FlatFilePos
 {
     int nFile;
-    unsigned int nPos;
+    uint64_t nPos;
 
     ADD_SERIALIZE_METHODS;
 
@@ -26,7 +27,7 @@ struct FlatFilePos
 
     FlatFilePos() : nFile(-1), nPos(0) {}
 
-    FlatFilePos(int nFileIn, unsigned int nPosIn) :
+    FlatFilePos(int nFileIn, uint64_t nPosIn) :
         nFile(nFileIn),
         nPos(nPosIn)
     {}

@@ -1122,10 +1122,10 @@ static bool WriteBlockToDisk(const CBlock& block, FlatFilePos& pos, const CMessa
     fileout << messageStart << nSize;
 
     // Write block
-    long fileOutPos = ftell(fileout.Get());
+    int64_t fileOutPos = FileTell64(fileout.Get());
     if (fileOutPos < 0)
         return error("WriteBlockToDisk: ftell failed");
-    pos.nPos = (unsigned int)fileOutPos;
+    pos.nPos = fileOutPos;
     fileout << block;
 
     return true;
@@ -1578,10 +1578,10 @@ static bool UndoWriteToDisk(const CBlockUndo& blockundo, FlatFilePos& pos, const
     fileout << messageStart << nSize;
 
     // Write undo data
-    long fileOutPos = ftell(fileout.Get());
+    int64_t fileOutPos = FileTell64(fileout.Get());
     if (fileOutPos < 0)
         return error("%s: ftell failed", __func__);
-    pos.nPos = (unsigned int)fileOutPos;
+    pos.nPos = fileOutPos;
     fileout << blockundo;
 
     // calculate & write checksum

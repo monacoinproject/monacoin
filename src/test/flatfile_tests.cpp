@@ -2,10 +2,12 @@
 // Distributed under the MIT software license, see the accompanying
 // file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
+#include <chain.h>
 #include <clientversion.h>
 #include <flatfile.h>
 #include <streams.h>
 #include <test/util/setup_common.h>
+#include <util/strencodings.h>
 #include <util/system.h>
 
 #include <boost/test/unit_test.hpp>
@@ -121,6 +123,96 @@ BOOST_AUTO_TEST_CASE(flatfile_flush)
     // Flush with finalize should truncate file.
     seq.Flush(FlatFilePos(0, 1), true);
     BOOST_CHECK_EQUAL(fs::file_size(seq.FileName(FlatFilePos(0, 1))), 1);
+}
+
+// Positions in block and undo files are not limited to 32 bits. Undo files in
+// particular have no size limit.
+BOOST_AUTO_TEST_CASE(flatfile_large_positions)
+{
+    const auto data_dir = GetDataDir();
+    FlatFileSeq seq(data_dir, "a", 16 * 1024);
+
+    // Past 4 GiB. Only the data at the end is written, so on most file
+    // systems this is a sparse file that takes little space.
+    const uint64_t large_pos = (uint64_t{5} << 30) + 123;
+    std::string line("The steady addition of a constant of amount of new coins is analogous to gold miners.");
+    const uint64_t end_pos = large_pos + GetSerializeSize(line, CLIENT_VERSION);
+
+    {
+        CAutoFile file(seq.Open(FlatFilePos(0, large_pos)), SER_DISK, CLIENT_VERSION);
+        BOOST_REQUIRE(!file.IsNull());
+        BOOST_CHECK_EQUAL(FileTell64(file.Get()), int64_t(large_pos));
+        file << LIMITED_STRING(line, 256);
+        BOOST_CHECK_EQUAL(FileTell64(file.Get()), int64_t(end_pos));
+    }
+
+    // Finalizing the file truncates it at the given position.
+    BOOST_CHECK(seq.Flush(FlatFilePos(0, end_pos), true));
+    BOOST_CHECK_EQUAL(fs::file_size(seq.FileName(FlatFilePos(0, 0))), end_pos);
+
+    {
+        CAutoFile file(seq.Open(FlatFilePos(0, large_pos), true), SER_DISK, CLIENT_VERSION);
+        BOOST_REQUIRE(!file.IsNull());
+        std::string read_line;
+        file >> LIMITED_STRING(read_line, 256);
+        BOOST_CHECK_EQUAL(read_line, line);
+    }
+
+    fs::remove(seq.FileName(FlatFilePos(0, 0)));
+}
+
+// Widening the positions does not change how they are stored on disk.
+BOOST_AUTO_TEST_CASE(flatfile_pos_serialization)
+{
+    // Positions below 4 GiB are serialized as before, when they were 32 bits.
+    {
+        CDataStream widened(SER_DISK, CLIENT_VERSION);
+        widened << FlatFilePos(7, 0xfedcba98);
+        CDataStream before(SER_DISK, CLIENT_VERSION);
+        int file = 7;
+        uint32_t pos = 0xfedcba98;
+        before << VARINT_MODE(file, VarIntMode::NONNEGATIVE_SIGNED) << VARINT(pos);
+        BOOST_CHECK_EQUAL(HexStr(widened.begin(), widened.end()), HexStr(before.begin(), before.end()));
+
+        FlatFilePos read;
+        before >> read;
+        BOOST_CHECK(read == FlatFilePos(7, 0xfedcba98));
+    }
+
+    // Larger positions are stored and read back.
+    const uint64_t large_pos = (uint64_t{5} << 30) + 123;
+    {
+        CDataStream stream(SER_DISK, CLIENT_VERSION);
+        stream << FlatFilePos(7, large_pos);
+        FlatFilePos read;
+        stream >> read;
+        BOOST_CHECK(read == FlatFilePos(7, large_pos));
+    }
+    {
+        CBlockFileInfo info;
+        info.nSize = 0x1000;
+        info.nUndoSize = large_pos;
+        CDataStream stream(SER_DISK, CLIENT_VERSION);
+        stream << info;
+        CBlockFileInfo read;
+        stream >> read;
+        BOOST_CHECK_EQUAL(read.nSize, uint64_t{0x1000});
+        BOOST_CHECK_EQUAL(read.nUndoSize, large_pos);
+    }
+    {
+        CBlockIndex index;
+        index.nStatus = BLOCK_HAVE_DATA | BLOCK_HAVE_UNDO;
+        index.nFile = 3;
+        index.nDataPos = 0x80;
+        index.nUndoPos = large_pos;
+        CDataStream stream(SER_DISK, CLIENT_VERSION);
+        stream << CDiskBlockIndex(&index);
+        CDiskBlockIndex read;
+        stream >> read;
+        BOOST_CHECK_EQUAL(read.nDataPos, uint64_t{0x80});
+        BOOST_CHECK_EQUAL(read.nUndoPos, large_pos);
+        BOOST_CHECK(read.GetUndoPos() == FlatFilePos(3, large_pos));
+    }
 }
 
 BOOST_AUTO_TEST_SUITE_END()
