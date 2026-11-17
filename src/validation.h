@@ -394,6 +394,17 @@ bool RewindBlockIndex(const CChainParams& params) LOCKS_EXCLUDED(cs_main);
 /** Compute at which vout of the block's coinbase transaction the witness commitment occurs, or -1 if not found */
 int GetWitnessCommitmentIndex(const CBlock& block);
 
+/**
+ * Check that the witness data of a block matches its witness commitment, and
+ * that a block without a witness commitment has no witness data. These are
+ * the checks that ContextualCheckBlock() reports as BLOCK_MUTATED.
+ *
+ * @param[in]  block                      A block whose merkle root has been checked.
+ * @param[in]  expect_witness_commitment  Whether segwit is active for the block.
+ * @param[out] state                      Set to BLOCK_MUTATED on failure.
+ */
+bool CheckWitnessMalleation(const CBlock& block, bool expect_witness_commitment, BlockValidationState& state);
+
 /** Update uncommitted block structures (currently: only the witness reserved value). This is safe for submitted blocks. */
 void UpdateUncommittedBlockStructures(CBlock& block, const CBlockIndex* pindexPrev, const Consensus::Params& consensusParams);
 

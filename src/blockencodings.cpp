@@ -177,7 +177,7 @@ bool PartiallyDownloadedBlock::IsTxAvailable(size_t index) const
     return txn_available[index] != nullptr;
 }
 
-ReadStatus PartiallyDownloadedBlock::FillBlock(CBlock& block, const std::vector<CTransactionRef>& vtx_missing)
+ReadStatus PartiallyDownloadedBlock::FillBlock(CBlock& block, const std::vector<CTransactionRef>& vtx_missing, bool segwit_active)
 {
     if (header.IsNull()) return READ_STATUS_INVALID;
 
@@ -212,6 +212,15 @@ ReadStatus PartiallyDownloadedBlock::FillBlock(CBlock& block, const std::vector<
         if (state.GetResult() == BlockValidationResult::BLOCK_MUTATED)
             return READ_STATUS_FAILED; // Possible Short ID collision
         return READ_STATUS_CHECKBLOCK_FAILED;
+    }
+
+    // Also check the witness data now. The transactions match the merkle
+    // root, but their witnesses may not match the witness commitment. The
+    // caller clears the download state of the block when this returns
+    // READ_STATUS_OK, so a block that is only found to be mutated later
+    // could be used to stall the download.
+    if (!CheckWitnessMalleation(block, segwit_active, state)) {
+        return READ_STATUS_FAILED; // Possible Short ID collision
     }
 
     LogPrint(BCLog::CMPCTBLOCK, "Successfully reconstructed block %s with %lu txn prefilled, %lu txn from mempool (incl at least %lu from extra pool) and %lu txn requested\n", hash.ToString(), prefilled_count, mempool_count, extra_count, vtx_missing.size());

@@ -3381,7 +3381,8 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
                     return true;
                 }
                 std::vector<CTransactionRef> dummy;
-                status = tempBlock.FillBlock(*pblock, dummy);
+                status = tempBlock.FillBlock(*pblock, dummy,
+                                             /*segwit_active=*/IsWitnessEnabled(pindex->pprev, chainparams.GetConsensus()));
                 if (status == READ_STATUS_OK) {
                     fBlockReconstructed = true;
                 }
@@ -3486,7 +3487,11 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
             }
 
             PartiallyDownloadedBlock& partialBlock = *range_flight.first->second.second->partialBlock;
-            ReadStatus status = partialBlock.FillBlock(*pblock, resp.txn);
+            // We should not have gotten this far in compact block processing
+            // unless it's attached to a known header.
+            const CBlockIndex* prev_block = LookupBlockIndex(partialBlock.header.hashPrevBlock);
+            ReadStatus status = partialBlock.FillBlock(*pblock, resp.txn,
+                                                       /*segwit_active=*/IsWitnessEnabled(prev_block, chainparams.GetConsensus()));
             if (status == READ_STATUS_INVALID) {
                 MarkBlockAsReceived(resp.blockhash, pfrom->GetId()); // Reset in-flight state in case of whitelist
                 Misbehaving(pfrom->GetId(), 100, strprintf("Peer %d sent us invalid compact block/non-matching block transactions\n", pfrom->GetId()));
