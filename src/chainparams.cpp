@@ -85,10 +85,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TESTDUMMY].nTimeout = 1230767999; // December 31, 2008
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000003e85b23b0cab3099d6e"); // height 4100000
+        consensus.nMinimumChainWork = uint256S("0x0000000000000000000000000000000000000000000003e85efc2ee0fd1386b9"); // height 4165667
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0xcb6251d70bea2cea1834ef22ee159523017d1e6fd4dfe82526754571e919f807"); //1639061
+        consensus.defaultAssumeValid = uint256S("0xf822607c1f5d87a8a5183188b27d10b1de8b58d086152620cdf1efc4919e152e"); //4100000
 
         // Hardfork params
         nSwitchKGWblock = 80000;
@@ -160,10 +160,10 @@ public:
         };
 
         chainTxData = ChainTxData{
-            // Data from RPC: getchaintxstats 4096 f822607c1f5d87a8a5183188b27d10b1de8b58d086152620cdf1efc4919e152e
-            /* nTime    */ 1788837419,
-            /* nTxCount */ 7963391,
-            /* dTxRate  */ 0.01374108126288547,
+            // Data from RPC: getchaintxstats 4096 bbd50459015b4087508cc30b15608a326779161aa36e0a0a1b552133f3cbae36
+            /* nTime    */ 1795050140,
+            /* nTxCount */ 8052475,
+            /* dTxRate  */ 0.01487127248659465,
         };
     }
 };
