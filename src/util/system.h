@@ -27,6 +27,7 @@
 #include <util/threadnames.h>
 #include <util/time.h>
 
+#include <cstdio>
 #include <exception>
 #include <map>
 #include <set>
@@ -54,9 +55,39 @@ bool error(const char* fmt, const Args&... args)
 
 void PrintExceptionContinue(const std::exception *pex, const char* pszThread);
 bool FileCommit(FILE *file);
-bool TruncateFile(FILE *file, unsigned int length);
+bool TruncateFile(FILE *file, uint64_t length);
 int RaiseFileDescriptorLimit(int nMinFD);
-void AllocateFileRange(FILE *file, unsigned int offset, unsigned int length);
+void AllocateFileRange(FILE *file, uint64_t offset, unsigned int length);
+
+/**
+ * 64-bit-clean file positioning.
+ *
+ * The wrapper is necessary for Windows, because `long` is only 32 bits there,
+ * even in 64-bit builds (LLP64).
+ */
+inline int FileSeek64(FILE* file, int64_t offset, int origin)
+{
+#if defined(WIN32)
+    return _fseeki64(file, offset, origin);
+#else
+    return std::fseek(file, offset, origin);
+#endif
+}
+
+/**
+ * 64-bit-clean file positioning.
+ *
+ * The wrapper is necessary for Windows, because `long` is only 32 bits there,
+ * even in 64-bit builds (LLP64).
+ */
+inline int64_t FileTell64(FILE* file)
+{
+#if defined(WIN32)
+    return _ftelli64(file);
+#else
+    return std::ftell(file);
+#endif
+}
 bool RenameOver(fs::path src, fs::path dest);
 bool LockDirectory(const fs::path& directory, const std::string lockfile_name, bool probe_only=false);
 void UnlockDirectory(const fs::path& directory, const std::string& lockfile_name);

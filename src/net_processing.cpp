@@ -11,6 +11,7 @@
 #include <chainparams.h>
 #include <consensus/validation.h>
 #include <hash.h>
+#include <headerssync.h>
 #include <validation.h>
 #include <merkleblock.h>
 #include <netmessagemaker.h>
@@ -18,6 +19,7 @@
 #include <netbase.h>
 #include <policy/fees.h>
 #include <policy/policy.h>
+#include <pow.h>
 #include <primitives/block.h>
 #include <primitives/transaction.h>
 #include <random.h>
@@ -44,7 +46,20 @@ static constexpr std::chrono::seconds RELAY_TX_CACHE_TIME{15 * 60};
 /** Headers download timeout expressed in microseconds
  *  Timeout = base + per_header * (expected number of headers) */
 static constexpr int64_t HEADERS_DOWNLOAD_TIMEOUT_BASE = 15 * 60 * 1000000; // 15 minutes
-static constexpr int64_t HEADERS_DOWNLOAD_TIMEOUT_PER_HEADER = 1000; // 1ms/header
+static constexpr int64_t HEADERS_DOWNLOAD_TIMEOUT_PER_HEADER = 2000; // 2ms/header
+/** A peer that is not our headers sync peer may only start a headers presync
+ *  if no other presync has made progress for this long, in seconds. */
+static constexpr int64_t HEADERS_PRESYNC_STALL_TIME = 60;
+/** How long to wait for a peer to respond to a getheaders request, in seconds */
+static constexpr int64_t HEADERS_RESPONSE_TIME = 2 * 60; // 2 minutes
+/** A headers chain that forks from one of the last ANTI_DOS_FORK_DEPTH blocks
+ *  of our chain is accepted without having to show more work than that block,
+ *  if that block is also not older than ANTI_DOS_FORK_DEPTH block intervals. */
+static constexpr int ANTI_DOS_FORK_DEPTH = 24;
+/** While our tip is behind our best header, the best header is used for the
+ *  anti-DoS work threshold as well. That stops if no block has been connected
+ *  for this long, in seconds. */
+static constexpr int64_t ANTI_DOS_BEST_HEADER_STALL_TIME = 10 * 60;
 /** Protect at least this many outbound peers from disconnection due to slow/
  * behind headers chain.
  */
@@ -124,6 +139,24 @@ static constexpr unsigned int MAX_FEEFILTER_CHANGE_DELAY = 5 * 60;
 namespace {
     /** Number of nodes with fSyncStarted. */
     int nSyncStarted GUARDED_BY(cs_main) = 0;
+
+    /** Hash of the last block inv that made us send a getheaders to a peer
+     *  we had not started headers sync with. */
+    uint256 g_last_block_inv_triggering_headers_sync GUARDED_BY(cs_main);
+
+    /** Protects g_headers_sync. cs_main must not be taken while holding it. */
+    Mutex g_headers_sync_mutex;
+    /** Headers-sync state of the peers that are giving us a headers chain
+     *  that has not shown enough work yet (eg for initial sync, or syncing
+     *  large reorgs). Only the message handling thread adds entries. */
+    std::map<NodeId, std::unique_ptr<HeadersSyncState>> g_headers_sync GUARDED_BY(g_headers_sync_mutex);
+    /** When a headers sync in g_headers_sync last processed headers, in seconds. */
+    int64_t g_last_headers_sync_progress_time GUARDED_BY(g_headers_sync_mutex) = 0;
+    /** When the progress of a headers presync was last logged, in seconds. */
+    std::atomic<int64_t> g_last_presync_log_time{0};
+    /** When a block was last connected, in seconds. Before the first block is
+     *  connected, when BestHeaderForAntiDoS() was first called. */
+    std::atomic<int64_t> g_last_block_connected_time{0};
 
     /**
      * Sources of received blocks, saved to be able punish them when processing
@@ -241,6 +274,10 @@ struct CNodeState {
     int nUnconnectingHeaders;
     //! Whether we've started headers synchronization with this peer.
     bool fSyncStarted;
+    //! Whether we've sent this peer a getheaders in response to an inv prior to initial-headers-sync completing
+    bool m_inv_triggered_getheaders_before_sync{false};
+    //! Whether we've sent our peer a sendheaders message.
+    bool m_sent_sendheaders{false};
     //! When to potentially disconnect peer for stalling headers download
     int64_t nHeadersSyncTimeout;
     //! Since when we're stalling block download progress (in microseconds), or 0.
@@ -818,6 +855,10 @@ void PeerLogicValidation::InitializeNode(CNode *pnode) {
 
 void PeerLogicValidation::FinalizeNode(NodeId nodeid, bool& fUpdateConnectionTime) {
     fUpdateConnectionTime = false;
+    {
+        LOCK(g_headers_sync_mutex);
+        g_headers_sync.erase(nodeid);
+    }
     LOCK(cs_main);
     CNodeState *state = State(nodeid);
     assert(state != nullptr);
@@ -1087,6 +1128,9 @@ static bool MaybePunishNodeForBlock(NodeId nodeid, const BlockValidationState& s
     case BlockValidationResult::BLOCK_RECENT_CONSENSUS_CHANGE:
     case BlockValidationResult::BLOCK_TIME_FUTURE:
         break;
+    // The header was not stored because its chain may have too little work.
+    case BlockValidationResult::BLOCK_HEADER_LOW_WORK:
+        break;
     }
     if (message != "") {
         LogPrint(BCLog::NET, "peer=%d: %s\n", nodeid, message);
@@ -1211,6 +1255,7 @@ void PeerLogicValidation::BlockConnected(const std::shared_ptr<const CBlock>& pb
         }
 
         g_last_tip_update = GetTime();
+        g_last_block_connected_time = GetTime();
     }
     {
         LOCK(g_cs_recent_confirmed_transactions);
@@ -1718,38 +1763,395 @@ inline void static SendBlockTransactions(const CBlock& block, const BlockTransac
     connman->PushMessage(pfrom, msgMaker.Make(nSendFlags, NetMsgType::BLOCKTXN, resp));
 }
 
-bool static ProcessHeadersMessage(CNode* pfrom, CConnman* connman, CTxMemPool& mempool, const std::vector<CBlockHeader>& headers, const CChainParams& chainparams, bool via_compact_block)
+/**
+ * Request headers from this peer with a given locator.
+ * We don't issue a getheaders message if we have a recent one outstanding.
+ * This returns true if a getheaders is actually sent, and false otherwise.
+ */
+static bool MaybeSendGetHeaders(CNode* pfrom, CConnman* connman, const CBlockLocator& locator)
+{
+    const CNetMsgMaker msgMaker(pfrom->GetSendVersion());
+
+    const int64_t current_time = GetTime();
+    // Only allow a new getheaders message to go out if we don't have a recent
+    // one already in-flight
+    if (pfrom->m_last_getheaders_timestamp.load() < current_time - HEADERS_RESPONSE_TIME) {
+        connman->PushMessage(pfrom, msgMaker.Make(NetMsgType::GETHEADERS, locator, uint256()));
+        pfrom->m_last_getheaders_timestamp = current_time;
+        return true;
+    }
+    return false;
+}
+
+/** Return true if the headers connect to each other, false otherwise */
+static bool CheckHeadersAreContinuous(const std::vector<CBlockHeader>& headers)
+{
+    uint256 hashLastBlock;
+    for (const CBlockHeader& header : headers) {
+        if (!hashLastBlock.IsNull() && header.hashPrevBlock != hashLastBlock) {
+            return false;
+        }
+        hashLastBlock = header.GetHash();
+    }
+    return true;
+}
+
+/** Return true if the headers have proof-of-work matching what's claimed. The
+ *  hash function depends on the height: the first header is at first_height. */
+static bool HasValidProofOfWork(const std::vector<CBlockHeader>& headers, int first_height, const Consensus::Params& consensusParams)
+{
+    int height = first_height;
+    for (const CBlockHeader& header : headers) {
+        if (!CheckHeaderProofOfWork(header, height++, consensusParams)) return false;
+    }
+    return true;
+}
+
+/**
+ * Return the oldest block, going back from the given block, that a headers
+ * chain may fork from without having to show more work than that block.
+ *
+ * Bitcoin Core allows forks from the last 144 blocks of the tip, which is a
+ * day. Here the difficulty is adjusted at every block, from the timestamps of
+ * the last 24 blocks, and a fork may lower it by up to a factor of 3 per block
+ * if its timestamps are far enough apart. How far a fork can lower its
+ * difficulty depends on the time between its fork point and the latest
+ * timestamp that is allowed, which is two hours from now. With the fork point
+ * at most 24 blocks back and at most 36 minutes old, the proof of work that
+ * each header of a fork needs stays within a factor of about 50 of what the
+ * chain needs at the fork point. With 144 blocks it would be a factor of
+ * several thousand.
+ *
+ * Forks from older blocks are not rejected, they have to show their work
+ * first: a chain with more work than ours is always accepted.
+ */
+static const CBlockIndex* AntiDoSForkLimit(const CBlockIndex* index, const Consensus::Params& consensusParams)
+{
+    const int64_t oldest_time = GetAdjustedTime() - ANTI_DOS_FORK_DEPTH * consensusParams.nPowTargetSpacing;
+    for (int depth = 0; depth < ANTI_DOS_FORK_DEPTH; ++depth) {
+        if (index->pprev == nullptr || index->pprev->GetBlockTime() < oldest_time) break;
+        index = index->pprev;
+    }
+    return index;
+}
+
+/**
+ * Return our best header if it can be used for the anti-DoS work threshold,
+ * and nullptr otherwise.
+ *
+ * While we are behind (initial block download, or catching up after having
+ * been offline), the tip is old. A fork that starts just above it, from a
+ * block that is hours or months old, can lower its difficulty all the way to
+ * the minimum, and passes a threshold that only looks at the tip. But we
+ * usually know the headers of the chain we are syncing, and a fork from far
+ * below those with less work is of no more use to us than it is to a node that
+ * is in sync.
+ *
+ * The best header is only a header: its blocks may be invalid, or may never be
+ * given to us. So that such a chain can't keep us from accepting the headers
+ * of another chain, it is only used
+ * - if it builds on our tip: it is the chain we are connecting blocks of,
+ * - if the next block on it is not known to be invalid, and
+ * - if a block was connected in the last ANTI_DOS_BEST_HEADER_STALL_TIME
+ *   seconds: we are making progress on it. At worst, the headers of another
+ *   chain are accepted that much later.
+ */
+static const CBlockIndex* BestHeaderForAntiDoS(const CBlockIndex* tip) EXCLUSIVE_LOCKS_REQUIRED(cs_main)
+{
+    const CBlockIndex* best_header = pindexBestHeader;
+    if (best_header == nullptr || best_header->nHeight <= tip->nHeight) return nullptr;
+    if (best_header->GetAncestor(tip->nHeight) != tip) return nullptr;
+    if (best_header->GetAncestor(tip->nHeight + 1)->nStatus & BLOCK_FAILED_MASK) return nullptr;
+
+    const int64_t now = GetTime();
+    int64_t last_progress = g_last_block_connected_time.load();
+    if (last_progress == 0) {
+        g_last_block_connected_time = now;
+        last_progress = now;
+    }
+    if (now - last_progress > ANTI_DOS_BEST_HEADER_STALL_TIME) return nullptr;
+
+    return best_header;
+}
+
+/**
+ * Calculate an anti-DoS work threshold for headers chains: the work a headers
+ * chain must have before we store it. This is the work of our chain at the
+ * oldest block that a fork may start from (see AntiDoSForkLimit), measured
+ * from the tip, and from the best header if that can be used (see
+ * BestHeaderForAntiDoS), and at least the minimum chain work.
+ */
+static arith_uint256 GetAntiDoSWorkThreshold(const Consensus::Params& consensusParams)
+{
+    arith_uint256 near_chaintip_work = 0;
+    LOCK(cs_main);
+    const CBlockIndex* tip = ::ChainActive().Tip();
+    if (tip != nullptr) {
+        near_chaintip_work = AntiDoSForkLimit(tip, consensusParams)->nChainWork;
+        const CBlockIndex* best_header = BestHeaderForAntiDoS(tip);
+        if (best_header != nullptr) {
+            near_chaintip_work = std::max(near_chaintip_work, AntiDoSForkLimit(best_header, consensusParams)->nChainWork);
+        }
+    }
+    return std::max(near_chaintip_work, nMinimumChainWork);
+}
+
+/** Return true if the given header is an ancestor of pindexBestHeader or our
+ *  current tip */
+static bool IsAncestorOfBestHeaderOrTip(const CBlockIndex* header) EXCLUSIVE_LOCKS_REQUIRED(cs_main)
+{
+    if (header == nullptr) {
+        return false;
+    } else if (pindexBestHeader != nullptr && header == pindexBestHeader->GetAncestor(header->nHeight)) {
+        return true;
+    } else if (::ChainActive().Contains(header)) {
+        return true;
+    }
+    return false;
+}
+
+/**
+ * Try to continue a low-work headers sync that has already begun.
+ * Assumes the caller has already verified the headers connect. The proof of
+ * work of the headers is checked by the sync.
+ *  @param[in]  pfrom        The peer we're syncing with.
+ *  @param[in,out] headers   The headers to be processed.
+ *  @param[out] invalid_pow  Set if a header did not have valid proof of work.
+ *  @return     True if the passed in headers were successfully processed
+ *              as the continuation of a low-work headers sync in progress;
+ *              false otherwise.
+ *              If false, the passed in headers will be returned back to
+ *              the caller.
+ *              If true, the returned headers may be empty, indicating
+ *              there is no more work for the caller to do; or the headers
+ *              may be populated with entries that have passed anti-DoS
+ *              checks (and therefore may be validated for block index
+ *              acceptance by the caller).
+ */
+static bool IsContinuationOfLowWorkHeadersSync(CNode* pfrom, CConnman* connman, std::vector<CBlockHeader>& headers, bool& invalid_pow, const Consensus::Params& consensusParams) EXCLUSIVE_LOCKS_REQUIRED(g_headers_sync_mutex)
+{
+    auto it = g_headers_sync.find(pfrom->GetId());
+    if (it == g_headers_sync.end()) {
+        // We don't have a sync in progress with this peer.
+        return false;
+    }
+    HeadersSyncState& headers_sync = *it->second;
+
+    auto result = headers_sync.ProcessNextHeaders(headers, headers.size() == MAX_HEADERS_RESULTS);
+    invalid_pow = result.invalid_pow;
+    if (result.success) g_last_headers_sync_progress_time = GetTime();
+    if (result.request_more) {
+        auto locator = headers_sync.NextHeadersRequestLocator();
+        // If we were instructed to ask for a locator, it should not be empty.
+        if (!locator.vHave.empty()) {
+            // It should be impossible for the getheaders request to fail,
+            // because we should have cleared the last getheaders timestamp
+            // when processing the headers that triggered this call. But
+            // it may be possible to bypass this via compactblock
+            // processing, so check the result before logging just to be
+            // safe.
+            bool sent_getheaders = MaybeSendGetHeaders(pfrom, connman, locator);
+            if (sent_getheaders) {
+                LogPrint(BCLog::NET, "more getheaders (from %s) to peer=%d\n",
+                        locator.vHave.front().ToString(), pfrom->GetId());
+            } else {
+                LogPrint(BCLog::NET, "error sending next getheaders (from %s) to continue sync with peer=%d\n",
+                        locator.vHave.front().ToString(), pfrom->GetId());
+            }
+        }
+    }
+
+    if (headers_sync.GetState() == HeadersSyncState::State::FINAL) {
+        g_headers_sync.erase(it);
+    } else if (headers_sync.GetState() == HeadersSyncState::State::PRESYNC) {
+        // Nothing is stored in this phase, so the block index does not show
+        // any progress. Log it, but not for every message.
+        const int64_t now = GetTime();
+        if (now >= g_last_presync_log_time.load() + 5) {
+            g_last_presync_log_time = now;
+            const int64_t height = headers_sync.GetPresyncHeight();
+            const int64_t blocks_left = std::max<int64_t>(0, (GetAdjustedTime() - headers_sync.GetPresyncTime()) / consensusParams.nPowTargetSpacing);
+            LogPrintf("Pre-synchronizing blockheaders, height: %d (~%.2f%%)\n", height, 100.0 / (height + blocks_left) * height);
+        }
+    }
+
+    if (result.success) {
+        // We only overwrite the headers passed in if processing was
+        // successful.
+        headers.swap(result.pow_validated_headers);
+    }
+
+    return result.success;
+}
+
+/**
+ * Check work on a headers chain to be processed, and if insufficient,
+ * initiate our anti-DoS headers sync mechanism.
+ *
+ * @param[in]   pfrom               The peer whose headers we're processing.
+ * @param[in]   chain_start_header  Where these headers connect in our index.
+ * @param[in,out]   headers         The headers to be processed. The caller has
+ *                                  checked their proof of work.
+ *
+ * @return      True if chain was low work (headers will be empty after
+ *              calling); false otherwise.
+ */
+static bool TryLowWorkHeadersSync(CNode* pfrom, CConnman* connman, const CBlockIndex* chain_start_header, std::vector<CBlockHeader>& headers, const Consensus::Params& consensusParams)
+{
+    // Calculate the total work on this chain.
+    arith_uint256 total_work = chain_start_header->nChainWork + CalculateHeadersWork(headers);
+
+    // Our dynamic anti-DoS threshold (minimum work required on a headers chain
+    // before we'll store it)
+    arith_uint256 minimum_chain_work = GetAntiDoSWorkThreshold(consensusParams);
+
+    // Avoid DoS via low-difficulty-headers by only processing if the headers
+    // are part of a chain with sufficient work.
+    if (total_work < minimum_chain_work) {
+        // Only try to sync with this peer if their headers message was full;
+        // otherwise they don't have more headers after this so no point in
+        // trying to sync their too-little-work chain.
+        if (headers.size() == MAX_HEADERS_RESULTS) {
+            // Note: we could advance to the last header in this set that is
+            // known to us, rather than starting at the first header (which we
+            // may already have); however this is unlikely to matter much since
+            // ProcessHeadersMessage() already handles the case where all
+            // headers in a received message are already known and are
+            // ancestors of pindexBestHeader or ::ChainActive().Tip(), by skipping
+            // this logic in that case. So even if the first header in this set
+            // of headers is known, some header in this set must be new, so
+            // advancing to the first unknown header would be a small effect.
+            //
+            // A presync downloads the whole chain of the peer, and checks the
+            // proof of work of every header. Bitcoin Core starts one with
+            // every peer that gets here, which is at most one more peer for
+            // every new block (see the handling of inv messages). With a block
+            // every 90 seconds and the cost of scrypt, that would be most of
+            // our peers at once, each from the start. So only our headers
+            // sync peer always gets a presync. Another peer only gets one if
+            // no presync has made progress for a while, so that we are not
+            // stuck with a sync peer that stalls.
+            bool is_sync_peer = false;
+            {
+                LOCK(cs_main);
+                const CNodeState* state = State(pfrom->GetId());
+                is_sync_peer = state != nullptr && state->fSyncStarted;
+            }
+            LOCK(g_headers_sync_mutex);
+            if (!is_sync_peer && !g_headers_sync.empty() &&
+                    GetTime() - g_last_headers_sync_progress_time <= HEADERS_PRESYNC_STALL_TIME) {
+                LogPrint(BCLog::NET, "Not starting headers presync with peer=%d: another one is in progress\n", pfrom->GetId());
+            } else {
+                g_headers_sync[pfrom->GetId()].reset(new HeadersSyncState(pfrom->GetId(), consensusParams,
+                    chain_start_header, minimum_chain_work));
+
+                // Now a HeadersSyncState object for tracking this synchronization
+                // is created, process the headers using it as normal. Failures are
+                // handled inside of IsContinuationOfLowWorkHeadersSync.
+                bool invalid_pow = false;
+                (void)IsContinuationOfLowWorkHeadersSync(pfrom, connman, headers, invalid_pow, consensusParams);
+            }
+        } else {
+            LogPrint(BCLog::NET, "Ignoring low-work chain (height=%u) from peer=%d\n", chain_start_header->nHeight + headers.size(), pfrom->GetId());
+        }
+
+        // The peer has not yet given us a chain that meets our work threshold,
+        // so we want to prevent further processing of the headers in any case.
+        std::vector<CBlockHeader>().swap(headers);
+        return true;
+    }
+
+    return false;
+}
+
+bool static ProcessHeadersMessage(CNode* pfrom, CConnman* connman, CTxMemPool& mempool, std::vector<CBlockHeader> headers, const CChainParams& chainparams, bool via_compact_block)
 {
     const CNetMsgMaker msgMaker(pfrom->GetSendVersion());
     size_t nCount = headers.size();
 
     if (nCount == 0) {
         // Nothing interesting. Stop asking this peers for more headers.
+        // If we were in the middle of headers sync, receiving an empty headers
+        // message suggests that the peer suddenly has nothing to give us
+        // (perhaps it reorged to our chain). Clear download state for this peer.
+        LOCK(g_headers_sync_mutex);
+        g_headers_sync.erase(pfrom->GetId());
         return true;
     }
 
-    bool received_new_header = false;
-    const CBlockIndex *pindexLast = nullptr;
-    {
+    // Are these headers connected to each other?
+    if (!CheckHeadersAreContinuous(headers)) {
         LOCK(cs_main);
-        CNodeState *nodestate = State(pfrom->GetId());
+        Misbehaving(pfrom->GetId(), 20, "non-continuous headers sequence");
+        return false;
+    }
 
+    const CBlockIndex *pindexLast = nullptr;
+
+    // We'll set already_validated_work to true if these headers are
+    // successfully processed as part of a low-work headers sync in progress
+    // (either in PRESYNC or REDOWNLOAD phase).
+    // If true, this will mean that any headers returned to us (ie during
+    // REDOWNLOAD) can be validated without further anti-DoS checks.
+    bool already_validated_work = false;
+
+    // If we're in the middle of headers sync, let it do its magic.
+    bool have_headers_sync = false;
+    {
+        bool invalid_pow = false;
+        {
+            LOCK(g_headers_sync_mutex);
+
+            already_validated_work = IsContinuationOfLowWorkHeadersSync(pfrom, connman, headers, invalid_pow, chainparams.GetConsensus());
+
+            have_headers_sync = g_headers_sync.count(pfrom->GetId()) > 0;
+        }
+
+        if (invalid_pow) {
+            LOCK(cs_main);
+            Misbehaving(pfrom->GetId(), 100, "header with invalid proof of work");
+            return false;
+        }
+
+        // The headers we passed in may have been:
+        // - untouched, perhaps if no headers-sync was in progress, or some
+        //   failure occurred
+        // - erased, such as if the headers were successfully processed and no
+        //   additional headers processing needs to take place (such as if we
+        //   are still in PRESYNC)
+        // - replaced with headers that are now ready for validation, such as
+        //   during the REDOWNLOAD phase of a low-work headers sync.
+        // So just check whether we still have headers that we need to process,
+        // or not.
+        if (headers.empty()) {
+            return true;
+        }
+    }
+
+    // Do these headers connect to something in our block index?
+    const CBlockIndex* chain_start_header = WITH_LOCK(cs_main, return LookupBlockIndex(headers[0].hashPrevBlock));
+
+    if (chain_start_header == nullptr) {
+        LOCK(cs_main);
         // If this looks like it could be a block announcement (nCount <
         // MAX_BLOCKS_TO_ANNOUNCE), use special logic for handling headers that
-        // don't connect:
+        // don't connect, as this could be benign:
         // - Send a getheaders message in response to try to connect the chain.
         // - The peer can send up to MAX_UNCONNECTING_HEADERS in a row that
         //   don't connect before giving DoS points
         // - Once a headers message is received that is valid and does connect,
         //   nUnconnectingHeaders gets reset back to 0.
-        if (!LookupBlockIndex(headers[0].hashPrevBlock) && nCount < MAX_BLOCKS_TO_ANNOUNCE) {
+        if (nCount < MAX_BLOCKS_TO_ANNOUNCE) {
+            CNodeState *nodestate = State(pfrom->GetId());
             nodestate->nUnconnectingHeaders++;
-            connman->PushMessage(pfrom, msgMaker.Make(NetMsgType::GETHEADERS, ::ChainActive().GetLocator(pindexBestHeader), uint256()));
-            LogPrint(BCLog::NET, "received header %s: missing prev block %s, sending getheaders (%d) to end (peer=%d, nUnconnectingHeaders=%d)\n",
-                    headers[0].GetHash().ToString(),
-                    headers[0].hashPrevBlock.ToString(),
-                    pindexBestHeader->nHeight,
-                    pfrom->GetId(), nodestate->nUnconnectingHeaders);
+            // Try to fill in the missing headers.
+            if (MaybeSendGetHeaders(pfrom, connman, ::ChainActive().GetLocator(pindexBestHeader))) {
+                LogPrint(BCLog::NET, "received header %s: missing prev block %s, sending getheaders (%d) to end (peer=%d, nUnconnectingHeaders=%d)\n",
+                        headers[0].GetHash().ToString(),
+                        headers[0].hashPrevBlock.ToString(),
+                        pindexBestHeader->nHeight,
+                        pfrom->GetId(), nodestate->nUnconnectingHeaders);
+            }
             // Set hashLastUnknownBlock for this peer, so that if we
             // eventually get the headers - even from a different peer -
             // we can use this peer to download.
@@ -1760,25 +2162,61 @@ bool static ProcessHeadersMessage(CNode* pfrom, CConnman* connman, CTxMemPool& m
             }
             return true;
         }
+        // As before, a longer headers message that does not connect is
+        // treated like a header with an unknown previous block.
+        Misbehaving(pfrom->GetId(), 10, "invalid header received");
+        return false;
+    }
 
-        uint256 hashLastBlock;
-        for (const CBlockHeader& header : headers) {
-            if (!hashLastBlock.IsNull() && header.hashPrevBlock != hashLastBlock) {
-                Misbehaving(pfrom->GetId(), 20, "non-continuous headers sequence");
-                return false;
-            }
-            hashLastBlock = header.GetHash();
-        }
-
-        // If we don't have the last header, then they'll have given us
-        // something new (if these headers are valid).
-        if (!LookupBlockIndex(hashLastBlock)) {
-            received_new_header = true;
+    // If the headers we received are already in memory and an ancestor of
+    // pindexBestHeader or our tip, skip anti-DoS checks. These headers will not
+    // use any more memory (and we are not leaking information that could be
+    // used to fingerprint us).
+    const CBlockIndex* last_received_header = nullptr;
+    {
+        LOCK(cs_main);
+        last_received_header = LookupBlockIndex(headers.back().GetHash());
+        if (IsAncestorOfBestHeaderOrTip(last_received_header)) {
+            already_validated_work = true;
         }
     }
 
+    // If our peer has NoBan privileges, then bypass our anti-DoS logic (this
+    // saves bandwidth when we connect to a trusted peer on startup).
+    if (pfrom->HasPermission(PF_NOBAN)) {
+        already_validated_work = true;
+    }
+
+    // At this point, the headers connect to something in our block index.
+    // Do anti-DoS checks to determine if we should process or store for later
+    // processing.
+    if (!already_validated_work) {
+        // The work of a chain only counts if it is backed by proof of work, so
+        // check that first. The headers connect to our block index, so their
+        // heights, which the hash function depends on, are known.
+        if (!HasValidProofOfWork(headers, chain_start_header->nHeight + 1, chainparams.GetConsensus())) {
+            LOCK(cs_main);
+            Misbehaving(pfrom->GetId(), 100, "header with invalid proof of work");
+            return false;
+        }
+
+        if (TryLowWorkHeadersSync(pfrom, connman, chain_start_header, headers, chainparams.GetConsensus())) {
+            // The chain has too little work so far, and there are no headers
+            // to process any further.
+            return true;
+        }
+    }
+
+    // At this point, we have a set of headers with sufficient work on them
+    // which can be processed.
+
+    // If we don't have the last header, then this peer will have given us
+    // something new (if these headers are valid).
+    bool received_new_header = (last_received_header == nullptr);
+
+    // Now process all the headers.
     BlockValidationState state;
-    if (!ProcessNewBlockHeaders(headers, state, chainparams, &pindexLast)) {
+    if (!ProcessNewBlockHeaders(headers, /* min_pow_checked */ true, state, chainparams, &pindexLast)) {
         if (state.IsInvalid()) {
             MaybePunishNodeForBlock(pfrom->GetId(), state, via_compact_block, "invalid header received");
             return false;
@@ -1804,12 +2242,14 @@ bool static ProcessHeadersMessage(CNode* pfrom, CConnman* connman, CTxMemPool& m
             nodestate->m_last_block_announcement = GetTime();
         }
 
-        if (nCount == MAX_HEADERS_RESULTS) {
+        // Consider fetching more headers if we are not using our headers-sync mechanism.
+        if (nCount == MAX_HEADERS_RESULTS && !have_headers_sync) {
             // Headers message had its maximum size; the peer may have more headers.
             // TODO: optimize: if pindexLast is an ancestor of ::ChainActive().Tip or pindexBestHeader, continue
             // from there instead.
-            LogPrint(BCLog::NET, "more getheaders (%d) to end to peer=%d (startheight:%d)\n", pindexLast->nHeight, pfrom->GetId(), pfrom->nStartingHeight);
-            connman->PushMessage(pfrom, msgMaker.Make(NetMsgType::GETHEADERS, ::ChainActive().GetLocator(pindexLast), uint256()));
+            if (MaybeSendGetHeaders(pfrom, connman, ::ChainActive().GetLocator(pindexLast))) {
+                LogPrint(BCLog::NET, "more getheaders (%d) to end to peer=%d (startheight:%d)\n", pindexLast->nHeight, pfrom->GetId(), pfrom->nStartingHeight);
+            }
         }
 
         bool fCanDirectFetch = CanDirectFetch(chainparams.GetConsensus());
@@ -2180,13 +2620,6 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
                       pfrom->m_tx_relay == nullptr ? "block-relay" : "full-relay");
         }
 
-        if (pfrom->nVersion >= SENDHEADERS_VERSION) {
-            // Tell our peer we prefer to receive headers rather than inv's
-            // We send this to non-NODE NETWORK peers as well, because even
-            // non-NODE NETWORK peers can announce blocks (such as pruning
-            // nodes)
-            connman->PushMessage(pfrom, msgMaker.Make(NetMsgType::SENDHEADERS));
-        }
         if (pfrom->nVersion >= SHORT_IDS_BLOCKS_VERSION) {
             // Tell our peer we are willing to provide version 1 or 2 cmpctblocks
             // However, we do not request new block announcements using
@@ -2353,8 +2786,9 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
                 UpdateBlockAvailability(pfrom->GetId(), inv.hash);
                 if (!fAlreadyHave && !fImporting && !fReindex && !mapBlocksInFlight.count(inv.hash)) {
                     // Headers-first is the primary method of announcement on
-                    // the network. If a node fell back to sending blocks by inv,
-                    // it's probably for a re-org. The final block hash
+                    // the network. If a node fell back to sending blocks by
+                    // inv, it may be for a re-org, or because we haven't
+                    // completed initial headers sync. The final block hash
                     // provided should be the highest, so send a getheaders and
                     // then fetch the blocks we need to catch up.
                     best_block = &inv.hash;
@@ -2372,8 +2806,30 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
         }
 
         if (best_block != nullptr) {
-            connman->PushMessage(pfrom, msgMaker.Make(NetMsgType::GETHEADERS, ::ChainActive().GetLocator(pindexBestHeader), *best_block));
-            LogPrint(BCLog::NET, "getheaders (%d) %s to peer=%d\n", pindexBestHeader->nHeight, best_block->ToString(), pfrom->GetId());
+            // If we haven't started initial headers-sync with this peer, then
+            // consider sending a getheaders now. On initial startup, there's a
+            // reliability vs bandwidth tradeoff, where we are only trying to do
+            // initial headers sync with one peer at a time, with a long
+            // timeout (at which point, if the sync hasn't completed, we will
+            // disconnect the peer and then choose another). In the meantime,
+            // as new blocks are found, we are willing to add one new peer per
+            // block to sync with as well, to sync quicker in the case where
+            // our initial peer is unresponsive (but less bandwidth than we'd
+            // use if we turned on sync with all peers).
+            CNodeState* state = State(pfrom->GetId());
+            assert(state != nullptr);
+            if (state->fSyncStarted || (!state->m_inv_triggered_getheaders_before_sync && *best_block != g_last_block_inv_triggering_headers_sync)) {
+                if (MaybeSendGetHeaders(pfrom, connman, ::ChainActive().GetLocator(pindexBestHeader))) {
+                    LogPrint(BCLog::NET, "getheaders (%d) %s to peer=%d\n", pindexBestHeader->nHeight, best_block->ToString(), pfrom->GetId());
+                }
+                if (!state->fSyncStarted) {
+                    state->m_inv_triggered_getheaders_before_sync = true;
+                    // Update the last block hash that triggered a new headers
+                    // sync, so that we don't turn on headers sync with more
+                    // than 1 new peer every new block.
+                    g_last_block_inv_triggering_headers_sync = *best_block;
+                }
+            }
         }
 
         return true;
@@ -2530,7 +2986,10 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
 
         LOCK(cs_main);
         if (::ChainstateActive().IsInitialBlockDownload() && !pfrom->HasPermission(PF_NOBAN)) {
-            LogPrint(BCLog::NET, "Ignoring getheaders from peer=%d because node is in initial block download\n", pfrom->GetId());
+            LogPrint(BCLog::NET, "Ignoring getheaders from peer=%d because node is in initial block download; sending empty response\n", pfrom->GetId());
+            // Just respond with an empty headers message, to tell the peer to
+            // go away but not treat us as unresponsive.
+            connman->PushMessage(pfrom, msgMaker.Make(NetMsgType::HEADERS, std::vector<CBlock>()));
             return true;
         }
 
@@ -2747,10 +3206,16 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
         {
         LOCK(cs_main);
 
-        if (!LookupBlockIndex(cmpctblock.header.hashPrevBlock)) {
+        const CBlockIndex* prev_block = LookupBlockIndex(cmpctblock.header.hashPrevBlock);
+        if (!prev_block) {
             // Doesn't connect (or is genesis), instead of DoSing in AcceptBlockHeader, request deeper headers
-            if (!::ChainstateActive().IsInitialBlockDownload())
-                connman->PushMessage(pfrom, msgMaker.Make(NetMsgType::GETHEADERS, ::ChainActive().GetLocator(pindexBestHeader), uint256()));
+            if (!::ChainstateActive().IsInitialBlockDownload()) {
+                MaybeSendGetHeaders(pfrom, connman, ::ChainActive().GetLocator(pindexBestHeader));
+            }
+            return true;
+        } else if (prev_block->nChainWork + CalculateHeadersWork({cmpctblock.header}) < GetAntiDoSWorkThreshold(chainparams.GetConsensus())) {
+            // If we get a low-work header in a compact block, we can ignore it.
+            LogPrint(BCLog::NET, "Ignoring low-work compact block from peer %d\n", pfrom->GetId());
             return true;
         }
 
@@ -2761,7 +3226,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
 
         const CBlockIndex *pindex = nullptr;
         BlockValidationState state;
-        if (!ProcessNewBlockHeaders({cmpctblock.header}, state, chainparams, &pindex)) {
+        if (!ProcessNewBlockHeaders({cmpctblock.header}, /* min_pow_checked */ true, state, chainparams, &pindex)) {
             if (state.IsInvalid()) {
                 MaybePunishNodeForBlock(pfrom->GetId(), state, /*via_compact_block*/ true, "invalid header via cmpctblock");
                 return true;
@@ -2916,7 +3381,8 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
                     return true;
                 }
                 std::vector<CTransactionRef> dummy;
-                status = tempBlock.FillBlock(*pblock, dummy);
+                status = tempBlock.FillBlock(*pblock, dummy,
+                                             /*segwit_active=*/IsWitnessEnabled(pindex->pprev, chainparams.GetConsensus()));
                 if (status == READ_STATUS_OK) {
                     fBlockReconstructed = true;
                 }
@@ -2965,7 +3431,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
             // we have a chain with at least nMinimumChainWork), and we ignore
             // compact blocks with less work than our tip, it is safe to treat
             // reconstructed compact blocks as having been requested.
-            ProcessNewBlock(chainparams, pblock, /*fForceProcessing=*/true, &fNewBlock);
+            ProcessNewBlock(chainparams, pblock, /*fForceProcessing=*/true, /*min_pow_checked=*/true, &fNewBlock);
             if (fNewBlock) {
                 pfrom->nLastBlockTime = GetTime();
             } else {
@@ -3021,7 +3487,11 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
             }
 
             PartiallyDownloadedBlock& partialBlock = *range_flight.first->second.second->partialBlock;
-            ReadStatus status = partialBlock.FillBlock(*pblock, resp.txn);
+            // We should not have gotten this far in compact block processing
+            // unless it's attached to a known header.
+            const CBlockIndex* prev_block = LookupBlockIndex(partialBlock.header.hashPrevBlock);
+            ReadStatus status = partialBlock.FillBlock(*pblock, resp.txn,
+                                                       /*segwit_active=*/IsWitnessEnabled(prev_block, chainparams.GetConsensus()));
             if (status == READ_STATUS_INVALID) {
                 MarkBlockAsReceived(resp.blockhash, pfrom->GetId()); // Reset in-flight state in case of whitelist
                 Misbehaving(pfrom->GetId(), 100, strprintf("Peer %d sent us invalid compact block/non-matching block transactions\n", pfrom->GetId()));
@@ -3074,7 +3544,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
             // disk-space attacks), but this should be safe due to the
             // protections in the compact block handler -- see related comment
             // in compact block optimistic reconstruction handling.
-            ProcessNewBlock(chainparams, pblock, /*fForceProcessing=*/true, &fNewBlock);
+            ProcessNewBlock(chainparams, pblock, /*fForceProcessing=*/true, /*min_pow_checked=*/true, &fNewBlock);
             if (fNewBlock) {
                 pfrom->nLastBlockTime = GetTime();
                 // The block is stored, so clear any parallel requests for it
@@ -3097,6 +3567,10 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
             return true;
         }
 
+        // Assume that this is in response to any outstanding getheaders
+        // request we may have sent, and clear out the time of our last request
+        pfrom->m_last_getheaders_timestamp = 0;
+
         std::vector<CBlockHeader> headers;
 
         // Bypass the normal CBlock deserialization, as we don't want to risk deserializing 2000 full blocks.
@@ -3112,7 +3586,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
             ReadCompactSize(vRecv); // ignore tx count; assume it is 0.
         }
 
-        return ProcessHeadersMessage(pfrom, connman, mempool, headers, chainparams, /*via_compact_block=*/false);
+        return ProcessHeadersMessage(pfrom, connman, mempool, std::move(headers), chainparams, /*via_compact_block=*/false);
     }
 
     if (msg_type == NetMsgType::BLOCK)
@@ -3130,6 +3604,7 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
 
         bool forceProcessing = false;
         const uint256 hash(pblock->GetHash());
+        bool min_pow_checked = false;
         {
             LOCK(cs_main);
             // Also always process if we requested the block explicitly, as we may
@@ -3140,9 +3615,16 @@ bool ProcessMessage(CNode* pfrom, const std::string& msg_type, CDataStream& vRec
             // which peers send us compact blocks, so the race between here and
             // cs_main in ProcessNewBlock is fine.
             mapBlockSource.emplace(hash, std::make_pair(pfrom->GetId(), true));
+
+            // Check work on this block against our anti-dos thresholds. This
+            // only matters if we don't have the header of the block yet.
+            const CBlockIndex* prev_block = LookupBlockIndex(pblock->hashPrevBlock);
+            if (prev_block && prev_block->nChainWork + CalculateHeadersWork({pblock->GetBlockHeader()}) >= GetAntiDoSWorkThreshold(chainparams.GetConsensus())) {
+                min_pow_checked = true;
+            }
         }
         bool fNewBlock = false;
-        ProcessNewBlock(chainparams, pblock, forceProcessing, &fNewBlock);
+        ProcessNewBlock(chainparams, pblock, forceProcessing, min_pow_checked, &fNewBlock);
         if (fNewBlock) {
             pfrom->nLastBlockTime = GetTime();
             // In case this block came from a different peer than we requested
@@ -3531,7 +4013,6 @@ void PeerLogicValidation::ConsiderEviction(CNode *pto, int64_t time_in_seconds)
     AssertLockHeld(cs_main);
 
     CNodeState &state = *State(pto->GetId());
-    const CNetMsgMaker msgMaker(pto->GetSendVersion());
 
     if (!state.m_chain_sync.m_protect && IsOutboundDisconnectionCandidate(pto) && state.fSyncStarted) {
         // This is an outbound peer subject to disconnection if they don't
@@ -3564,10 +4045,13 @@ void PeerLogicValidation::ConsiderEviction(CNode *pto, int64_t time_in_seconds)
                 pto->fDisconnect = true;
             } else {
                 assert(state.m_chain_sync.m_work_header);
+                // Here, we assume that the getheaders message goes out,
+                // because it'll either go out or be skipped because of a
+                // getheaders in-flight already, in which case the peer should
+                // still respond to us with a sufficiently high work chain tip.
+                MaybeSendGetHeaders(pto, connman, ::ChainActive().GetLocator(state.m_chain_sync.m_work_header->pprev));
                 LogPrint(BCLog::NET, "sending getheaders to outbound peer=%d to verify chain work (current best known block:%s, benchmark blockhash: %s)\n", pto->GetId(), state.pindexBestKnownBlock != nullptr ? state.pindexBestKnownBlock->GetBlockHash().ToString() : "<none>", state.m_chain_sync.m_work_header->GetBlockHash().ToString());
-                connman->PushMessage(pto, msgMaker.Make(NetMsgType::GETHEADERS, ::ChainActive().GetLocator(state.m_chain_sync.m_work_header->pprev), uint256()));
                 state.m_chain_sync.m_sent_getheaders = true;
-                constexpr int64_t HEADERS_RESPONSE_TIME = 120; // 2 minutes
                 // Bump the timeout to allow a response, which could clear the timeout
                 // (if the response shows the peer has synced), reset the timeout (if
                 // the peer syncs to the required work but not to our tip), or result
@@ -3728,6 +4212,22 @@ bool PeerLogicValidation::SendMessages(CNode* pto)
 
         CNodeState &state = *State(pto->GetId());
 
+        // Delay sending SENDHEADERS (BIP 130) until we're done with an
+        // initial-headers-sync with this peer. Receiving headers announcements for
+        // new blocks while trying to sync their headers chain is problematic,
+        // because of the state tracking done.
+        if (!state.m_sent_sendheaders && pto->nVersion >= SENDHEADERS_VERSION) {
+            if (state.pindexBestKnownBlock != nullptr &&
+                    state.pindexBestKnownBlock->nChainWork > nMinimumChainWork) {
+                // Tell our peer we prefer to receive headers rather than inv's
+                // We send this to non-NODE NETWORK peers as well, because even
+                // non-NODE NETWORK peers can announce blocks (such as pruning
+                // nodes)
+                connman->PushMessage(pto, msgMaker.Make(NetMsgType::SENDHEADERS));
+                state.m_sent_sendheaders = true;
+            }
+        }
+
         // Address refresh broadcast
         int64_t nNow = GetTimeMicros();
         auto current_time = GetTime<std::chrono::microseconds>();
@@ -3774,9 +4274,6 @@ bool PeerLogicValidation::SendMessages(CNode* pto)
         if (!state.fSyncStarted && !pto->fClient && !fImporting && !fReindex) {
             // Only actively request headers from a single peer, unless we're close to today.
             if ((nSyncStarted == 0 && fFetch) || pindexBestHeader->GetBlockTime() > GetAdjustedTime() - 24 * 60 * 60) {
-                state.fSyncStarted = true;
-                state.nHeadersSyncTimeout = GetTimeMicros() + HEADERS_DOWNLOAD_TIMEOUT_BASE + HEADERS_DOWNLOAD_TIMEOUT_PER_HEADER * (GetAdjustedTime() - pindexBestHeader->GetBlockTime())/(consensusParams.nPowTargetSpacing);
-                nSyncStarted++;
                 const CBlockIndex *pindexStart = pindexBestHeader;
                 /* If possible, start at the block preceding the currently
                    best known header.  This ensures that we always get a
@@ -3787,8 +4284,13 @@ bool PeerLogicValidation::SendMessages(CNode* pto)
                    got back an empty response.  */
                 if (pindexStart->pprev)
                     pindexStart = pindexStart->pprev;
-                LogPrint(BCLog::NET, "initial getheaders (%d) to peer=%d (startheight:%d)\n", pindexStart->nHeight, pto->GetId(), pto->nStartingHeight);
-                connman->PushMessage(pto, msgMaker.Make(NetMsgType::GETHEADERS, ::ChainActive().GetLocator(pindexStart), uint256()));
+                if (MaybeSendGetHeaders(pto, connman, ::ChainActive().GetLocator(pindexStart))) {
+                    LogPrint(BCLog::NET, "initial getheaders (%d) to peer=%d (startheight:%d)\n", pindexStart->nHeight, pto->GetId(), pto->nStartingHeight);
+
+                    state.fSyncStarted = true;
+                    state.nHeadersSyncTimeout = GetTimeMicros() + HEADERS_DOWNLOAD_TIMEOUT_BASE + HEADERS_DOWNLOAD_TIMEOUT_PER_HEADER * (GetAdjustedTime() - pindexBestHeader->GetBlockTime())/(consensusParams.nPowTargetSpacing);
+                    nSyncStarted++;
+                }
             }
         }
 

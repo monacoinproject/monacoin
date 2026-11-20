@@ -20,6 +20,25 @@ void CChain::SetTip(CBlockIndex *pindex) {
     }
 }
 
+std::vector<uint256> LocatorEntries(const CBlockIndex* index)
+{
+    int step = 1;
+    std::vector<uint256> have;
+    if (index == nullptr) return have;
+
+    have.reserve(32);
+    while (index) {
+        have.push_back(index->GetBlockHash());
+        if (index->nHeight == 0) break;
+        // Exponentially larger steps back, plus the genesis block.
+        int height = std::max(index->nHeight - step, 0);
+        // Use skiplist.
+        index = index->GetAncestor(height);
+        if (have.size() > 10) step *= 2;
+    }
+    return have;
+}
+
 CBlockLocator CChain::GetLocator(const CBlockIndex *pindex) const {
     int nStep = 1;
     std::vector<uint256> vHave;

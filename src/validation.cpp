@@ -1122,10 +1122,10 @@ static bool WriteBlockToDisk(const CBlock& block, FlatFilePos& pos, const CMessa
     fileout << messageStart << nSize;
 
     // Write block
-    long fileOutPos = ftell(fileout.Get());
+    int64_t fileOutPos = FileTell64(fileout.Get());
     if (fileOutPos < 0)
         return error("WriteBlockToDisk: ftell failed");
-    pos.nPos = (unsigned int)fileOutPos;
+    pos.nPos = fileOutPos;
     fileout << block;
 
     return true;
@@ -1578,10 +1578,10 @@ static bool UndoWriteToDisk(const CBlockUndo& blockundo, FlatFilePos& pos, const
     fileout << messageStart << nSize;
 
     // Write undo data
-    long fileOutPos = ftell(fileout.Get());
+    int64_t fileOutPos = FileTell64(fileout.Get());
     if (fileOutPos < 0)
         return error("%s: ftell failed", __func__);
-    pos.nPos = (unsigned int)fileOutPos;
+    pos.nPos = fileOutPos;
     fileout << blockundo;
 
     // calculate & write checksum
@@ -1856,8 +1856,9 @@ static unsigned int GetBlockScriptFlags(const CBlockIndex* pindex, const Consens
         flags |= SCRIPT_VERIFY_CHECKSEQUENCEVERIFY;
     }
 
-    // Start enforcing BIP147 NULLDUMMY (activated simultaneously with segwit)
+    // Start enforcing WITNESS rules using versionbits logic.
     if (IsWitnessEnabled(pindex->pprev, consensusparams)) {
+        flags |= SCRIPT_VERIFY_WITNESS;
         flags |= SCRIPT_VERIFY_NULLDUMMY;
     }
 
@@ -3260,16 +3261,28 @@ static bool FindUndoPos(BlockValidationState &state, int nFile, FlatFilePos &pos
 
 static bool CheckBlockHeader(const CBlockHeader& block, BlockValidationState& state, const Consensus::Params& consensusParams, bool fCheckPOW = true)
 {
-    // Get prev block index
-    int nHeight = 0;
-    LOCK(cs_main);
-    CBlockIndex* pindexPrev = LookupBlockIndex(block.hashPrevBlock);
-    if (pindexPrev != NULL) {
-        nHeight = pindexPrev->nHeight + 1;
+    if (!fCheckPOW) return true;
+
+    // The proof of work algorithm depends on the height, which is only known
+    // when the previous block is.
+    const CBlockIndex* pindexPrev = WITH_LOCK(cs_main, return LookupBlockIndex(block.hashPrevBlock));
+    const bool is_genesis = block.hashPrevBlock.IsNull();
+
+    bool pow_ok;
+    if (pindexPrev || is_genesis) {
+        const int nHeight = pindexPrev ? pindexPrev->nHeight + 1 : 0;
+        pow_ok = CheckProofOfWork(block.GetPoWHash(nHeight >= Params().SwitchLyra2REv2_DGWblock()), block.nBits, consensusParams);
+    } else {
+        // A block with an unknown parent is never accepted: AcceptBlockHeader()
+        // rejects it as prev-blk-not-found. Accept either algorithm here, so that
+        // it is rejected for that reason and not as high-hash, which would
+        // punish a peer for sending a valid block that we cannot connect yet.
+        pow_ok = CheckProofOfWork(block.GetPoWHash(true), block.nBits, consensusParams) ||
+                 CheckProofOfWork(block.GetPoWHash(false), block.nBits, consensusParams);
     }
 
     // Check proof of work matches claimed amount
-    if (fCheckPOW && !CheckProofOfWork(block.GetPoWHash(nHeight >= Params().SwitchLyra2REv2_DGWblock()), block.nBits, consensusParams))
+    if (!pow_ok)
         return state.Invalid(BlockValidationResult::BLOCK_INVALID_HEADER, "high-hash", "proof of work failed");
 
     return true;
@@ -3480,6 +3493,42 @@ static bool ContextualCheckBlockHeader(const CBlockHeader& block, BlockValidatio
  *  in ConnectBlock().
  *  Note that -reindex-chainstate skips the validation that happens here!
  */
+// This is the same as the witness commitment checks in ContextualCheckBlock(),
+// which is left as it is so that this does not touch the consensus code.
+bool CheckWitnessMalleation(const CBlock& block, bool expect_witness_commitment, BlockValidationState& state)
+{
+    bool fHaveWitness = false;
+    if (expect_witness_commitment) {
+        int commitpos = GetWitnessCommitmentIndex(block);
+        if (commitpos != -1) {
+            if (block.vtx[0]->vin.empty() ||
+                    block.vtx[0]->vin[0].scriptWitness.stack.size() != 1 || block.vtx[0]->vin[0].scriptWitness.stack[0].size() != 32) {
+                return state.Invalid(BlockValidationResult::BLOCK_MUTATED, "bad-witness-nonce-size", strprintf("%s : invalid witness reserved value size", __func__));
+            }
+            // The malleation check is ignored; as the transaction tree itself
+            // already does not permit it, it is impossible to trigger in the
+            // witness tree.
+            bool malleated = false;
+            uint256 hashWitness = BlockWitnessMerkleRoot(block, &malleated);
+            CHash256().Write(hashWitness.begin(), 32).Write(&block.vtx[0]->vin[0].scriptWitness.stack[0][0], 32).Finalize(hashWitness.begin());
+            if (memcmp(hashWitness.begin(), &block.vtx[0]->vout[commitpos].scriptPubKey[6], 32)) {
+                return state.Invalid(BlockValidationResult::BLOCK_MUTATED, "bad-witness-merkle-match", strprintf("%s : witness merkle commitment mismatch", __func__));
+            }
+            fHaveWitness = true;
+        }
+    }
+
+    // No witness data is allowed in blocks that don't commit to witness data, as this would otherwise leave room for spam
+    if (!fHaveWitness) {
+        for (const auto& tx : block.vtx) {
+            if (tx->HasWitness()) {
+                return state.Invalid(BlockValidationResult::BLOCK_MUTATED, "unexpected-witness", strprintf("%s : unexpected witness data found", __func__));
+            }
+        }
+    }
+    return true;
+}
+
 static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& state, const Consensus::Params& consensusParams, const CBlockIndex* pindexPrev)
 {
     const int nHeight = pindexPrev == nullptr ? 0 : pindexPrev->nHeight + 1;
@@ -3503,7 +3552,9 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
     }
 
     // Enforce rule that the coinbase starts with serialized block height
-    if (nHeight >= consensusParams.BIP34Height)
+    // The genesis block predates BIP34. It goes through this check when the
+    // block files are reindexed, and BIP34Height does not exclude it here.
+    if (pindexPrev != nullptr && nHeight >= consensusParams.BIP34Height)
     {
         CScript expect = CScript() << nHeight;
         if (block.vtx[0]->vin[0].scriptSig.size() < expect.size() ||
@@ -3562,7 +3613,7 @@ static bool ContextualCheckBlock(const CBlock& block, BlockValidationState& stat
     return true;
 }
 
-bool BlockManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex)
+bool BlockManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex, bool min_pow_checked)
 {
     AssertLockHeld(cs_main);
     // Check for duplicate
@@ -3639,8 +3690,16 @@ bool BlockManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationS
             }
         }
     }
-    if (pindex == nullptr)
+    if (pindex == nullptr) {
+        // Only the genesis block gets here with a header that is already
+        // known. Everything else is a new header, which is only stored if its
+        // chain is known to have enough work.
+        if (!min_pow_checked && hash != chainparams.GetConsensus().hashGenesisBlock) {
+            LogPrint(BCLog::VALIDATION, "%s: not adding new block header %s, missing anti-dos proof-of-work validation\n", __func__, hash.ToString());
+            return state.Invalid(BlockValidationResult::BLOCK_HEADER_LOW_WORK, "too-little-chainwork");
+        }
         pindex = AddToBlockIndex(block);
+    }
 
     if (ppindex)
         *ppindex = pindex;
@@ -3648,14 +3707,24 @@ bool BlockManager::AcceptBlockHeader(const CBlockHeader& block, BlockValidationS
     return true;
 }
 
+arith_uint256 CalculateHeadersWork(const std::vector<CBlockHeader>& headers)
+{
+    arith_uint256 total_work{0};
+    for (const CBlockHeader& header : headers) {
+        CBlockIndex dummy(header);
+        total_work += GetBlockProof(dummy);
+    }
+    return total_work;
+}
+
 // Exposed wrapper for AcceptBlockHeader
-bool ProcessNewBlockHeaders(const std::vector<CBlockHeader>& headers, BlockValidationState& state, const CChainParams& chainparams, const CBlockIndex** ppindex)
+bool ProcessNewBlockHeaders(const std::vector<CBlockHeader>& headers, bool min_pow_checked, BlockValidationState& state, const CChainParams& chainparams, const CBlockIndex** ppindex)
 {
     {
         LOCK(cs_main);
         for (const CBlockHeader& header : headers) {
             CBlockIndex *pindex = nullptr; // Use a temp pindex instead of ppindex to avoid a const_cast
-            bool accepted = g_blockman.AcceptBlockHeader(header, state, chainparams, &pindex);
+            bool accepted = g_blockman.AcceptBlockHeader(header, state, chainparams, &pindex, min_pow_checked);
             ::ChainstateActive().CheckBlockIndex(chainparams.GetConsensus());
 
             if (!accepted) {
@@ -3694,7 +3763,7 @@ static FlatFilePos SaveBlockToDisk(const CBlock& block, int nHeight, const CChai
 }
 
 /** Store block on disk. If dbp is non-nullptr, the file is known to already reside on disk */
-bool CChainState::AcceptBlock(const std::shared_ptr<const CBlock>& pblock, BlockValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex, bool fRequested, const FlatFilePos* dbp, bool* fNewBlock)
+bool CChainState::AcceptBlock(const std::shared_ptr<const CBlock>& pblock, BlockValidationState& state, const CChainParams& chainparams, CBlockIndex** ppindex, bool fRequested, const FlatFilePos* dbp, bool* fNewBlock, bool min_pow_checked)
 {
     const CBlock& block = *pblock;
 
@@ -3704,7 +3773,7 @@ bool CChainState::AcceptBlock(const std::shared_ptr<const CBlock>& pblock, Block
     CBlockIndex *pindexDummy = nullptr;
     CBlockIndex *&pindex = ppindex ? *ppindex : pindexDummy;
 
-    bool accepted_header = m_blockman.AcceptBlockHeader(block, state, chainparams, &pindex);
+    bool accepted_header = m_blockman.AcceptBlockHeader(block, state, chainparams, &pindex, min_pow_checked);
     CheckBlockIndex(chainparams.GetConsensus());
 
     if (!accepted_header)
@@ -3776,7 +3845,7 @@ bool CChainState::AcceptBlock(const std::shared_ptr<const CBlock>& pblock, Block
     return true;
 }
 
-bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool *fNewBlock)
+bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<const CBlock> pblock, bool fForceProcessing, bool min_pow_checked, bool *fNewBlock)
 {
     AssertLockNotHeld(cs_main);
 
@@ -3794,7 +3863,7 @@ bool ProcessNewBlock(const CChainParams& chainparams, const std::shared_ptr<cons
         bool ret = CheckBlock(*pblock, state, chainparams.GetConsensus());
         if (ret) {
             // Store to disk
-            ret = ::ChainstateActive().AcceptBlock(pblock, state, chainparams, &pindex, fForceProcessing, nullptr, fNewBlock);
+            ret = ::ChainstateActive().AcceptBlock(pblock, state, chainparams, &pindex, fForceProcessing, nullptr, fNewBlock, min_pow_checked);
         }
         if (!ret) {
             GetMainSignals().BlockChecked(*pblock, state);
@@ -4683,7 +4752,7 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, FlatFi
                     CBlockIndex* pindex = LookupBlockIndex(hash);
                     if (!pindex || (pindex->nStatus & BLOCK_HAVE_DATA) == 0) {
                       BlockValidationState state;
-                      if (::ChainstateActive().AcceptBlock(pblock, state, chainparams, nullptr, true, dbp, nullptr)) {
+                      if (::ChainstateActive().AcceptBlock(pblock, state, chainparams, nullptr, true, dbp, nullptr, /* min_pow_checked */ true)) {
                           nLoaded++;
                       }
                       if (state.IsError()) {
@@ -4714,16 +4783,17 @@ bool LoadExternalBlockFile(const CChainParams& chainparams, FILE* fileIn, FlatFi
                     while (range.first != range.second) {
                         std::multimap<uint256, FlatFilePos>::iterator it = range.first;
                         std::shared_ptr<CBlock> pblockrecursive = std::make_shared<CBlock>();
-                        uint256 hash = block.GetHash();
-                        LOCK(cs_main);
-                        int nHeight = LookupBlockIndex(hash)->nHeight;
-                        if (ReadBlockFromDisk(*pblockrecursive, it->second, nHeight, chainparams.GetConsensus()))
+                        // The proof of work algorithm depends on the height of the block
+                        // being read, which is a child of head. head is not in the block
+                        // index if it was rejected; its children cannot be accepted then.
+                        const CBlockIndex* pindexHead = WITH_LOCK(cs_main, return LookupBlockIndex(head));
+                        if (pindexHead && ReadBlockFromDisk(*pblockrecursive, it->second, pindexHead->nHeight + 1, chainparams.GetConsensus()))
                         {
                             LogPrint(BCLog::REINDEX, "%s: Processing out of order child %s of %s\n", __func__, pblockrecursive->GetHash().ToString(),
                                     head.ToString());
                             LOCK(cs_main);
                             BlockValidationState dummy;
-                            if (::ChainstateActive().AcceptBlock(pblockrecursive, dummy, chainparams, nullptr, true, &it->second, nullptr))
+                            if (::ChainstateActive().AcceptBlock(pblockrecursive, dummy, chainparams, nullptr, true, &it->second, nullptr, /* min_pow_checked */ true))
                             {
                                 nLoaded++;
                                 queue.push_back(pblockrecursive->GetHash());

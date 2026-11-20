@@ -41,8 +41,8 @@ class CBlockFileInfo
 {
 public:
     unsigned int nBlocks;      //!< number of blocks stored in file
-    unsigned int nSize;        //!< number of used bytes of block file
-    unsigned int nUndoSize;    //!< number of used bytes in the undo file
+    uint64_t nSize;            //!< number of used bytes of block file
+    uint64_t nUndoSize;        //!< number of used bytes in the undo file
     unsigned int nHeightFirst; //!< lowest height of block in file
     unsigned int nHeightLast;  //!< highest height of block in file
     uint64_t nTimeFirst;       //!< earliest time of block in file
@@ -153,10 +153,10 @@ public:
     int nFile{0};
 
     //! Byte offset within blk?????.dat where this block's data is stored
-    unsigned int nDataPos{0};
+    uint64_t nDataPos{0};
 
     //! Byte offset within rev?????.dat where this block's undo data is stored
-    unsigned int nUndoPos{0};
+    uint64_t nUndoPos{0};
 
     //! (memory only) Total amount of work (expected number of hashes) in the chain up to and including this block
     arith_uint256 nChainWork{};
@@ -379,6 +379,10 @@ public:
         return str;
     }
 };
+
+/** Construct a list of hash entries to put in a locator, without using the
+ *  active chain (so that cs_main is not needed). */
+std::vector<uint256> LocatorEntries(const CBlockIndex* index);
 
 /** An in-memory indexed chain of blocks. */
 class CChain {

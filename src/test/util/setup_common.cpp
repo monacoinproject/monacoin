@@ -197,14 +197,24 @@ CBlock TestChain100Setup::CreateAndProcessBlock(const std::vector<CMutableTransa
     // IncrementExtraNonce creates a valid coinbase and merkleRoot
     {
         LOCK(cs_main);
+        // The witness commitment was made for the transactions of the template.
+        const int commitpos = GetWitnessCommitmentIndex(block);
+        if (commitpos != -1) {
+            CMutableTransaction coinbase(*block.vtx[0]);
+            coinbase.vout.erase(coinbase.vout.begin() + commitpos);
+            block.vtx[0] = MakeTransactionRef(std::move(coinbase));
+            GenerateCoinbaseCommitment(block, ::ChainActive().Tip(), chainparams.GetConsensus());
+        }
         unsigned int extraNonce = 0;
         IncrementExtraNonce(&block, ::ChainActive().Tip(), extraNonce);
     }
 
-    while (!CheckProofOfWork(block.GetHash(), block.nBits, chainparams.GetConsensus())) ++block.nNonce;
+    // The proof of work is checked on the scrypt or Lyra2REv2 hash, depending on the height.
+    const bool lyra2rev2 = WITH_LOCK(cs_main, return ::ChainActive().Height() + 1) >= chainparams.SwitchLyra2REv2_DGWblock();
+    while (!CheckProofOfWork(block.GetPoWHash(lyra2rev2), block.nBits, chainparams.GetConsensus())) ++block.nNonce;
 
     std::shared_ptr<const CBlock> shared_pblock = std::make_shared<const CBlock>(block);
-    ProcessNewBlock(chainparams, shared_pblock, true, nullptr);
+    ProcessNewBlock(chainparams, shared_pblock, true, true, nullptr);
 
     CBlock result = block;
     return result;
