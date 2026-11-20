@@ -1,10 +1,10 @@
-Monacoin Core version 0.20.5 is now available from:
+Monacoin Core version 0.20.6 is now available from:
 
   <https://github.com/monacoinproject/monacoin/releases>
 
 This is a new minor version release, including security fixes backported from
-Bitcoin Core, other bug fixes and build improvements. All users are
-recommended to upgrade.
+Bitcoin Core and other bug fixes. All users are strongly recommended to
+upgrade.
 
 Please report bugs using the issue tracker at GitHub:
 
@@ -95,6 +95,58 @@ should be de-centralized. That system wasn't.
 Some people think risks of rewind attacks by crackers.
 But no worry. The recent Monacoin chain has enough hash power.
 Thanks miners for keeping work.
+
+0.20.6 change log
+=================
+
+This release backports the headers pre-synchronization from Bitcoin Core,
+which keeps a node from storing block headers of low-work chains, and fixes
+two more vulnerabilities from Bitcoin Core.
+
+### Vulnerability
+
+- #138 Download and check the work of a headers chain before storing it
+  (headers presync, mitigates CVE-2019-25220)
+- #138 Store block and undo file positions as 64-bit integers (CVE-2026-117346)
+- #138 Check for witness mutation when reconstructing a compact block
+  (CVE-2025-62859)
+
+### Behavior changes
+
+- During the initial headers sync, and when a peer gives us a chain that may
+  have less work than ours, the headers are downloaded twice. The first pass
+  only checks the proof of work and adds up the work, and nothing is stored.
+  It is logged as `Pre-synchronizing blockheaders`, and `getblockchaininfo`
+  shows `"headers": 0` until it is done. The headers are then downloaded
+  again and stored. The initial headers sync takes longer than before.
+- Only one peer at a time is used for this, unless it stops making progress.
+- A chain of headers is only stored if it has at least as much work as the
+  minimum chain work, and as our own chain at one of its last 24 blocks that
+  is not older than 36 minutes. While a node is catching up, this is also
+  measured from its best header. Forks from further back with less work are
+  no longer stored, and no longer shown by `getchaintips`. A chain with more
+  work than ours is still always accepted.
+- `sendheaders` is now sent to a peer only after its best known block has
+  more than the minimum chain work, and `getheaders` received during initial
+  block download is answered with an empty `headers` message.
+- `nMinimumChainWork` has been raised to the chain work at height 4165667,
+  and `assumevalid` has been moved to the block at height 4100000, so that a
+  new node can skip the signature checks up to that height.
+- Undo files can now grow past 4 GiB. The data directory format does not
+  change, and a data directory can still be used by older versions.
+
+### Bug fixes
+
+- #138 Fix `-reindex`, which failed on the genesis block with `bad-cb-height`
+- #138 Use the right height for blocks loaded out of order from block files
+  (`-reindex`, `-loadblock`)
+- #138 Don't reject blocks with an unknown parent as `high-hash`
+
+### Documentation and tests
+
+- #138 Point security reports to GitHub private vulnerability reporting
+  (`SECURITY.md`)
+- #138 Mine the blocks of the unit test fixtures with the proof of work hash
 
 0.20.5 change log
 =================
