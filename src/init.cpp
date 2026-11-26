@@ -89,6 +89,8 @@
 
 static bool fFeeEstimatesInitialized = false;
 static const bool DEFAULT_PROXYRANDOMIZE = true;
+//! Maximum mempool size on 32-bit systems.
+static constexpr int64_t MAX_32BIT_MEMPOOL_MB = 500;
 static const bool DEFAULT_REST_ENABLE = false;
 static const bool DEFAULT_STOPAFTERBLOCKIMPORT = false;
 
@@ -1067,6 +1069,11 @@ bool AppInitParameterInteraction()
     int64_t nMempoolSizeMin = gArgs.GetArg("-limitdescendantsize", DEFAULT_DESCENDANT_SIZE_LIMIT) * 1000 * 40;
     if (nMempoolSizeMax < 0 || nMempoolSizeMax < nMempoolSizeMin)
         return InitError(strprintf(_("-maxmempool must be at least %d MB").translated, std::ceil(nMempoolSizeMin / 1000000.0)));
+    // A 32-bit system can address at most 4 GiB, so a larger mempool makes no sense, and
+    // checking the size of blocks that large could overflow (CVE-2025-46597).
+    constexpr bool is_32bit = sizeof(void*) == 4;
+    if (is_32bit && nMempoolSizeMax > MAX_32BIT_MEMPOOL_MB * 1000000)
+        return InitError(strprintf("-maxmempool is set to %i but can't be over %i MB on 32-bit systems", nMempoolSizeMax / 1000000, MAX_32BIT_MEMPOOL_MB));
     // incremental relay fee sets the minimum feerate increase necessary for BIP 125 replacement in the mempool
     // and the amount the mempool min fee increases above the feerate of txs evicted due to mempool limiting.
     if (gArgs.IsArgSet("-incrementalrelayfee"))
