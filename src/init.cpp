@@ -1308,6 +1308,13 @@ bool AppInitMain(NodeContext& node)
 
     GetMainSignals().RegisterBackgroundSignalScheduler(*node.scheduler);
 
+    // Rate limit logging to disk from each source location, to mitigate disk
+    // filling attacks (CVE-2025-54604, CVE-2025-54605).
+    LogInstance().SetRateLimiting(MakeUnique<BCLog::LogRateLimiter>(
+        [&node](std::function<void()> func, std::chrono::milliseconds window) { node.scheduler->scheduleEvery(std::move(func), window); },
+        BCLog::RATELIMIT_MAX_BYTES,
+        BCLog::RATELIMIT_WINDOW));
+
     // Create client interfaces for wallets that are supposed to be loaded
     // according to -wallet and -disablewallet options. This only constructs
     // the interfaces, it doesn't load wallet data. Wallets actually get loaded
