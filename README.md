@@ -1,5 +1,5 @@
 Monacoin Core integration/staging tree
-=====================================
+===================================== 
 
 https://monacoin.org
 
