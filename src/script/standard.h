@@ -43,14 +43,17 @@ extern unsigned nMaxDatacarrierBytes;
 
 /**
  * Mandatory script verification flags that all new blocks must comply with for
- * them to be valid. (but old blocks may not comply with) Currently just P2SH,
- * but in the future other flags may be added, such as a soft-fork to enforce
- * strict DER encoding.
+ * them to be valid. Old blocks may not comply with all of them.
  *
- * Failing one of these tests may trigger a DoS ban - see CheckInputScripts() for
- * details.
+ * Block validation never uses other flags, so CheckInputScripts() uses them to
+ * tell block validation apart from mempool validation.
  */
-static const unsigned int MANDATORY_SCRIPT_VERIFY_FLAGS = SCRIPT_VERIFY_P2SH;
+static const unsigned int MANDATORY_SCRIPT_VERIFY_FLAGS = SCRIPT_VERIFY_P2SH |
+                                                          SCRIPT_VERIFY_DERSIG |
+                                                          SCRIPT_VERIFY_NULLDUMMY |
+                                                          SCRIPT_VERIFY_CHECKLOCKTIMEVERIFY |
+                                                          SCRIPT_VERIFY_CHECKSEQUENCEVERIFY |
+                                                          SCRIPT_VERIFY_WITNESS;
 
 enum txnouttype
 {
