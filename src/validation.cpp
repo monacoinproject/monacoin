@@ -909,13 +909,15 @@ bool MemPoolAccept::PolicyScriptChecks(ATMPArgs& args, Workspace& ws, Precompute
     // Check input scripts and signatures.
     // This is done last to help prevent CPU exhaustion denial-of-service attacks.
     if (!CheckInputScripts(tx, state, m_view, scriptVerifyFlags, true, false, txdata)) {
-        // SCRIPT_VERIFY_CLEANSTACK requires SCRIPT_VERIFY_WITNESS, so we
-        // need to turn both off, and compare against just turning off CLEANSTACK
-        // to see if the failure is specifically due to witness validation.
-        TxValidationState state_dummy; // Want reported failures to be from first CheckInputScripts
-        if (!tx.HasWitness() && CheckInputScripts(tx, state_dummy, m_view, scriptVerifyFlags & ~(SCRIPT_VERIFY_WITNESS | SCRIPT_VERIFY_CLEANSTACK), true, false, txdata) &&
-                !CheckInputScripts(tx, state_dummy, m_view, scriptVerifyFlags & ~SCRIPT_VERIFY_CLEANSTACK, true, false, txdata)) {
-            // Only the witness is missing, so the transaction itself may be fine.
+        // Detect a failure due to a missing witness, so that the p2p code doesn't add the txid
+        // to the reject filter. Running the scripts again with other flags to find out, as was
+        // done before, can triple the cost of validating an invalid transaction.
+        //
+        // Script validation with an empty witness always fails for a defined witness program
+        // (by consensus), and for an undefined one (by policy). So a transaction without a
+        // witness that spends a witness program may have had its witness stripped.
+        if (!tx.HasWitness() && SpendsWitnessProg(tx, m_view)) {
+            // Only the witness may be missing, so the transaction itself may be fine.
             state.Invalid(TxValidationResult::TX_WITNESS_MUTATED,
                     state.GetRejectReason(), state.GetDebugMessage());
         }
