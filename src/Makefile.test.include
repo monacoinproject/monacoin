@@ -203,7 +203,6 @@ BITCOIN_TESTS =\
   test/headers_sync_chainwork_tests.cpp \
   test/key_io_tests.cpp \
   test/key_tests.cpp \
-  test/limitedmap_tests.cpp \
   test/logging_tests.cpp \
   test/dbwrapper_tests.cpp \
   test/validation_tests.cpp \
