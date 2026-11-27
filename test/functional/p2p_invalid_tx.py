@@ -15,10 +15,7 @@ from test_framework.messages import (
 )
 from test_framework.mininode import P2PDataStore
 from test_framework.test_framework import BitcoinTestFramework
-from test_framework.util import (
-    assert_equal,
-    wait_until,
-)
+from test_framework.util import assert_equal
 from data import invalid_txs
 
 
@@ -85,7 +82,7 @@ class InvalidTxRequestTest(BitcoinTestFramework):
 
         # Make two p2p connections to provide the node with orphans
         # * p2ps[0] will send valid orphan txs (one with low fee)
-        # * p2ps[1] will send an invalid orphan tx (and is later disconnected for that)
+        # * p2ps[1] will send an invalid orphan tx (and is not disconnected for that)
         self.reconnect_p2p(num_connections=2)
 
         self.log.info('Test orphan transaction handling ... ')
@@ -143,9 +140,9 @@ class InvalidTxRequestTest(BitcoinTestFramework):
         }
         # Transactions that do not end up in the mempool
         # tx_orphan_no_fee, because it has too low fee (p2ps[0] is not disconnected for relaying that tx)
-        # tx_orphan_invaid, because it has negative fee (p2ps[1] is disconnected for relaying that tx)
+        # tx_orphan_invaid, because it has negative fee (p2ps[1] is not disconnected for relaying that tx)
 
-        wait_until(lambda: 1 == len(node.getpeerinfo()), timeout=12)  # p2ps[1] is no longer connected
+        assert_equal(2, len(node.getpeerinfo()))  # p2ps[1] is still connected
         assert_equal(expected_mempool, set(node.getrawmempool()))
 
 

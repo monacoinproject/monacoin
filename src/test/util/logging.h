@@ -21,7 +21,7 @@ class DebugLogHelper
 
 public:
     DebugLogHelper(std::string message);
-    ~DebugLogHelper() { check_found(); }
+    ~DebugLogHelper() noexcept(false) { check_found(); }
 };
 
 #define ASSERT_DEBUG_LOG(message) DebugLogHelper PASTE2(debugloghelper, __COUNTER__)(message)

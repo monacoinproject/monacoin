@@ -49,7 +49,9 @@ bool SetupNetworking();
 template<typename... Args>
 bool error(const char* fmt, const Args&... args)
 {
-    LogPrintf("ERROR: %s\n", tfm::format(fmt, args...));
+    // Rate limited per format string, which identifies the caller, rather than
+    // per source location, which would be this line for every caller.
+    LogPrintFormatInternal(fmt, 0, /* should_ratelimit */ true, "ERROR: %s\n", tfm::format(fmt, args...));
     return false;
 }
 

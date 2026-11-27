@@ -7,8 +7,11 @@
 #define BITCOIN_SCRIPT_INTERPRETER_H
 
 #include <script/script_error.h>
+#include <hash.h>
 #include <primitives/transaction.h>
 
+#include <memory>
+#include <utility>
 #include <vector>
 #include <stdint.h>
 
@@ -137,8 +140,28 @@ enum class SigVersion
 static constexpr size_t WITNESS_V0_SCRIPTHASH_SIZE = 32;
 static constexpr size_t WITNESS_V0_KEYHASH_SIZE = 20;
 
+/** Data structure to cache SHA256 midstates for the ECDSA sighash calculations
+ *  (bare, P2SH, P2WPKH, P2WSH). */
+class SigHashCache
+{
+    /** For each sighash mode (ALL, SINGLE, NONE, ALL|ANYONE, SINGLE|ANYONE, NONE|ANYONE),
+     *  optionally store a scriptCode which the hash is for, plus a midstate for the SHA256
+     *  computation just before adding the hash_type itself. */
+    std::unique_ptr<std::pair<CScript, CHashWriter>> m_cache_entries[6];
+
+    /** Given a hash_type, find which of the 6 cache entries is to be used. */
+    int CacheIndex(int32_t hash_type) const noexcept;
+
+public:
+    /** Return the SHA256 midstate for this hash_type and script_code if it is in this cache,
+     *  or nullptr. */
+    const CHashWriter* Load(int32_t hash_type, const CScript& script_code) const noexcept;
+    /** Store into this cache object the provided SHA256 midstate. */
+    void Store(int32_t hash_type, const CScript& script_code, const CHashWriter& writer);
+};
+
 template <class T>
-uint256 SignatureHash(const CScript& scriptCode, const T& txTo, unsigned int nIn, int nHashType, const CAmount& amount, SigVersion sigversion, const PrecomputedTransactionData* cache = nullptr);
+uint256 SignatureHash(const CScript& scriptCode, const T& txTo, unsigned int nIn, int nHashType, const CAmount& amount, SigVersion sigversion, const PrecomputedTransactionData* cache = nullptr, SigHashCache* sighash_cache = nullptr);
 
 class BaseSignatureChecker
 {
@@ -169,6 +192,7 @@ private:
     unsigned int nIn;
     const CAmount amount;
     const PrecomputedTransactionData* txdata;
+    mutable SigHashCache m_sighash_cache;
 
 protected:
     virtual bool VerifySignature(const std::vector<unsigned char>& vchSig, const CPubKey& vchPubKey, const uint256& sighash) const;
