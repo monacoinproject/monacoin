@@ -76,7 +76,9 @@ CBlock BuildChainTestingSetup::CreateBlock(const CBlockIndex* prev,
     unsigned int extraNonce = 0;
     IncrementExtraNonce(&block, prev, extraNonce);
 
-    while (!CheckProofOfWork(block.GetHash(), block.nBits, chainparams.GetConsensus())) ++block.nNonce;
+    // The proof of work is checked on the scrypt or Lyra2REv2 hash, depending on the height.
+    const bool lyra2rev2 = prev->nHeight + 1 >= chainparams.SwitchLyra2REv2_DGWblock();
+    while (!CheckProofOfWork(block.GetPoWHash(lyra2rev2), block.nBits, chainparams.GetConsensus())) ++block.nNonce;
 
     return block;
 }

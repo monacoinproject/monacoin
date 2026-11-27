@@ -48,14 +48,19 @@ BOOST_AUTO_TEST_CASE(block_subsidy_test)
 BOOST_AUTO_TEST_CASE(subsidy_limit_test)
 {
     const auto chainParams = CreateChainParams(CBaseChainParams::MAIN);
+    const int nHalvingInterval = chainParams->GetConsensus().nSubsidyHalvingInterval;
+    // Monacoin: sample with a step that divides the halving interval, so that
+    // the sum is exact. All of the subsidy is paid within 64 halvings.
+    const int nStep = 1200;
+    BOOST_REQUIRE_EQUAL(nHalvingInterval % nStep, 0);
     CAmount nSum = 0;
-    for (int nHeight = 0; nHeight < 14000000; nHeight += 1000) {
+    for (int nHeight = 0; nHeight < 64 * nHalvingInterval; nHeight += nStep) {
         CAmount nSubsidy = GetBlockSubsidy(nHeight, chainParams->GetConsensus());
         BOOST_CHECK(nSubsidy <= 50 * COIN);
-        nSum += nSubsidy * 1000;
+        nSum += nSubsidy * nStep;
         BOOST_CHECK(MoneyRange(nSum));
     }
-    BOOST_CHECK_EQUAL(nSum, CAmount{2099999997690000});
+    BOOST_CHECK_EQUAL(nSum, CAmount{10511999988436800});
 }
 
 static bool ReturnFalse() { return false; }

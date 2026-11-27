@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(bloom_create_insert_serialize_with_tweak)
 
 BOOST_AUTO_TEST_CASE(bloom_create_insert_key)
 {
-    std::string strSecret = std::string("5Kg1gnAjaLfKiwhhPpGS3QfRg2m6awQvaj98JCZBZQ5SuS2F15C");
+    std::string strSecret = std::string("6vyk9uiGUm8CCKbYue4PpoSbdWKZnjrxMQYJ1PaDGrQ4bLHTxQJ");
     CKey key = DecodeSecret(strSecret);
     CPubKey pubkey = key.GetPubKey();
     std::vector<unsigned char> vchPubKey(pubkey.begin(), pubkey.end());
@@ -244,7 +244,7 @@ BOOST_AUTO_TEST_CASE(merkle_block_2)
     for (unsigned int i = 0; i < vMatched.size(); i++)
         BOOST_CHECK(vMatched[i] == merkleBlock.vMatchedTxn[i].second);
 
-    // Match an output from the second transaction (the pubkey for address 1DZTzaBHUDM7T3QvUKBz4qXMRpkg8jsfB5)
+    // Match an output from the second transaction (the pubkey for address MLTdE15gyEWvLiPFhHqvK78gu3dqhnVcLs)
     // This should match the third transaction because it spends the output matched
     // It also matches the fourth transaction, which spends to the pubkey again
     filter.insert(ParseHex("044a656f065871a353f216ca26cef8dde2f03e8c16202d2e8ad769f02032cb86a5eb5e56842e92e19141d60a01928f8dd2c875a390f67c1f6c94cfc617c0ea45af"));
@@ -299,7 +299,7 @@ BOOST_AUTO_TEST_CASE(merkle_block_2_with_update_none)
     for (unsigned int i = 0; i < vMatched.size(); i++)
         BOOST_CHECK(vMatched[i] == merkleBlock.vMatchedTxn[i].second);
 
-    // Match an output from the second transaction (the pubkey for address 1DZTzaBHUDM7T3QvUKBz4qXMRpkg8jsfB5)
+    // Match an output from the second transaction (the pubkey for address MLTdE15gyEWvLiPFhHqvK78gu3dqhnVcLs)
     // This should not match the third transaction though it spends the output matched
     // It will match the fourth transaction, which has another pay-to-pubkey output to the same address
     filter.insert(ParseHex("044a656f065871a353f216ca26cef8dde2f03e8c16202d2e8ad769f02032cb86a5eb5e56842e92e19141d60a01928f8dd2c875a390f67c1f6c94cfc617c0ea45af"));

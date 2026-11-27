@@ -30,6 +30,11 @@ bool VerifyWallets(interfaces::Chain& chain, const std::vector<std::string>& wal
             chain.initError(strprintf(_("Specified -walletdir \"%s\" is a relative path").translated, wallet_dir.string()));
             return false;
         }
+        // Newer Boost versions keep a trailing separator in the canonical path. Strip it, so
+        // that the same directory always ends up as the same path.
+        while (canonical_wallet_dir.has_relative_path() && (canonical_wallet_dir.filename() == "." || canonical_wallet_dir.filename().empty())) {
+            canonical_wallet_dir = canonical_wallet_dir.parent_path();
+        }
         gArgs.ForceSetArg("-walletdir", canonical_wallet_dir.string());
     }
 
