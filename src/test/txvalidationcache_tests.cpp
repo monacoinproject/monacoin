@@ -15,6 +15,47 @@
 
 bool CheckInputScripts(const CTransaction& tx, TxValidationState &state, const CCoinsViewCache &inputs, unsigned int flags, bool cacheSigStore, bool cacheFullScriptStore, PrecomputedTransactionData& txdata, std::vector<CScriptCheck> *pvChecks);
 
+// Turn a low-S signature into the equivalent high-S one (same as in script_tests.cpp).
+void static NegateSignatureS(std::vector<unsigned char>& vchSig) {
+    // Parse the signature.
+    std::vector<unsigned char> r, s;
+    r = std::vector<unsigned char>(vchSig.begin() + 4, vchSig.begin() + 4 + vchSig[3]);
+    s = std::vector<unsigned char>(vchSig.begin() + 6 + vchSig[3], vchSig.begin() + 6 + vchSig[3] + vchSig[5 + vchSig[3]]);
+
+    // Really ugly to implement mod-n negation here, but it would be feature creep to expose such functionality from libsecp256k1.
+    static const unsigned char order[33] = {
+        0x00,
+        0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF,
+        0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE,
+        0xBA, 0xAE, 0xDC, 0xE6, 0xAF, 0x48, 0xA0, 0x3B,
+        0xBF, 0xD2, 0x5E, 0x8C, 0xD0, 0x36, 0x41, 0x41
+    };
+    while (s.size() < 33) {
+        s.insert(s.begin(), 0x00);
+    }
+    int carry = 0;
+    for (int p = 32; p >= 1; p--) {
+        int n = (int)order[p] - s[p] - carry;
+        s[p] = (n + 256) & 0xFF;
+        carry = (n < 0);
+    }
+    assert(carry == 0);
+    if (s.size() > 1 && s[0] == 0 && s[1] < 0x80) {
+        s.erase(s.begin());
+    }
+
+    // Reconstruct the signature.
+    vchSig.clear();
+    vchSig.push_back(0x30);
+    vchSig.push_back(4 + r.size() + s.size());
+    vchSig.push_back(0x02);
+    vchSig.push_back(r.size());
+    vchSig.insert(vchSig.end(), r.begin(), r.end());
+    vchSig.push_back(0x02);
+    vchSig.push_back(s.size());
+    vchSig.insert(vchSig.end(), s.begin(), s.end());
+}
+
 BOOST_AUTO_TEST_SUITE(txvalidationcache_tests)
 
 BOOST_FIXTURE_TEST_CASE(tx_mempool_block_doublespend, TestChain100Setup)
@@ -183,43 +224,47 @@ BOOST_FIXTURE_TEST_CASE(checkinputs_test, TestChain100Setup)
     spend_tx.vout[3].nValue = 11*CENT;
     spend_tx.vout[3].scriptPubKey = CScript() << OP_CHECKSEQUENCEVERIFY << OP_DROP << ToByteVector(coinbaseKey.GetPubKey()) << OP_CHECKSIG;
 
-    // Sign, with a non-DER signature
+    // Sign, with a high-S signature.
+    // Monacoin: upstream uses a non-DER signature here, as DERSIG is not yet
+    // enforced at this height on Bitcoin's regtest. It always is on Monacoin's
+    // regtest (BIP66Height = -1), so use a signature that is only invalid
+    // under a policy flag (LOW_S) instead.
     {
         std::vector<unsigned char> vchSig;
         uint256 hash = SignatureHash(p2pk_scriptPubKey, spend_tx, 0, SIGHASH_ALL, 0, SigVersion::BASE);
         BOOST_CHECK(coinbaseKey.Sign(hash, vchSig));
-        vchSig.push_back((unsigned char) 0); // padding byte makes this non-DER
+        NegateSignatureS(vchSig); // makes this high-S
         vchSig.push_back((unsigned char)SIGHASH_ALL);
         spend_tx.vin[0].scriptSig << vchSig;
     }
 
     // Test that invalidity under a set of flags doesn't preclude validity
     // under other (eg consensus) flags.
-    // spend_tx is invalid according to DERSIG
+    // spend_tx is invalid according to LOW_S
     {
         LOCK(cs_main);
 
         TxValidationState state;
         PrecomputedTransactionData ptd_spend_tx(spend_tx);
 
-        BOOST_CHECK(!CheckInputScripts(CTransaction(spend_tx), state, &::ChainstateActive().CoinsTip(), SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_DERSIG, true, true, ptd_spend_tx, nullptr));
+        BOOST_CHECK(!CheckInputScripts(CTransaction(spend_tx), state, &::ChainstateActive().CoinsTip(), SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_LOW_S, true, true, ptd_spend_tx, nullptr));
 
         // If we call again asking for scriptchecks (as happens in
         // ConnectBlock), we should add a script check object for this -- we're
         // not caching invalidity (if that changes, delete this test case).
         std::vector<CScriptCheck> scriptchecks;
-        BOOST_CHECK(CheckInputScripts(CTransaction(spend_tx), state, &::ChainstateActive().CoinsTip(), SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_DERSIG, true, true, ptd_spend_tx, &scriptchecks));
+        BOOST_CHECK(CheckInputScripts(CTransaction(spend_tx), state, &::ChainstateActive().CoinsTip(), SCRIPT_VERIFY_P2SH | SCRIPT_VERIFY_LOW_S, true, true, ptd_spend_tx, &scriptchecks));
         BOOST_CHECK_EQUAL(scriptchecks.size(), 1U);
 
-        // Test that CheckInputScripts returns true iff DERSIG-enforcing flags are
+        // Test that CheckInputScripts returns true iff the LOW_S flag is
         // not present.  Don't add these checks to the cache, so that we can
         // test later that block validation works fine in the absence of cached
         // successes.
-        ValidateCheckInputsForAllFlags(CTransaction(spend_tx), SCRIPT_VERIFY_DERSIG | SCRIPT_VERIFY_LOW_S | SCRIPT_VERIFY_STRICTENC, false);
+        ValidateCheckInputsForAllFlags(CTransaction(spend_tx), SCRIPT_VERIFY_LOW_S, false);
     }
 
-    // And if we produce a block with this tx, it should be valid (DERSIG not
-    // enabled yet), even though there's no cache entry.
+    // And if we produce a block with this tx, it should be valid (LOW_S is
+    // not a consensus rule), even though there's no cache entry.
     CBlock block;
 
     block = CreateAndProcessBlock({spend_tx}, p2pk_scriptPubKey);

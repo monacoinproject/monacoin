@@ -19,15 +19,19 @@ from binascii import b2a_hex
 from segwit_addr import bech32_encode, decode, convertbits, CHARSET, Encoding
 
 # key types
-PUBKEY_ADDRESS = 0
-SCRIPT_ADDRESS = 5
+PUBKEY_ADDRESS = 50
+SCRIPT_ADDRESS = 55
 PUBKEY_ADDRESS_TEST = 111
-SCRIPT_ADDRESS_TEST = 196
+SCRIPT_ADDRESS_TEST = 117
 PUBKEY_ADDRESS_REGTEST = 111
-SCRIPT_ADDRESS_REGTEST = 196
-PRIVKEY = 128
+SCRIPT_ADDRESS_REGTEST = 117
+PRIVKEY = 176
 PRIVKEY_TEST = 239
 PRIVKEY_REGTEST = 239
+# Script addresses with the former prefixes are still accepted, but they are
+# never generated, so they do not round trip.
+SCRIPT_ADDRESS_LEGACY = 5
+SCRIPT_ADDRESS_LEGACY_TEST = 196
 
 # script
 OP_0 = 0x00
@@ -66,41 +70,46 @@ templates = [
   ((PRIVKEY_REGTEST,),        32, (),   (True,  'regtest', False, None), (),            ()),
   ((PRIVKEY_REGTEST,),        32, (1,), (True,  'regtest', True,  None), (),            ())
 ]
+# templates for sequences that are accepted, but that are not generated
+legacy_templates = [
+  ((SCRIPT_ADDRESS_LEGACY,),      20, ()),
+  ((SCRIPT_ADDRESS_LEGACY_TEST,), 20, ()),
+]
 # templates for valid bech32 sequences
 bech32_templates = [
   # hrp, version, witprog_size, metadata, encoding, output_prefix
-  ('bc',    0, 20, (False, 'main',    None, True), Encoding.BECH32,  p2wpkh_prefix),
-  ('bc',    0, 32, (False, 'main',    None, True), Encoding.BECH32,  p2wsh_prefix),
-  ('bc',    1, 32, (False, 'main',    None, True), Encoding.BECH32M, p2tr_prefix),
-  ('bc',    2,  2, (False, 'main',    None, True), Encoding.BECH32M, (OP_2, 2)),
-  ('tb',    0, 20, (False, 'test',    None, True), Encoding.BECH32,  p2wpkh_prefix),
-  ('tb',    0, 32, (False, 'test',    None, True), Encoding.BECH32,  p2wsh_prefix),
-  ('tb',    1, 32, (False, 'test',    None, True), Encoding.BECH32M, p2tr_prefix),
-  ('tb',    3, 16, (False, 'test',    None, True), Encoding.BECH32M, (OP_3, 16)),
-  ('bcrt',  0, 20, (False, 'regtest', None, True), Encoding.BECH32,  p2wpkh_prefix),
-  ('bcrt',  0, 32, (False, 'regtest', None, True), Encoding.BECH32,  p2wsh_prefix),
-  ('bcrt',  1, 32, (False, 'regtest', None, True), Encoding.BECH32M, p2tr_prefix),
-  ('bcrt', 16, 40, (False, 'regtest', None, True), Encoding.BECH32M, (OP_16, 40))
+  ('mona',   0, 20, (False, 'main',    None, True), Encoding.BECH32,  p2wpkh_prefix),
+  ('mona',   0, 32, (False, 'main',    None, True), Encoding.BECH32,  p2wsh_prefix),
+  ('mona',   1, 32, (False, 'main',    None, True), Encoding.BECH32M, p2tr_prefix),
+  ('mona',   2,  2, (False, 'main',    None, True), Encoding.BECH32M, (OP_2, 2)),
+  ('tmona',  0, 20, (False, 'test',    None, True), Encoding.BECH32,  p2wpkh_prefix),
+  ('tmona',  0, 32, (False, 'test',    None, True), Encoding.BECH32,  p2wsh_prefix),
+  ('tmona',  1, 32, (False, 'test',    None, True), Encoding.BECH32M, p2tr_prefix),
+  ('tmona',  3, 16, (False, 'test',    None, True), Encoding.BECH32M, (OP_3, 16)),
+  ('rmona',  0, 20, (False, 'regtest', None, True), Encoding.BECH32,  p2wpkh_prefix),
+  ('rmona',  0, 32, (False, 'regtest', None, True), Encoding.BECH32,  p2wsh_prefix),
+  ('rmona',  1, 32, (False, 'regtest', None, True), Encoding.BECH32M, p2tr_prefix),
+  ('rmona', 16, 40, (False, 'regtest', None, True), Encoding.BECH32M, (OP_16, 40))
 ]
 # templates for invalid bech32 sequences
 bech32_ng_templates = [
   # hrp, version, witprog_size, encoding, invalid_bech32, invalid_checksum, invalid_char
   ('tc',    0, 20, Encoding.BECH32,  False, False, False),
   ('bt',    1, 32, Encoding.BECH32M, False, False, False),
-  ('tb',   17, 32, Encoding.BECH32M, False, False, False),
-  ('bcrt',  3,  1, Encoding.BECH32M, False, False, False),
-  ('bc',   15, 41, Encoding.BECH32M, False, False, False),
-  ('tb',    0, 16, Encoding.BECH32,  False, False, False),
-  ('bcrt',  0, 32, Encoding.BECH32,  True,  False, False),
-  ('bc',    0, 16, Encoding.BECH32,  True,  False, False),
-  ('tb',    0, 32, Encoding.BECH32,  False, True,  False),
-  ('bcrt',  0, 20, Encoding.BECH32,  False, False, True),
-  ('bc',    0, 20, Encoding.BECH32M, False, False, False),
-  ('tb',    0, 32, Encoding.BECH32M, False, False, False),
-  ('bcrt',  0, 20, Encoding.BECH32M, False, False, False),
-  ('bc',    1, 32, Encoding.BECH32,  False, False, False),
-  ('tb',    2, 16, Encoding.BECH32,  False, False, False),
-  ('bcrt', 16, 20, Encoding.BECH32,  False, False, False),
+  ('tmona', 17, 32, Encoding.BECH32M, False, False, False),
+  ('rmona',  3,  1, Encoding.BECH32M, False, False, False),
+  ('mona',  15, 41, Encoding.BECH32M, False, False, False),
+  ('tmona',  0, 16, Encoding.BECH32,  False, False, False),
+  ('rmona',  0, 32, Encoding.BECH32,  True,  False, False),
+  ('mona',   0, 16, Encoding.BECH32,  True,  False, False),
+  ('tmona',  0, 32, Encoding.BECH32,  False, True,  False),
+  ('rmona',  0, 20, Encoding.BECH32,  False, False, True),
+  ('mona',   0, 20, Encoding.BECH32M, False, False, False),
+  ('tmona',  0, 32, Encoding.BECH32M, False, False, False),
+  ('rmona',  0, 20, Encoding.BECH32M, False, False, False),
+  ('mona',   1, 32, Encoding.BECH32,  False, False, False),
+  ('tmona',  2, 16, Encoding.BECH32,  False, False, False),
+  ('rmona', 16, 20, Encoding.BECH32,  False, False, False),
 ]
 
 def is_valid(v):
@@ -110,7 +119,7 @@ def is_valid(v):
     result = b58decode_chk(v)
     if result is None:
         return is_valid_bech32(v)
-    for template in templates:
+    for template in templates + legacy_templates:
         prefix = bytearray(template[0])
         suffix = bytearray(template[2])
         if result.startswith(prefix) and result.endswith(suffix):
@@ -120,7 +129,7 @@ def is_valid(v):
 
 def is_valid_bech32(v):
     '''Check vector v for bech32 validity'''
-    for hrp in ['bc', 'tb', 'bcrt']:
+    for hrp in ['mona', 'tmona', 'rmona']:
         if decode(hrp, v) != (None, None):
             return True
     return False

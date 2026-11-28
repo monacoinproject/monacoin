@@ -27,6 +27,12 @@ struct MinerTestingSetup : public RegTestingSetup {
     std::shared_ptr<const CBlock> BadBlock(const uint256& prev_hash);
     std::shared_ptr<CBlock> FinalizeBlock(std::shared_ptr<CBlock> pblock);
     void BuildChain(const uint256& root, int height, const unsigned int invalid_rate, const unsigned int branch_rate, const unsigned int max_size, std::vector<std::shared_ptr<const CBlock>>& blocks);
+
+    // Monacoin: blocks are built before their parent is known to the block
+    // index, so the heights are tracked here. They are needed for the BIP34
+    // coinbase and to pick the proof of work algorithm.
+    std::map<uint256, int> m_block_heights;
+    int BlockHeight(const uint256& hash) const;
 };
 } // namespace validation_block_tests
 
@@ -59,6 +65,12 @@ struct TestSubscriber final : public CValidationInterface {
     }
 };
 
+int MinerTestingSetup::BlockHeight(const uint256& hash) const
+{
+    if (hash == Params().GenesisBlock().GetHash()) return 0;
+    return m_block_heights.at(hash);
+}
+
 std::shared_ptr<CBlock> MinerTestingSetup::Block(const uint256& prev_hash)
 {
     static int i = 0;
@@ -88,6 +100,9 @@ std::shared_ptr<CBlock> MinerTestingSetup::Block(const uint256& prev_hash)
     txCoinbase.vout[1].nValue = txCoinbase.vout[0].nValue;
     txCoinbase.vout[0].nValue = 0;
     txCoinbase.vin[0].scriptWitness.SetNull();
+    // BIP34 is always active, and the template was made for the current tip
+    // rather than for prev_hash, so put the right height in the coinbase.
+    txCoinbase.vin[0].scriptSig = CScript() << (BlockHeight(prev_hash) + 1) << OP_0;
     pblock->vtx[0] = MakeTransactionRef(std::move(txCoinbase));
 
     return pblock;
@@ -100,9 +115,13 @@ std::shared_ptr<CBlock> MinerTestingSetup::FinalizeBlock(std::shared_ptr<CBlock>
 
     pblock->hashMerkleRoot = BlockMerkleRoot(*pblock);
 
-    while (!CheckProofOfWork(pblock->GetPoWHash(), pblock->nBits, Params().GetConsensus())) {
+    // The proof of work is checked on the scrypt or Lyra2REv2 hash, depending on the height.
+    const int height = BlockHeight(pblock->hashPrevBlock) + 1;
+    const bool lyra2rev2 = height >= Params().SwitchLyra2REv2_DGWblock();
+    while (!CheckProofOfWork(pblock->GetPoWHash(lyra2rev2), pblock->nBits, Params().GetConsensus())) {
         ++(pblock->nNonce);
     }
+    m_block_heights[pblock->GetHash()] = height;
 
     return pblock;
 }

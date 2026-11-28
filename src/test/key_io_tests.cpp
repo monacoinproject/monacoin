@@ -146,4 +146,32 @@ BOOST_AUTO_TEST_CASE(key_io_invalid)
     }
 }
 
+// Monacoin: script addresses with the former prefixes (the same as Bitcoin's)
+// are still accepted, but they are encoded with the current prefixes.
+BOOST_AUTO_TEST_CASE(key_io_legacy_script_address)
+{
+    const CScript script = CScript() << OP_HASH160 << ParseHex("d7184dd5b2ac5ffa6b808271b51d39610ca29521") << OP_EQUAL;
+    const struct {
+        std::string chain;
+        std::string legacy;
+        std::string current;
+    } cases[] = {
+        {CBaseChainParams::MAIN, "3MJLKTjYK8U2LSE5G8qH66P6cTkd2fbYKo", "PUCVYtdwp9dqE7CQV7VDLMzS5gdnaott6E"},
+        {CBaseChainParams::TESTNET, "2NCrYPCfZvayNYDrcwGT9i3NMpoxnq1doXx", "pR9tbd7oqLN9vyqn188yQ8sD6xcGbhuizr"},
+        {CBaseChainParams::REGTEST, "2NCrYPCfZvayNYDrcwGT9i3NMpoxnq1doXx", "pR9tbd7oqLN9vyqn188yQ8sD6xcGbhuizr"},
+    };
+
+    for (const auto& c : cases) {
+        SelectParams(c.chain);
+        for (const std::string& address : {c.legacy, c.current}) {
+            const CTxDestination dest = DecodeDestination(address);
+            BOOST_CHECK_MESSAGE(IsValidDestination(dest), "!IsValid:" + address);
+            BOOST_CHECK_EQUAL(HexStr(GetScriptForDestination(dest)), HexStr(script));
+            BOOST_CHECK_EQUAL(EncodeDestination(dest), c.current);
+        }
+    }
+
+    SelectParams(CBaseChainParams::MAIN);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
